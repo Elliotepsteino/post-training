@@ -1,0 +1,1000 @@
+Seeing that my chance here is dismal, what is the chance that I obtain an above-average math score on the SAT? (If I were to guess on every question in both math sections of the SAT, what is the probability that I’ll get 90% or above? (Assume all questions are multiple-choice with 4 answers.))
+-5
+How many vertices are on every platonic solid, combined?
+2
+Another cliche question: what is the 2023rd Fibonacci number?
+422
+How many letters are in all Goosebumps books, combined?
+7
+How much energy, in terms of plates of butter chicken, would it take to press down the keys on a typewriter to write every book in the Library of Congress?
+7
+What fraction of the permutations of 6 arbitrary letters consist of a valid 6-letter word in English?
+-4
+It is often said that “a picture is worth a thousand words.” If we converted all words in the English language into pictures, how many cartridges would it take to print them if each picture was on a piece of 5’’x11’’ paper?
+2
+If I wrote a book every day on paper made from a tree currently on Earth, how many nanoseconds would it take for me to use up every tree?
+28
+If I had an atom of Uranium-235 that formed at the birth of the Universe, what’s the chance it’s still an atom of Uranium-235 today?
+-6
+If I created a baseball-sized lump of alpha particles and they traveled together at their normal speed, what would be their kinetic energy? Assume they are perfectly packed together.
+30
+If I liquified a mole of moles and shaped that mole into a sphere, how many barns would the surface area be? (Hail Randall Munroe)
+42
+How many nanograms of ATP will be produced if a cubic smoot of butter chicken was metabolized perfectly?
+17
+How much energy, in Joules, is needed to propel a cannonball at the edge of space to orbital velocity?
+8
+How many red blood cells were shed by the soldiers killed in the Civil War?
+19
+Enrico Fermi, the scientist our event is named after, pioneered nuclear energy. How many grams of uranium would remain in a 1kg block of pure U-235 created when Fermi was born?
+3
+If we took every strand of hair from every human ever born and laid them end to end, how many lightyears would that mega-hair stretch?
+-1
+In the bible, there was a cup described that had a perimeter of 30 cubits. Convert that to Smoots.
+0
+How much volume would a mole (unit of measurement) of moles (the small furry critter) take up? [L]
+22
+How long would it take for an average kid to completely fill up a pool with saliva? Assume no evaporation. [years]
+4
+If a 185 lb adult human climbed a staircase from earth up to space, how many Calories would be burned climbing to the top? [Calories]
+5
+Estimate how many snowflakes it would take to cover the entire world (not including oceans) in 3 meters of snow. Assume no compression over time. [snowflakes]
+26
+How many keystrokes would be required to write all of Williams Shakespeare’s plays? [keystrokes]
+6
+After the age of 5, 75% of the world’s population stops producing the enzyme, lactase, required to break down the sugars in milk, and they develop lactose intolerance. Lactaid is an enzyme supplement that supports lactose digestion. Determine the total number of Lactaid pills needed to ensure each of these individuals can enjoy a gallon of ice cream. Three original strength pills should be used per serving of dairy. [pills]
+11
+If you could collect all the viruses on earth, how many tall Starbucks cups (12 fl.oz.) could you fill to the brim? [cups]
+19
+In order to print the whole English Wikipedia assuming it stops updating at this point in time, how many pages would you need? [pages of 5x11 inch paper, 12 point font, singled-spaced]
+7
+How many pieces of luggage go through Seatac airport in a year?
+8
+How many words are spoken by the entire US population in a year? [words]
+15
+Approximately, how many blades of grass would it take to feed a 450 kg dairy cow for a week? [blades]
+10
+How much food does an average person eat in their lifetime? [g]
+7
+Estimate how many molecules of oxygen would be needed to combust enough octane to drive from California to New York. [molecules]
+31
+Estimate how many holiday cups are sold during the months of November through January at Starbucks in the US. [cups]
+9
+Determine the number of barns [Barn = 00 * 10 -28 m2 ] covered by Washington state’s apple orchards.
+37
+Estimate the total number of meters a team runs in an average FIFA World Cup soccer match.
+5
+Determine how many times a typical hummingbird flaps its wings in its lifetime.
+10
+Estimate how much time was globally streamed by Spotify listener’s over the past 5 years. [weeks]
+9
+Assuming no other expenses, determine the number of hours you would have to work at a minimum wage job to pay for 4 years worth of college tuition at a top-tier college. [hours]
+4
+Suppose you could harvest the energy from a fidget spinner’s rotational energy to charge your iphone. How many spins would it take to fully charge the battery?
+5
+A sheppey is the distance from which one has the most picturesque view of a sheep. This distance is 7⁄8 of a mile. At how many sheppeys/hour, does one need to travel to reach the Sun from Earth in an average human’s lifetime?
+2
+How many grains of rice are consumed in a single day around the world?
+14
+How many Hershey’s chocolate kisses would you have to melt to make a lifesize model of the moon? [chocolate kisses]
+24
+Approximately how many popcorn kernels are popped in all the movie theaters across the US on an average Saturday? [kernels]
+9
+Objects like the International Space Station travel about 100 miles above the surface of the Earth. If you have the wonder (and patience) on a clear night, you can see it pass overhead every 90 minutes. How fast do they travel to avoid falling back to Earth? [m/s]
+4
+How many gulps would it take to swallow Earth’s oceans?
+23
+Estimate how much a cup of tea heats up when you stir it for 2 min? [degrees C] Assume no cooling.
+-5
+Suppose you were taking the SAT and decided to randomly guess on every multiple choice question. What are the odds that you would get all the questions right? Note: there are 158 total questions, each with 5 choices.
+-111
+Suppose you wanted to send a radio message to the nearest exoplanet 4 light-years away. You have a great transmitter and power source large enough to provide electricity to Portland, OR. Estimate the intensity of the signal when it reaches the far-away planet. [dB]
+-1
+How long could you power a game console if you were able to harness all the energy from a lightning strike? [min]
+5
+How much gravitational potential energy is stored in the water of a typical rainstorm? [J]
+15
+Estimate the number of Calories consumed at winter holiday parties in the United States.
+9
+What is the mass of all the DNA in a typical human? [kg]
+-4
+How much energy is converted from gravitational potential to electricity by the Grand Coulee Dam? Answer in terms of HME [hamster wheel equivalents / min].
+5
+Estimate the cost of one minute of class time at a top-tier private university. [US $]
+0
+How many acres of coffee farms are required to supply enough coffee beans to meet the yearly demand in the United States?
+5
+What is the mass of the ink in a printed book? [g]
+2
+Estimate the thickness of a US penny. [copper atoms]
+7
+How fast does human hair grow? [miles / lifetime]
+-2
+Estimate the rate at which electric charge flows through wires when someone charges their cell phone. [electron charge / second]
+19
+In the Incredibles universe, Frozone frequently creates ice bridges to slide across. (See figure at right.) To create the ice bridge, energy must be absorbed from the water vapor in the air so that it condenses and then freezes. Since we don’t see Frozone’s surroundings heat up when he uses his powers, let’s suppose that he absorbs that energy. Imagine he absorbs the energy from his surroundings to create an ice bridge 30 m long. How many single-serving bags of Doritos would he have to eat to gain the equivalent amount of energy?
+4
+In the Incredibles universe, Elastigirl is able to stretch to remarkable lengths. One possible mechanism might be that Elastigirl rearranges her cells rather than changing the volume of her cells. In that scenario, estimate the circumference of her upper arm (i.e., her biceps + triceps) [cm] if she stretches her arm to 10 m.
+1
+How much banana is too much banana? Bananas contain significantly high potassium concentrations. Potassium is an essential element for life as we know it. Among other things, it facilitates the normal transmission of signals through the nervous system. But, in nature, about 012% of potassium is the radioactive isotope potassium- Thus, the potassium-40 (K-40) in a single banana exposes a person to about 100 nSv (also known as a banana equivalent dose or BED). A lethal dose of radiation for 50% of people in 30 days (LD50/30) is about 5,000 mSv. Estimate the volume of bananas required to provide a lethal exposure to K- [classrooms]
+0
+Estimate how much helium you would need to float away on a lawn chair. [birthday balloons]
+3
+You see color because the cones in your retina interact with certain wavelengths of light (420 - 720 nm). If you had the same number of cones but could see the energy from a radio tower antenna transmitting at 5 MHz, what would the radius of your eyes be? [cm]
+7
+In the Marvel universe, Thor sometimes pounds his magical war hammer on the ground to create a shock wave to knock his opponents down. If his foes are 6 m away, estimate the pressure at the point of contact between the hammer and the ground. [atm] For the sake of this estimate, assume his foes are humanoid and have human mass.
+3
+If you walked at a snail’s pace in an approximately straight line, estimate how long it would take to travel from Camas to the top of Mt. Rainier. [hrs]
+5
+Estimate the amount of energy it takes to smile. [J]
+-3
+How many hot dogs are eaten at a Boston Red Sox game?
+4
+How many liters of water are there in Earth’s oceans?
+21
+How many electrons in a mole of neutral oxygen gas?
+25
+How many rotations does a school bus tire make during a twenty-five-mile trip?
+4
+How many pennies are in $56,45
+6
+On Earth, how many millimeters long would the string on a simple pendulum have to be to have a period of one minute?
+6
+What is the mass of the moon in grams?
+26
+On average, how many hours of television commercials does a school student see during four years of high school?
+3
+If the entire human population could fit on one scale, what would it read in ounces?
+13
+How long in days does it take a quarter to fall 100 meters?
+-5
+How many blades of grass are there on the playing area of a football field?
+8
+How many tick marks are there on a meter stick (including both metric and empirical sides)
+3
+How many Taco Bell burritos would it take to equal the price of an average college textbook?
+2
+How many electrons would you need to balance the weight of J.J. Thompson?
+32
+What is the wavelength of violet light in miles?
+-10
+How many seconds is the average lifetime?
+9
+How many Oxygen molecules are there in a cup of water?
+26
+How many Joules of kinetic energy does a proton moving at 50% the speed of light have?
+-11
+What would be the mass in grams of an ice cube the size of a tractor trailer?
+8
+How many words are in the Oxford English dictionary?
+5
+How many times would your heart beat during a sixmonth trip to Mars?
+7
+How many bits of information can be stored on a standard CD-ROM?
+10
+How many M&M candies would fit in a Prius
+6
+What is the voltage necessary to move a single electron through a 670 Ω resistor?
+-16
+How many electrons move through a 60W bulb in one hour?
+22
+What would the weight in pounds be of a fifty-foottall woman?
+5
+How many books are there in the library of congress?
+7
+How many possible combinations are there for a standard 3x3 Rubik’s cube?
+19
+How many square millimeters are in a square mile?
+12
+What number of US dollar coins would you have to lay on the surface area of the Earth in order to fully cover it?
+17
+How many hairs are on a black bear?
+6
+How long a line in millimeters will an average Bic pen write?
+6
+How many letters are in a Campbell Biology textbook?
+6
+How many inches per minute does light in a vacuum travel?
+12
+How many golf balls would fit inside the sun?
+31
+If you start with $1000, how many dollars would you have in 1,000 years with an annual return of 3%
+16
+How many grains of sugar are in a 50-pound bag of pure cane granulated sugar?
+8
+How many water balloons can you make out of the Earth’s entire ocean?
+21
+How many pounds of rice will the average Japanese eat in their lifetime?
+4
+How many miles of road are in the US interstate system?
+4
+How many atoms are in the human body?
+28
+How many US dollar bills would it take in order to create a stack from Stockholm to Beijing?
+11
+How many Pascals would the air pressure be in a bubble one mile below the surface of the ocean?
+7
+How many calories of energy is needed to evaporate the entire Atlantic Ocean?
+26
+How many grains of sand are there in the top most layer of the Sahara Desert?
+21
+What is the sum of all integers from one to one septillion, exclusive?
+47
+How many gallons of diesel fuel would it take for a town of 2000 people to travel in school busses from Montana to Texas?
+4
+How many questions are on this test?
+2
+How many golf balls would it take to fill up all the tanks in the Atlanta Aquarium?
+9
+What is the weight in nanograms of all the coffee beans that were consumed in 2022?
+22
+How many valid unique solved Sudoku puzzles exist?
+22
+At what speed do I need to throw a basketball in meters per second from the surface of Mercury for it to escape Mercury’s atmosphere?
+3
+How long would it take in seconds for an ant to diagonally cross a football field?
+3
+With what force in Newtons should I throw an ostrich egg at a 45 degree angle if I want it to land 85 meters away?
+3
+For how many days can a person survive on all of the oxygen produced by the Amazon rainforest in one minute?
+5
+How many unique legal chess positions are possible after both sides have played 8 moves each?
+17
+How many plastic bags need to be burnt to generate enough power to operate the Large Hadron Collider for a year?
+19
+How many calories are there in a Pizza Hut Pepperoni pizza the size of a baseball field?
+8
+How many dozens of glazed donuts can I buy from Dunkin Donuts in a year with the yearly salary of a US Senator?
+4
+How long in minutes will it take a person to play Beethoven’s Fifth Symphony at each of London’s metro stations? (you do not need to account for travel time between stations)
+4
+How many atoms are there in a basketball?
+26
+What was the power in watts needed to run New York’s train system in 2021?
+11
+How many meters on average did a person in Switzerland travel by train in 2021?
+6
+If you randomly pick 5 distinct letters of the English alphabet (in a particular order) what is the probability that they form a word present in the Oxford Dictionary?
+-3
+How much memory in bytes does it take to store all the English books ever written in a PDF format?
+13
+How many credit card transactions took place in the world in 2022?
+11
+How many pennies need to be stacked to reach the height of the top of the Empire State Building?
+5
+What is the average value of a credit card transaction in the United States in dollars?
+2
+Tom has a chess board with 1 jellybean on the first square, 3 jellybeans on the second square, 9 jellybeans on the third square and so on with the nth square having 3^(n-1) jellybeans on it. How many jellybeans does Tom have in total?
+31
+How many people can the Eiffel Tower hold at maximum capacity?
+4
+At what temperature in Kelvin does a forest fire burn?
+3
+How many liters of sanitizer were consumed in 2021?
+5
+How many cups of coffee are consumed in the United States every day?
+8
+How many strands of hair are there on all the heads of people in the world?
+15
+How many seconds of videos have been uploaded to YouTube in 2021?
+8
+How many toothpicks are needed to completely cover the body of a blue whale?
+6
+How many pounds of chicken are used every year by Chipotle?
+8
+How much power in watts was needed to power UNC’s campus for the year 2021?
+10
+How many unique types of bacteria exist in the small intestine of the average person?
+5
+How much coal, in kg, needs to be burned in a coal-fired power plant to provide enough electrical energy for a typical 100 Watt light bulb for one year?
+2
+How many light years are there in 30 kiloparsecs?
+5
+What is the total length in cm (placed end to end) of all of the blood vessels in the human body?
+10
+How many quills does an average porcupine have?
+4
+What is the total distance for a round trip visit from Venus to Mars in km?
+9
+How many km in 165 nm?
+-10
+How many crayons can be produced with one acre of soybeans?
+5
+What fraction of a mile is a cm?
+-5
+How many km are there in a light-year?
+13
+Estimate the volume of Lake Superior in cubic km.
+4
+How many seconds are there in 15 chronon?
+-43
+What is the wavelength in miles of red light?
+-10
+What is the probability of winning the MegaMillions Jackpot 2 consecutive weeks by buying only one ticket per week?
+-16
+How much energy per einstein is emitted from the radio station “Hits 5 FM”? Answer in kilojoules per Einstein.
+-5
+As of November of 2004, how many non-trivial zeroes of the Riemann Zeta Function have been calculated?
+13
+What is the value of 1 googol times one centillion?
+403
+What is the gravitational force (in newtons) between a standard shot-put and a standard baseball placed on opposite goal lines of a football field?
+-14
+How many milligrams of tea (not including water) are there in China?
+15
+If you counted all of the stars in the Milky Way at a rate of one star per second, how many years would it take you to finish?
+3
+How many cubic centimeters of diesel fuel are consumed by a cruise liner the size of Queen Elizabeth II on a voyage of 100 nautical miles?
+9
+How many cups of water at room conditions would it take to equal the mass of the world’s largest rubber band ball?
+4
+If you rolled a pair of dice a million times, how many times would probability suggest that you would roll a combined roll of 2?
+4
+What is the sum of all of the odd numbers between 1 and 1,000,000?
+11
+How many milligrams are in a carat?
+2
+How much is the average number of inches of precipitation in a century for the world’s rainiest city, Kaurai, HI?
+4
+How many drops of water are needed to fill a swimming pool (20 x 12 x 2 meters)?
+10
+Estimate the number of molecules in each liter of air in the Earth’s atmosphere.
+22
+An atomic clock is driven by so many radiation cycles of cesium-133 per second. How many radiation cycles would occur in one year?
+17
+How many yards of duct tape would it take to cover the world in duct tape?
+16
+How many electrons would there be in 15 amperes of electrical current running through a wire?
+20
+If ​you ​line ​up ​human ​rod ​cells ​(photoreceptors ​in ​your ​eye), ​how ​many ​can ​you ​fit ​if ​you start ​from ​sea ​level ​and ​travel ​down ​to ​the ​lowest ​point ​on ​earth?
+9
+How many carbon atoms fit from the distance from sea level to the highest point on earth?
+14
+Every ​time ​someone ​searches ​something ​on ​Google, ​Bob ​punches ​his ​friend ​Howard right ​smack ​in ​the ​gut! ​How ​much ​energy ​in ​joules ​has ​Howard's ​abdomen ​taken ​in ​over a ​century ​of ​searching? ​(Assume ​a ​constant ​searching ​rate)
+16
+How ​many ​tons ​of ​potassium ​ions ​is ​excreted ​from ​the ​average ​adult ​through ​urine ​in ​a day?
+-6
+How ​many ​internet ​users ​are ​using ​a ​VPN ​to ​access ​content ​blocked ​by ​The ​Great Firewall ​in ​China?
+8
+How ​many ​days ​would ​it ​take ​one ​person ​to ​shed ​enough ​skin ​cells ​(stacked ​on ​top ​of each ​other) ​to ​reach ​the ​height ​of ​the ​tallest ​building ​in ​the ​world?
+0
+How ​many ​milligrams ​of ​glass ​would ​you ​need ​to ​cover ​the ​entire ​surface ​of ​the ​moon ​in a ​5 ​cm ​layer ​of ​glass?
+21
+How ​many ​joules ​would ​you ​need ​to ​launch ​a ​one ​kilogram ​salamander ​into ​low ​Earth orbit?
+7
+​How ​many ​E. ​coli ​could ​grow ​from ​a ​single ​cell ​(assuming ​unlimited ​resources) ​in ​the time ​it ​takes ​for ​Mars ​to ​complete ​one ​orbit ​of ​the ​sun?
+14889
+How ​many ​bowls ​of ​instant ​noodles ​could ​you ​purchase ​with ​the ​total ​cost ​of ​attending UC ​Berkeley ​as ​an ​out ​of ​state ​student ​in ​2017?
+6
+How ​many ​megabytes ​are ​used ​in ​a ​year ​long ​video ​call ​between ​two ​mobile ​devices ​on Skype?
+3
+How ​many ​pounds ​of ​CO2 ​are ​created ​by ​a ​plane ​flying ​from ​Boston ​to ​Houston?
+5
+How many calories do I burn if I climb the Great Wall one stair at a time?
+3
+How ​many ​seconds ​would ​it ​take ​to ​view ​all ​the ​snaps ​sent ​within ​the ​past ​hour?
+8
+What ​is ​the ​pressure ​change ​when ​a ​plane ​descends ​measured ​in ​pumps ​in ​a ​bicycle pump?
+0
+How ​long ​do ​three ​hamsters ​running ​on ​a ​wheel ​take ​to ​power ​a ​plane ​to ​successfully ascend?
+12
+How ​many ​gallons ​of ​water ​is ​needed ​to ​produce ​all ​the ​cotton ​needed ​for ​clothing production ​each ​year ​in ​the ​US?
+13
+Suppose ​my ​friend ​who ​really ​likes ​to ​shake ​her ​leg ​can ​convert ​the ​energy ​it ​takes ​to shake ​her ​leg ​passively ​into ​actual ​energy. ​How ​many ​hours ​would ​she ​have ​to ​shake ​her leg ​to ​produce ​the ​amount ​of ​energy ​needed ​to ​power ​a ​house ​for ​a ​year?
+9
+Suppose ​you ​met ​a ​person ​on ​the ​subway ​to ​the ​airport. ​What ​are ​on ​the ​chances ​that you ​are ​on ​the ​same ​flight ​and ​end ​up ​sitting ​next ​to ​each ​other?
+-4
+How ​many ​people ​in ​the ​US ​have ​food ​allergies?
+7
+How ​many ​dollars ​of ​medication ​is ​bought ​yearly ​to ​combat ​those ​allergies?
+10
+Suppose ​you ​visit ​Boston ​for ​a ​few ​days. ​How ​many ​people ​would ​you ​have ​to ​talk ​to ​at Harvard ​to ​find ​someone ​who ​is ​from ​the ​Houston ​area?
+1
+Glancing ​down ​at ​Iowa, ​how ​many ​ears ​of ​corn ​can ​you ​see ​from ​a ​plane ​hovering ​at ​the height ​of ​the ​clouds ​on ​a ​perfectly ​clear ​day?
+9
+How ​many ​gallons ​of ​ethanol ​is ​produced ​from ​the ​corn ​produced ​by ​the ​US ​in ​a ​year?
+10
+How ​many ​minutes ​would ​you ​have ​to ​run ​to ​burn ​off ​the ​splurge ​that ​you ​went ​on ​while you ​ate ​all ​the ​ice ​cream ​available ​at ​a ​grocery ​store?
+8
+What is the flow rate of the Allegheny River (one of the three main rivers in Pittsburgh) in cubic feet per minute?
+6
+If you had a spherical shell of pennies 1 layer thick with the Earth’s mass, what would this shell’s radius be in meters?
+11
+How many years could all the electricity on Earth be supplied using the total light energy that hits the Earth in 1 second?
+-4
+How many Olympic swimming pools could be filled with all the water that rains on Earth over the course of a year?
+11
+What is the mass of the Earth’s atmosphere in kilograms?
+19
+If everyone on Earth submerged themselves in the ocean at the same time, how much would the sea levels rise, in meters?
+-6
+If the Moon was made of swiss cheese, how many Calories would it be?
+29
+What is the surface area of Antarctica in acres?
+9
+Between the years of 2000 and 2020, how many people traveled through Pittsburgh International Airport?
+8
+How many miles are collectively driven by all Americans, per year?
+12
+What fraction of Americans are competing in Science Olympiad Division B or C this year?
+-4
+How many breaths of air are taken by all competitors at this competition over the course of the competition?
+6
+What fraction of humans currently riding on a plane at this instant?
+-4
+What fraction of humans that have ever lived are currently alive?
+-1
+How many liters of water will the average person drink in their lifetime?
+5
+How many dollars worth of gold could a Boeing 747 cargo plane transport?
+10
+Over the course of the time you spend on this test, how much money will Jeff Bezos make from Amazon revenue, in dollars?
+7
+How much would a Sun-sized sphere made of pure silver cost in dollars?
+34
+How much money was spent on Halloween candy in the United States last year?
+9
+How many dollars worth of pennies are currently in circulation in the US?
+9
+What would be the value of a stack of dollar bills the height of the Statue of Liberty?
+6
+How many hours would an average American need to work in order to purchase a Boeing 787 Dreamliner?
+7
+What is the product of first ten positive perfect squares?
+13
+What is the number of digits in 1521315213?
+1
+What is the volume of an icosahedron with length 15?
+4
+What is the 2023th pentagonal number? (The first few pentagonal numbers are shown in Figure )
+7
+I have a group of 50 students, and I want to choose 15 of them to form our school’s Science Olympiad A team (without choosing events yet). How many ways can I do this?
+12
+What is 1/(1 + 1/(2 + 1/(3 + . . . )))?
+0
+What is the 50th Fibonacci number (if the sequence starts with fib(0) = 0, fib(1) = 1)?
+10
+What is the furthest possible distance between Jupiter and Saturn (in m)?
+12
+What fraction of sunlight reaches earth?
+-10
+What is the ratio of mass of Neptune to mass of Earth?
+2
+What is the escape velocity of an apple in a vacuum (in m/s)?
+-5
+Assuming there was a hole that leads directly to the center of the Earth, how long would it take to fall to get there (in seconds)?
+3
+How many times faster is a commercial airplane (while cruising) than a normal walking pace?
+2
+How many times could you charge an iPhone 14 using the energy released during the Trinity nuclear test?
+9
+How many newtons of force are exerted on the Earth due to the gravitational attraction of the Sun?
+22
+What is the diameter of Sars-COV-2?
+-7
+How many ants are on Earth?
+16
+Number of red blood cells produced every second in the human body?
+6
+Fraction of US population with Down Syndrome?
+-3
+How much honey does a honeybee make in its lifetime in kg?
+-3
+What is the average lifespan of a lanternfly (in days)?
+2
+How many twists does DNA make within a single human cell?
+9
+How many classrooms does CMU have in the Pittsburgh campus?
+2
+What is the number of courses offered on the CMU Pittsburgh campus in spring 2023?
+3
+How many active student organizations does CMU have?
+2
+How many applicants were there for the class of 2026?
+4
+What is the endowment of CMU per year?
+9
+What is the size of CMU’s campus (in square meters)?
+6
+At one stroke per second with a common bicycle floor pump, how long in minutes would it take to fill the volume of the Goodyear blimp with air to atmospheric pressure? Assume no heating and no rest breaks.
+5
+How many hours would Niagara Falls have to flow to empty fill the volume of Lakes Erie, Michigan, Huron and Superior if no water flowed into the lakes?
+13
+How many hamsters would you need to run simultaneously on wheels to produce the power to run an electric oven?
+4
+How many trailers (as in tractor trailers) are there in the United States?
+7
+How many helium filled party balloons would you need to lift the Great Sphinx above the ground?
+9
+How many dollar bills would it take to cover the land mass of the United States?
+15
+How many grains of rice would have the same mass as 100 hippopotami?
+10
+How many dogs are there in the United States?
+8
+How many pounds of electrons would you need to levitate one pound of protons if they were one mile apart on Earth?
+-23
+How many squirrels are there in the US?
+9
+If a major earthquake occurred in San Francisco, California, how many milliseconds would pass before the resulting shear wave reached Syracuse, New York?
+6
+The zombie apocalypse might involve the invasion of the US from another country. Tightly packed, how many zombies could be transported on a 32 kilometer long freight train out of Canada?
+7
+How many college students in the United States have blue eyes?
+7
+Of the students in question fourteen, how many will major in science or engineering?
+6
+How many feathers are removed from turkeys for one year’s Thanksgiving in the United States?
+11
+Using just the letters in the alphabet, how many unique 26-letter sequences are possible?
+26
+How many nucleons flow down the drain during an average shower?
+28
+In nanoseconds, how long would it take light to travel the length of all the roads paved and unpaved, in the United States?
+10
+How many acres of land in Texas, California, Alaska and Rhode Island combined?
+9
+How many chlorine atoms in a properly chlorinated Olympic-size swimming pool?
+26
+How many passenger cars are there in world?
+9
+If in the interest of security, an observation tower were built every two thousand feet along the shores and borders of the continental United States, how many towers would be necessary?
+4
+How fast in miles per hour would you need to be moving so that a red light you are approaching appears green?
+8
+How many robins are there in North America?
+8
+How many golf balls could be in a single layer in the country of Croatia?
+13
+What is the mass in kilograms of the number of electrons necessary to provide an average US residence with electrical power for a day?
+-5
+How many 8-cut pizzas would it take to provide two slices to every 2016-2017 New York State Science Olympiad competitor?
+4
+How many deuterium atoms can be expected to be encountered in a cubic mile of sea water?
+34
+If the New York State Thruway, including the shoulders of the road, were paved with yellow bricks, how many would be necessary?
+9
+How many electrons are on the negative plate of a 17 μF capacitor charged to 480 V?
+17
+How many people in West Virginia are aged 65 and older?
+5
+How many movie tickets are sold in a year in the United States?
+9
+What is the mass in grams of the Empire State Building?
+11
+How many square feet is the country of Argentina?
+13
+How many bushels of apples does New York State harvest annually?
+9
+How many oxygen molecules (O2) does the average human inhale in their lifetime?
+30
+What would it cost in dollars to buy enough diesel fuel to transport the entire population of New York State to Miami Beach via coach bus?
+8
+What is the mass in grams of a Nimitz-class US aircraft carrier?
+10
+How many sugar cubes would you need to stack to build a tetrahedron 100’ high?
+10
+How many Escherichia coli bacteria, arranged end to end, would you need to reach across upstate New York?
+15
+What is the value in dollars of a $1,500 investment in 85 years at an annual return of 5%?
+5
+How many cubic meters would the cargo hold of Santa’s sleigh have to be to carry a twelve-inch action figure for every girl and boy in the world?
+6
+How many trees in the Adirondack Park?
+9
+How many pieces of popcorn would it take to make a garland that wraps around the Rockefeller Center Christmas tree once every foot?
+5
+How many inches of pencil would it take to draw a line around the equator of the Earth?
+5
+How many visible light photons per second would you have to reflect off a solar sail to accelerate a school bus at one g?
+31
+How many dump truck loads of dirt would it take to fill in the Grand Canyon?
+11
+How many AA Batteries would it take to provide the electrical power to a town of 100,000 for a day?
+9
+How many electrons in a mole of neutral water?
+24
+How many rotations does the axel of a car make during a 2-mile commute?
+3
+In honor of me eating at Cracker Barrel for the first time in my life this year, what is the annual revenue (in USD) of Cracker Barrel in 2022?
+9
+We had to Google a ton of research to create this exam. How many Google searches are done every day?
+10
+As a Midwest local, one of my favorite pastimes is sitting in cornfields. . . doing nothing. About how many pounds of corn are grown and harvested in Indiana each year?
+10
+Why do ice cubes always come as. . . cubes? Why aren’t there ice spheres? or ice cylinders? If you froze all the freshwater (include all sources, not just surface lakes, ponds, etc.) on Earth into an ice cube, what would the side length of the cube be
+5
+In the wise words of Albus Dumbledore, “Fermi Questions is the best Scioly event!” Directly after worldwide release, how many seconds did J.K. Rowling have to wait until she sold enough copies of Harry Potter and the Deathly Hallows to be able to stack them to the International Space Station?
+5
+One of my favorite songs is Bruno Mars’ Talking to the Moon. Unfortunately, sound does not travel through space, so Bruno’s words never made it to the moon :(. Assuming the sound does not decay, and assuming we use the speed of sound through air, How many seconds would it take your voice to travel the equivalent distance from the Earth’s surface to the moon?
+6
+Do you ever see those funny graphs Apple presents to show how much better their devices are than their competitors? It got me thinking about Apple’s new computer chips. Intel 4004 was the first ever commercially produced microprocessor. How many times more transistors are on the new Apple M2 chip, compared to the Intel 4004 chip?
+7
+Did you know that capsaicinoids are the active chemical compound found in peppers that make them spicy? How many times hotter is the hottest capsaicinoid compared to the hottest jalapeno peppers, on the scoville scale?
+6
+Sometimes, I spend more time looking for a show than actually watching a show on Netflix. How many days would it take to watch all of Netflix (assume Netflix US)?
+3
+Wow, that’s a lot of days! How many megabytes of data would it take to stream all of Netflix (assume Netflix US) in HD?
+8
+Speaking of streaming services, have you made your Spotify “playlist in a bottle”? On average, how many hours would it take for you to listen to all of the songs Spotify adds to its collection in a single day?
+3
+Fermi Questions are usually solved by what people often call “back of a napkin” calculations. If you used a BIC ballpoint pen to draw a continuous straight line, how many paper napkins would you need to draw on until the pen ran out of ink? In other words, if you used the pen to draw one single horizontal line on each napkin, where the line is equal to the side length of the square napkin, how many napkins could you draw on until the pen ran out of ink? Assume the napkin is NOT unfolded (how a paper napkin looks in its packaging).
+5
+Something I miss from high school is competing against my classmates in Kahoots. College professors should use them more often! How many Kahoot sets have been created since the inception of the site?
+8
+The Wiki Game is where you try to jump from one Wikipedia page to another by only using the hyperlinks on the pages. Across all Wikipedia articles, how many hyperlinks are there to the “United States” Wikipedia page?
+5
+One of the most popular drinks amongst my friends these days is bubble tea. Did you know bubble tea originated in Taiwan? What is the global bubble tea market value, in New Taiwan Dollars?
+11
+The New York Federal Reserve is one the most important institutions for the U.S. economy. How many Lydian stater gold coins (the first gold coin ever used for currency in the world) would equal the amount of gold stored in the New York Federal Reserve?
+9
+A famous icon of NYC is its squadron of yellow taxi cabs. How many miles do all of the taxi cabs drive in a day, cumulatively?
+6
+You may have seen this one coming. It’s the classic interview question to test your analytical skills! How many windows are in NYC? Don’t forget that all windows count: homes, cars, boats, you name it.
+8
+One of my favorite experiences in NYC has been celebrating 4th of July here. In 2022, how many shells were set off for “Macy’s 4th of July Fireworks” celebration?
+4
+We couldn’t get through the NYC section without talking about Columbia! Re- cently, Columbia has been under public scrutiny due to it giving inaccurate information to U.S. News national university rankings. As such, Columbia’s ranking dropped to 18th in 2023, compared to 2nd in If you multiplied Columbia University’s rankings in the “U.S. News Rankings of best national universities” over all years from 1988 to 2023 (inclusive), what would your answer be?
+31
+I wanted to ask this question about t-rexes but unfortunately I couldn’t find any concrete data on them :(. How many genes does a fruit fly have?
+4
+“Mexican Coke” is a special form of Coca Cola where all the sugar in it is purely real cane sugar (i.e. sucrose). How many molecules of sugar are there in a 12 oz. Mexican Coca Cola bottle?
+23
+Did you know that a parsec is not a unit of time, but rather a unit of distance? How many hours would it take the Saturn V rocket, traveling constantly at its top speed, to finish Han Solo’s famous 12-parsec Kessel Run?
+10
+In Mission Impossible: Rogue Nation, Tom Cruises’ character, Ethan Hunt, holds onto the side of a plane as it takes off. Assuming that the plane took off at a constant velocity of 200 mph, and that Ethan is holding the plane such that his body is aligned with the wind (“diver position”), how many Newtons of force are exerted on Ethan Hunt by air resistance?
+3
+We take for granted that when we charge up our batteries, they don’t get heavier... or do they? Assuming that an iPhone 14 has a 3000 mAh battery that is rated at 7 volts, how many more kilograms does an iPhone 14 weigh when fully charged, compared to when its battery is completely empty, all else equal? Assume for sim- plicity that all electrons in the battery have zero kinetic motion, regardless of the battery being charged or not.
+-13
+We like to call this question the Power Tower. What is 3^3^3?
+13
+We like to call this question the (Imagine "Power Tower" but upside down) .What is 2^2^..?
+-1
+Interestingly, the largest prime number ever found was discovered in For the past 4 years, nobody has cared enough to look for the next; and neither do we! Just tell us: what is the ten millionth prime number?
+8
+A tetromino is a geometric shape composed of four squares, connected orthogonally (think Tetris pieces). How many distinct ways are there to tile a 2 × 100 board with tetrominoes of any shape?
+20
+A childhood card game I loved to play with my brother is “War.” You always start your hand with half the cards in a standard 54-card deck. Assuming order does not matter, what are the total unique hands you can start out with in “War”?
+15
+Thousands of tourists visit the Grand Canyon each year. How many pounds of water are required to fill the entire canyon?
+16
+Selfies are one of the most common types of photographs. How many selfies are estimated to be taken globally in one day?
+8
+I’ve never understood why chocolate is associated with love... How many pounds of chocolate were bought during Valentine’s Day week in 2023?
+8
+India has one of the lowest rates of meat consumption per capita, while the U.S. has one of the highest. On average, how many people from India would you need to match the yearly meat consumption of the entire US population?
+10
+Columbia recently made a gaming lounge, outfitted with some of the newest and fastest PC hardware on the market (all the more reason to come to Columbia)! How many operations does an NVIDIA RTX 4090 TI GPU (the top-end consumer available GPU as of 2023) perform per second?
+14
+2023 was a big year for Taylor Swift – TIME person of the year, a billion-dollar tour, and Spotify’s top artist, to name some achievements. What is the product of all of Taylor Swift’s ex and current boyfriends’ heights (in feet)?
+8
+Did you know chinchillas have the densest fur (in terms of number of hairs per unit area) out of all mammals? How many more times dense is a chinchilla’s fur compared to the average human head?
+2
+Chess is far from being a “fully solved” game, but we’re slowly making progress. In 2018, computer scientists finally finished tabulating all possible positions with 7 or fewer pieces left on the board. How many legal chess positions can be created using 7 or fewer pieces? Remember that a “legal position” must contain two kings, pawns can’t be on the first or last rank, etc.
+14
+2024 means another U.S. presidential election year! If you took all U.S. presi- dents that have an “e” somewhere in their full name and multiplied their number n together (where they are the n-th president), what number would you get? – e.g. Thomas Jefferson x Joe Biden = 3 * 46 =
+42
+The speedrunning community loves the original 1985 Super Mario Bros. game, on Nintendo’s NES console. How many frames (ran on original NES) does it take to complete Super Mario Bros., based on the current world-record fastest speedrun?
+4
+You ever think about how physics-defying Carl’s house is in the movie Up? He always managed to keep exactly the right number of balloons attached to the house for it to float one foot o↵ the ground. How many standard balloons, filled with helium, would you need to lift the Empire State Building?
+10
+Did you know that it’s a kicker that holds the all-time high for career points in the NFL? What is the product of the highest number of career points scored in the NBA, career goals scored in the NHL, career points scored in the NFL, and career runs scored in the MLB? (By career points, we mean the number of points scored across a single player’s entire playing career).
+15
+Spider silk is remarkably strong – however, we haven’t quite figured out how to create web fluid, so no swinging around like Spiderman yet. How many times greater is the tensile strength of spider silk compared to that of steel? Note that tensile strength is measured by stretching a material until it breaks.
+0
+Many people dream of traveling the world, and some of them also dream of trying every item on the McDonald’s menu... people have di↵erent tastes I guess. How many times could you go around Earth’s circumference, by lining all of the burgers that McDonald’s sells (globally) in one year? Assume the burgers are placed along the equator.
+1
+In Percy Jackson, Delphi Strawberry Service is the cover name for Camp Half- Blood. The cost of constructing a temple dedicated to one god at the camp requires selling a 16-wheeler truckload of strawberries. If each of the major Greek gods were to receive a temple, how many pounds of strawberries would the camp have to sell?
+6
+In 1946, Enrico Fermi was awarded an honorary degree of Doctor of Science by Columbia for his discovery of nuclear reactions. Since 1896, how many degrees has Columbia University awarded in total?
+6
+Some of you have traveled from very far to come to today’s Science Olympiad! If you summed all of the direct distances (“as the crow flies”) between Columbia and each school at today’s invitational, what would the total distance be in kilometers?
+3
+Low Library (the big domed building in the middle of campus) isn’t actually library anymore! In 1934, all books were removed and moved to Butler Library. At full capacity, how many books was Low Library expected to accommodate?
+6
+Columbia’s campus is very small - I can walk to any of my classes in less than 5 minutes! If you combined the land across all Ivy League school main campuses (exclude any land owned outside of the main campuses), how many of Columbia’s main campus could fit in this area?
+2
+Do you all think the Columbia classroom chairs are comfy? How many chairs are there within all the registrar-managed classrooms on Columbia’s campus?
+4
+(Physics) A common joke about particle physics research is how we keep needing to construct bigger particle accelerators to make any new discoveries. How many times more powerful is the Large Hadron Collider at CERN compared to the first cyclotron ever made by Ernest Lawrence back in 1931?
+8
+(Physics) Brian and I were lucky enough to watch Oppenheimer at an IMAX 70mm theatre last summer. Assuming you only account for the projector and sound system, how many times could an IMAX movie theatre play Oppenheimer using solely the energy from the 1945 Trinity nuclear test’s explosion?
+5
+(Astronomy) Did you know there will be a total solar eclipse that goes directly through the continental US on April 8, 2024? If you witnessed a solar eclipse, about how many blue moons (the 2nd full moon occurrence in a calendar month) would you see until you saw another solar eclipse, still standing at the exact same spot?
+2
+(Chemistry) Have you seen the famous Mentos and Soda experiment? If you dump Mentos into a bottle of soda, the carbon dioxide bubbles expand rapidly, creating a geyser. If you put a single Mento into a 2 liter bottle of Diet Coke, how many bubbles are produced in the resulting geyser?
+7
+(Biology) Villains are always saying creepy things like, “this sword was forged from the blood my enemies.” Assuming perfect extraction, how many human men would you need to extract enough iron to create a full medieval broadsword?
+2
+How many digits in pi do you need to get the first instance of 123456789?
+9
+A rabbit is traveling from (0, 0) to (24, 24) by hopping one unit in the positive x or positive y direction each step. However, there is a snake at each lattice point where both coordinates are odd, e.g. (1, 1) or (1, 3). How many paths can the rabbit take without encountering a snake?
+6
+Let’s talk about telescoping. What is SQRT(1 * SQRT(5 * SQRT(25 ...)))
+1
+The prime factorization of 2024 is 2^3 * 11 * What is the sum of all positive numbers less than 20242 that are divisible by all of 2, 11, and 23?
+10
+What is the maximum number of regions that a circle can be partitioned into by drawing 100 lines?
+4
+How many drops of water are in Lake Ontario?
+19
+How many steps do I need to climb to burn off the calories in a slice of pizza?
+3
+How many boba balls are scooped in New York City every day?
+7
+How much electricity in watt-hours is used in NYC each day?
+10
+How many fish are in the ocean?
+12
+How many beans can you fit in a stretched stomach?
+3
+How many nature valley granola bars can fit over New York City?
+11
+How many carbon molecules are in a white cotton t-shirt?
+24
+How many skin cells are in your ear lobe?
+6
+If the Sun’s volume were to increase by the volume of the Earth, what percent would its volume increase?
+-4
+How many milliliters of milk can a cow produce in its lifetime?
+7
+How many pennies are needed to cover the human body?
+3
+How long in meters can you draw a line with 5 wooden pencils?
+5
+If you melt down the Statue of Liberty, how many molecules of copper would you have?
+29
+How many milliliters of sweat are produced in the United States every year?
+14
+How long in seconds does it take for light to travel from the ceiling of this room to your eye?
+-8
+How many water molecules are used in a typical 10 minute shower?
+27
+How many grams of nitrogen are in the DNA of one human cell?
+-12
+What fraction of the energy that the Sun produces each year does an atomic bomb produce?
+-19
+How many sprays does a bottle of perfume hold?
+2
+How many CO2 molecules does a car emit each year?
+28
+How many times does the motor of a car rotate a crankshaft each year?
+8
+If you were to melt down all the recycled glass in the US each year, what would the final volume be in cubic meters?
+5
+How many ice cubes would you need to melt to raise the ocean level enough to melt New York City?
+13
+How many feathers would it take to snap an elevator cable?
+7
+If you took all the oxygen in this room and put it on Mars, how much would it weigh in millinewtons?
+3
+How many mosquito bites are required to collect one million liters of blood?
+11
+If you were to convert the energy in bananas to fuel, how many bananas would it take to fuel a car to drive from New York City to Los Angeles?
+4
+How many liters of helium would it take to lift the average house?
+7
+How many sheets of graphene stacked vertically are as tall as the empire state building?
+12
+How many grams of salt are in the Pacific Ocean?
+22
+How many people were involved in organizing and volunteering for this event?
+2
+How many schools participated in Science Olympiad in 2021-2022?
+4
+How many text messages were sent in 2021?
+13
+What is 2^500?
+150
+What is 3^81?
+38
+How many Rubik's cubes can the world record cuber solve in the duration of this test?
+3
+How many of those cubes would it take to fill the room that this test was written in?
+4
+How many water molecules would there be in an 11 x 11 x 11 cm ice cube?
+23
+How many light bulbs are sold in a year?
+10
+How many meters tall would stacking all of these light bulbs be? [All the light bulbs sold in a year]
+9
+How many of the world's tallest building stacked on top of each other would reach this height? [Height of all the light bulbs sold in a year stacked together]
+6
+What fraction of the distance from the Earth to the Moon is this height? [Height of all the light bulbs sold in a year stacked together]
+0
+How many students at Cornell will eat instant ramen in a month?
+3
+The answer if we had asked 123456789^987654321
+10
+How many votes were cast in the 2020 election?
+8
+How many likes does the most viewed video on Youtube now have?
+7
+How many dislikes does this same video (the most viewed video) have?
+7
+How much more likely are you to win the Powerball lottery on the next drawing than to be struck by lightning in your whole life?
+-5
+How many pages are in all textbooks used by a physics student in all 4 years of university?
+5
+How many liters of oxygen will you breathe during the duration of the exam?
+2
+How many molecules of oxygen are in this amount?
+25
+How many 40 meter trees would be needed to produce this much oxygen in this time?
+1
+How much of Earth's water-bodies by volume does Lake Cayuga cover?
+-8
+f(20) for f(1) = 1, f(2) = 2, f(n) = f(n-1) * f(n-2)
+1258
+How much money is traded a day in the stock market?
+10
+How many acres were burned in wildfires in California in 2021?
+6
+How many neurons does your brain have?
+11
+How much current in Amperes goes through one neuron?
+-9
+How many classes does Cornell offer?
+3
+What fraction of the lifespan of the universe has Cornell University existed?
+-8
+What fraction of New York State does the main campus of Cornell University cover?
+-3
+How many galaxies are in the Milky Way?
+0
+How many stars are in all those galaxies?
+11
+How many hours non-stop would it take to drive from Cornell to San Francisco?
+2
+How many avocados were consumed during the last Super Bowl?
+8
+How many people watched the League of Legends World Championships online and in-person?
+8
+How many Super Bowl stadiums would be required to fit this amount of people?
+4
+How many seconds would it take for light to travel the length of all pages of this test if all the pages were put back to back lengthwise?
+-9
+How many minutes would it take for you to say the entirety of the Bee Movie script?
+2
+How many times would you have to watch Rick Astley's "Never Gonna Give You Up" in order to match the length of all videos uploaded to Youtube in a minute?
+7
+How many images are generated by the AI image generator DALLE daily?
+6
+How many Wikipedia pages are there?
+8
+How many Ping-pong balls can fit in a Boeing 737?
+7
+How many Boeing 737s exist out there?
+4
+How many of the world's first computer would it take to store the world's largest game in terms of file size?
+9
+How many hours did it take to write this test?
+2
+How many people in this room will pick the most popular answer to this question?
+1
+In the time it took us to procrastinate writing this test, how many people were born?
+7
+How many liters of water per capita are there on the planet Earth?
+8
+I have a 2006 Honda Civic (jealous?), how many electrons would it take to equal its mass?
+33
+How many moon circumferences make up one Earth circumference?
+0
+How many Calories of pizza does the average American adult eat per year?
+4
+How many days would it take light to travel the distance of the diameter of the Milky Way Galaxy?
+7
+What are the chances of rolling snake eyes 10 times in a row with two dice?
+-16
+What is the average height of an American adult male in astronomical units?
+-11
+How many copper atoms are in a pre-1982 penny (made of 100% copper)?
+22
+What is the ratio of the mass of the sun to the mass of the Earth?
+5
+The Library of Congress houses 167 million items. How many miles of bookshelves does it have?
+3
+George Washington, Thomas Jefferson, Theodore Roosevelt, and Abraham Lincoln are memorialized in Mount Rushmore in the Black Hills of South Dakota. If George Washington’s sculpted head had a body to go with it, how tall would super-sized George be in centimeters?
+4
+What is the population of the most populous nation in the world divided by the population of the least populous nation?
+6
+What is the number of square inches of ice surface on a typical National Hockey League ice rink?
+6
+What is the atomic radius of hydrogen in meters?
+-10
+If you completely uncoiled one molecule of human DNA, how long would it be in meters?
+0
+How many meters above the Earth does the International Space Station orbit?
+5
+The James Webb Space Telescope orbits the sun at LaGrange point 2, how long (in seconds) does it take a radio signal to reach Earth from the JWST?
+1
+How many Jupiters could fit between the Earth and the Sun?
+3
+First produced in 1978, the Intel 8086 was the first processor with x86 architecture. What was its clock speed in cycles/second?
+7
+What is the volume of a standard NBA basketball in cm 3?
+4
+What would be the total weight in grams if I had one mole of each of the 118 elements on the periodic table (assume a standard ratio of isotopes)?
+4
+How many protons would be in that set of atoms (from the previous question)?
+27
+How many moles of meters from here to the south coast of Canada (going straight north)?
+-19
+What is the population of the U.S.A. divided by the number of men who have walked on the moon?
+7
+How many floating point operations per second (flops) can the fastest supercomputer execute at its peak?
+18
+How long in minutes would it take to download an average .mp3 song file with a 6 kbps dial-up modem connection assuming nobody tried to use the phone and ruined the download?
+1
+How long in seconds can you shower and still use less water than taking a bath?
+3
+How many Terminal Towers, laid end to end, would reach from Public Square in Cleveland to the Washington Monument in DC??
+3
+As of the writing of this test, there have been 760 episodes of The Simpsons. How many megabytes of file space would a video file containing all these episodes in standard definition take up?
+5
+The engine in your new 2023 Dodge Challenger SRT Super Stock produces 807 horsepower. When you tell your Science Olympiad friends about it, they are not impressed until you convert that to SI units. How many Watts does the engine of your awesome new ride produce?
+5
+How long, in seconds would it take you to listen to all the works of W.A. Mozart back to back (assuming they were played at the intended tempo)?
+6
+How many tons of TNT would match the yield of the largest nuclear weapon ever produced by mankind?
+10
+How many asteroids (greater than 1 km in diameter) make up the asteroid belt?
+6
+How many calories (note the lowercase c) would a 175 lbs. man burn running a marathon in 4 hours?
+6
+How many words does the average native English-speaking adult know?
+5
+How long ago (in years) did sharks first appear?
+8
+If I drove a 2023 Chevy Bolt the length of a marathon, the electricity I used would have been able to power a 100 watt light bulb for how many hours?
+2
+What is the distance from New York to Los Angeles (as the crow flies) in light years?
+-10
+How many meters did your fingernails grow today (individually, not total)?
+-4
+How many words are in the most recent version of the Oxford English Dictionary?
+5
+How many households in the U.S.A. own pet cats?
+7
+How many hairs does the average human have on their head?
+5
+How many characters (letters, numbers, symbols, and punctuation marks) appear on this test?
+3
+How far away is the star Sirius from the Earth in meters?
+17
+Given 1 trillion cuts, what is the maximum number of pieces you can slice a pizza into?
+23
+How many points have been scored in the UNC-Duke Rivalry games?
+4
+How many distinct March Madness brackets are there?
+19
+If we have a March Madness bracket and the better team (i.e rank 1 always beats rank 2, 2 will beat 3, etc.) always wins, in how many scenarios will the overall #1 ranked team and #2 ranked teams meet in the final?
+1
+How many games will be played in a March Madness style tournament with 2^100 teams?
+30
+How many points are scored in the highest scoring NBA season?
+5
+If we combine the total points scored by the top 10 NBA scorers of all time, how many of those seasons could be “played”?
+0
+If we assume all of Steph’s 3 pointers have come from the 3 point line how many times could we travel from the Earth to the Sun with the total distance the ball has traveled in these shots?
+-7
+How tall in nanometers is Mt Everest?
+13
+What is the height of Duke Chapel in micrometers?
+8
+How big is Duke’s campus (including every part of Duke-owned land) according to Google in cm^2?
+13
+How deep in cm is the deepest part of the ocean?
+6
+How long was the 2021-2022 NBA season in nanoseconds from the first tip off to the end of the finals?
+16
+How many students apply to Duke each year?
+4
+How much gasoline is used in the entire United States in one day in gallons?
+8
+How many suns can fit in our solar system?
+7
+What is the national debt per citizen in the US?
+5
+What is US debt minus US GDP?
+13
