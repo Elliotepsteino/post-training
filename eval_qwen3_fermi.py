@@ -35,8 +35,8 @@ def parse_args() -> argparse.Namespace:
                    help="If true, use data/fermi_test_20.txt; else data/fermi_test.txt.")
     p.add_argument("--raw", action="store_true", help="Evaluate the raw base model (ignore any LoRA adapter).")
     p.add_argument("--max_new", type=int, default=int(os.environ.get("MAX_NEW", "512")))
-    p.add_argument("--temp", type=float, default=float(os.environ.get("TEMP", "0.0"))) # 0.8
-    p.add_argument("--top_p", type=float, default=float(os.environ.get("TOP_P", "1.0"))) #0.95
+    p.add_argument("--temp", type=float, default=float(os.environ.get("TEMP", "0.0")))
+    p.add_argument("--top_p", type=float, default=float(os.environ.get("TOP_P", "1.0")))
     p.add_argument("--seed", type=int, default=int(os.environ.get("SEED", "17")))
     p.add_argument("--trim_after_json", action=argparse.BooleanOptionalAction, default=True,
                    help="Cut response right after the FIRST JSON block.")
@@ -306,6 +306,102 @@ def generate_batch(
         responses.append(resp)
 
     return responses
+
+def main():
+    args = parse_args()
+    set_seed(args.seed)
+    torch.backends.cuda.matmul.allow_tf32 = True
+    torch.backends.cudnn.allow_tf32 = True
+
+    eval_file = "data/fermi_test_20.txt" if args.debug else "data/fermi_test.txt"
+    split_tag = "20" if args.debug else "full"
+    os.makedirs(args.out_dir, exist_ok=True)
+    # Filenames reflect which adapter we used
+    mode_tag = "raw" if args.raw else ("grpo" if args.use_grpo else "lora")
+    out_json = os.path.join(args.out_dir, f"test_qwen_{mode_tag}_{split_tag}.json")
+    out_metr = os.path.join(args.out_dir, f"metrics_{mode_tag}_{split_tag}.json")
+
+    # Decide adapter path
+    use_adapter = (not args.raw)
+    chosen_adapter = None
+    if use_adapter:
+        chosen_adapter = args.grpo_adapter_dir if args.use_grpo else args.adapter_dir
+        if not os.path.isdir(chosen_adapter):
+            raise FileNotFoundError(
+                f"Adapter directory not found: {chosen_adapter}. "
+                f"Use --raw to eval base model or provide a valid path."
+            )
+
+    print(f"Eval file: {eval_file}")
+    if args.raw:
+        print("Mode: RAW base model")
+    else:
+        print(f"Mode: Base + LoRA ({'GRPO' if args.use_grpo else 'SFT/initial'}) -> {chosen_adapter}")
+    print(f"Output: {out_json}")
+
+    pairs = read_eval_pairs(eval_file)
+    tok, model, attn_info = load_model_and_tokenizer(
+        args.base_model,
+        adapter_dir=chosen_adapter,
+        use_adapter=use_adapter,
+        try_flash=args.flash
+    )
+
+    results: List[Dict[str, Any]] = []
+    hits = 0
+
+    bs = max(1, int(args.batch_size))
+    for start in range(0, len(pairs), bs):
+        chunk = pairs[start:start+bs]
+        qs = [q for (q, _) in chunk]
+        ys = [y for (_, y) in chunk]
+
+        resps = generate_batch(tok, model, qs, args.max_new, args.temp, args.top_p,
+                               trim_after_json=args.trim_after_json, ban_prefixes=args.ban_prefixes)
+
+        for (q, y), resp_text in zip(chunk, resps):
+            try:
+                L, U = extract_LU(resp_text)
+            except Exception:
+                L, U = None, None
+            covered = (L is not None and U is not None and (L <= y <= U))
+            hits += int(covered)
+
+            results.append({
+                "id": len(results)+1,
+                "question": q,
+                "response": resp_text,
+                "true_answer": y,
+                "lower": L if L is not None else None,
+                "upper": U if U is not None else None,
+            })
+            print(f"[{len(results):03d}] y={y}  L={L}  U={U}  covered={covered}")
+
+    coverage = hits / len(pairs) if pairs else 0.0
+    print(f"\nCoverage ({mode_tag}-{split_tag}): {hits}/{len(pairs)} = {coverage:.3f}")
+    with open(out_json, "w", encoding="utf-8") as f:
+        json.dump(results, f, ensure_ascii=False, indent=2)
+
+    metr_payload = {
+        "coverage": coverage,
+        "n": len(pairs),
+        "mode": mode_tag,
+        "split": split_tag,
+        "attention": attn_info,
+        "adapter_path": chosen_adapter if chosen_adapter else None,
+        "base_model": args.base_model,
+    }
+    with open(out_metr, "w", encoding="utf-8") as f:
+        json.dump(metr_payload, f, indent=2)
+
+    print(f"Wrote: {out_json}\nWrote: {out_metr}")
+
+if __name__ == "__main__":
+    main()
+
+
+
+
 
 
 
