@@ -158,77 +158,6 @@ def find_first(hay: List[int], needles: List[int]) -> Optional[int]:
             return i
     return None
 
-# -----------------------------
-# Batched generator (kept; used directly for rollouts)
-# -----------------------------
-@torch.no_grad()
-def batched_generate_old(
-    model, tok, questions: List[str], pct: float,
-    max_new: int, temperature: float, top_p: float, top_k: Optional[int],
-    bad_prefixes: Optional[List[str]] = None
-) -> List[str]:
-    msgs_list = []
-    for q in questions[:1]:
-        msgs_list.append([
-            {"role": "system", "content": system_text(pct)},
-            {"role": "user", "content": user_prompt(q, pct)}
-        ])
-    prompts = [tok.apply_chat_template(m, tokenize=False, add_generation_prompt=True) for m in msgs_list]
-    batch = tok(prompts, return_tensors="pt", padding=True).to(model.device)
-    input_lens = batch.attention_mask.sum(dim=1).tolist()
-
-    eos_ids = get_eos_ids(tok)
-
-    gen_kwargs = dict(
-        max_new_tokens=max_new,
-        return_dict_in_generate=True,
-        output_scores=False,
-        use_cache=True,
-    )
-    if temperature and temperature > 0:
-        gen_kwargs.update(dict(do_sample=True, temperature=float(temperature)))
-        if top_p is not None and 0 < top_p <= 1.0:
-            gen_kwargs["top_p"] = float(top_p)
-        if top_k is not None and top_k > 0:
-            gen_kwargs["top_k"] = int(top_k)
-    else:
-        gen_kwargs["do_sample"] = False
-    #if False:
-    if eos_ids:
-        gen_kwargs["eos_token_id"] = eos_ids if len(eos_ids) > 1 else eos_ids[0]
-    
-
-    if bad_prefixes:
-        bad_words_ids = []
-        for s in bad_prefixes:
-            bw = tok(s, add_special_tokens=False).input_ids
-            if bw:
-                bad_words_ids.append(bw)
-        if bad_words_ids:
-            gen_kwargs["bad_words_ids"] = bad_words_ids
-
-    out = model.generate(**batch, **gen_kwargs)
-    seqs = out.sequences
-
-    responses = []
-    for b in range(seqs.size(0)):
-        start = input_lens[b]
-        gen_ids = seqs[b, start:].tolist()
-        if eos_ids:
-            cut = find_first(gen_ids, eos_ids)
-            if cut is not None:
-                gen_ids = gen_ids[:cut]
-        text = tok.decode(gen_ids, skip_special_tokens=True).strip()
-        # Keep full text (eval-style), not just JSON
-        #breakpoint()
-        text = sanitize_leading_noise(text)
-        # cut before a new user turn (eval-style guard)
-        cut_pos = text.find("\n<|im_start|>user")
-        if cut_pos != -1:
-            text = text[:cut_pos].rstrip()
-        responses.append(text)
-    return responses
-
 @torch.no_grad()
 def batched_generate(
     model,
@@ -388,7 +317,7 @@ def build_pg_minibatch(
 def parse_args():
     ap = argparse.ArgumentParser("GRPO RL for Qwen3-4B on Fermi intervals (LoRA)")
     ap.add_argument("--base_model", type=str, default=os.environ.get("BASE_MODEL", "Qwen/Qwen3-4B-Base"))
-    ap.add_argument("--adapter_dir", type=str, default=os.environ.get("ADAPTER_DIR", "./qwen3-4b-instruct-bf16-lora/checkpoint-50"))
+    ap.add_argument("--adapter_dir", type=str, default=os.environ.get("ADAPTER_DIR", "./qwen3-4b-instruct-bf16-lora/checkpoint-64"))
     ap.add_argument("--out_dir", type=str, default=os.environ.get("OUT_DIR", "./qwen3-4b-grpo"))
     ap.add_argument("--debug", dest="debug", action=argparse.BooleanOptionalAction, default=False,
                     help="Use fermi_train_20.txt when true, else fermi_train.txt")
@@ -595,7 +524,11 @@ def main():
             # Advantage: (r - mean_r) per rollout (simple baseline)
             device_for_rewards = next(model.parameters()).device
             rewards_tensor = torch.tensor(all_rewards, dtype=torch.float32, device=device_for_rewards)
-            adv = rewards_tensor - rewards_tensor.mean()
+            #adv = rewards_tensor - rewards_tensor.mean()
+            # New idea with only positive advantage
+            adv = (rewards_tensor - rewards_tensor.mean()) / (rewards_tensor.std() + 1.0)
+            adv = adv.clamp_min(0.0)
+
 
             # AMP context (CUDA only)
             if torch.cuda.is_available():
