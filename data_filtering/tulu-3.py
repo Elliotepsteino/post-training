@@ -1,0 +1,564 @@
+#!/usr/bin/env python3
+"""
+Utilities for classifying the allenai/tulu-3-sft-mixture by knowledge year.
+
+The script runs an OpenAI Batch job with GPT-5-mini to label the minimum year
+(between 2001 and 2025) that contains the knowledge required to answer each
+question/answer pair. Results are saved as one JSONL shard per year together
+with helper utilities for loading and shuffling data up to a target cutoff.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import random
+import time
+from collections import defaultdict
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Tuple
+
+from datasets import Dataset, load_dataset
+from openai import OpenAI
+
+YEARS = list(range(2001, 2026))
+CATEGORIES = [
+    "general_knowledge",
+    "math",
+    "coding",
+    "science",
+    "history",
+    "law",
+    "finance",
+    "health",
+    "creative_writing",
+    "multi_lingual",
+    "instruction_following",
+    "reasoning",
+    "other",
+]
+DEFAULT_MODEL = "gpt-5-mini"
+DEFAULT_SUBSET = 50
+POLLABLE_STATUSES = {"validating", "in_progress", "running", "queued", "finalizing"}
+
+
+@dataclass
+class SampleRecord:
+    """Lightweight container for the subset we send to the Batch API."""
+
+    sample_index: int
+    dataset_row: Dict[str, Any]
+    question: str
+    answer: str
+
+    @property
+    def custom_id(self) -> str:
+        return f"sample-{self.sample_index}"
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--subset-size",
+        type=int,
+        default=DEFAULT_SUBSET,
+        help="How many samples to classify (default: 50).",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path(__file__).resolve().parent / "tulu_year_shards",
+        help="Where to save per-year JSONL files and batch artifacts.",
+    )
+    parser.add_argument(
+        "--model",
+        default=DEFAULT_MODEL,
+        help="OpenAI model to use (default: GPT-5-mini).",
+    )
+    parser.add_argument(
+        "--completion-window",
+        default="24h",
+        help="Batch completion window requested from OpenAI.",
+    )
+    parser.add_argument(
+        "--poll-interval",
+        type=int,
+        default=20,
+        help="Seconds between batch status polls.",
+    )
+    parser.add_argument(
+        "--resume-batch-id",
+        default=None,
+        help="Skip submission and resume polling an existing batch id.",
+    )
+    parser.add_argument(
+        "--use-batch",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Use the OpenAI Batch API (default). Pass --no-use-batch for live synchronous calls.",
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=13,
+        help="Seed for deterministic subset selection and shuffling.",
+    )
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    output_dir: Path = args.output_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    if not args.use_batch and args.resume_batch_id:
+        raise ValueError("--resume-batch-id is only valid when --use-batch is enabled.")
+
+    samples = build_subset(subset_size=args.subset_size, seed=args.seed)
+    if not samples:
+        raise ValueError("No samples extracted from the dataset.")
+
+    client = OpenAI()
+    (
+        requests,
+        batch_input_path,
+        request_count,
+        timestamp,
+        run_id,
+    ) = prepare_batch_payload(samples=samples, model=args.model, output_dir=output_dir)
+
+    if args.use_batch:
+        batch = maybe_submit_batch(
+            client=client,
+            batch_input_path=batch_input_path,
+            model=args.model,
+            sample_count=request_count,
+            output_dir=output_dir,
+            completion_window=args.completion_window,
+            resume_batch_id=args.resume_batch_id,
+            run_id=run_id,
+        )
+        print(f"Polling batch {batch.id} (status: {batch.status})")
+        batch = wait_for_batch_completion(
+            client=client,
+            batch_id=batch.id,
+            poll_interval=args.poll_interval,
+        )
+        print(f"Batch finished with status {batch.status}")
+        if batch.status != "completed":
+            raise RuntimeError(f"Batch failed with status: {batch.status}")
+
+        output_path = download_batch_output(
+            client=client,
+            file_id=batch.output_file_id,
+            output_dir=output_dir,
+            run_id=run_id,
+        )
+    else:
+        output_path = run_live_classification(
+            client=client,
+            requests=requests,
+            output_dir=output_dir,
+            batch_input_path=batch_input_path,
+            model=args.model,
+            run_id=run_id,
+        )
+
+    year_map = parse_batch_predictions(output_path=output_path)
+    grouped = attach_years(samples=samples, year_map=year_map)
+    shard_dir = save_year_shards(
+        grouped_records=grouped,
+        output_dir=output_dir,
+        run_id=run_id,
+        timestamp=timestamp,
+    )
+    print_summary(grouped_records=grouped, shard_dir=shard_dir)
+
+
+def build_subset(subset_size: int, seed: int) -> List[SampleRecord]:
+    ds = load_dataset("allenai/tulu-3-sft-mixture")["train"]
+    total = len(ds)
+    if subset_size > total:
+        subset_size = total
+    rng = random.Random(seed)
+    indices = list(range(total))
+    rng.shuffle(indices)
+    chosen = sorted(indices[:subset_size])
+    samples: List[SampleRecord] = []
+    for idx in chosen:
+        row = ds[idx]
+        question, answer = extract_question_answer(row)
+        if not question:
+            continue
+        samples.append(SampleRecord(idx, row, question, answer))
+    return samples
+
+
+def extract_question_answer(row: Dict[str, Any]) -> Tuple[str, str]:
+    """Attempt to obtain a user question and assistant answer from arbitrary schema."""
+
+    def normalize_content(content: Any) -> str:
+        if content is None:
+            return ""
+        if isinstance(content, str):
+            return content
+        if isinstance(content, list):
+            parts = []
+            for chunk in content:
+                if isinstance(chunk, dict) and "text" in chunk:
+                    parts.append(chunk.get("text", ""))
+                else:
+                    parts.append(str(chunk))
+            return " ".join(parts)
+        if isinstance(content, dict):
+            return content.get("text") or ""
+        return str(content)
+
+    if "messages" in row and row["messages"]:
+        user_turns: List[str] = []
+        assistant_turns: List[str] = []
+        for msg in row["messages"]:
+            role = msg.get("role") or ""
+            text = normalize_content(msg.get("content"))
+            if role in {"user", "instruction"}:
+                user_turns.append(text)
+            elif role == "assistant":
+                assistant_turns.append(text)
+        question = user_turns[-1] if user_turns else ""
+        answer = assistant_turns[-1] if assistant_turns else ""
+        return question.strip(), answer.strip()
+
+    if "prompt" in row and "response" in row:
+        return row["prompt"].strip(), row["response"].strip()
+
+    question = (
+        row.get("question")
+        or row.get("input")
+        or row.get("instructions")
+        or row.get("source")
+        or ""
+    )
+    answer = row.get("answer") or row.get("output") or row.get("target") or ""
+    return str(question).strip(), str(answer).strip()
+
+
+def prepare_batch_payload(
+    samples: List[SampleRecord],
+    model: str,
+    output_dir: Path,
+) -> Tuple[List[Dict[str, Any]], Path, int, str, str]:
+    requests = [build_batch_request(sample, model=model) for sample in samples]
+    if not requests:
+        raise ValueError("No valid samples with extracted question/answer pairs.")
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%MZ")
+    sample_count = len(requests)
+    run_id = f"{timestamp}_n{sample_count}"
+    batch_input_path = output_dir / f"batch_input_{run_id}.jsonl"
+    write_jsonl(requests, batch_input_path)
+    print(f"Wrote {sample_count} batch requests to {batch_input_path}")
+    return requests, batch_input_path, sample_count, timestamp, run_id
+
+
+def maybe_submit_batch(
+    client: OpenAI,
+    batch_input_path: Path,
+    model: str,
+    sample_count: int,
+    output_dir: Path,
+    completion_window: str,
+    resume_batch_id: str | None,
+    run_id: str,
+):
+    if resume_batch_id:
+        print(f"Resuming existing batch {resume_batch_id}")
+        return client.batches.retrieve(resume_batch_id)
+
+    with batch_input_path.open("rb") as handle:
+        input_file = client.files.create(file=handle, purpose="batch")
+
+    batch = client.batches.create(
+        input_file_id=input_file.id,
+        endpoint="/v1/chat/completions",
+        completion_window=completion_window,
+        metadata={"description": "tulu-3 year classification subset"},
+    )
+    metadata = {
+        "mode": "batch",
+        "run_id": run_id,
+        "batch_id": batch.id,
+        "input_file_id": input_file.id,
+        "input_file_path": str(batch_input_path),
+        "model": model,
+        "subset_size": sample_count,
+        "submitted_at": datetime.now(timezone.utc).isoformat(),
+    }
+    metadata_path = output_dir / f"batch_metadata_{run_id}.json"
+    metadata_path.write_text(json.dumps(metadata, indent=2))
+    (output_dir / "batch_metadata_latest.json").write_text(json.dumps(metadata, indent=2))
+    print(f"Submitted batch {batch.id}; metadata saved to {metadata_path}")
+    return batch
+
+
+def build_batch_request(sample: SampleRecord, model: str) -> Dict[str, Any]:
+    system_prompt = (
+        "You label the minimum calendar year (between 2001 and 2025) required "
+        "to answer a question without temporal leakage. When uncertain you must "
+        "pick the earliest plausible year consistent with the evidence."
+    )
+    user_prompt = (
+        "You receive a question and a canonical answer separated by delimiters.\n"
+        "Pick the smallest year Y in [2001, 2025] so that a model with knowledge "
+        "through year Y could answer confidently, considering BOTH the question "
+        "and answer. If no specific time-dependent knowledge is required, output 2001.\n"
+        "Rules:\n"
+        "- Consider publication dates, statistics, laws, releases, and events.\n"
+        "- Output the smallest year that still contains every fact mentioned.\n"
+        "- If multiple explicit years are referenced, return the most recent explicit year.\n"
+        "- If only a range or uncertainty is provided (e.g., 'released between 2008 and 2015'), "
+        "answer with the earliest year in that range to stay conservative.\n"
+        "- If information is older than 2001, still respond with 2001.\n"
+        "- Do not hallucinate years that are not grounded in the text.\n"
+        "- Additionally, assign the question to one category from this list: "
+        f"{', '.join(CATEGORIES[:-1])}, or {CATEGORIES[-1]} if nothing fits.\n"
+        "\n"
+        "Illustrative example:\n"
+        "Question:\n"
+        "\"Teacher: In this task, you are given a text from tweets and a boolean question whether this tweet "
+        "has positive sentiment or negative sentiment. Your task is to generate answer \"yes\" when the tweet has that "
+        "particular sentiment, otherwise generate answer \"no\".\\nTeacher: Now, understand the problem? If you are still "
+        "confused, see the following example:\\nTweet: @justinchuan Awww! I was thinking about you lot up there! Glad you enjoyed "
+        "it Question: is it a positive tweet?\\nSolution: yes\\nReason: There is an expression of happiness in this tweet text, hence, "
+        "we can say it's positive. So answer is 'yes'.\\n\\nNow, solve this instance: Tweet: Goddamn my back hurts this morning.  "
+        "Question: is it a positive tweet?\\nStudent:\"\n"
+        "Answer JSON:\n"
+        '{"year": 2006, "confidence": "high", "category": "general_knowledge", "justification": "Answer references tweets, a concept only available after Twitter launched in 2006, so 2006 is the earliest safe year.", "evidence_years": [2006]}\n'
+        "\n"
+        "Use the same reasoning style for the sample below and respond with compact JSON only.\n"
+        "\n"
+        f"<question>\n{sample.question}\n</question>\n"
+        f"<answer>\n{sample.answer}\n</answer>\n"
+        "Return JSON exactly in this schema:\n"
+        '{"year": 2001, "confidence": "low|medium|high", '
+        '"category": "one of the allowed categories", '
+        '"justification": "why year is required", "evidence_years": [2008]}\n'
+    )
+    body = {
+        "model": model,
+        "response_format": {"type": "json_object"},
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+    }
+    return {"custom_id": sample.custom_id, "method": "POST", "url": "/v1/chat/completions", "body": body}
+
+
+def write_jsonl(items: Iterable[Dict[str, Any]], path: Path) -> None:
+    with path.open("w", encoding="utf-8") as handle:
+        for item in items:
+            handle.write(json.dumps(item, ensure_ascii=False) + "\n")
+
+
+def run_live_classification(
+    client: OpenAI,
+    requests: List[Dict[str, Any]],
+    output_dir: Path,
+    batch_input_path: Path,
+    model: str,
+    run_id: str,
+) -> Path:
+    sample_count = len(requests)
+    output_path = output_dir / f"batch_output_local_{run_id}.jsonl"
+    print(f"Running {sample_count} live completions with {model}")
+    with output_path.open("w", encoding="utf-8") as handle:
+        for idx, request in enumerate(requests, start=1):
+            completion = client.chat.completions.create(**request["body"])
+            payload = {
+                "custom_id": request["custom_id"],
+                "response": {
+                    "status_code": 200,
+                    "body": completion.model_dump(),
+                },
+            }
+            handle.write(json.dumps(payload) + "\n")
+            print(f"[live] Processed {idx}/{sample_count}")
+    metadata = {
+        "mode": "live",
+        "run_id": run_id,
+        "batch_id": None,
+        "input_file_path": str(batch_input_path),
+        "output_file_path": str(output_path),
+        "model": model,
+        "subset_size": sample_count,
+        "completed_at": datetime.now(timezone.utc).isoformat(),
+    }
+    metadata_path = output_dir / f"batch_metadata_{run_id}.json"
+    metadata_path.write_text(json.dumps(metadata, indent=2))
+    (output_dir / "batch_metadata_latest.json").write_text(json.dumps(metadata, indent=2))
+    print(f"Wrote live output to {output_path}")
+    return output_path
+
+
+def wait_for_batch_completion(client: OpenAI, batch_id: str, poll_interval: int):
+    while True:
+        batch = client.batches.retrieve(batch_id)
+        if batch.status in POLLABLE_STATUSES:
+            time.sleep(poll_interval)
+            continue
+        if batch.status == "completed" and not getattr(batch, "output_file_id", None):
+            time.sleep(poll_interval)
+            continue
+        return batch
+
+
+def download_batch_output(client: OpenAI, file_id: str, output_dir: Path, run_id: str) -> Path:
+    response = client.files.content(file_id)
+    destination = output_dir / f"batch_output_{run_id}_{file_id}.jsonl"
+    with open(destination, "wb") as handle:
+        payload = response.read() if hasattr(response, "read") else response
+        if isinstance(payload, bytes):
+            handle.write(payload)
+        else:
+            handle.write(str(payload).encode("utf-8"))
+    print(f"Downloaded batch output to {destination}")
+    return destination
+
+
+def parse_batch_predictions(output_path: Path) -> Dict[str, Dict[str, Any]]:
+    year_map: Dict[str, Dict[str, Any]] = {}
+    with output_path.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            payload = json.loads(line)
+            custom_id = payload.get("custom_id")
+            body = payload.get("response", {}).get("body", {})
+            choices = body.get("choices") or []
+            if not choices:
+                continue
+            message = choices[0]["message"]["content"]
+            try:
+                parsed = json.loads(message)
+            except json.JSONDecodeError:
+                parsed = {"year": 2001, "confidence": "low", "justification": message, "evidence_years": []}
+            year = parsed.get("year", 2001)
+            if not isinstance(year, int):
+                try:
+                    year = int(year)
+                except (ValueError, TypeError):
+                    year = 2001
+            year = min(max(year, YEARS[0]), YEARS[-1])
+            parsed["year"] = year
+            category = parsed.get("category", "other")
+            if not isinstance(category, str):
+                category = "other"
+            category = category.strip().lower()
+            if category not in CATEGORIES:
+                category = "other"
+            parsed["category"] = category
+            year_map[custom_id] = parsed
+    return year_map
+
+
+def attach_years(samples: List[SampleRecord], year_map: Dict[str, Dict[str, Any]]):
+    grouped: Dict[int, List[Dict[str, Any]]] = defaultdict(list)
+    for sample in samples:
+        prediction = year_map.get(sample.custom_id)
+        if not prediction:
+            continue
+        record = {
+            "sample_index": sample.sample_index,
+            "year": prediction["year"],
+            "confidence": prediction.get("confidence"),
+            "category": prediction.get("category", "other"),
+            "justification": prediction.get("justification"),
+            "evidence_years": prediction.get("evidence_years", []),
+            "question": sample.question,
+            "answer": sample.answer,
+            "messages": sample.dataset_row.get("messages"),
+            "source": sample.dataset_row.get("source"),
+        }
+        grouped[prediction["year"]].append(record)
+    return grouped
+
+
+def save_year_shards(
+    grouped_records: Dict[int, List[Dict[str, Any]]],
+    output_dir: Path,
+    run_id: str,
+    timestamp: str,
+) -> Path:
+    shard_dir = output_dir / f"year_shards_{run_id}"
+    shard_dir.mkdir(parents=True, exist_ok=True)
+    category_counts = defaultdict(int)
+    for year, records in grouped_records.items():
+        shard_path = shard_dir / f"year={year}.jsonl"
+        write_jsonl(records, shard_path)
+        for record in records:
+            category = record.get("category", "other")
+            if category not in CATEGORIES:
+                category = "other"
+            category_counts[category] += 1
+    manifest_path = shard_dir / "manifest.json"
+    manifest = {
+        "run_id": run_id,
+        "generated_at": int(time.time()),
+        "timestamp": timestamp,
+        "years": sorted(grouped_records.keys()),
+        "total_records": sum(len(records) for records in grouped_records.values()),
+        "shard_dir": str(shard_dir),
+        "category_counts": dict(sorted(category_counts.items())),
+    }
+    manifest_path.write_text(json.dumps(manifest, indent=2))
+    return shard_dir
+
+
+def print_summary(grouped_records: Dict[int, List[Dict[str, Any]]], shard_dir: Path) -> None:
+    total = sum(len(records) for records in grouped_records.values())
+    print(f"Saved {total} labeled samples to {shard_dir}")
+    for year in sorted(grouped_records):
+        print(f"Year {year}: {len(grouped_records[year])} samples")
+
+
+class YearBoundedTuluLoader:
+    """
+    Utility for merging and shuffling shards saved under year_shards_<run_id>.
+    """
+
+    def __init__(self, shard_dir: Path):
+        self.shard_dir = Path(shard_dir)
+
+    def load(
+        self,
+        max_year: int,
+        shuffle: bool = True,
+        seed: int | None = None,
+    ) -> Dataset:
+        if max_year < YEARS[0]:
+            raise ValueError(f"max_year must be >= {YEARS[0]}")
+        max_year = min(max_year, YEARS[-1])
+        records: List[Dict[str, Any]] = []
+        for year in YEARS:
+            if year > max_year:
+                break
+            shard_path = self.shard_dir / f"year={year}.jsonl"
+            if not shard_path.exists():
+                continue
+            with shard_path.open("r", encoding="utf-8") as handle:
+                for line in handle:
+                    if not line.strip():
+                        continue
+                    record = json.loads(line)
+                    records.append(record)
+        if shuffle:
+            rng = random.Random(seed)
+            rng.shuffle(records)
+        if not records:
+            raise FileNotFoundError(f"No shards found up to year {max_year} in {self.shard_dir}")
+        return Dataset.from_list(records)
+
+
+if __name__ == "__main__":
+    main()
