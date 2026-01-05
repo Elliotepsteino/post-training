@@ -32,9 +32,12 @@ The extra torch line pulls the CUDA 12.5 wheels directly from the official PyTor
 ```bash
 cd /home/epsteine/qwen
 python -m data_filtering.tulu-3 \
+  --dataset-name allenai/tulu-3-sft-mixture \
   --subset-size 50 \
   --output-dir data_filtering/tulu_year_shards
 ```
+
+Switch `--dataset-name` (default `allenai/tulu-3-sft-mixture`) to target additional corpora such as `allenai/llama-3.1-tulu-3-8b-preference-mixture`, `allenai/RLVR-GSM`, `allenai/RLVR-MATH`, or `allenai/RLVR-IFeval`. Pair it with `--dataset-split` (default `train`) if you need a different partition. The sampler now understands each schema: DPO runs feed both the preferred and rejected completions to the classifier, while RLVR runs include the full conversation, gold rationale, and any constraint metadata so the assigned year reflects the newest fact anywhere in the bundle.
 
 To run the exact same pipeline without the Batch API (synchronous Chat Completions, still emitting batch-style JSONL files), add `--no-use-batch`:
 
@@ -57,13 +60,29 @@ bash data_filtering/run_full_pipeline.sh \
 
 The script forwards every argument to `tulu-3.py`, detects the `--output-dir` value (defaulting to `data_filtering/tulu_year_shards`), reads `batch_metadata_latest.json` from that directory to locate the newest `year_shards_<run_id>` folder, and then renders both histograms there.
 
+### Multi-dataset helper
+
+To classify several datasets in one sweep (currently the SFT mixture, the Tulu-3 DPO mixture, and the three RLVR sets) with a uniform configuration, use:
+
+```bash
+bash data_filtering/run_all_filters.sh --no-use-batch
+```
+
+Environment variables control the shared knobs:
+
+- `SUBSET_SIZE` (default `10`)
+- `OUTPUT_ROOT` (default `data_filtering/tulu_year_shards`)
+- `DATASET_SPLIT` (default `train`)
+
+Any additional CLI flags (e.g., `--no-use-batch`, `--model gpt-4.1`) are forwarded to each `python -m data_filtering.tulu-3` invocation. The helper now launches every dataset pipeline in parallel, so batches for SFT/DPO/RLVR are submitted simultaneously; expect higher instantaneous OpenAI/HF traffic. After each dataset finishes it calls `python -m data_filtering.year_histogram --shard-dir ...` so year/category PDFs are rendered automatically (requires `matplotlib`). Every invocation of the helper creates a session directory named after the current U.S. Pacific time (PT) stamp (override with `SESSION_STAMP=...`). All dataset-specific outputs for that session live under `data_filtering/tulu_year_shards/<session_stamp>/<dataset-slug>/...`, making it easy to compare artifacts produced in the same sweep.
+
 Key behavior:
 
 - Loads the train split, samples 50 examples (shuffled by `--seed`), and extracts user/assistant turns.
 - Builds an OpenAI Batch-style input file with `gpt-5-mini` prompts.
 - Writes the payload to `batch_input_<timestamp>_n<count>.jsonl` (with an easily readable UTC timestamp), then (by default) submits it via the Batch API; `--no-use-batch` reuses the same file for synchronous calls.
 - Batch output files mirror the same identifier: `batch_output_<timestamp>_n<count>_<fileid>.jsonl` for batch mode and `batch_output_local_<timestamp>_n<count>.jsonl` for live mode. Metadata is stored in `batch_metadata_<timestamp>_n<count>.json`, with `batch_metadata_latest.json` pointing at the most recent run.
-- Polls the batch until completion (or runs live Chat Completions), parses the assigned year and question category for every sample, and writes shards named `year=YYYY.jsonl` inside a run-scoped folder `year_shards_<timestamp>_n<count>`.
+- Polls the batch until completion (or runs live Chat Completions), parses the assigned year and question category for every sample, and writes shards named `year=YYYY_<run_id>.jsonl` inside a run-scoped folder `year_shards_<run_id>` so each file name carries the timestamp and sample count.
 - Each shard directory also receives a `manifest.json` that records the covered years, total count, and run identifier.
 
 Flags of interest:
@@ -79,19 +98,19 @@ To scale beyond the default, increase `--subset-size` or update the sampling log
 
 ## Consuming the shards
 
-The script exposes `YearBoundedTuluLoader` for merging and shuffling data up to a cutoff. Point it at a specific run directory (e.g., `year_shards_2025-12-01_02-18Z_n50`):
+The script exposes `YearBoundedTuluLoader` for merging and shuffling data up to a cutoff. Point it at a specific run directory (e.g., `data_filtering/tulu_year_shards/2026-01-05_12-21PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-05_20-21Z_n10`):
 
 ```python
 from pathlib import Path
 from data_filtering.tulu-3 import YearBoundedTuluLoader
 
-run_dir = Path("data_filtering/tulu_year_shards/year_shards_2025-12-01_02-18Z_n50")
+run_dir = Path("data_filtering/tulu_year_shards/2026-01-05_12-21PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-05_20-21Z_n10")
 loader = YearBoundedTuluLoader(run_dir)
 dataset = loader.load(max_year=2014, shuffle=True, seed=7)
 print(dataset[:2])
 ```
 
-This returns a Hugging Face `Dataset` assembled from every `year=YYYY.jsonl` shard where `YYYY <= max_year`, shuffled if requested. Use the resulting dataset directly in downstream dataloaders or convert it to other formats as needed.
+This returns a Hugging Face `Dataset` assembled from every `year=YYYY_<run_id>.jsonl` shard where `YYYY <= max_year`, shuffled if requested. Use the resulting dataset directly in downstream dataloaders or convert it to other formats as needed.
 
 Each record exposes: `sample_index`, `year`, `category`, `confidence`, `justification`, `evidence_years`, `question`, `answer`, and the original metadata fields that were present in the source row.
 

@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import re
 import time
 from collections import defaultdict
 from dataclasses import dataclass
@@ -42,6 +43,156 @@ CATEGORIES = [
 DEFAULT_MODEL = "gpt-5-mini"
 DEFAULT_SUBSET = 50
 POLLABLE_STATUSES = {"validating", "in_progress", "running", "queued", "finalizing"}
+DEFAULT_DATASET = "allenai/tulu-3-sft-mixture"
+DEFAULT_SPLIT = "train"
+VARIANT_SFT = "sft"
+VARIANT_DPO = "dpo"
+VARIANT_RLVR = "rlvr"
+DATASET_VARIANTS = {
+    "allenai/llama-3.1-tulu-3-8b-preference-mixture": VARIANT_DPO,
+    "allenai/RLVR-GSM": VARIANT_RLVR,
+    "allenai/RLVR-MATH": VARIANT_RLVR,
+    "allenai/RLVR-IFeval": VARIANT_RLVR,
+}
+VARIANT_NOTES = {
+    VARIANT_SFT: (
+        "These are supervised instruction-tuning pairs: treat the question as the user prompt "
+        "and the answer as the assistant's canonical reply."
+    ),
+    VARIANT_DPO: (
+        "These samples include BOTH a preferred answer and a rejected answer. Consider every fact "
+        "mentioned in either answer when deciding the minimum safe year."
+    ),
+    VARIANT_RLVR: (
+        "These samples bundle evaluation prompts, solution rationales, and sometimes explicit constraints. "
+        "Treat the full message history plus the provided ground-truth/constraint text as a single answer bundle."
+    ),
+}
+
+
+def normalize_content(content: Any) -> str:
+    if content is None:
+        return ""
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        parts = []
+        for chunk in content:
+            if isinstance(chunk, dict) and "text" in chunk:
+                parts.append(chunk.get("text", ""))
+            else:
+                parts.append(str(chunk))
+        return " ".join(parts)
+    if isinstance(content, dict):
+        return content.get("text") or ""
+    return str(content)
+
+
+def flatten_messages(messages: List[Dict[str, Any]]) -> str:
+    lines: List[str] = []
+    for msg in messages or []:
+        role = msg.get("role") or "unknown"
+        text = normalize_content(msg.get("content")).strip()
+        if not text:
+            continue
+        lines.append(f"[{role}] {text}")
+    return "\n\n".join(lines).strip()
+
+
+def extract_generic_question_answer(row: Dict[str, Any]) -> Tuple[str, str]:
+    if "messages" in row and row["messages"]:
+        user_turns: List[str] = []
+        assistant_turns: List[str] = []
+        for msg in row["messages"]:
+            role = msg.get("role") or ""
+            text = normalize_content(msg.get("content"))
+            if role in {"user", "instruction"}:
+                user_turns.append(text)
+            elif role == "assistant":
+                assistant_turns.append(text)
+        question = user_turns[-1] if user_turns else ""
+        answer = assistant_turns[-1] if assistant_turns else ""
+        return question.strip(), answer.strip()
+
+    if "prompt" in row and "response" in row:
+        return row["prompt"].strip(), row["response"].strip()
+
+    question = (
+        row.get("question")
+        or row.get("input")
+        or row.get("instructions")
+        or row.get("source")
+        or ""
+    )
+    answer = row.get("answer") or row.get("output") or row.get("target") or ""
+    return str(question).strip(), str(answer).strip()
+
+
+def extract_dpo_question_answer(row: Dict[str, Any]) -> Tuple[str, str]:
+    def split_turns(messages: List[Dict[str, Any]]) -> Tuple[List[str], List[str]]:
+        user_turns: List[str] = []
+        assistant_turns: List[str] = []
+        for msg in messages:
+            role = (msg.get("role") or "").lower()
+            text = normalize_content(msg.get("content")).strip()
+            if not text:
+                continue
+            if role == "assistant":
+                assistant_turns.append(text)
+            else:
+                user_turns.append(text)
+        return user_turns, assistant_turns
+
+    prompt = (row.get("prompt") or "").strip()
+    user_chosen, assistant_chosen = split_turns(row.get("chosen") or [])
+    user_rejected, assistant_rejected = split_turns(row.get("rejected") or [])
+
+    question_parts: List[str] = []
+    if prompt:
+        question_parts.append(prompt)
+    seen_user_texts = set()
+    for part in user_chosen + user_rejected:
+        if part not in seen_user_texts:
+            question_parts.append(part)
+            seen_user_texts.add(part)
+    question = "\n\n".join(part for part in question_parts if part).strip()
+
+    answer_sections: List[str] = []
+    if assistant_chosen:
+        answer_sections.append("preferred answer:\n" + "\n\n".join(assistant_chosen))
+    if assistant_rejected:
+        answer_sections.append("rejected answer:\n" + "\n\n".join(assistant_rejected))
+    answer = "\n\n---\n\n".join(answer_sections).strip()
+    return question, answer
+
+
+def extract_rlvr_question_answer(row: Dict[str, Any]) -> Tuple[str, str]:
+    question = flatten_messages(row.get("messages") or [])
+    answer_parts: List[str] = []
+    ground_truth = row.get("ground_truth")
+    if isinstance(ground_truth, str):
+        answer_parts.append(ground_truth.strip())
+    dataset_name = row.get("dataset")
+    if isinstance(dataset_name, str) and dataset_name:
+        answer_parts.append(f"[dataset] {dataset_name}")
+    constraint = row.get("constraint")
+    if isinstance(constraint, str) and constraint.strip():
+        answer_parts.append(f"[constraint] {constraint.strip()}")
+    return question, "\n\n".join(part for part in answer_parts if part).strip()
+
+
+DATASET_EXTRACTORS = {
+    "allenai/llama-3.1-tulu-3-8b-preference-mixture": extract_dpo_question_answer,
+    "allenai/RLVR-GSM": extract_rlvr_question_answer,
+    "allenai/RLVR-MATH": extract_rlvr_question_answer,
+    "allenai/RLVR-IFeval": extract_rlvr_question_answer,
+}
+
+
+def slugify_dataset(name: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", (name or "dataset").lower())
+    slug = slug.strip("-")
+    return slug or "dataset"
 
 
 @dataclass
@@ -52,6 +203,8 @@ class SampleRecord:
     dataset_row: Dict[str, Any]
     question: str
     answer: str
+    dataset_name: str
+    dataset_variant: str
 
     @property
     def custom_id(self) -> str:
@@ -65,6 +218,16 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=DEFAULT_SUBSET,
         help="How many samples to classify (default: 50).",
+    )
+    parser.add_argument(
+        "--dataset-name",
+        default=DEFAULT_DATASET,
+        help=f"Hugging Face dataset to sample from (default: {DEFAULT_DATASET}).",
+    )
+    parser.add_argument(
+        "--dataset-split",
+        default=DEFAULT_SPLIT,
+        help=f"Dataset split to load (default: {DEFAULT_SPLIT}).",
     )
     parser.add_argument(
         "--output-dir",
@@ -116,18 +279,29 @@ def main() -> None:
     if not args.use_batch and args.resume_batch_id:
         raise ValueError("--resume-batch-id is only valid when --use-batch is enabled.")
 
-    samples = build_subset(subset_size=args.subset_size, seed=args.seed)
+    samples = build_subset(
+        dataset_name=args.dataset_name,
+        dataset_split=args.dataset_split,
+        subset_size=args.subset_size,
+        seed=args.seed,
+    )
     if not samples:
         raise ValueError("No samples extracted from the dataset.")
 
     client = OpenAI()
+    dataset_slug = slugify_dataset(args.dataset_name)
     (
         requests,
         batch_input_path,
         request_count,
         timestamp,
         run_id,
-    ) = prepare_batch_payload(samples=samples, model=args.model, output_dir=output_dir)
+    ) = prepare_batch_payload(
+        samples=samples,
+        model=args.model,
+        output_dir=output_dir,
+        dataset_slug=dataset_slug,
+    )
 
     if args.use_batch:
         batch = maybe_submit_batch(
@@ -139,6 +313,8 @@ def main() -> None:
             completion_window=args.completion_window,
             resume_batch_id=args.resume_batch_id,
             run_id=run_id,
+            dataset_name=args.dataset_name,
+            dataset_split=args.dataset_split,
         )
         print(f"Polling batch {batch.id} (status: {batch.status})")
         batch = wait_for_batch_completion(
@@ -164,6 +340,8 @@ def main() -> None:
             batch_input_path=batch_input_path,
             model=args.model,
             run_id=run_id,
+            dataset_name=args.dataset_name,
+            dataset_split=args.dataset_split,
         )
 
     year_map = parse_batch_predictions(output_path=output_path)
@@ -177,8 +355,13 @@ def main() -> None:
     print_summary(grouped_records=grouped, shard_dir=shard_dir)
 
 
-def build_subset(subset_size: int, seed: int) -> List[SampleRecord]:
-    ds = load_dataset("allenai/tulu-3-sft-mixture")["train"]
+def build_subset(
+    dataset_name: str,
+    dataset_split: str,
+    subset_size: int,
+    seed: int,
+) -> List[SampleRecord]:
+    ds = load_dataset(dataset_name, split=dataset_split)
     total = len(ds)
     if subset_size > total:
         subset_size = total
@@ -187,74 +370,29 @@ def build_subset(subset_size: int, seed: int) -> List[SampleRecord]:
     rng.shuffle(indices)
     chosen = sorted(indices[:subset_size])
     samples: List[SampleRecord] = []
+    extractor = DATASET_EXTRACTORS.get(dataset_name, extract_generic_question_answer)
+    dataset_variant = DATASET_VARIANTS.get(dataset_name, VARIANT_SFT)
     for idx in chosen:
         row = ds[idx]
-        question, answer = extract_question_answer(row)
-        if not question:
+        question, answer = extractor(row)
+        if not question or not answer:
             continue
-        samples.append(SampleRecord(idx, row, question, answer))
+        samples.append(SampleRecord(idx, row, question, answer, dataset_name, dataset_variant))
     return samples
-
-
-def extract_question_answer(row: Dict[str, Any]) -> Tuple[str, str]:
-    """Attempt to obtain a user question and assistant answer from arbitrary schema."""
-
-    def normalize_content(content: Any) -> str:
-        if content is None:
-            return ""
-        if isinstance(content, str):
-            return content
-        if isinstance(content, list):
-            parts = []
-            for chunk in content:
-                if isinstance(chunk, dict) and "text" in chunk:
-                    parts.append(chunk.get("text", ""))
-                else:
-                    parts.append(str(chunk))
-            return " ".join(parts)
-        if isinstance(content, dict):
-            return content.get("text") or ""
-        return str(content)
-
-    if "messages" in row and row["messages"]:
-        user_turns: List[str] = []
-        assistant_turns: List[str] = []
-        for msg in row["messages"]:
-            role = msg.get("role") or ""
-            text = normalize_content(msg.get("content"))
-            if role in {"user", "instruction"}:
-                user_turns.append(text)
-            elif role == "assistant":
-                assistant_turns.append(text)
-        question = user_turns[-1] if user_turns else ""
-        answer = assistant_turns[-1] if assistant_turns else ""
-        return question.strip(), answer.strip()
-
-    if "prompt" in row and "response" in row:
-        return row["prompt"].strip(), row["response"].strip()
-
-    question = (
-        row.get("question")
-        or row.get("input")
-        or row.get("instructions")
-        or row.get("source")
-        or ""
-    )
-    answer = row.get("answer") or row.get("output") or row.get("target") or ""
-    return str(question).strip(), str(answer).strip()
 
 
 def prepare_batch_payload(
     samples: List[SampleRecord],
     model: str,
     output_dir: Path,
+    dataset_slug: str,
 ) -> Tuple[List[Dict[str, Any]], Path, int, str, str]:
     requests = [build_batch_request(sample, model=model) for sample in samples]
     if not requests:
         raise ValueError("No valid samples with extracted question/answer pairs.")
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%MZ")
     sample_count = len(requests)
-    run_id = f"{timestamp}_n{sample_count}"
+    run_id = f"{dataset_slug}_{timestamp}_n{sample_count}"
     batch_input_path = output_dir / f"batch_input_{run_id}.jsonl"
     write_jsonl(requests, batch_input_path)
     print(f"Wrote {sample_count} batch requests to {batch_input_path}")
@@ -270,6 +408,8 @@ def maybe_submit_batch(
     completion_window: str,
     resume_batch_id: str | None,
     run_id: str,
+    dataset_name: str,
+    dataset_split: str,
 ):
     if resume_batch_id:
         print(f"Resuming existing batch {resume_batch_id}")
@@ -282,7 +422,7 @@ def maybe_submit_batch(
         input_file_id=input_file.id,
         endpoint="/v1/chat/completions",
         completion_window=completion_window,
-        metadata={"description": "tulu-3 year classification subset"},
+        metadata={"description": f"year classification subset ({dataset_name})"},
     )
     metadata = {
         "mode": "batch",
@@ -292,6 +432,8 @@ def maybe_submit_batch(
         "input_file_path": str(batch_input_path),
         "model": model,
         "subset_size": sample_count,
+        "dataset_name": dataset_name,
+        "dataset_split": dataset_split,
         "submitted_at": datetime.now(timezone.utc).isoformat(),
     }
     metadata_path = output_dir / f"batch_metadata_{run_id}.json"
@@ -307,14 +449,18 @@ def build_batch_request(sample: SampleRecord, model: str) -> Dict[str, Any]:
         "to answer a question without temporal leakage. When uncertain you must "
         "pick the earliest plausible year consistent with the evidence."
     )
+    variant_note = VARIANT_NOTES.get(sample.dataset_variant, VARIANT_NOTES[VARIANT_SFT])
     user_prompt = (
-        "You receive a question and a canonical answer separated by delimiters.\n"
+        "You receive a dataset-specific question plus an answer bundle (which may contain multiple sections).\n"
+        f"{variant_note}\n"
         "Pick the smallest year Y in [2001, 2025] so that a model with knowledge "
-        "through year Y could answer confidently, considering BOTH the question "
-        "and answer. If no specific time-dependent knowledge is required, output 2001.\n"
+        "through year Y could answer confidently, considering EVERYTHING in both the question "
+        "and the answer bundle. If no specific time-dependent knowledge is required, output 2001.\n"
         "Rules:\n"
         "- Consider publication dates, statistics, laws, releases, and events.\n"
         "- Output the smallest year that still contains every fact mentioned.\n"
+        "- If the bundle includes multiple responses (e.g., preferred/rejected answers, constraints, rationales), "
+        "the chosen year must satisfy the most recent reference anywhere in the bundle.\n"
         "- If multiple explicit years are referenced, return the most recent explicit year.\n"
         "- If only a range or uncertainty is provided (e.g., 'released between 2008 and 2015'), "
         "answer with the earliest year in that range to stay conservative.\n"
@@ -338,7 +484,7 @@ def build_batch_request(sample: SampleRecord, model: str) -> Dict[str, Any]:
         "Use the same reasoning style for the sample below and respond with compact JSON only.\n"
         "\n"
         f"<question>\n{sample.question}\n</question>\n"
-        f"<answer>\n{sample.answer}\n</answer>\n"
+        f"<answer_bundle>\n{sample.answer}\n</answer_bundle>\n"
         "Return JSON exactly in this schema:\n"
         '{"year": 2001, "confidence": "low|medium|high", '
         '"category": "one of the allowed categories", '
@@ -368,6 +514,8 @@ def run_live_classification(
     batch_input_path: Path,
     model: str,
     run_id: str,
+    dataset_name: str,
+    dataset_split: str,
 ) -> Path:
     sample_count = len(requests)
     output_path = output_dir / f"batch_output_local_{run_id}.jsonl"
@@ -392,6 +540,8 @@ def run_live_classification(
         "output_file_path": str(output_path),
         "model": model,
         "subset_size": sample_count,
+        "dataset_name": dataset_name,
+        "dataset_split": dataset_split,
         "completed_at": datetime.now(timezone.utc).isoformat(),
     }
     metadata_path = output_dir / f"batch_metadata_{run_id}.json"
@@ -470,6 +620,7 @@ def attach_years(samples: List[SampleRecord], year_map: Dict[str, Dict[str, Any]
             continue
         record = {
             "sample_index": sample.sample_index,
+            "dataset_name": sample.dataset_name,
             "year": prediction["year"],
             "confidence": prediction.get("confidence"),
             "category": prediction.get("category", "other"),
@@ -494,7 +645,7 @@ def save_year_shards(
     shard_dir.mkdir(parents=True, exist_ok=True)
     category_counts = defaultdict(int)
     for year, records in grouped_records.items():
-        shard_path = shard_dir / f"year={year}.jsonl"
+        shard_path = shard_dir / f"year={year}_{run_id}.jsonl"
         write_jsonl(records, shard_path)
         for record in records:
             category = record.get("category", "other")
@@ -543,21 +694,29 @@ class YearBoundedTuluLoader:
         for year in YEARS:
             if year > max_year:
                 break
-            shard_path = self.shard_dir / f"year={year}.jsonl"
-            if not shard_path.exists():
+            shard_paths = self._find_shard_paths(year)
+            if not shard_paths:
                 continue
-            with shard_path.open("r", encoding="utf-8") as handle:
-                for line in handle:
-                    if not line.strip():
-                        continue
-                    record = json.loads(line)
-                    records.append(record)
+            for shard_path in shard_paths:
+                with shard_path.open("r", encoding="utf-8") as handle:
+                    for line in handle:
+                        if not line.strip():
+                            continue
+                        record = json.loads(line)
+                        records.append(record)
         if shuffle:
             rng = random.Random(seed)
             rng.shuffle(records)
         if not records:
             raise FileNotFoundError(f"No shards found up to year {max_year} in {self.shard_dir}")
         return Dataset.from_list(records)
+
+    def _find_shard_paths(self, year: int) -> List[Path]:
+        exact = self.shard_dir / f"year={year}.jsonl"
+        if exact.exists():
+            return [exact]
+        matches = sorted(self.shard_dir.glob(f"year={year}_*.jsonl"))
+        return matches
 
 
 if __name__ == "__main__":
