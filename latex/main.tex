@@ -1,0 +1,47 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\geometry{margin=1in}
+
+\title{Qwen3-4B-Base: TÜLU-3 Dev (limit = 8) Snapshot}
+\author{Automated Eval Script}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+We run the TÜLU-3 dev smoke-test via \texttt{run\_tulu3\_dev\_limit8.sh}, which:
+\begin{itemize}
+    \item dynamically loads the 11 dev tasks across the 5 local A6000 GPUs so every device stays busy;
+    \item caps each task to \textbf{eight} examples using the \texttt{--limit} flag for fast iteration;
+    \item writes all artifacts to \texttt{olmes/workspace\_tulu3\_dev\_limit8/} along with a \texttt{summary.json} snapshot and GPU logs under \texttt{olmes/logs/}.
+\end{itemize}
+
+Table~\ref{tab:tulu} lists the primary score reported by each task (converted to a percentage) together with the number of evaluated examples.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{llcc}
+        \toprule
+        Task & Metric & Score (\%) & $n$ \\
+        \midrule
+        GSM8K & Exact match & 87.50 & 8 \\
+        DROP & F1 & 50.00 & 8 \\
+        Minerva Math (avg) & Exact match & 35.00 & 40 \\
+        HumanEval & pass@10 & 99.98 & 8 \\
+        HumanEval+ & pass@10 & 99.96 & 8 \\
+        IFEval & Prompt loose acc & 50.00 & 8 \\
+        PopQA & Accuracy & 12.50 & 8 \\
+        MMLU (mc) & Macro accuracy & 71.71 & 456 \\
+        AlpacaEval v2 & Len-ctrl win rate & 0.57 & 8 \\
+        BBH (cot-v1) & Macro accuracy & 54.69 & 64 \\
+        TruthfulQA & MC2 & 63.15 & 8 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Primary metrics for the TÜLU-3 dev suite using \texttt{--limit 8}. Scores are taken directly from \texttt{summary.json}.}
+    \label{tab:tulu}
+\end{table}
+
+\end{document}

@@ -26,3 +26,7 @@ Key flags:
 - `--model-name`, `--output-dir`, `--batch-size`, `--grad-accum`, etc. mirror the options in `train_qwen3_sft.py`.
 
 The script respects the LoRA, optimizer, and confidence interval settings exposed through CLI flags or environment variables, saving the adapter and tokenizer to `--output-dir` once training completes.
+
+## TÜLU-3 Dev Sanity Eval (multi-GPU)
+
+The evaluation-specific workflow (including the `run_tulu3_dev_limit8.sh` helper, log locations, and summary regeneration snippet) now lives in `olmes/README.md`. See that file for the most up-to-date instructions.
