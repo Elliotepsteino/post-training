@@ -151,8 +151,7 @@ def create_year_dataset(
     output_dir.mkdir(parents=True, exist_ok=True)
     safe_task = task.replace("/", "-")
     slug = dataset_name or f"{safe_task}_upto_{max_year}"
-    if max_samples:
-        slug += f"_n{max_samples}"
+    slug += f"_n{len(ds)}"
     output_file = output_dir / f"{slug}.jsonl"
     ds.to_json(str(output_file))
     return output_file
