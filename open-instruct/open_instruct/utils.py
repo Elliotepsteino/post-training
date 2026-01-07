@@ -28,6 +28,7 @@ try:
 except Exception:
     pass
 # isort: on
+import contextlib
 import dataclasses
 import functools
 import json
@@ -755,6 +756,30 @@ def get_wandb_tags() -> list[str]:
         tags.append(f"branch: {os.environ['GIT_BRANCH']}")
     tags = [tag[:64] for tag in tags]
     return tags
+
+
+def get_wandb_run_url(wandb_tracker: Any | None = None) -> str | None:
+    """Best-effort retrieval of the active wandb run URL across tracker implementations."""
+    if wandb_tracker is not None:
+        for attr in ("run", "tracker", "_tracker"):
+            candidate = getattr(wandb_tracker, attr, None)
+            if candidate is None:
+                continue
+            if hasattr(candidate, "get_url"):
+                with contextlib.suppress(Exception):
+                    return candidate.get_url()
+            run = getattr(candidate, "run", None)
+            if run is not None and hasattr(run, "get_url"):
+                with contextlib.suppress(Exception):
+                    return run.get_url()
+
+    with contextlib.suppress(Exception):
+        import wandb
+
+        run = getattr(wandb, "run", None)
+        if run is not None and hasattr(run, "get_url"):
+            return run.get_url()
+    return None
 
 
 # ----------------------------------------------------------------------------

@@ -18,8 +18,9 @@ warmup_ratio: 0.03
 weight_decay: 0.0
 num_train_epochs: 2
 output_dir: output/qwen3_year2007_full
-with_tracking: false
-report_to: []
+with_tracking: true
+report_to: 
+  - wandb
 logging_steps: 10
 seed: 17
 gradient_checkpointing: true
