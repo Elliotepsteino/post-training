@@ -4,7 +4,8 @@ set -euo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OLMES_DIR="$REPO_DIR/olmes"
 MODEL_PATH="$REPO_DIR/model_weights/Qwen3-4B-Base"
-OUTPUT_ROOT="$OLMES_DIR/workspace_tulu3_dev_limit8"
+WORKSPACES_DIR="$REPO_DIR/workspaces/olmes"
+OUTPUT_ROOT="$WORKSPACES_DIR/tulu3_dev_limit8"
 LOG_ROOT="$OLMES_DIR/logs/tulu3_dev_limit8"
 TASKS=(
   "gsm8k::tulu"
@@ -65,6 +66,7 @@ run_worker() {
     mkdir -p "$out_dir"
     echo "[$(date -Is)] [GPU $gpu_id] Starting $task" | tee -a "$log_file"
     (
+      cd "$OLMES_DIR"
       export CUDA_VISIBLE_DEVICES="$gpu_id"
       uv run olmes \
         --model "$MODEL_PATH" \

@@ -39,7 +39,16 @@ uv sync --group gpu # for vLLM support
 # To install with pip:
 pip install -e .
 pip install -e ".[gpu]" # for vLLM support
+
+# Activate the local venv (after it has been created once)
+source /home/epsteine/post-training/olmes/.venv/bin/activate
 ```
+
+Source the virtual environment whenever you open a new shell so `olmes`, `uv`, and the helper scripts resolve the correct dependencies.
+
+### Workspace outputs (local setup)
+
+To keep the repo tidy, all evaluation workspaces live under `/home/epsteine/post-training/workspaces/olmes` (create it once with `mkdir -p /home/epsteine/post-training/workspaces/olmes`). When running commands from `post-training/olmes`, point `--output-dir` at `../workspaces/olmes/<run_name>` (or rely on the helper scripts, which already use this layout).
 
 ## Usage
 
@@ -111,7 +120,7 @@ To reproduce the internal Qwen3 ARC-Challenge runs, download the base checkpoint
    uv run olmes \
        --model "${LOCAL_DIR}" \
        --task arc_challenge::olmes \
-       --output-dir workspace_qwen3
+       --output-dir ../workspaces/olmes/workspace_qwen3
    ```
 
 For the instruct checkpoint replace the repo id in step 3 with `Qwen/Qwen3-4B-Instruct` (login required) and reuse the same command in step 4, pointing `--model` at the instruct download.
@@ -129,14 +138,14 @@ Features:
 
 - Uses all 5 local A6000s with a dynamic queue so each GPU stays busy.
 - Applies `--limit 8` so each task evaluates on eight prompts (good for ~45 minutes runtime).
-- Writes outputs to `olmes/workspace_tulu3_dev_limit8/<task_alias>/` and logs under `olmes/logs/tulu3_dev_limit8/`.
+- Writes outputs to `/home/epsteine/post-training/workspaces/olmes/tulu3_dev_limit8/<task_alias>/` and logs under `olmes/logs/tulu3_dev_limit8/`.
 
 To regenerate the high-level summary (consumed by the LaTeX report at `/home/epsteine/post-training/latex/main.tex`):
 
 ```bash
 python - <<'PY'
 import json, os
-root = 'olmes/workspace_tulu3_dev_limit8'
+root = 'workspaces/olmes/tulu3_dev_limit8'
 tasks = [
     ('gsm8k::tulu', 'gsm8k__tulu'),
     ('drop::llama3', 'drop__llama3'),
@@ -170,6 +179,20 @@ PY
 ```
 
 Inspect `summary.json` or the per-task folders for the raw predictions, requests, and metrics.
+
+
+## TÜLU-3 dev long run (limit=100)
+
+For a deeper sweep of the TÜLU-3 dev suite (100 prompts per task), use `/home/epsteine/post-training/run_tulu3_dev_limit100.sh` after activating the virtualenv:
+
+```bash
+source /home/epsteine/post-training/olmes/.venv/bin/activate
+cd /home/epsteine/post-training
+chmod +x run_tulu3_dev_limit100.sh
+./run_tulu3_dev_limit100.sh
+```
+
+The script fans tasks across all 5 local A6000s, writes results to `/home/epsteine/post-training/workspaces/olmes/tulu3_dev_limit${LIMIT}/`, and logs under `olmes/logs/tulu3_dev_limit${LIMIT}/`. Override the default limit by exporting `LIMIT` (for example, `LIMIT=50 ./run_tulu3_dev_limit100.sh`) to experiment with shorter or longer passes without editing the script.
 
 
 ## Running Eval Suites

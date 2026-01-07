@@ -247,7 +247,7 @@ def batched_generate(
                     break
 
         text = tok.decode(gen_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True).strip()
-        text = sanitize_leading_noise(text)
+        #text = sanitize_leading_noise(text) Unclear if this is good or bad
         cut_pos = text.find("\n<|im_start|>user")
         if cut_pos != -1:
             text = text[:cut_pos].rstrip()
@@ -297,9 +297,13 @@ def build_pg_minibatch(
         am = [0] * pad_len + [1] * len(ids)
         t = inp[1:] + [pad_id]
         label_mask = [0] * pad_len + m
+
         labels = []
         for tid, valid in zip(t, label_mask):
             labels.append(tid if valid == 1 else -100)
+
+        # ---- FIX: do not train on the final step (EOS→PAD/EOS) ----
+        labels[-1] = -100
 
         input_ids.append(inp)
         attn.append(am)
@@ -342,6 +346,9 @@ def parse_args():
     ap.add_argument("--save_every", type=int, default=int(os.environ.get("SAVE_EVERY", "200")))
     ap.add_argument("--ban_prefixes", nargs="*", default=os.environ.get(
         "BAN_PREFIXES", "łazienk aimassage SpecWarn NdrFcShort").split())
+    # ---- NEW: KL penalty coefficient ----
+    ap.add_argument("--kl_coef", type=float, default=float(os.environ.get("KL_COEF", "0.05")),
+                    help="Coefficient for KL(p||q) penalty vs base SFT model.")
     return ap.parse_args()
 
 # -----------------------------
@@ -436,6 +443,19 @@ def main():
     optimizer = AdamW((p for p in model.parameters() if p.requires_grad), lr=args.lr, weight_decay=args.weight_decay)
     os.makedirs(args.out_dir, exist_ok=True)
 
+    # ---- FIX: Frozen reference **SFT** model for KL (base + loaded adapter), no grad ----
+    ref_kwargs = dict(model_kwargs)  # shallow copy
+    try:
+        ref_base = AutoModelForCausalLM.from_pretrained(args.base_model, **ref_kwargs)
+    except TypeError:
+        ref_kwargs.pop("attn_implementation", None)
+        ref_base = AutoModelForCausalLM.from_pretrained(args.base_model, **ref_kwargs)
+
+    ref_model = PeftModel.from_pretrained(ref_base, args.adapter_dir, is_trainable=False)
+    ref_model.eval()
+    for p in ref_model.parameters():
+        p.requires_grad = False
+
     conf_grid = [0.99]  #[0.90, 0.95, 0.99, 0.998]  # confidence levels
     alpha_map = {c: (1.0 - c) for c in conf_grid}
 
@@ -467,7 +487,7 @@ def main():
             # We call it repeatedly to collect `num_samples` per question.
             # ============================
             model.eval()
-
+            args.ban_prefixes = None
             gens_by_ex: List[List[str]] = [[] for _ in range(len(qs))]
             for _ in range(args.num_samples):
                 # generate one sample per question in a single batched call
@@ -521,14 +541,11 @@ def main():
             total_tokens = 0
             total_obj = 0.0
 
-            # Advantage: (r - mean_r) per rollout (simple baseline)
+            # Advantage: (r - mean_r) / std per rollout (simple baseline)
             device_for_rewards = next(model.parameters()).device
             rewards_tensor = torch.tensor(all_rewards, dtype=torch.float32, device=device_for_rewards)
-            #adv = rewards_tensor - rewards_tensor.mean()
-            # New idea with only positive advantage
-            adv = (rewards_tensor - rewards_tensor.mean()) / (rewards_tensor.std() + 1.0)
-            adv = adv.clamp_min(0.0)
-
+            adv = (rewards_tensor - rewards_tensor.mean()) / (rewards_tensor.std() + 1e-8)
+            print("Advantages: ", adv)
 
             # AMP context (CUDA only)
             if torch.cuda.is_available():
@@ -565,6 +582,22 @@ def main():
                     obj = per_sample_obj.mean()
                     loss = -obj
 
+                    # ---- FIX: Proper KL(p||q) penalty vs frozen SFT reference ----
+                    with torch.no_grad():
+                        ref_out = ref_model(input_ids=inputs, attention_mask=attn, labels=None)
+
+                    # compute tokenwise KL using full distributions (>=0)
+                    cur_lp = F.log_softmax(logits.float(), dim=-1)
+                    ref_lp = F.log_softmax(ref_out.logits[:, :-1, :].float(), dim=-1)
+                    p = cur_lp.exp()
+                    kl_tokenwise = (p * (cur_lp - ref_lp)).sum(dim=-1)  # [bsz, seqlen-1]
+
+                    mask_f = mask.float()
+                    per_sample_kl = (kl_tokenwise * mask_f).sum(dim=1) / token_counts
+                    kl_mean = per_sample_kl.mean()
+
+                    loss = loss + args.kl_coef * kl_mean
+
                 loss.backward()
                 total_obj += obj.item()
                 total_tokens += int(token_counts.sum().item())
@@ -591,6 +624,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
 
 
 

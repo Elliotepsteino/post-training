@@ -3,11 +3,9 @@
 
 import argparse
 import os
-from pathlib import Path
-from typing import Dict, Any, List, Iterable
+from typing import Dict, Any, List
 
 import torch
-from datasets import load_dataset, Dataset
 from transformers import (
     AutoTokenizer,
     AutoModelForCausalLM,
@@ -17,6 +15,7 @@ from transformers import (
     set_seed,
 )
 from peft import LoraConfig, get_peft_model
+from dataloader import load_year_mixture
 
 # -----------------------------
 # Default config (env overrides)
@@ -140,55 +139,6 @@ def wrap_with_lora(model):
         target_modules=target_modules,
     )
     return get_peft_model(model, peft_cfg)
-
-# -----------------------------
-# Dataset helpers
-# -----------------------------
-def _extract_question_response(example: Dict[str, Any]) -> Dict[str, str]:
-    question = (
-        example.get("question")
-        or example.get("prompt")
-        or example.get("input")
-        or ""
-    )
-    answer = (
-        example.get("answer")
-        or example.get("response")
-        or example.get("output")
-        or ""
-    )
-    return {"question": question, "response": answer}
-
-
-def load_year_mixture(shard_dir: str, max_year: int, seed: int, max_samples: int | None) -> Dataset:
-    shard_path = Path(shard_dir)
-    if not shard_path.exists():
-        raise FileNotFoundError(f"Shard directory not found: {shard_dir}")
-
-    data_files: List[str] = []
-    for file in sorted(shard_path.glob("year=*.jsonl")):
-        try:
-            year = int(file.stem.split("=")[-1])
-        except ValueError:
-            continue
-        if year <= max_year:
-            data_files.append(str(file))
-
-    if not data_files:
-        raise FileNotFoundError(f"No shards with year <= {max_year} found in {shard_dir}")
-
-    ds = load_dataset("json", data_files=data_files, split="train")
-    cols_to_remove = [c for c in ds.column_names if c not in {"question", "answer", "response"}]
-    ds = ds.map(_extract_question_response, remove_columns=cols_to_remove, desc="Extracting Q/A pairs")
-    cols_to_keep = {"question", "response"}
-    extra_cols = [c for c in ds.column_names if c not in cols_to_keep]
-    if extra_cols:
-        ds = ds.remove_columns(extra_cols)
-
-    ds = ds.shuffle(seed=seed)
-    if max_samples is not None and max_samples > 0 and len(ds) > max_samples:
-        ds = ds.select(range(max_samples))
-    return ds
 
 # -----------------------------
 # Serialization helpers
