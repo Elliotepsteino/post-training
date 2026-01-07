@@ -106,18 +106,45 @@ Use the filtered shards under `/home/epsteine/post-training/data_filtering/tulu_
    CUDA_VISIBLE_DEVICES=0 \
    bash scripts/finetune_with_accelerate_debug.sh \
      configs/train_configs/tulu3/tulu3_sft_year2007_debug.yaml
+     --deepspeed_config_file configs/ds_configs/stage3_offloading_accelerate.conf
    ```
    The debug script hard-caps total batch size at 1 (per-device batch 1, gradient accumulation 1) so it fits comfortably on a single GPU. Append any extra `accelerate launch` flags (e.g., `--deepspeed_config_file configs/ds_configs/stage3_offloading_accelerate.conf`) after the config path if you need CPU offload. The debug config samples 256 rows, trains for 0.25 epochs, and skips WandB logging so you can quickly validate the pipeline. Because we rely on a local JSONL file, `dataset_mixer_list`, `dataset_name`, and `dataset_config_name` are set to `null` inside the config to avoid colliding with the built-in TÜLU dataset defaults. Open Instruct tries to detect your Hugging Face org via `hf_whoami()` before training; make sure you have a local token by running `huggingface-cli login` once (or exporting `HF_TOKEN=...`) or the run will fail with `LocalTokenNotFoundError`.
 
-3. **Scale to the full training recipe (example uses GPUs 1–4).**
+3. **Scale to the full training recipe (1000 samples) (example uses GPUs 1–4).**
    ```bash
    source .venv/bin/activate
-   CUDA_VISIBLE_DEVICES=0,3,4 \
+   CUDA_VISIBLE_DEVICES=2,3,4 \
    bash scripts/finetune_with_accelerate_config_simple.sh 3 \
      configs/train_configs/tulu3/tulu3_sft_year2007_full.yaml \
      --deepspeed_config_file configs/ds_configs/stage3_offloading_accelerate.conf
    ```
    Adjust `CUDA_VISIBLE_DEVICES`, the first argument (process count), and any extra accelerate flags to match your setup. The full config streams the complete `/home/epsteine/post-training/datasets/tulu3_sft_year2007.jsonl` file with Qwen/Qwen3-4B-Base.
+
+4. **Scale to the full training recipe (26431 samples) (example uses GPUs 1–4).**
+   ```bash
+   source .venv/bin/activate
+   CUDA_VISIBLE_DEVICES=2,3,4 \
+   bash scripts/finetune_with_accelerate_config_simple.sh 3 \
+     configs/train_configs/tulu3/tulu3_sft_year2007_full_n26431.yaml \
+     --deepspeed_config_file configs/ds_configs/stage3_offloading_accelerate.conf
+   ```
+
+5. **LoRA variant (26431 samples) (example uses GPUs 1–4).**
+   ```bash
+   source .venv/bin/activate
+   CUDA_VISIBLE_DEVICES=2,3,4 \
+   bash scripts/finetune_with_accelerate_config_simple.sh 3 \
+     configs/train_configs/tulu3/tulu3_sft_year2007_full_n26431_lora.yaml \
+     --deepspeed_config_file configs/ds_configs/stage3_offloading_accelerate.conf
+   ```
+
+6. **LoRA variant without optimizer offload (26431 samples).**
+   ```bash
+   source .venv/bin/activate
+   CUDA_VISIBLE_DEVICES=2,3,4 \
+   bash scripts/finetune_with_accelerate_config_simple.sh 3 \
+     configs/train_configs/tulu3/tulu3_sft_year2007_full_n26431_lora.yaml
+   ```
 
 
 ### Preference Tuning

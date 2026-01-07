@@ -1,0 +1,33 @@
+model_name_or_path: Qwen/Qwen3-4B-Base
+model_revision: main
+use_flash_attn: true
+use_lora: true
+lora_rank: 64
+lora_alpha: 16
+lora_dropout: 0.1
+tokenizer_name: Qwen/Qwen3-4B-Base
+use_slow_tokenizer: false
+dataset_mixer:
+  /home/epsteine/post-training/datasets/allenai-tulu-3-sft-mixture_upto_2007_n26431.jsonl: "1.0"
+dataset_mixer_list: null
+dataset_name: null
+dataset_config_name: null
+max_seq_length: 4096
+preprocessing_num_workers: 128
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 16
+learning_rate: 1.0e-04 #3.0e-05 #1.0e-04
+lr_scheduler_type: linear #cosine
+warmup_ratio: 0.03
+weight_decay: 0.0
+num_train_epochs: 2
+output_dir: output/qwen3_year2007_full_n26431_lora
+with_tracking: true
+report_to:
+  - wandb
+logging_steps: 10
+seed: 17
+gradient_checkpointing: true
+dataset_mix_dir: output/qwen3_year2007_full_n26431_lora
+checkpointing_steps: 500
+keep_last_n_checkpoints: 3
