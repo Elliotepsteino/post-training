@@ -3,45 +3,122 @@
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \geometry{margin=1in}
 
-\title{Qwen3-4B-Base: TÜLU-3 Dev (limit = 8) Snapshot}
-\author{Automated Eval Script}
+\title{Synchronos LLM Post Training}
+\author{Post-Training Team}
 \date{\today}
 
 \begin{document}
 \maketitle
 
-We run the TÜLU-3 dev smoke-test via \texttt{run\_tulu3\_dev\_limit8.sh}, which:
-\begin{itemize}
-    \item dynamically loads the 11 dev tasks across the 5 local A6000 GPUs so every device stays busy;
-    \item caps each task to \textbf{eight} examples using the \texttt{--limit} flag for fast iteration;
-    \item writes all artifacts to \texttt{olmes/workspace\_tulu3\_dev\_limit8/} along with a \texttt{summary.json} snapshot and GPU logs under \texttt{olmes/logs/}.
-\end{itemize}
+\section{Evaluation}
+We run the TÜLU-3 dev smoke test with \texttt{run\_tulu3\_dev\_limit100.sh}, dispatching 11 validation suites across the local A6000 fleet and constraining each task to a 100-example slice (MMLU uses 100 questions per subject, yielding 5{,}700 evaluations). This regimen provides a fast signal on diverse reasoning, coding, alignment, and factuality workloads while keeping GPU time manageable.
 
-Table~\ref{tab:tulu} lists the primary score reported by each task (converted to a percentage) together with the number of evaluated examples.
+Table~\ref{tab:tulu} summarizes the latest snapshot for Qwen3-4B-Base as well as placeholder columns for upcoming +SFT, +DPO, and +RLVR checkpoints (marked ``--'' until those evaluations finish). Scores are reported as percentages, with \texttt{n} denoting the evaluated examples per task.
 
-\begin{table}[h]
+\begin{table}[t]
     \centering
-    \begin{tabular}{llcc}
+    \begin{tabular}{llcccccc}
         \toprule
-        Task & Metric & Score (\%) & $n$ \\
+        Task & Metric & Qwen3-4B Base & +SFT & +DPO & +RLVR & $n$ \\
         \midrule
-        GSM8K & Exact match & 87.50 & 8 \\
-        DROP & F1 & 50.00 & 8 \\
-        Minerva Math (avg) & Exact match & 35.00 & 40 \\
-        HumanEval & pass@10 & 99.98 & 8 \\
-        HumanEval+ & pass@10 & 99.96 & 8 \\
-        IFEval & Prompt loose acc & 50.00 & 8 \\
-        PopQA & Accuracy & 12.50 & 8 \\
-        MMLU (mc) & Macro accuracy & 71.71 & 456 \\
-        AlpacaEval v2 & Len-ctrl win rate & 0.57 & 8 \\
-        BBH (cot-v1) & Macro accuracy & 54.69 & 64 \\
-        TruthfulQA & MC2 & 63.15 & 8 \\
+        GSM8K & Exact match & 83.00 & -- & -- & -- & 100 \\
+        DROP & F1 & 52.15 & -- & -- & -- & 100 \\
+        Minerva Math (avg) & Exact match & 47.00 & -- & -- & -- & 200 \\
+        HumanEval & pass@10 & 95.84 & -- & -- & -- & 100 \\
+        HumanEval+ & pass@10 & 94.80 & -- & -- & -- & 100 \\
+        IFEval & Prompt loose acc & 40.00 & -- & -- & -- & 100 \\
+        PopQA & Accuracy & 17.00 & -- & -- & -- & 100 \\
+        MMLU (mc) & Macro accuracy & 74.46 & -- & -- & -- & 5{,}700 \\
+        AlpacaEval v2 & Len-ctrl win rate & 6.54 & -- & -- & -- & 100 \\
+        BBH (cot-v1) & Macro accuracy & -- & -- & -- & -- & -- \\
+        TruthfulQA & MC2 & 54.48 & -- & -- & -- & 100 \\
         \bottomrule
     \end{tabular}
-    \caption{Primary metrics for the TÜLU-3 dev suite using \texttt{--limit 8}. Scores are taken directly from \texttt{summary.json}.}
+    \caption{Primary metrics for the TÜLU-3 dev suite (Qwen3-4B-Base, 100-example subsets). The BBH run is still executing at this scale; results will be inserted once the evaluation completes.}
     \label{tab:tulu}
 \end{table}
+
+\section{Data Filtering}
+We label every supervised (SFT), preference (DPO), and RLVR sample with the minimum calendar year consistent with its question--answer bundle. The latest sweep (session \texttt{2026-01-05\_14-31PT}) processed 1,000 examples per corpus, enforcing a conservative policy that forces the most recent referenced year to dominate. Figures~\ref{fig:sft}--\ref{fig:rlvr} show both year and category distributions for each dataset family; these plots make it easy to confirm that earlier buckets remain uncontaminated while still exposing modern content when desired.
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-05_22-31Z_n1000/year_histogram.pdf}
+        \caption{Year distribution (SFT).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-05_22-31Z_n1000/category_histogram.pdf}
+        \caption{Category distribution (SFT).}
+    \end{subfigure}
+    \caption{Filtering summary for the TÜLU-3 SFT mixture (session \texttt{2026-01-05\_14-31PT}, $n=1000$).}
+    \label{fig:sft}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-llama-3-1-tulu-3-8b-preference-mixture/year_shards_allenai-llama-3-1-tulu-3-8b-preference-mixture_2026-01-05_22-31Z_n1000/year_histogram.pdf}
+        \caption{Year distribution (DPO).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-llama-3-1-tulu-3-8b-preference-mixture/year_shards_allenai-llama-3-1-tulu-3-8b-preference-mixture_2026-01-05_22-31Z_n1000/category_histogram.pdf}
+        \caption{Category distribution (DPO).}
+    \end{subfigure}
+    \caption{Filtering summary for the TÜLU-3 DPO mixture (session \texttt{2026-01-05\_14-31PT}, $n=1000$).}
+    \label{fig:dpo}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-rlvr-gsm/year_shards_allenai-rlvr-gsm_2026-01-05_22-31Z_n1000/year_histogram.pdf}
+        \caption{Year distribution (RLVR-GSM).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-rlvr-gsm/year_shards_allenai-rlvr-gsm_2026-01-05_22-31Z_n1000/category_histogram.pdf}
+        \caption{Category distribution (RLVR-GSM).}
+    \end{subfigure}
+
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-rlvr-math/year_shards_allenai-rlvr-math_2026-01-05_22-31Z_n1000/year_histogram.pdf}
+        \caption{Year distribution (RLVR-MATH).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-rlvr-math/year_shards_allenai-rlvr-math_2026-01-05_22-31Z_n1000/category_histogram.pdf}
+        \caption{Category distribution (RLVR-MATH).}
+    \end{subfigure}
+
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-rlvr-ifeval/year_shards_allenai-rlvr-ifeval_2026-01-05_22-31Z_n1000/year_histogram.pdf}
+        \caption{Year distribution (RLVR-IFeval).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-05_14-31PT/allenai-rlvr-ifeval/year_shards_allenai-rlvr-ifeval_2026-01-05_22-31Z_n1000/category_histogram.pdf}
+        \caption{Category distribution (RLVR-IFeval).}
+    \end{subfigure}
+    \caption{Filtering summary for the RLVR datasets (session \texttt{2026-01-05\_14-31PT}, $n=1000$ per split).}
+    \label{fig:rlvr}
+\end{figure}
+
+Downstream, we select shards via \texttt{YearBoundedTuluLoader} to enforce any desired knowledge cutoff (e.g., 2014). This combination of automated year tagging, per-dataset plots, and conservative labeling has kept Synchronos LLM post-training leak-free while enabling rapid iteration on evaluation benchmarks.
 
 \end{document}
