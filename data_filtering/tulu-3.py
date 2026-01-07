@@ -42,6 +42,7 @@ CATEGORIES = [
 ]
 DEFAULT_MODEL = "gpt-5-mini"
 DEFAULT_SUBSET = 50
+DEFAULT_MAX_BATCH_SIZE = 20000
 POLLABLE_STATUSES = {"validating", "in_progress", "running", "queued", "finalizing"}
 DEFAULT_DATASET = "allenai/tulu-3-sft-mixture"
 DEFAULT_SPLIT = "train"
@@ -67,6 +68,48 @@ VARIANT_NOTES = {
         "These samples bundle evaluation prompts, solution rationales, and sometimes explicit constraints. "
         "Treat the full message history plus the provided ground-truth/constraint text as a single answer bundle."
     ),
+}
+
+
+@dataclass
+class TokenUsage:
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    total_tokens: int = 0
+
+    def add(self, prompt: int = 0, completion: int = 0, total: int | None = None) -> None:
+        self.prompt_tokens += max(0, prompt or 0)
+        self.completion_tokens += max(0, completion or 0)
+        if total is None:
+            total = (prompt or 0) + (completion or 0)
+        self.total_tokens += max(0, total or 0)
+
+    def merge(self, other: "TokenUsage") -> None:
+        self.add(other.prompt_tokens, other.completion_tokens, other.total_tokens)
+
+    def as_dict(self) -> Dict[str, int]:
+        return {
+            "prompt_tokens": self.prompt_tokens,
+            "completion_tokens": self.completion_tokens,
+            "total_tokens": self.total_tokens,
+}
+
+BATCH_DISCOUNT = 0.5  # OpenAI halves token prices for Batch requests at the time of writing.
+
+MODEL_PRICING_PER_MILLION = {
+    # Update these defaults if OpenAI revises pricing for the referenced models.
+    "gpt-5-mini": {
+        "prompt": 0.25,  # USD per 1M prompt tokens
+        "completion": 2.00,  # USD per 1M completion tokens
+    },
+    "gpt-5.2": {
+        "prompt": 1.75,
+        "completion": 14.00,
+    },
+    "gpt-5.2-pro": {
+        "prompt": 21.00,
+        "completion": 168.00,
+    },
 }
 
 
@@ -211,6 +254,13 @@ class SampleRecord:
         return f"sample-{self.sample_index}"
 
 
+@dataclass
+class PendingBatch:
+    run_id: str
+    samples: List[SampleRecord]
+    batch_id: str
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -218,6 +268,13 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=DEFAULT_SUBSET,
         help="How many samples to classify (default: 50).",
+    )
+    parser.add_argument(
+        "--max-batch-size",
+        type=int,
+        default=DEFAULT_MAX_BATCH_SIZE,
+        help="Maximum number of samples per OpenAI batch submission (default: 20000). Larger subsets are split "
+        "into multiple batches that run in parallel.",
     )
     parser.add_argument(
         "--dataset-name",
@@ -278,6 +335,8 @@ def main() -> None:
 
     if not args.use_batch and args.resume_batch_id:
         raise ValueError("--resume-batch-id is only valid when --use-batch is enabled.")
+    if args.max_batch_size <= 0:
+        raise ValueError("--max-batch-size must be positive.")
 
     samples = build_subset(
         dataset_name=args.dataset_name,
@@ -290,17 +349,97 @@ def main() -> None:
 
     client = OpenAI()
     dataset_slug = slugify_dataset(args.dataset_name)
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%MZ")
+    max_batch_size = max(1, args.max_batch_size)
+
+    if len(samples) <= max_batch_size:
+        grouped, run_id, usage_stats = run_single_batch(
+            samples=samples,
+            dataset_slug=dataset_slug,
+            output_dir=output_dir,
+            args=args,
+            client=client,
+            timestamp=timestamp,
+        )
+    else:
+        grouped, run_id, usage_stats = run_multi_batch(
+            samples=samples,
+            dataset_slug=dataset_slug,
+            output_dir=output_dir,
+            args=args,
+            client=client,
+            timestamp=timestamp,
+            max_batch_size=max_batch_size,
+        )
+
+    shard_dir = save_year_shards(
+        grouped_records=grouped,
+        output_dir=output_dir,
+        run_id=run_id,
+        timestamp=timestamp,
+    )
+    print_summary(grouped_records=grouped, shard_dir=shard_dir)
+    log_usage_summary(
+        usage=usage_stats,
+        model=args.model,
+        output_dir=output_dir,
+        run_id=run_id,
+        batch_discount_applied=bool(args.use_batch),
+    )
+
+
+def build_subset(
+    dataset_name: str,
+    dataset_split: str,
+    subset_size: int,
+    seed: int,
+) -> List[SampleRecord]:
+    ds = load_dataset(dataset_name, split=dataset_split)
+    total = len(ds)
+    if subset_size > total:
+        subset_size = total
+    rng = random.Random(seed)
+    indices = list(range(total))
+    rng.shuffle(indices)
+    chosen = sorted(indices[:subset_size])
+    samples: List[SampleRecord] = []
+    extractor = DATASET_EXTRACTORS.get(dataset_name, extract_generic_question_answer)
+    dataset_variant = DATASET_VARIANTS.get(dataset_name, VARIANT_SFT)
+    for idx in chosen:
+        row = ds[idx]
+        question, answer = extractor(row)
+        if not question or not answer:
+            continue
+        samples.append(SampleRecord(idx, row, question, answer, dataset_name, dataset_variant))
+    return samples
+
+
+def chunk_samples(samples: List[SampleRecord], max_batch_size: int) -> List[List[SampleRecord]]:
+    return [samples[i : i + max_batch_size] for i in range(0, len(samples), max_batch_size)]
+
+
+def run_single_batch(
+    samples: List[SampleRecord],
+    dataset_slug: str,
+    output_dir: Path,
+    args: argparse.Namespace,
+    client: OpenAI,
+    timestamp: str,
+) -> Tuple[Dict[int, List[Dict[str, Any]]], str, TokenUsage]:
+    run_id = f"{dataset_slug}_{timestamp}_n{len(samples)}"
     (
         requests,
         batch_input_path,
         request_count,
-        timestamp,
-        run_id,
+        _,
+        _,
     ) = prepare_batch_payload(
         samples=samples,
         model=args.model,
         output_dir=output_dir,
         dataset_slug=dataset_slug,
+        run_id_override=run_id,
+        timestamp_override=timestamp,
     )
 
     if args.use_batch:
@@ -344,41 +483,137 @@ def main() -> None:
             dataset_split=args.dataset_split,
         )
 
-    year_map = parse_batch_predictions(output_path=output_path)
+    year_map, usage_stats = parse_batch_predictions(output_path=output_path)
     grouped = attach_years(samples=samples, year_map=year_map)
-    shard_dir = save_year_shards(
-        grouped_records=grouped,
+    return grouped, run_id, usage_stats
+
+
+def run_multi_batch(
+    samples: List[SampleRecord],
+    dataset_slug: str,
+    output_dir: Path,
+    args: argparse.Namespace,
+    client: OpenAI,
+    timestamp: str,
+    max_batch_size: int,
+) -> Tuple[Dict[int, List[Dict[str, Any]]], str, TokenUsage]:
+    if args.resume_batch_id:
+        raise ValueError("--resume-batch-id is not supported when multiple batches are required.")
+
+    total = len(samples)
+    final_run_id = f"{dataset_slug}_{timestamp}_n{total}"
+    chunks = chunk_samples(samples, max_batch_size)
+    chunk_count = len(chunks)
+    pending_jobs: List[PendingBatch] = []
+    chunk_infos: List[Dict[str, Any]] = []
+    aggregated: Dict[int, List[Dict[str, Any]]] = defaultdict(list)
+    usage_totals = TokenUsage()
+
+    if args.use_batch:
+        for idx, chunk in enumerate(chunks):
+            chunk_run_id = f"{final_run_id}_part{idx + 1}of{chunk_count}_n{len(chunk)}"
+            (
+                _,
+                batch_input_path,
+                request_count,
+                _,
+                _,
+            ) = prepare_batch_payload(
+                samples=chunk,
+                model=args.model,
+                output_dir=output_dir,
+                dataset_slug=dataset_slug,
+                run_id_override=chunk_run_id,
+                timestamp_override=timestamp,
+            )
+            batch = maybe_submit_batch(
+                client=client,
+                batch_input_path=batch_input_path,
+                model=args.model,
+                sample_count=request_count,
+                output_dir=output_dir,
+                completion_window=args.completion_window,
+                resume_batch_id=None,
+                run_id=chunk_run_id,
+                dataset_name=args.dataset_name,
+                dataset_split=args.dataset_split,
+            )
+            print(f"Submitted chunk {idx + 1}/{chunk_count}: batch {batch.id}")
+            pending_jobs.append(PendingBatch(run_id=chunk_run_id, samples=chunk, batch_id=batch.id))
+            chunk_infos.append(
+                {"run_id": chunk_run_id, "batch_id": batch.id, "subset_size": len(chunk)}
+            )
+
+        for job in pending_jobs:
+            print(f"Polling batch {job.batch_id} (chunk {job.run_id})")
+            batch = wait_for_batch_completion(
+                client=client,
+                batch_id=job.batch_id,
+                poll_interval=args.poll_interval,
+            )
+            print(f"Batch {job.batch_id} finished with status {batch.status}")
+            if batch.status != "completed":
+                raise RuntimeError(f"Batch {job.batch_id} failed with status: {batch.status}")
+            output_path = download_batch_output(
+                client=client,
+                file_id=batch.output_file_id,
+                output_dir=output_dir,
+                run_id=job.run_id,
+            )
+            year_map, usage_stats = parse_batch_predictions(output_path=output_path)
+            chunk_grouped = attach_years(samples=job.samples, year_map=year_map)
+            merge_grouped(aggregated, chunk_grouped)
+            usage_totals.merge(usage_stats)
+    else:
+        for idx, chunk in enumerate(chunks):
+            chunk_run_id = f"{final_run_id}_part{idx + 1}of{chunk_count}_n{len(chunk)}"
+            (
+                requests,
+                batch_input_path,
+                _,
+                _,
+                _,
+            ) = prepare_batch_payload(
+                samples=chunk,
+                model=args.model,
+                output_dir=output_dir,
+                dataset_slug=dataset_slug,
+                run_id_override=chunk_run_id,
+                timestamp_override=timestamp,
+            )
+            output_path = run_live_classification(
+                client=client,
+                requests=requests,
+                output_dir=output_dir,
+                batch_input_path=batch_input_path,
+                model=args.model,
+                run_id=chunk_run_id,
+                dataset_name=args.dataset_name,
+                dataset_split=args.dataset_split,
+            )
+            year_map, usage_stats = parse_batch_predictions(output_path=output_path)
+            chunk_grouped = attach_years(samples=chunk, year_map=year_map)
+            merge_grouped(aggregated, chunk_grouped)
+            usage_totals.merge(usage_stats)
+            chunk_infos.append({"run_id": chunk_run_id, "batch_id": None, "subset_size": len(chunk)})
+
+    write_combined_metadata(
         output_dir=output_dir,
-        run_id=run_id,
-        timestamp=timestamp,
+        final_run_id=final_run_id,
+        dataset_name=args.dataset_name,
+        dataset_split=args.dataset_split,
+        total_samples=total,
+        chunk_infos=chunk_infos,
     )
-    print_summary(grouped_records=grouped, shard_dir=shard_dir)
+    return aggregated, final_run_id, usage_totals
 
 
-def build_subset(
-    dataset_name: str,
-    dataset_split: str,
-    subset_size: int,
-    seed: int,
-) -> List[SampleRecord]:
-    ds = load_dataset(dataset_name, split=dataset_split)
-    total = len(ds)
-    if subset_size > total:
-        subset_size = total
-    rng = random.Random(seed)
-    indices = list(range(total))
-    rng.shuffle(indices)
-    chosen = sorted(indices[:subset_size])
-    samples: List[SampleRecord] = []
-    extractor = DATASET_EXTRACTORS.get(dataset_name, extract_generic_question_answer)
-    dataset_variant = DATASET_VARIANTS.get(dataset_name, VARIANT_SFT)
-    for idx in chosen:
-        row = ds[idx]
-        question, answer = extractor(row)
-        if not question or not answer:
-            continue
-        samples.append(SampleRecord(idx, row, question, answer, dataset_name, dataset_variant))
-    return samples
+def merge_grouped(
+    aggregated: Dict[int, List[Dict[str, Any]]],
+    chunk_grouped: Dict[int, List[Dict[str, Any]]],
+) -> None:
+    for year, records in chunk_grouped.items():
+        aggregated[year].extend(records)
 
 
 def prepare_batch_payload(
@@ -386,13 +621,15 @@ def prepare_batch_payload(
     model: str,
     output_dir: Path,
     dataset_slug: str,
+    run_id_override: str | None = None,
+    timestamp_override: str | None = None,
 ) -> Tuple[List[Dict[str, Any]], Path, int, str, str]:
     requests = [build_batch_request(sample, model=model) for sample in samples]
     if not requests:
         raise ValueError("No valid samples with extracted question/answer pairs.")
-    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%MZ")
+    timestamp = timestamp_override or datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%MZ")
     sample_count = len(requests)
-    run_id = f"{dataset_slug}_{timestamp}_n{sample_count}"
+    run_id = run_id_override or f"{dataset_slug}_{timestamp}_n{sample_count}"
     batch_input_path = output_dir / f"batch_input_{run_id}.jsonl"
     write_jsonl(requests, batch_input_path)
     print(f"Wrote {sample_count} batch requests to {batch_input_path}")
@@ -443,11 +680,34 @@ def maybe_submit_batch(
     return batch
 
 
+def write_combined_metadata(
+    output_dir: Path,
+    final_run_id: str,
+    dataset_name: str,
+    dataset_split: str,
+    total_samples: int,
+    chunk_infos: List[Dict[str, Any]],
+) -> None:
+    metadata = {
+        "mode": "batch",
+        "run_id": final_run_id,
+        "dataset_name": dataset_name,
+        "dataset_split": dataset_split,
+        "subset_size": total_samples,
+        "chunk_batches": chunk_infos,
+        "submitted_at": datetime.now(timezone.utc).isoformat(),
+    }
+    metadata_path = output_dir / f"batch_metadata_{final_run_id}.json"
+    metadata_path.write_text(json.dumps(metadata, indent=2))
+    (output_dir / "batch_metadata_latest.json").write_text(json.dumps(metadata, indent=2))
+
+
 def build_batch_request(sample: SampleRecord, model: str) -> Dict[str, Any]:
     system_prompt = (
         "You label the minimum calendar year (between 2001 and 2025) required "
-        "to answer a question without temporal leakage. When uncertain you must "
-        "pick the earliest plausible year consistent with the evidence."
+        "to answer a question without temporal leakage. The label must never precede "
+        "any fact mentioned in the sample; when uncertain, err toward the later year "
+        "so that no future knowledge sneaks into earlier buckets."
     )
     variant_note = VARIANT_NOTES.get(sample.dataset_variant, VARIANT_NOTES[VARIANT_SFT])
     user_prompt = (
@@ -463,7 +723,7 @@ def build_batch_request(sample: SampleRecord, model: str) -> Dict[str, Any]:
         "the chosen year must satisfy the most recent reference anywhere in the bundle.\n"
         "- If multiple explicit years are referenced, return the most recent explicit year.\n"
         "- If only a range or uncertainty is provided (e.g., 'released between 2008 and 2015'), "
-        "answer with the earliest year in that range to stay conservative.\n"
+        "answer with the latest year in that range so no future facts are included.\n"
         "- If information is older than 2001, still respond with 2001.\n"
         "- Do not hallucinate years that are not grounded in the text.\n"
         "- Additionally, assign the question to one category from this list: "
@@ -576,8 +836,9 @@ def download_batch_output(client: OpenAI, file_id: str, output_dir: Path, run_id
     return destination
 
 
-def parse_batch_predictions(output_path: Path) -> Dict[str, Dict[str, Any]]:
+def parse_batch_predictions(output_path: Path) -> Tuple[Dict[str, Dict[str, Any]], TokenUsage]:
     year_map: Dict[str, Dict[str, Any]] = {}
+    usage_totals = TokenUsage()
     with output_path.open("r", encoding="utf-8") as handle:
         for line in handle:
             if not line.strip():
@@ -585,6 +846,12 @@ def parse_batch_predictions(output_path: Path) -> Dict[str, Dict[str, Any]]:
             payload = json.loads(line)
             custom_id = payload.get("custom_id")
             body = payload.get("response", {}).get("body", {})
+            usage = body.get("usage") or {}
+            usage_totals.add(
+                prompt=usage.get("prompt_tokens", 0),
+                completion=usage.get("completion_tokens", 0),
+                total=usage.get("total_tokens"),
+            )
             choices = body.get("choices") or []
             if not choices:
                 continue
@@ -609,7 +876,7 @@ def parse_batch_predictions(output_path: Path) -> Dict[str, Dict[str, Any]]:
                 category = "other"
             parsed["category"] = category
             year_map[custom_id] = parsed
-    return year_map
+    return year_map, usage_totals
 
 
 def attach_years(samples: List[SampleRecord], year_map: Dict[str, Dict[str, Any]]):
@@ -671,6 +938,76 @@ def print_summary(grouped_records: Dict[int, List[Dict[str, Any]]], shard_dir: P
     print(f"Saved {total} labeled samples to {shard_dir}")
     for year in sorted(grouped_records):
         print(f"Year {year}: {len(grouped_records[year])} samples")
+
+
+def effective_pricing(model: str, batch_discount: bool) -> Dict[str, float] | None:
+    pricing = MODEL_PRICING_PER_MILLION.get(model)
+    if not pricing:
+        return None
+    factor = BATCH_DISCOUNT if batch_discount else 1.0
+    prompt_rate = pricing.get("prompt")
+    completion_rate = pricing.get("completion")
+    adjusted = {}
+    if prompt_rate is not None:
+        adjusted["prompt"] = prompt_rate * factor
+    if completion_rate is not None:
+        adjusted["completion"] = completion_rate * factor
+    return adjusted
+
+
+def estimate_cost_usd(model: str, usage: TokenUsage, batch_discount_applied: bool) -> float | None:
+    rates = effective_pricing(model, batch_discount_applied)
+    if not rates:
+        return None
+    prompt_rate = rates.get("prompt")
+    completion_rate = rates.get("completion")
+    cost = 0.0
+    has_rate = False
+    if prompt_rate is not None:
+        cost += (usage.prompt_tokens / 1_000_000) * prompt_rate
+        has_rate = True
+    if completion_rate is not None:
+        cost += (usage.completion_tokens / 1_000_000) * completion_rate
+        has_rate = True
+    return round(cost, 4) if has_rate else None
+
+
+def log_usage_summary(
+    usage: TokenUsage,
+    model: str,
+    output_dir: Path,
+    run_id: str,
+    batch_discount_applied: bool,
+) -> None:
+    rates = effective_pricing(model=model, batch_discount=batch_discount_applied)
+    summary = {
+        "run_id": run_id,
+        "model": model,
+        "prompt_tokens": usage.prompt_tokens,
+        "completion_tokens": usage.completion_tokens,
+        "total_tokens": usage.total_tokens,
+        "logged_at": datetime.now(timezone.utc).isoformat(),
+        "batch_discount_applied": batch_discount_applied,
+        "prompt_price_per_million_tokens_usd": rates.get("prompt") if rates else None,
+        "completion_price_per_million_tokens_usd": rates.get("completion") if rates else None,
+    }
+    cost = estimate_cost_usd(
+        model=model,
+        usage=usage,
+        batch_discount_applied=batch_discount_applied,
+    )
+    summary["estimated_cost_usd"] = cost
+    usage_path = output_dir / f"token_usage_{run_id}.json"
+    usage_path.write_text(json.dumps(summary, indent=2))
+    latest_path = output_dir / "token_usage_latest.json"
+    latest_path.write_text(json.dumps(summary, indent=2))
+    printable_cost = f"${cost:.4f}" if cost is not None else "n/a"
+    print(
+        "Token usage summary - "
+        f"prompt: {usage.prompt_tokens:,}, completion: {usage.completion_tokens:,}, "
+        f"total: {usage.total_tokens:,}, estimated cost: {printable_cost}. "
+        f"Saved to {usage_path}"
+    )
 
 
 class YearBoundedTuluLoader:

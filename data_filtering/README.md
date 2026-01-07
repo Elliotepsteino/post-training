@@ -84,6 +84,7 @@ Key behavior:
 - Batch output files mirror the same identifier: `batch_output_<timestamp>_n<count>_<fileid>.jsonl` for batch mode and `batch_output_local_<timestamp>_n<count>.jsonl` for live mode. Metadata is stored in `batch_metadata_<timestamp>_n<count>.json`, with `batch_metadata_latest.json` pointing at the most recent run.
 - Polls the batch until completion (or runs live Chat Completions), parses the assigned year and question category for every sample, and writes shards named `year=YYYY_<run_id>.jsonl` inside a run-scoped folder `year_shards_<run_id>` so each file name carries the timestamp and sample count.
 - Each shard directory also receives a `manifest.json` that records the covered years, total count, and run identifier.
+- After every run the script aggregates OpenAI usage across all batches and writes `token_usage_<run_id>.json` (plus a `token_usage_latest.json` pointer) inside the session directory. The file reports prompt tokens, completion tokens, total tokens, whether a batch discount was applied (50% cheaper token rates), and the effective per-million prompt/response token prices alongside the estimated USD cost; the same stats print to stdout for quick inspection.
 
 Flags of interest:
 
