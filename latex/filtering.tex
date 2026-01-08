@@ -1,0 +1,235 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\geometry{margin=1in}
+
+\title{Synchronos LLM Data Filtering}
+\author{Elliot Epstein}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+This document summarizes the data filtering pipeline and evaluation for Synchronos LLM post-training.
+
+\section{Data Filtering}
+We label each supervised (SFT), preference, and RLVR sample with the minimum calendar year consistent with its question--answer bundle; the prompt structure is detailed in Appendix~A. We considered deterministic filtering, but it was difficult to capture all edge cases with a rule-based approach. The latest sweep (session \texttt{2026-01-06\_14-10PT}) processed 30{,}549 SFT examples, 29{,}510 preference examples, and three RLVR datasets (7{,}358 GSM, 7{,}372 MATH, 14{,}958 IFEval) with a conservative policy that uses the most recent referenced year. Figures~\ref{fig:sft}--\ref{fig:rlvr} show year and category distributions for each dataset family and validate cutoff integrity.
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-06_22-10Z_n49948/year_histogram.pdf}
+        \caption{Year distribution (SFT).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-06_22-10Z_n49948/category_histogram.pdf}
+        \caption{Category distribution (SFT).}
+    \end{subfigure}
+    \caption{Filtering summary for the TÜLU-3 SFT mixture (session \texttt{2026-01-06\_14-10PT}, $n=30{,}549$).}
+    \label{fig:sft}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-llama-3-1-tulu-3-8b-preference-mixture/year_shards_allenai-llama-3-1-tulu-3-8b-preference-mixture_2026-01-06_22-10Z_n50000/year_histogram.pdf}
+        \caption{Year distribution (DPO).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-llama-3-1-tulu-3-8b-preference-mixture/year_shards_allenai-llama-3-1-tulu-3-8b-preference-mixture_2026-01-06_22-10Z_n50000/category_histogram.pdf}
+        \caption{Category distribution (DPO).}
+    \end{subfigure}
+    \caption{Filtering summary for the TÜLU-3 preference mixture (session \texttt{2026-01-06\_14-10PT}, $n=29{,}510$).}
+    \label{fig:dpo}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-rlvr-gsm/year_shards_allenai-rlvr-gsm_2026-01-06_22-10Z_n7473/year_histogram.pdf}
+        \caption{Year distribution (RLVR-GSM).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-rlvr-gsm/year_shards_allenai-rlvr-gsm_2026-01-06_22-10Z_n7473/category_histogram.pdf}
+        \caption{Category distribution (RLVR-GSM).}
+    \end{subfigure}
+
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-rlvr-math/year_shards_allenai-rlvr-math_2026-01-06_22-10Z_n7500/year_histogram.pdf}
+        \caption{Year distribution (RLVR-MATH).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-rlvr-math/year_shards_allenai-rlvr-math_2026-01-06_22-10Z_n7500/category_histogram.pdf}
+        \caption{Category distribution (RLVR-MATH).}
+    \end{subfigure}
+
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-rlvr-ifeval/year_shards_allenai-rlvr-ifeval_2026-01-06_22-10Z_n14973/year_histogram.pdf}
+        \caption{Year distribution (RLVR-IFeval).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{../data_filtering/tulu_year_shards/2026-01-06_14-10PT/allenai-rlvr-ifeval/year_shards_allenai-rlvr-ifeval_2026-01-06_22-10Z_n14973/category_histogram.pdf}
+        \caption{Category distribution (RLVR-IFeval).}
+    \end{subfigure}
+    \caption{Filtering summary for the RLVR datasets (session \texttt{2026-01-06\_14-10PT}, GSM $n=7{,}358$, MATH $n=7{,}372$, IFEval $n=14{,}958$).}
+    \label{fig:rlvr}
+\end{figure}
+
+\paragraph{Filtering Cost.}
+The current filtering pass uses GPT-5-mini with batch requests at \$0.25/\$2.00 per 1M input/output tokens; the batch discount halves these rates to \$0.125/\$1.00. Table~\ref{tab:filtering-costs} summarizes per-sample token averages, current costs, and projections for the full SFT/preference corpus plus the RLVR targets. TÜLU-3 still requires filtering 900k SFT examples and 250k preference examples beyond the current subset; projected costs scale linearly with per-sample token counts. For prompts under 200k tokens, Gemini 3 Flash is priced at \$0.50/\$3.00 per 1M input/output tokens (similar to GPT-5-mini), while Gemini 3 Pro is \$2.00/\$12.00 (similar to GPT-5.2).
+
+\begin{table}[t]
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lrrrrrrr}
+        \toprule
+        Dataset & Current $n$ & Tokens/sample & Current cost & Projected $n$ & GPT-5-mini & GPT-5.2 & GPT-5.2 Pro \\
+        \midrule
+        SFT & 30{,}549 & 1{,}661 & \$20.46 & 930{,}549 & \$623 & \$4.36k & \$52.3k \\
+        Preference & 29{,}510 & 2{,}437 & \$25.08 & 279{,}510 & \$238 & \$1.66k & \$20.0k \\
+        RLVR GSM & 7{,}358 & 2{,}167 & \$6.78 & 8{,}790 & \$8.10 & \$56.7 & \$680 \\
+        RLVR MATH & 7{,}372 & 1{,}653 & \$3.68 & 7{,}500 & \$3.74 & \$26.2 & \$315 \\
+        RLVR IFEval & 14{,}958 & 1{,}690 & \$10.81 & 15{,}000 & \$10.84 & \$75.9 & \$910 \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Filtering costs (USD) under batch pricing. Projected counts use 900k/250k additional SFT/preference samples and RLVR targets of 8.79k (GSM), 7.5k (MATH), and 15k (IFeval).}
+    \label{tab:filtering-costs}
+\end{table}
+
+\paragraph{Filtering Evaluation.}
+We sample 50 questions evenly across year shards and compare model conservatism, defined as the tendency to predict a later (higher) year; the most conservative prediction is the maximum year among models for the same prompt. Combining the cheaper models in each family gives the most conservative estimate (Figure~\ref{fig:conservative-ensemble}), and this can be extended to include Anthropic models. Without ground truth, we count how often each model produces the maximum year for the same prompt (ties count). Figure~\ref{fig:conservative-ensemble} shows per-model counts plus two max-ensembles: Gemini 3 Flash + GPT-5-mini and Gemini 3 Pro + GPT-5.2.
+
+Next step: human labels for the 50 questions. With ground truth, we will report exact accuracy, conservative accuracy (predicted year $\ge$ gold), and weighted accuracy (mean of the two).
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../data_filtering/filtering_eval/results/conservatism_counts_max_combo.pdf}
+    \caption{Most-conservative counts over 50 questions, with max-ensembles of Gemini 3 Flash + GPT-5-mini and Gemini 3 Pro + GPT-5.2 (ties count).}
+    \label{fig:conservative-ensemble}
+\end{figure}
+
+Downstream, we select shards with a year-bounded loader to enforce knowledge cutoffs (e.g., 2014).
+
+\clearpage
+\appendix
+\section{SFT Filtering Prompt}
+\begin{verbatim}
+You label the minimum calendar year (between 2001 and 2025) required to answer
+a question without temporal leakage. The label must never precede any fact
+mentioned in the sample; when uncertain, err toward the later year so that no
+future knowledge sneaks into earlier buckets.
+
+You receive a dataset-specific question plus an answer bundle (which may contain
+multiple sections).
+These are supervised instruction-tuning pairs: treat the question as the user
+prompt and the response as the assistant answer. The label year must satisfy
+any facts in either part of the exchange.
+Pick the smallest year Y in [2001, 2025] so that a model with knowledge through
+year Y could answer confidently, considering EVERYTHING in both the question and
+the answer bundle. If no specific time-dependent knowledge is required, output
+2001.
+Rules:
+- Consider publication dates, statistics, laws, releases, and events.
+- Output the smallest year that still contains every fact mentioned.
+- If the bundle includes multiple responses (e.g., preferred/rejected answers,
+  constraints, rationales), the chosen year must satisfy the most recent
+  reference anywhere in the bundle.
+- If multiple explicit years are referenced, return the most recent explicit
+  year.
+- If only a range or uncertainty is provided (e.g., "released between 2008 and
+  2015"), answer with the latest year in that range so no future facts are
+  included.
+- If information is older than 2001, still respond with 2001.
+- Do not hallucinate years that are not grounded in the text.
+- Additionally, assign the question to one category from this list: coding,
+  creative_writing, finance, general_knowledge, health, history,
+  instruction_following, law, math, multi_lingual, other, reasoning, science.
+
+Illustrative example:
+Question:
+"Teacher: In this task, you are given a text from tweets and a boolean question
+whether this tweet has positive sentiment or negative sentiment. Your task is to
+generate answer "yes" when the tweet has that particular sentiment, otherwise
+generate answer "no".\nTeacher: Now, understand the problem? If you are still
+confused, see the following example:\nTweet: @justinchuan Awww! I was thinking
+about you lot up there! Glad you enjoyed it Question: is it a positive tweet?\n
+Solution: yes\nReason: There is an expression of happiness in this tweet text,
+hence, we can say it's positive. So answer is 'yes'.\n\nNow, solve this instance:
+Tweet: Goddamn my back hurts this morning.  Question: is it a positive tweet?\n
+Student:"
+Answer JSON:
+{"year": 2006, "confidence": "high", "category": "general_knowledge",
+"justification": "Answer references tweets, a concept only available after
+Twitter launched in 2006, so 2006 is the earliest safe year.",
+"evidence_years": [2006]}
+
+Use the same reasoning style for the sample below and respond with compact JSON
+only.
+
+<question>
+{sample.question}
+</question>
+<answer_bundle>
+{sample.answer}
+</answer_bundle>
+Return JSON exactly in this schema:
+{"year": 2001, "confidence": "low|medium|high",
+"category": "one of the allowed categories",
+"justification": "why year is required", "evidence_years": [2008]}
+\end{verbatim}
+
+\paragraph{SFT Mixture Data.}
+The TÜLU 3 SFT mixture used for training contains 939{,}344 samples from the sources below.
+
+\begin{table}[t]
+    \centering
+    \small
+    \begin{tabular}{lrl}
+        \toprule
+        Dataset & Prompts & License \\
+        \midrule
+        CoCoNot & 10{,}983 & ODC-BY-1.0 \\
+        FLAN v2 (ai2-adapt-dev/flan\_v2\_converted) & 89{,}982 & -- \\
+        No Robots & 9{,}500 & CC-BY-NC-4.0 \\
+        OpenAssistant Guanaco & 7{,}132 & Apache 2.0 \\
+        Tulu 3 Persona MATH & 149{,}960 & ODC-BY-1.0 \\
+        Tulu 3 Persona GSM & 49{,}980 & ODC-BY-1.0 \\
+        Tulu 3 Persona Python & 34{,}999 & ODC-BY-1.0 \\
+        Tulu 3 Persona Algebra & 20{,}000 & ODC-BY-1.0 \\
+        Tulu 3 Persona IF & 29{,}980 & ODC-BY-1.0 \\
+        NuminaMath-TIR & 64{,}312 & Apache 2.0 \\
+        Tulu 3 WildGuardMix & 50{,}000 & Apache 2.0 \\
+        Tulu 3 WildJailbreak & 50{,}000 & ODC-BY-1.0 \\
+        Tulu 3 Hardcoded & 240 & CC-BY-4.0 \\
+        Aya & 100{,}000 & Apache 2.0 \\
+        WildChat GPT-4 & 100{,}000 & ODC-BY-1.0 \\
+        TableGPT & 5{,}000 & MIT \\
+        SciRIFF & 10{,}000 & ODC-BY-1.0 \\
+        Evol CodeAlpaca & 107{,}276 & Apache 2.0 \\
+        \bottomrule
+    \end{tabular}
+    \caption{TÜLU 3 SFT mixture composition. Source details: Brahman et al. (2024), Longpre et al. (2023), Rajani et al. (2023), Kopf et al. (2024), Beeching et al. (2024), Han et al. (2024), Wildteaming (2024), Singh et al. (2024), Zhao et al. (2024), Zha et al. (2023), Wadden et al. (2024), Luo et al. (2023).}
+    \label{tab:sft-mixture}
+\end{table}
+
+\end{document}
