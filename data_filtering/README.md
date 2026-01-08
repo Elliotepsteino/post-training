@@ -97,6 +97,84 @@ Flags of interest:
 
 To scale beyond the default, increase `--subset-size` or update the sampling logic; the Batch payload and polling loop already work for larger jobs, but be mindful of rate limits and storage.
 
+## Filtering evaluation (50-question audit)
+
+This lightweight audit samples 50 questions across year shards, runs OpenAI models, and reports exact/conservative/weighted accuracy. Gold labels are set to `gpt-5.2` by default (you can replace them later).
+
+Note: the filtering eval client does not set `temperature` because some GPT-5.x models only accept the default value.
+
+Step-by-step (non-batch):
+
+```bash
+python data_filtering/filtering_eval/sample_questions.py --num-samples 50
+python data_filtering/filtering_eval/run_openai_eval.py --model gpt-5.2 \
+  --out data_filtering/filtering_eval/predictions/preds_gpt-5.2.jsonl
+python data_filtering/filtering_eval/create_gold_dataset.py \
+  --preds data_filtering/filtering_eval/predictions/preds_gpt-5.2.jsonl \
+  --gold-model gpt-5.2 \
+  --sequential-ids
+python data_filtering/filtering_eval/run_openai_eval.py --model gpt-5-mini \
+  --samples data_filtering/filtering_eval/data/gold_dataset.jsonl \
+  --out data_filtering/filtering_eval/predictions/preds_gpt-5-mini.jsonl
+python data_filtering/filtering_eval/score_predictions.py \
+  --samples data_filtering/filtering_eval/data/gold_dataset.jsonl \
+  --gold-field gold_year \
+  --out-tex data_filtering/filtering_eval/results/filtering_eval_table.tex
+```
+
+Optional Gemini models (requires `GEMINI_API_KEY` or `GOOGLE_API_KEY`):
+
+```bash
+python data_filtering/filtering_eval/run_gemini_eval.py --model gemini-1.5-pro \
+  --samples data_filtering/filtering_eval/data/gold_dataset.jsonl \
+  --out data_filtering/filtering_eval/predictions/preds_gemini-1.5-pro.jsonl
+```
+
+```bash
+bash data_filtering/filtering_eval/run_all.sh batch-wait
+```
+
+The batch submissions run in parallel, then the script waits for completion and writes the table.
+
+To change the sample size, set `SAMPLE_SIZE`:
+
+```bash
+SAMPLE_SIZE=50 bash data_filtering/filtering_eval/run_all.sh batch-wait
+```
+
+To include Gemini models in the batch-wait or live flows, set `GEMINI_MODELS`:
+
+```bash
+GEMINI_MODELS="gemini-1.5-pro,gemini-1.5-flash" bash data_filtering/filtering_eval/run_all.sh live
+```
+
+If you prefer manual control:
+
+```bash
+bash data_filtering/filtering_eval/run_all.sh batch
+# Once the batch jobs complete:
+bash data_filtering/filtering_eval/run_all.sh fetch <BATCH_ID_MINI> <BATCH_ID_52> <BATCH_ID_52PRO>
+```
+
+Non-batch mode:
+
+```bash
+bash data_filtering/filtering_eval/run_all.sh live
+```
+
+Outputs:
+
+- Samples: `data_filtering/filtering_eval/data/samples.jsonl`
+- Predictions: `data_filtering/filtering_eval/predictions/preds_<model>.jsonl`
+- Summary: `data_filtering/filtering_eval/results/summary.json`
+- LaTeX table: `data_filtering/filtering_eval/results/filtering_eval_table.tex`
+
+If you later add a manual label field (e.g., `gold_year`) to `samples.jsonl`, re-score with:
+
+```bash
+python data_filtering/filtering_eval/score_predictions.py --gold-field gold_year
+```
+
 ## Consuming the shards
 
 The script exposes `YearBoundedTuluLoader` for merging and shuffling data up to a cutoff. Point it at a specific run directory (e.g., `data_filtering/tulu_year_shards/2026-01-05_12-21PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-05_20-21Z_n10`):

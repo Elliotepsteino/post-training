@@ -1,0 +1,19 @@
+{
+  "n": 50,
+  "most_conservative": {
+    "gemini-3-flash-preview": 39,
+    "gemini-3-pro-preview": 32,
+    "max(gemini-3-flash-preview,gpt-5-mini)": 46,
+    "max(gemini-3-pro-preview,gpt-5.2)": 36,
+    "gpt-5-mini": 30,
+    "gpt-5.2": 24
+  },
+  "least_conservative": {
+    "gpt-5-mini": 35,
+    "gpt-5.2": 43,
+    "gemini-3-flash-preview": 25,
+    "gemini-3-pro-preview": 28,
+    "max(gemini-3-flash-preview,gpt-5-mini)": 20,
+    "max(gemini-3-pro-preview,gpt-5.2)": 24
+  }
+}
