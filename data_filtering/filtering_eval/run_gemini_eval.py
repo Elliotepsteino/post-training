@@ -9,7 +9,8 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List
 
-from run_openai_eval import SYSTEM_PROMPT, build_user_prompt, extract_year
+from prompt_templates import SYSTEM_PROMPT, build_user_prompt
+from run_openai_eval import extract_year, parse_response
 
 
 def load_samples(path: str) -> List[dict]:
@@ -59,10 +60,10 @@ def run_live(
                 gm = genai.GenerativeModel(model_name=model, system_instruction=SYSTEM_PROMPT)
                 resp = gm.generate_content(user_prompt)
                 text = resp.text or ""
-                year = extract_year(text) or 2001
+                parsed = parse_response(text)
                 if sleep_s:
                     time.sleep(sleep_s)
-                return {"id": row["id"], "model": model, "pred_year": year, "raw_response": text}
+                return {"id": row["id"], "model": model, **parsed}
             except Exception as exc:
                 attempt += 1
                 if attempt > max_retries:
@@ -71,12 +72,11 @@ def run_live(
                     gm = genai.GenerativeModel(model_name=fallback_model, system_instruction=SYSTEM_PROMPT)
                     resp = gm.generate_content(user_prompt)
                     text = resp.text or ""
-                    year = extract_year(text) or 2001
+                    parsed = parse_response(text)
                     return {
                         "id": row["id"],
                         "model": fallback_model,
-                        "pred_year": year,
-                        "raw_response": text,
+                        **parsed,
                         "fallback_used": True,
                         "error": str(exc),
                     }

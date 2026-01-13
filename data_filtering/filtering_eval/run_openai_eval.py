@@ -7,78 +7,10 @@ import json
 import os
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, Iterable, List
 
-CATEGORIES = [
-    "general_knowledge",
-    "math",
-    "coding",
-    "science",
-    "history",
-    "law",
-    "finance",
-    "health",
-    "creative_writing",
-    "multi_lingual",
-    "instruction_following",
-    "reasoning",
-    "other",
-]
-
-SYSTEM_PROMPT = (
-    "You label the minimum calendar year (between 2001 and 2025) required "
-    "to answer a question without temporal leakage. The label must never precede "
-    "any fact mentioned in the sample; when uncertain, err toward the later year "
-    "so that no future knowledge sneaks into earlier buckets."
-)
-
-VARIANT_NOTE = (
-    "These are supervised instruction-tuning pairs: treat the question as the user prompt "
-    "and the answer as the assistant's canonical reply."
-)
-
-
-def build_user_prompt(question: str, answer: str) -> str:
-    return (
-        "You receive a dataset-specific question plus an answer bundle (which may contain multiple sections).\n"
-        f"{VARIANT_NOTE}\n"
-        "Pick the smallest year Y in [2001, 2025] so that a model with knowledge "
-        "through year Y could answer confidently, considering EVERYTHING in both the question "
-        "and the answer bundle. If no specific time-dependent knowledge is required, output 2001.\n"
-        "Rules:\n"
-        "- Consider publication dates, statistics, laws, releases, and events.\n"
-        "- Output the smallest year that still contains every fact mentioned.\n"
-        "- If the bundle includes multiple responses (e.g., preferred/rejected answers, constraints, rationales), "
-        "the chosen year must satisfy the most recent reference anywhere in the bundle.\n"
-        "- If multiple explicit years are referenced, return the most recent explicit year.\n"
-        "- If only a range or uncertainty is provided (e.g., 'released between 2008 and 2015'), "
-        "answer with the latest year in that range so no future facts are included.\n"
-        "- If information is older than 2001, still respond with 2001.\n"
-        "- Do not hallucinate years that are not grounded in the text.\n"
-        "- Additionally, assign the question to one category from this list: "
-        f"{', '.join(CATEGORIES[:-1])}, or {CATEGORIES[-1]} if nothing fits.\n"
-        "\n"
-        "Illustrative example:\n"
-        "Question:\n"
-        "\"Teacher: In this task, you are given a text from tweets and a boolean question whether this tweet "
-        "has positive sentiment or negative sentiment. Your task is to generate answer \"yes\" when the tweet has that "
-        "particular sentiment, otherwise generate answer \"no\".\\nTeacher: Now, understand the problem? If you are still "
-        "confused, see the following example:\\nTweet: @justinchuan Awww! I was thinking about you lot up there! Glad you enjoyed "
-        "it Question: is it a positive tweet?\\nSolution: yes\\nReason: There is an expression of happiness in this tweet text, hence, "
-        "we can say it's positive. So answer is 'yes'.\\n\\nNow, solve this instance: Tweet: Goddamn my back hurts this morning.  "
-        "Question: is it a positive tweet?\\nStudent:\"\n"
-        "Answer JSON:\n"
-        '{"year": 2006, "confidence": "high", "category": "general_knowledge", "justification": "Answer references tweets, a concept only available after Twitter launched in 2006, so 2006 is the earliest safe year.", "evidence_years": [2006]}\n'
-        "\n"
-        "Use the same reasoning style for the sample below and respond with compact JSON only.\n"
-        "\n"
-        f"<question>\n{question}\n</question>\n"
-        f"<answer_bundle>\n{answer}\n</answer_bundle>\n"
-        "Return JSON exactly in this schema:\n"
-        '{"year": 2001, "confidence": "low|medium|high", '
-        '"category": "one of the allowed categories", '
-        '"justification": "why year is required", "evidence_years": [2008]}\n'
-    )
+from prompt_templates import SYSTEM_PROMPT, build_user_prompt
 
 YEAR_RE = re.compile(r"\b(20\d{2})\b")
 
@@ -107,6 +39,67 @@ def extract_year(text: str) -> int | None:
         if 2001 <= year <= 2025:
             return year
     return None
+
+
+def _extract_json_object(text: str) -> tuple[dict, bool]:
+    text = text.strip()
+    try:
+        return json.loads(text), True
+    except Exception:
+        pass
+    # Try to recover last JSON object from free-form text.
+    end = text.rfind("}")
+    if end == -1:
+        return {}, False
+    start = text.rfind("{", 0, end)
+    if start != -1 and end > start:
+        snippet = text[start : end + 1]
+        try:
+            return json.loads(snippet), True
+        except Exception:
+            return {}, False
+    return {}, False
+
+
+def _compute_year_from_entities(entities: dict) -> int | None:
+    upper_bounds = []
+    for val in entities.values():
+        if not isinstance(val, dict):
+            continue
+        ci = val.get("confidence_interval_95")
+        if isinstance(ci, list) and len(ci) == 2:
+            try:
+                upper_bounds.append(int(ci[1]))
+            except Exception:
+                continue
+    if upper_bounds:
+        return max(upper_bounds)
+    return None
+
+
+def parse_response(text: str) -> dict:
+    payload, parsed_ok = _extract_json_object(text)
+
+    confidence = payload.get("confidence", "")
+    category = payload.get("category", "")
+    justification = payload.get("justification", "")
+    entities = payload.get("entities", {})
+    if not isinstance(entities, dict):
+        entities = {}
+
+    year_from_entities = _compute_year_from_entities(entities)
+    year = year_from_entities or extract_year(text) or 2001
+
+    result = {
+        "pred_year": year,
+        "confidence": confidence,
+        "category": category,
+        "justification": justification,
+        "entities": entities,
+    }
+    if not parsed_ok:
+        result["raw_response"] = text
+    return result
 
 
 def write_predictions(path: str, rows: Iterable[dict]) -> None:
@@ -181,40 +174,56 @@ def fetch_batch(batch_id: str, model: str, out_path: str) -> None:
         text = ""
         if choices:
             text = choices[0].get("message", {}).get("content", "")
-        year = extract_year(text) or 2001
-        preds.append(
-            {
-                "id": record.get("custom_id"),
-                "model": model,
-                "pred_year": year,
-                "raw_response": text,
-            }
-        )
+        parsed = parse_response(text)
+        preds.append({"id": record.get("custom_id"), "model": model, **parsed})
 
     write_predictions(out_path, preds)
     print(f"Wrote predictions to {out_path}")
 
 
-def run_live(samples: List[dict], model: str, out_path: str, sleep_s: float) -> None:
+def run_one_live(row: dict, model: str) -> dict:
     from openai import OpenAI
 
     client = OpenAI()
+    user_prompt = build_user_prompt(row.get("question", ""), row.get("answer", ""))
+    resp = client.chat.completions.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt},
+        ],
+        response_format={"type": "json_object"},
+    )
+    text = resp.choices[0].message.content or ""
+    parsed = parse_response(text)
+    return {"id": row["id"], "model": model, **parsed}
+
+
+def run_live(samples: List[dict], model: str, out_path: str, sleep_s: float) -> None:
     preds = []
-    for row in samples:
-        user_prompt = build_user_prompt(row.get("question", ""), row.get("answer", ""))
-        resp = client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": user_prompt},
-            ],
-            response_format={"type": "json_object"},
-        )
-        text = resp.choices[0].message.content or ""
-        year = extract_year(text) or 2001
-        preds.append({"id": row["id"], "model": model, "pred_year": year, "raw_response": text})
+    for idx, row in enumerate(samples, start=1):
+        preds.append(run_one_live(row, model))
+        print(f"Completed {idx}/{len(samples)}")
         if sleep_s:
             time.sleep(sleep_s)
+    write_predictions(out_path, preds)
+    print(f"Wrote predictions to {out_path}")
+
+
+def run_live_parallel(samples: List[dict], model: str, out_path: str, max_workers: int) -> None:
+    preds_by_id: Dict[str, dict] = {}
+    total = len(samples)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(run_one_live, row, model): row for row in samples}
+        completed = 0
+        for future in as_completed(futures):
+            row = futures[future]
+            result = future.result()
+            preds_by_id[str(row["id"])] = result
+            completed += 1
+            print(f"Completed {completed}/{total}")
+
+    preds = [preds_by_id[str(row["id"])] for row in samples if str(row["id"]) in preds_by_id]
     write_predictions(out_path, preds)
     print(f"Wrote predictions to {out_path}")
 
@@ -231,6 +240,8 @@ def main() -> None:
     parser.add_argument("--wait", action="store_true", help="Wait for batch completion and fetch results")
     parser.add_argument("--poll-interval", type=float, default=30.0, help="Seconds between batch status checks")
     parser.add_argument("--sleep", type=float, default=0.0, help="Sleep between requests in live mode")
+    parser.add_argument("--parallel", action="store_true", help="Run live requests in parallel")
+    parser.add_argument("--max-workers", type=int, default=35, help="Max workers for parallel live mode")
     args = parser.parse_args()
 
     samples = load_samples(args.samples)
@@ -254,7 +265,10 @@ def main() -> None:
                 raise RuntimeError(f"Batch {batch_id} finished with status: {status}")
             fetch_batch(batch_id, args.model, args.out)
     else:
-        run_live(samples, args.model, args.out, args.sleep)
+        if args.parallel:
+            run_live_parallel(samples, args.model, args.out, args.max_workers)
+        else:
+            run_live(samples, args.model, args.out, args.sleep)
 
 
 if __name__ == "__main__":
