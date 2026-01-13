@@ -34,6 +34,68 @@ python run_openai_eval.py --model gpt-5-mini \
 
 Repeat for `gpt-5.2` and `gpt-5.2-pro`.
 
+Parallel OpenAI + Gemini on the gold dataset:
+
+```bash
+export OPENAI_API_KEY=...
+export GEMINI_API_KEY=...  # or GOOGLE_API_KEY
+
+./run_openai_gemini_parallel.sh
+```
+
+Run all four models in parallel with 10 workers per model (OpenAI + Gemini):
+
+```bash
+export OPENAI_API_KEY=...
+export GEMINI_API_KEY=...  # or GOOGLE_API_KEY
+
+OPENAI_MODELS=gpt-5-mini,gpt-5.2 \
+GEMINI_MODELS=gemini-3-flash-preview,gemini-3-pro-preview \
+OPENAI_MAX_WORKERS=10 \
+GEMINI_MAX_WORKERS=10 \
+./run_openai_gemini_parallel.sh
+```
+
+Parallel OpenAI only (live):
+
+```bash
+export OPENAI_API_KEY=...
+./run_openai_parallel.sh
+```
+
+To fire all samples concurrently for a single model:
+
+```bash
+export OPENAI_API_KEY=...
+python run_openai_eval.py --model gpt-5-mini --samples "$SAMPLES" \
+  --out "$PRED_DIR/preds_gpt-5-mini.jsonl" --parallel --max-workers 35
+```
+
+Parallel OpenAI only (batch with progress output):
+
+```bash
+export OPENAI_API_KEY=...
+SAMPLES=/home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset.jsonl
+PRED_DIR=/home/epsteine/post-training/data_filtering/filtering_eval/predictions
+
+python run_openai_eval.py --batch --wait --model gpt-5-mini \
+  --samples "$SAMPLES" --out "$PRED_DIR/preds_gpt-5-mini.jsonl" &
+python run_openai_eval.py --batch --wait --model gpt-5.2 \
+  --samples "$SAMPLES" --out "$PRED_DIR/preds_gpt-5.2.jsonl" &
+wait
+```
+python run_openai_eval.py --model gpt-5-mini --samples "$SAMPLES" --out "$PRED_DIR/preds_gpt-5-mini.jsonl"
+
+```bash
+OPENAI_MODELS=gpt-5.2-pro \
+GEMINI_MODELS=gemini-3-pro-preview,gemini-3-flash-preview \
+SAMPLES=/home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset.jsonl \
+PRED_DIR=/home/epsteine/post-training/data_filtering/filtering_eval/predictions \
+OUT_JSON=/home/epsteine/post-training/data_filtering/filtering_eval/results/summary.json \
+OUT_TEX=/home/epsteine/post-training/data_filtering/filtering_eval/results/filtering_eval_table.tex \
+./run_openai_gemini_parallel.sh
+```
+
 ## 3) Score and emit LaTeX table
 
 Gold labels are taken from the `gpt-5.2-pro` predictions:
