@@ -15,6 +15,41 @@
 
 This document summarizes the data filtering pipeline and evaluation for Synchronos LLM post-training.
 
+\section{Small Scale Filtering Eval}
+We run a small-scale audit on a 35-question gold set with human year labels and entity annotations to validate the filtering pipeline. The process follows these steps:
+\begin{enumerate}
+    \item Extract time-anchored entities from the question and answer bundle.
+    \item Assign a best-estimate year and a 95\% confidence interval per entity.
+    \item Generate standalone search queries for each entity.
+    \item Retrieve evidence from search results to ground the estimates.
+    \item Update entity confidence intervals based on the evidence.
+    \item Update the overall estimated year using the maximum upper bound across entities.
+\end{enumerate}
+Key plots for this analysis are Figure~\ref{fig:grounding-conservative} and Figure~\ref{fig:grounding-delta-search}.
+Figure~\ref{fig:grounding-conservative} shows that search grounding improves no-leak accuracy by roughly 10 points across models, with Gemini models reaching 100\% no-leak accuracy. An additional test set beyond the current dev evaluation set would strengthen this claim, since the dev set was used to improve prompt structure and diagnose errors.
+Figure~\ref{fig:grounding-delta-search} shows the distribution of predicted year minus gold year; the most common failure is entity extraction, while search grounding appears reliable. We categorize error types using an LLM with access to the ground-truth answer.
+
+\paragraph{Why not GLiNER.}
+We evaluated GLiNER for entity extraction, but it is a poor fit for this task. Given fixed categories, it must both detect the entity span and map it to a category; empirically it misses entities frequently in our data. Because missed entities directly induce leakage, we instead use LLMs for the full stack (entity extraction through year estimation), with search-based evidence grounding to improve reliability.
+
+\subsection{Next Steps}
+Next, we plan to annotate an additional set that we will call the test set, reserved for final performance reporting. We also plan to sample multiple predictions per model and take the maximum year across samples to reduce leakage risk.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../data_filtering/filtering_eval/results/grounding_impact_conservative.pdf}
+    \caption{No-leak accuracy (predicted year $\ge$ gold) before vs.\ after search grounding.}
+    \label{fig:grounding-conservative}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1.0\textwidth]{../data_filtering/filtering_eval/results/grounding_impact_delta_search_grid.pdf}
+    \caption{Search-aided prediction error (predicted year minus ground truth) by model, with negative deltas colored by failure type.}
+    \label{fig:grounding-delta-search}
+\end{figure}
+
+\clearpage
 \section{Data Filtering}
 We label each supervised (SFT), preference, and RLVR sample with the minimum calendar year consistent with its question--answer bundle; the prompt structure is detailed in Appendix~A. We considered deterministic filtering, but it was difficult to capture all edge cases with a rule-based approach. The latest sweep (session \texttt{2026-01-06\_14-10PT}) processed 30{,}549 SFT examples, 29{,}510 preference examples, and three RLVR datasets (7{,}358 GSM, 7{,}372 MATH, 14{,}958 IFEval) with a conservative policy that uses the most recent referenced year. Figures~\ref{fig:sft}--\ref{fig:rlvr} show year and category distributions for each dataset family and validate cutoff integrity.
 
@@ -116,18 +151,6 @@ The current filtering pass uses GPT-5-mini with batch requests at \$0.25/\$2.00 
     \label{tab:filtering-costs}
 \end{table}
 
-\paragraph{Filtering Evaluation.}
-We sample 50 questions evenly across year shards and compare model conservatism, defined as the tendency to predict a later (higher) year; the most conservative prediction is the maximum year among models for the same prompt. Combining the cheaper models in each family gives the most conservative estimate (Figure~\ref{fig:conservative-ensemble}), and this can be extended to include Anthropic models. Without ground truth, we count how often each model produces the maximum year for the same prompt (ties count). Figure~\ref{fig:conservative-ensemble} shows per-model counts plus two max-ensembles: Gemini 3 Flash + GPT-5-mini and Gemini 3 Pro + GPT-5.2.
-
-Next step: human labels for the 50 questions. With ground truth, we will report exact accuracy, conservative accuracy (predicted year $\ge$ gold), and weighted accuracy (mean of the two).
-
-\begin{figure}[t]
-    \centering
-    \includegraphics[width=0.9\textwidth]{../data_filtering/filtering_eval/results/conservatism_counts_max_combo.pdf}
-    \caption{Most-conservative counts over 50 questions, with max-ensembles of Gemini 3 Flash + GPT-5-mini and Gemini 3 Pro + GPT-5.2 (ties count).}
-    \label{fig:conservative-ensemble}
-\end{figure}
-
 Downstream, we select shards with a year-bounded loader to enforce knowledge cutoffs (e.g., 2014).
 
 \clearpage
@@ -142,49 +165,46 @@ future knowledge sneaks into earlier buckets.
 You receive a dataset-specific question plus an answer bundle (which may contain
 multiple sections).
 These are supervised instruction-tuning pairs: treat the question as the user
-prompt and the response as the assistant answer. The label year must satisfy
-any facts in either part of the exchange.
+prompt and the response as the assistant answer.
 Pick the smallest year Y in [2001, 2025] so that a model with knowledge through
 year Y could answer confidently, considering EVERYTHING in both the question and
 the answer bundle. If no specific time-dependent knowledge is required, output
 2001.
-Rules:
-- Consider publication dates, statistics, laws, releases, and events.
-- Output the smallest year that still contains every fact mentioned.
-- If the bundle includes multiple responses (e.g., preferred/rejected answers,
-  constraints, rationales), the chosen year must satisfy the most recent
-  reference anywhere in the bundle.
-- If multiple explicit years are referenced, return the most recent explicit
-  year.
-- If only a range or uncertainty is provided (e.g., "released between 2008 and
-  2015"), answer with the latest year in that range so no future facts are
-  included.
-- If information is older than 2001, still respond with 2001.
-- Do not hallucinate years that are not grounded in the text.
-- Additionally, assign the question to one category from this list: coding,
-  creative_writing, finance, general_knowledge, health, history,
-  instruction_following, law, math, multi_lingual, other, reasoning, science.
 
-Illustrative example:
-Question:
-"Teacher: In this task, you are given a text from tweets and a boolean question
-whether this tweet has positive sentiment or negative sentiment. Your task is to
-generate answer "yes" when the tweet has that particular sentiment, otherwise
-generate answer "no".\nTeacher: Now, understand the problem? If you are still
-confused, see the following example:\nTweet: @justinchuan Awww! I was thinking
-about you lot up there! Glad you enjoyed it Question: is it a positive tweet?\n
-Solution: yes\nReason: There is an expression of happiness in this tweet text,
-hence, we can say it's positive. So answer is 'yes'.\n\nNow, solve this instance:
-Tweet: Goddamn my back hurts this morning.  Question: is it a positive tweet?\n
-Student:"
-Answer JSON:
+Rules:
+- Identify all time-anchored entities in the question and answer bundle.
+- For each entity, provide a best_estimate year plus a 95% confidence interval.
+- Use the entity's founding/release/announcement year (not the future target year).
+- Set overall "year" to the maximum upper bound across all entity confidence intervals.
+- If a range is mentioned (e.g., "released between 2008 and 2015"), use that as
+  the entity's interval.
+- If information is older than 2001, still respond with 2001.
+- Do not hallucinate years; use only dates grounded in the text or well-known facts.
+- Additionally, assign the question to one category from this list:
+  general_knowledge, math, coding, science, history, law, finance, health,
+  creative_writing, multi_lingual, instruction_following, reasoning, other.
+
+You may reason internally, but the final output must be a single JSON object only.
+Do not include any extra text or code fences.
+
+Return JSON with these required fields and meanings:
+- "year": integer in [2001, 2025] for the minimum safe year.
+- "confidence": "low" | "medium" | "high".
+- "category": one of the allowed categories listed above.
+- "justification": short reason for the chosen year.
+- "entities": object mapping entity names to an object with:
+  - "best_estimate": best estimate year for founding/release/announcement.
+  - "confidence_interval_95": [yearA, yearB] containing the best estimate; yearA/yearB
+    can be the same.
+  - "search_query": a standalone query to verify the year estimate.
+- If no entities are found, use an empty object for "entities".
+
+Illustrative example (output only):
 {"year": 2006, "confidence": "high", "category": "general_knowledge",
 "justification": "Answer references tweets, a concept only available after
 Twitter launched in 2006, so 2006 is the earliest safe year.",
-"evidence_years": [2006]}
-
-Use the same reasoning style for the sample below and respond with compact JSON
-only.
+"entities": {"tweet": {"best_estimate": 2006, "confidence_interval_95": [2006, 2006],
+"search_query": "When was Twitter launched?"}}}
 
 <question>
 {sample.question}
@@ -195,7 +215,11 @@ only.
 Return JSON exactly in this schema:
 {"year": 2001, "confidence": "low|medium|high",
 "category": "one of the allowed categories",
-"justification": "why year is required", "evidence_years": [2008]}
+"justification": "why year is required",
+"entities": {"entityA": {"best_estimate": 2008, "confidence_interval_95": [2007, 2009],
+"search_query": "When was entityA released?"},
+"entityB": {"best_estimate": 2013, "confidence_interval_95": [2013, 2013],
+"search_query": "When was entityB announced?"}}}
 \end{verbatim}
 
 \paragraph{SFT Mixture Data.}
