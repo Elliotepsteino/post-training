@@ -27,13 +27,25 @@ We run a small-scale audit on a 35-question gold set with human year labels and 
 \end{enumerate}
 Key plots for this analysis are Figure~\ref{fig:grounding-conservative} and Figure~\ref{fig:grounding-delta-search}.
 Figure~\ref{fig:grounding-conservative} shows that search grounding improves no-leak accuracy by roughly 10 points across models, with Gemini models reaching 100\% no-leak accuracy. An additional test set beyond the current dev evaluation set would strengthen this claim, since the dev set was used to improve prompt structure and diagnose errors.
-Figure~\ref{fig:grounding-delta-search} shows the distribution of predicted year minus gold year; the most common failure is entity extraction, while search grounding appears reliable. We categorize error types using an LLM with access to the ground-truth answer.
+Figure~\ref{fig:grounding-delta-search} shows the distribution of predicted year minus gold year; the most common failure is entity extraction, while search grounding appears reliable. We categorize error types using an LLM with access to the ground-truth answer. We also observe that Gemini 3 Flash with search outperforms Gemini 3 Pro with search, and GPT-5-mini with search outperforms GPT-5.2. Possible explanations are that the prompt is still ambiguous and larger models choose a valid but misaligned interpretation, the larger models are more overconfident, or the sample size is too small to draw a clear conclusion.
+
+\paragraph{Annotation protocol.}
+For each sample, the annotator read the question and answer, extracted relevant entities (omitting entities that are clearly older than the dominant ones), and searched to find the concept date for each entity. For each entity, we include a source link to the article stating the concept date unless the fact is trivially known. The full annotation pass took about 2 hours, or roughly 3.5 minutes per question.
 
 \paragraph{Why not GLiNER.}
 We evaluated GLiNER for entity extraction, but it is a poor fit for this task. Given fixed categories, it must both detect the entity span and map it to a category; empirically it misses entities frequently in our data. Because missed entities directly induce leakage, we instead use LLMs for the full stack (entity extraction through year estimation), with search-based evidence grounding to improve reliability.
 
 \subsection{Next Steps}
 Next, we plan to annotate an additional set that we will call the test set, reserved for final performance reporting. We also plan to sample multiple predictions per model and take the maximum year across samples to reduce leakage risk.
+
+\paragraph{Other performance metrics.}
+Possible options include an asymmetric error loss averaged over samples,
+$L = \max(0, -e) + \beta \cdot \max(0, e)$ where $e = \hat{y} - y$,
+$\hat{y}$ is the predicted year, and $y$ is the gold year. This penalizes
+underestimates more than overestimates when $\beta < 1$, but it is harder to
+interpret and requires choosing $\beta$. Another option is an equally weighted
+average of exact year match and no-leak accuracy, which is easy to interpret but
+does not distinguish between off-by-one errors and large errors.
 
 \begin{figure}[t]
     \centering
