@@ -4,12 +4,14 @@
         \toprule
         Model & Exact acc & Conservative acc & Weighted acc \\
         \midrule
-        gemini-3-flash-preview & -- & -- & -- \\
-        gemini-3-pro-preview & -- & -- & -- \\
-        gpt-5-mini & -- & -- & -- \\
-        gpt-5.2 & -- & -- & -- \\
+        gemini-3-flash-preview & 40.00 & 97.14 & 68.57 \\
+        gemini-3-flash-preview_grounded & 42.86 & 97.14 & 70.00 \\
+        gemini-3-flash-preview_grounded_updated & 42.86 & 97.14 & 70.00 \\
+        gemini-3-flash-preview_nonconservative & 0.00 & 0.00 & 0.00 \\
+        gpt-5-mini & 45.71 & 88.57 & 67.14 \\
+        gpt-5.2 & 25.71 & 82.86 & 54.29 \\
         \bottomrule
     \end{tabular}
-    \caption{Filtering label accuracy on 50 questions (TODO: fill after human ground-truth labeling). Exact is year match; conservative is predicted year $\ge$ gold year; weighted is mean of the two.}
+    \caption{Filtering label accuracy on 50 questions. Exact is year match; conservative is predicted year $\ge$ gold year; weighted is mean of the two.}
     \label{tab:filtering-eval}
 \end{table}

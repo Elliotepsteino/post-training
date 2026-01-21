@@ -22,7 +22,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Create gold dataset from predictions.")
     parser.add_argument("--samples", default="/home/epsteine/post-training/data_filtering/filtering_eval/data/samples.jsonl")
     parser.add_argument("--preds", required=True, help="Predictions JSONL (e.g., preds_gpt-5.2-pro.jsonl)")
-    parser.add_argument("--out", default="/home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset.jsonl")
+    parser.add_argument("--out", default="/home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset_dev.jsonl")
     parser.add_argument("--gold-model", default="gpt-5.2")
     parser.add_argument("--sequential-ids", action="store_true", help="Rewrite ids as 1..N")
     args = parser.parse_args()

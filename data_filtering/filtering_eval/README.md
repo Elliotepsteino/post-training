@@ -1,6 +1,6 @@
 # Filtering Eval (Year Labels)
 
-This directory contains a small evaluation pipeline to sanity check year labels on a 50‑question sample.
+This directory contains a small evaluation pipeline to sanity check year labels on the gold set.
 
 ## 1) Sample questions
 
@@ -12,89 +12,65 @@ python sample_questions.py \
 
 This draws evenly across available year shards (latest session by default) and stores `question` plus metadata.
 
-## 2) Run model predictions
+## 2) Run model predictions and grounding via Make
 
-Batch (recommended):
+Use `make help` to see all targets. The main workflow is:
 
-```bash
-python run_openai_eval.py --batch --model gpt-5.2-pro \
-  --out /home/epsteine/post-training/data_filtering/filtering_eval/predictions/preds_gpt-5.2-pro.jsonl
+1) Generate predictions (optionally multi-sample).
+2) Ground entities via search.
+3) Update estimates using evidence (rule or LLM aggregation).
+4) Analyze and plot.
 
-# later, fetch results
-python run_openai_eval.py --fetch-batch <BATCH_ID> --model gpt-5.2-pro \
-  --out /home/epsteine/post-training/data_filtering/filtering_eval/predictions/preds_gpt-5.2-pro.jsonl
-```
-
-Non‑batch:
-
-```bash
-python run_openai_eval.py --model gpt-5-mini \
-  --out /home/epsteine/post-training/data_filtering/filtering_eval/predictions/preds_gpt-5-mini.jsonl
-```
-
-Repeat for `gpt-5.2` and `gpt-5.2-pro`.
-
-Parallel OpenAI + Gemini on the gold dataset:
+Example: full grounded pipeline (generate → search → update → analyze):
 
 ```bash
 export OPENAI_API_KEY=...
 export GEMINI_API_KEY=...  # or GOOGLE_API_KEY
 
-./run_openai_gemini_parallel.sh
+make grounded_pipeline
 ```
 
-Run all four models in parallel with 10 workers per model (OpenAI + Gemini):
+Multi-sample grounded pipeline:
 
 ```bash
 export OPENAI_API_KEY=...
 export GEMINI_API_KEY=...  # or GOOGLE_API_KEY
 
-OPENAI_MODELS=gpt-5-mini,gpt-5.2 \
-GEMINI_MODELS=gemini-3-flash-preview,gemini-3-pro-preview \
-OPENAI_MAX_WORKERS=10 \
-GEMINI_MAX_WORKERS=10 \
-./run_openai_gemini_parallel.sh
+NUM_SAMPLES=5 make grounded_pipeline_multisample
 ```
 
-Parallel OpenAI only (live):
+Gemini 3 Flash only:
 
 ```bash
-export OPENAI_API_KEY=...
-./run_openai_parallel.sh
+export GEMINI_API_KEY=...  # or GOOGLE_API_KEY
+
+NUM_SAMPLES=5 make grounded_pipeline_flash
 ```
 
-To fire all samples concurrently for a single model:
+Manual steps (single model example):
 
 ```bash
-export OPENAI_API_KEY=...
-python run_openai_eval.py --model gpt-5-mini --samples "$SAMPLES" \
-  --out "$PRED_DIR/preds_gpt-5-mini.jsonl" --parallel --max-workers 35
+export GEMINI_API_KEY=...  # or GOOGLE_API_KEY
+
+MODEL=gemini-3-flash-preview make ground
+MODEL=gemini-3-flash-preview AGGREGATION=llm make update
+MODEL=gemini-3-flash-preview make classify
+make analyze
 ```
 
-Parallel OpenAI only (batch with progress output):
+### Aggregation comparisons
+
+Run the update step once and compare LLM vs rank1-5:
 
 ```bash
-export OPENAI_API_KEY=...
-SAMPLES=/home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset.jsonl
-PRED_DIR=/home/epsteine/post-training/data_filtering/filtering_eval/predictions
-
-python run_openai_eval.py --batch --wait --model gpt-5-mini \
-  --samples "$SAMPLES" --out "$PRED_DIR/preds_gpt-5-mini.jsonl" &
-python run_openai_eval.py --batch --wait --model gpt-5.2 \
-  --samples "$SAMPLES" --out "$PRED_DIR/preds_gpt-5.2.jsonl" &
-wait
+MODEL=gemini-3-flash-preview AGGREGATION=llm make update
+MODEL=gemini-3-flash-preview make agg_plot
 ```
-python run_openai_eval.py --model gpt-5-mini --samples "$SAMPLES" --out "$PRED_DIR/preds_gpt-5-mini.jsonl"
 
-```bash
-OPENAI_MODELS=gpt-5.2-pro \
-GEMINI_MODELS=gemini-3-pro-preview,gemini-3-flash-preview \
-SAMPLES=/home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset.jsonl \
-PRED_DIR=/home/epsteine/post-training/data_filtering/filtering_eval/predictions \
-OUT_JSON=/home/epsteine/post-training/data_filtering/filtering_eval/results/summary.json \
-OUT_TEX=/home/epsteine/post-training/data_filtering/filtering_eval/results/filtering_eval_table.tex \
-./run_openai_gemini_parallel.sh
-```
+Pipeline outputs:
+- `results/grounding_summary.json`
+- `results/grounding_impact_*.pdf`
+- `results/grounding_aggregation_delta_grid.pdf`
 
 ## 3) Score and emit LaTeX table
 
@@ -111,7 +87,7 @@ If you manually label years in `samples.jsonl` (e.g., add a `gold_year` field), 
 ```bash
 python score_predictions.py \
   --gold-field gold_year \
-  --gold-path /home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset.jsonl
+  --gold-path /home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset_dev.jsonl
 ```
 
 The script writes `results/summary.json` and `results/filtering_eval_table.tex`.

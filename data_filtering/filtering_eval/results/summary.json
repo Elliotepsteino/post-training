@@ -3,31 +3,45 @@
   "results": [
     {
       "model": "gemini-3-flash-preview",
-      "exact": 50.0,
-      "conservative": 94.0,
-      "weighted": 72.0,
-      "n": 50
+      "exact": 40.0,
+      "conservative": 97.14285714285714,
+      "weighted": 68.57142857142857,
+      "n": 35
     },
     {
-      "model": "gemini-3-pro-preview",
-      "exact": 50.0,
-      "conservative": 90.0,
+      "model": "gemini-3-flash-preview_grounded",
+      "exact": 42.857142857142854,
+      "conservative": 97.14285714285714,
       "weighted": 70.0,
-      "n": 50
+      "n": 35
+    },
+    {
+      "model": "gemini-3-flash-preview_grounded_updated",
+      "exact": 42.857142857142854,
+      "conservative": 97.14285714285714,
+      "weighted": 70.0,
+      "n": 35
+    },
+    {
+      "model": "gemini-3-flash-preview_nonconservative",
+      "exact": 0.0,
+      "conservative": 0.0,
+      "weighted": 0.0,
+      "n": 0
     },
     {
       "model": "gpt-5-mini",
-      "exact": 62.0,
-      "conservative": 88.0,
-      "weighted": 75.0,
-      "n": 50
+      "exact": 45.714285714285715,
+      "conservative": 88.57142857142857,
+      "weighted": 67.14285714285714,
+      "n": 35
     },
     {
       "model": "gpt-5.2",
-      "exact": 100.0,
-      "conservative": 100.0,
-      "weighted": 100.0,
-      "n": 50
+      "exact": 25.71428571428571,
+      "conservative": 82.85714285714286,
+      "weighted": 54.28571428571429,
+      "n": 35
     }
   ]
 }

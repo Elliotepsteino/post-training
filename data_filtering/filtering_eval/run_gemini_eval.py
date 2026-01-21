@@ -10,7 +10,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List
 
 from prompt_templates import SYSTEM_PROMPT, build_user_prompt
-from run_openai_eval import extract_year, parse_response
+from run_openai_eval import parse_single_response
 
 
 def load_samples(path: str) -> List[dict]:
@@ -49,6 +49,7 @@ def run_live(
     fallback_model: str,
     max_retries: int,
     retry_sleep_s: float,
+    num_samples: int,
 ) -> None:
     import google.generativeai as genai
 
@@ -60,10 +61,11 @@ def run_live(
                 gm = genai.GenerativeModel(model_name=model, system_instruction=SYSTEM_PROMPT)
                 resp = gm.generate_content(user_prompt)
                 text = resp.text or ""
-                parsed = parse_response(text)
+                sample = parse_single_response(text)
+                sample["model"] = sample.get("model", model)
                 if sleep_s:
                     time.sleep(sleep_s)
-                return {"id": row["id"], "model": model, **parsed}
+                return sample
             except Exception as exc:
                 attempt += 1
                 if attempt > max_retries:
@@ -72,34 +74,59 @@ def run_live(
                     gm = genai.GenerativeModel(model_name=fallback_model, system_instruction=SYSTEM_PROMPT)
                     resp = gm.generate_content(user_prompt)
                     text = resp.text or ""
-                    parsed = parse_response(text)
-                    return {
-                        "id": row["id"],
-                        "model": fallback_model,
-                        **parsed,
-                        "fallback_used": True,
-                        "error": str(exc),
-                    }
+                    sample = parse_single_response(text)
+                    sample["model"] = sample.get("model", fallback_model)
+                    return sample
                 time.sleep(retry_sleep_s)
 
     preds: List[dict] = []
-    total = len(samples)
+    count = max(1, num_samples)
+    total = len(samples) * count
     if parallel:
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            futures = {executor.submit(run_one, row): row for row in samples}
+            futures = {}
+            for row in samples:
+                for sample_idx in range(1, count + 1):
+                    futures[executor.submit(run_one, row)] = (row, sample_idx)
             done = 0
             for future in as_completed(futures):
-                preds.append(future.result())
+                row, sample_idx = futures[future]
+                sample = future.result()
+                row_id = str(row["id"])
+                existing = next((p for p in preds if p["id"] == row_id), None)
+                if existing is None:
+                    existing = {"id": row_id, "model": model}
+                    preds.append(existing)
+                existing[f"sample_{sample_idx}"] = sample
                 done += 1
                 print(f"[{model}] completed {done}/{total}")
     else:
         done = 0
         for row in samples:
-            preds.append(run_one(row))
-            done += 1
-            print(f"[{model}] completed {done}/{total}")
+            row_id = str(row["id"])
+            entry = {"id": row_id, "model": model}
+            for sample_idx in range(1, count + 1):
+                entry[f"sample_{sample_idx}"] = run_one(row)
+                done += 1
+                print(f"[{model}] completed {done}/{total}")
+            preds.append(entry)
 
-    write_predictions(out_path, preds)
+    normalized_preds: List[dict] = []
+    for row in samples:
+        row_id = str(row["id"])
+        entry = next((p for p in preds if p["id"] == row_id), None)
+        if entry is None:
+            entry = {"id": row_id, "model": model}
+        for sample_idx in range(1, count + 1):
+            key = f"sample_{sample_idx}"
+            if key not in entry:
+                entry[key] = parse_single_response("")
+                entry[key]["model"] = model
+        year = max((entry[f"sample_{idx}"].get("year", 2001) for idx in range(1, count + 1)), default=2001)
+        entry["year"] = year
+        normalized_preds.append(entry)
+
+    write_predictions(out_path, normalized_preds)
     print(f"Wrote predictions to {out_path}")
 
 
@@ -110,10 +137,11 @@ def main() -> None:
     parser.add_argument("--out", default="/home/epsteine/post-training/data_filtering/filtering_eval/predictions/preds_gemini.jsonl")
     parser.add_argument("--sleep", type=float, default=0.0, help="Sleep between requests")
     parser.add_argument("--parallel", action="store_true", help="Run requests in parallel")
-    parser.add_argument("--max-workers", type=int, default=10, help="Parallel worker count")
+    parser.add_argument("--max-workers", type=int, default=200, help="Parallel worker count")
     parser.add_argument("--fallback-model", default="", help="Fallback Gemini model")
     parser.add_argument("--max-retries", type=int, default=4, help="Retry count before fallback")
     parser.add_argument("--retry-sleep", type=float, default=10.0, help="Seconds between retries")
+    parser.add_argument("--num-samples", type=int, default=1, help="Number of samples per input")
     args = parser.parse_args()
 
     configure_gemini()
@@ -128,6 +156,7 @@ def main() -> None:
         args.fallback_model,
         args.max_retries,
         args.retry_sleep,
+        args.num_samples,
     )
 
 

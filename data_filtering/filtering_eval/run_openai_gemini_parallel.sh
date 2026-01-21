@@ -2,15 +2,16 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SAMPLES="${SAMPLES:-$ROOT/data/gold_dataset.jsonl}"
+SAMPLES="${SAMPLES:-$ROOT/data/gold_dataset_dev.jsonl}"
 PRED_DIR="${PRED_DIR:-$ROOT/predictions}"
 OUT_JSON="${OUT_JSON:-$ROOT/results/summary.json}"
 OUT_TEX="${OUT_TEX:-$ROOT/results/filtering_eval_table.tex}"
 
-OPENAI_MODELS="${OPENAI_MODELS:-gpt-5-mini,gpt-5.2}"
-OPENAI_MAX_WORKERS="${OPENAI_MAX_WORKERS:-10}"
-GEMINI_MODELS="${GEMINI_MODELS:-gemini-3-pro-preview,gemini-3-flash-preview}"
-GEMINI_MAX_WORKERS="${GEMINI_MAX_WORKERS:-10}"
+OPENAI_MODELS="${OPENAI_MODELS-gpt-5-mini,gpt-5.2}"
+OPENAI_MAX_WORKERS="${OPENAI_MAX_WORKERS:-200}"
+GEMINI_MODELS="${GEMINI_MODELS-gemini-3-pro-preview,gemini-3-flash-preview}"
+GEMINI_MAX_WORKERS="${GEMINI_MAX_WORKERS:-200}"
+NUM_SAMPLES="${NUM_SAMPLES:-1}"
 
 if [[ -n "$OPENAI_MODELS" && -z "${OPENAI_API_KEY:-}" ]]; then
   echo "OPENAI_API_KEY is not set" >&2
@@ -33,7 +34,8 @@ for model in "${OPENAI_LIST[@]}"; do
       --samples "$SAMPLES" \
       --model "$model_trimmed" \
       --out "$PRED_DIR/preds_${model_trimmed}.jsonl" \
-      --parallel --max-workers "$OPENAI_MAX_WORKERS" &
+      --parallel --max-workers "$OPENAI_MAX_WORKERS" \
+      --num-samples "$NUM_SAMPLES" &
     pids+=("$!")
   fi
 done
@@ -46,7 +48,8 @@ for model in "${GEMINI_LIST[@]}"; do
       --samples "$SAMPLES" \
       --model "$model_trimmed" \
       --out "$PRED_DIR/preds_${model_trimmed}.jsonl" \
-      --parallel --max-workers "$GEMINI_MAX_WORKERS" &
+      --parallel --max-workers "$GEMINI_MAX_WORKERS" \
+      --num-samples "$NUM_SAMPLES" &
     pids+=("$!")
   fi
 done

@@ -2,11 +2,12 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SAMPLES="${SAMPLES:-$ROOT/data/gold_dataset.jsonl}"
+SAMPLES="${SAMPLES:-$ROOT/data/gold_dataset_dev.jsonl}"
 PRED_DIR="${PRED_DIR:-$ROOT/predictions}"
 
 OPENAI_MODELS="${OPENAI_MODELS:-gpt-5-mini,gpt-5.2}"
 OPENAI_MAX_WORKERS="${OPENAI_MAX_WORKERS:-35}"
+NUM_SAMPLES="${NUM_SAMPLES:-1}"
 
 if [[ -z "${OPENAI_API_KEY:-}" ]]; then
   echo "OPENAI_API_KEY is not set" >&2
@@ -24,7 +25,8 @@ for model in "${OPENAI_LIST[@]}"; do
       --samples "$SAMPLES" \
       --model "$model_trimmed" \
       --out "$PRED_DIR/preds_${model_trimmed}.jsonl" \
-      --parallel --max-workers "$OPENAI_MAX_WORKERS" &
+      --parallel --max-workers "$OPENAI_MAX_WORKERS" \
+      --num-samples "$NUM_SAMPLES" &
     pids+=("$!")
   fi
 done

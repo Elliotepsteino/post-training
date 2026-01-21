@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT="/home/epsteine/post-training/data_filtering/filtering_eval"
-SAMPLES="$ROOT/data/gold_dataset.jsonl"
+SAMPLES="$ROOT/data/gold_dataset_dev.jsonl"
 PRED_DIR="$ROOT/predictions"
 
 echo "Starting Gemini runs..."

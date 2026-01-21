@@ -1,0 +1,14 @@
+\begin{table}[t]
+    \centering
+    \begin{tabular}{lccc}
+        \toprule
+        Model & Exact acc & Conservative acc & Weighted acc \\
+        \midrule
+        gemini-3-flash-preview & 37.14 & 88.57 & 62.86 \\
+        gpt-5-mini & 40.00 & 91.43 & 65.71 \\
+        gpt-5.2 & 20.00 & 85.71 & 52.86 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Filtering label accuracy on 50 questions. Exact is year match; conservative is predicted year $\ge$ gold year; weighted is mean of the two.}
+    \label{tab:filtering-eval}
+\end{table}

@@ -1,0 +1,15 @@
+[
+  {
+    "model": "gemini-3-flash-preview",
+    "estimate_changed_frac": 0.0,
+    "ci_changed_frac": 0.0,
+    "exact_original": 0.4,
+    "conservative_original": 0.9714285714285714,
+    "weighted_original": 0.6857142857142857,
+    "exact_updated": 0.3142857142857143,
+    "conservative_updated": 1.0,
+    "weighted_updated": 0.6571428571428571,
+    "sample_consistency_icc": 0.9346150117060623,
+    "sample_all_same_frac": 0.4857142857142857
+  }
+]

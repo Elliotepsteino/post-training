@@ -21,7 +21,10 @@ def load_jsonl(path: str) -> List[dict]:
 def load_gold_from_predictions(pred_path: str) -> Dict[str, int]:
     gold: Dict[str, int] = {}
     for row in load_jsonl(pred_path):
-        gold[row["id"]] = int(row["pred_year"])
+        year = row.get("year", row.get("pred_year"))
+        if year is None:
+            continue
+        gold[row["id"]] = int(year)
     return gold
 
 
@@ -106,7 +109,12 @@ def main() -> None:
         if not fname.endswith(".jsonl"):
             continue
         model = fname.replace("preds_", "").replace(".jsonl", "")
-        preds = {row["id"]: int(row["pred_year"]) for row in load_jsonl(os.path.join(args.pred_dir, fname))}
+        preds = {}
+        for row in load_jsonl(os.path.join(args.pred_dir, fname)):
+            year = row.get("year", row.get("pred_year"))
+            if year is None:
+                continue
+            preds[row["id"]] = int(year)
         exact, cons, weighted, total = score(preds, gold)
         results.append(
             {
