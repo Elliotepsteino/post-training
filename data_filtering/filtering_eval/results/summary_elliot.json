@@ -1,0 +1,26 @@
+{
+  "gold_model": "gpt-5.2-pro",
+  "results": [
+    {
+      "model": "gemini-3-flash-preview",
+      "exact": 21.428571428571427,
+      "conservative": 97.85714285714285,
+      "weighted": 59.64285714285714,
+      "n": 140
+    },
+    {
+      "model": "gpt-5-mini",
+      "exact": 27.142857142857142,
+      "conservative": 94.28571428571428,
+      "weighted": 60.71428571428571,
+      "n": 140
+    },
+    {
+      "model": "gpt-5.2",
+      "exact": 21.428571428571427,
+      "conservative": 95.71428571428572,
+      "weighted": 58.57142857142858,
+      "n": 140
+    }
+  ]
+}

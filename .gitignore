@@ -39,6 +39,13 @@ data/*_train_*.parquet
 data/*_test_*.parquet
 datasets/
 data_filtering/tulu_year_shards/
+data_filtering/filtering_eval/predictions/test_elliot/
+data_filtering/filtering_eval/plan.md
+
+# Large subproject trees (kept out of git)
+configs/
+olmes/oe_eval/
+verl/
 
 # Model outputs / weights
 checkpoints/
