@@ -1,15 +1,15 @@
 [
   {
-    "model": "gemini-3-flash-preview",
+    "model": "gpt-5-mini",
     "estimate_changed_frac": 0.0,
     "ci_changed_frac": 0.0,
-    "exact_original": 0.4,
-    "conservative_original": 0.9714285714285714,
-    "weighted_original": 0.6857142857142857,
-    "exact_updated": 0.3142857142857143,
-    "conservative_updated": 1.0,
-    "weighted_updated": 0.6571428571428571,
-    "sample_consistency_icc": 0.9346150117060623,
-    "sample_all_same_frac": 0.4857142857142857
+    "exact_original": 0.2714285714285714,
+    "conservative_original": 0.9428571428571428,
+    "weighted_original": 0.6071428571428571,
+    "exact_updated": 0.2357142857142857,
+    "conservative_updated": 0.9428571428571428,
+    "weighted_updated": 0.5892857142857143,
+    "sample_consistency_icc": 0.7983568665922158,
+    "sample_all_same_frac": 0.44680851063829785
   }
 ]

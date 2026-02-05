@@ -8,15 +8,15 @@ GOLD_PATH ?= $(ROOT)/data/gold_dataset_dev.jsonl
 
 OPENAI_MODELS ?= gpt-5-mini,gpt-5.2
 GEMINI_MODELS ?= gemini-3-flash-preview,gemini-3-pro-preview
-OPENAI_MAX_WORKERS ?= 200
-GEMINI_MAX_WORKERS ?= 200
+OPENAI_MAX_WORKERS ?= 400
+GEMINI_MAX_WORKERS ?= 400
 NUM_SAMPLES ?= 5
 
 SEARCH_MODEL ?= gpt-4o-mini
-SEARCH_MAX_WORKERS ?= 10
-UPDATE_MAX_WORKERS ?= 8
+SEARCH_MAX_WORKERS ?= 50
+UPDATE_MAX_WORKERS ?= 32
 AGGREGATION ?= max
-AGGREGATE_MAX_WORKERS ?= 4
+AGGREGATE_MAX_WORKERS ?= 8
 
 MODEL ?= gemini-3-flash-preview
 
@@ -36,6 +36,7 @@ help:
 	@echo "  make analyze                         # plots + grounding_summary.json"
 	@echo "  make agg_plot                        # 3x2 delta grid (LLM + rank1-5)"
 	@echo "  make score                           # score predictions and emit table"
+	@echo "  make score_elliot                    # score predictions vs gold_dataset_test_elliot"
 
 .PHONY: sample
 sample:
@@ -159,3 +160,12 @@ score:
 	  --pred-dir $(PRED_DIR) \
 	  --out-json $(RESULTS_DIR)/summary.json \
 	  --out-tex $(RESULTS_DIR)/filtering_eval_table.tex
+
+.PHONY: score_elliot
+score_elliot:
+	python $(ROOT)/score_predictions.py \
+	  --gold-path $(ROOT)/data/gold_dataset_test_elliot.jsonl \
+	  --gold-field gold_year \
+	  --pred-dir $(PRED_DIR)/test_elliot \
+	  --out-json $(RESULTS_DIR)/summary_elliot.json \
+	  --out-tex $(RESULTS_DIR)/filtering_eval_table_elliot.tex
