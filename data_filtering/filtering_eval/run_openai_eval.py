@@ -362,12 +362,15 @@ def run_live_parallel(samples: List[dict], model: str, out_path: str, max_worker
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run OpenAI labeling for year prediction.")
+    file_storage = os.environ.get("FILE_STORAGE_ROOT", "/home/epsteine/post-training/file_storage")
+    default_pred_dir = os.path.join(file_storage, "data_filtering/filtering_eval/predictions")
+    default_requests_dir = os.path.join(file_storage, "data_filtering/filtering_eval/requests")
     parser.add_argument("--samples", default="/home/epsteine/post-training/data_filtering/filtering_eval/data/samples.jsonl")
     parser.add_argument("--model", required=True)
-    parser.add_argument("--out", default="/home/epsteine/post-training/data_filtering/filtering_eval/predictions/preds.jsonl")
+    parser.add_argument("--out", default=os.path.join(default_pred_dir, "preds.jsonl"))
     parser.add_argument("--batch", action="store_true", help="Use OpenAI batch API")
     parser.add_argument("--completion-window", default="24h")
-    parser.add_argument("--batch-out-dir", default="/home/epsteine/post-training/data_filtering/filtering_eval/requests")
+    parser.add_argument("--batch-out-dir", default=default_requests_dir)
     parser.add_argument("--fetch-batch", default="", help="Batch ID to fetch results")
     parser.add_argument("--wait", action="store_true", help="Wait for batch completion and fetch results")
     parser.add_argument("--poll-interval", type=float, default=30.0, help="Seconds between batch status checks")

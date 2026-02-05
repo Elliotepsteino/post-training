@@ -1,0 +1,106 @@
+\section{Model Training on Filtered Data}
+\label{sec:model-training}
+\subsection{SFT setup}
+We fine-tune Qwen3-4B-Base with LoRA adapters on the \SFTYearCutoff-capped T\"ULU-3 SFT subset (\SFTTrainCount{} examples) with a \SFTSeqLen-token context length.
+Training runs for \SFTEpochs{} epochs with linear decay, short warmup, and small per-device batches with gradient accumulation.
+Tokens per second per GPU are around \SFTTokensPerSec{}.
+The LoRA run takes about \SFTLoraHours{} hours \SFTLoraMinutes{} minutes for \SFTLoraTokens{} tokens (padding included).
+LoRA uses roughly \SFTLoraMemoryGB{} GB of GPU memory; full fine-tuning is about \SFTFullSlowdown{} slower, and T\"ULU-2 showed lower LoRA performance.
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        Component & Setting \\
+        \midrule
+        Base model & Qwen3-4B-Base \\
+        Tokenizer & Qwen3-4B-Base tokenizer \\
+        Training data & T\"ULU-3 SFT, year $\le$ \SFTYearCutoff{} (\SFTTrainCount{} examples) \\
+        Sequence length & \SFTSeqLen{} tokens \\
+        Batch size & \SFTBatchSizePerDevice{} sample per device \\
+        Gradient accumulation & \SFTGradAccum{} steps (effective \SFTGradAccum{} samples per device) \\
+        Optimizer schedule & Linear decay with \SFTWarmupPct{} warmup \\
+        Learning rate & $\SFTLearningRate$ \\
+        Weight decay & \SFTWeightDecay{} \\
+        Epochs & \SFTEpochs{} \\
+        LoRA configuration & rank \SFTLoraRank{}, $\alpha=\SFTLoraAlpha$, dropout \SFTLoraDropout{} \\
+        Memory optimizations & Flash attention and gradient checkpointing \\
+        Checkpoint cadence & Every \SFTCheckpointEvery{} steps (keep last \SFTCheckpointKeep{}) \\
+        \bottomrule
+    \end{tabular}
+    \caption{Supervised fine-tuning configuration for the LoRA run.}
+    \label{tab:sft-lora}
+\end{table}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth]{figures/lora_ft_metrics.png}
+    \caption{LoRA SFT training metrics: disk utilization (GB), reserved GPU memory (GB), learning rate, total tokens, per-device tokens per second, and train loss.}
+    \label{fig:lora-metrics}
+\end{figure}
+
+\paragraph{Hardware.}
+All runs use three NVIDIA RTX A6000 GPUs (48 GB each).
+The LoRA configuration fits within a single A6000 with limited headroom for data loading and logging.
+
+\subsection{SFT results}
+We run the T\"ULU-3 dev evaluation suite, dispatching 11 suites and limiting each task to 100 examples (MMLU uses 100 questions per subject, totaling 5{,}700 evaluations).
+This gives a fast signal across reasoning, coding, alignment, and factuality.
+Task summaries: GSM8K (grade-school math word problems), DROP (reading comprehension with numeric reasoning), Minerva Math (competition math problems across seven domains), HumanEval/HumanEval+ (Python coding pass@10), IFEval (instruction-following), PopQA (entity-centric factual QA), MMLU (multiple-choice knowledge across 57 subjects), AlpacaEval v2 (pairwise preference wins), BBH (hard reasoning tasks with CoT), TruthfulQA (robustness to falsehoods).
+
+\Cref{tab:tulu} summarizes the latest snapshot for Qwen3-4B-Base and placeholder columns for +SFT, +DPO, and +RLVR checkpoints (marked ``--'').
+The SFT evaluation is still running; partial results are shown where available.
+Scores are percentages, with $n$ denoting evaluated examples.
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{llcccccc}
+        \toprule
+        Task & Metric & Qwen3-4B Base & +SFT & +DPO & +RLVR & $n$ \\
+        \midrule
+        GSM8K & Exact match & \TuluGSMBase{} & \TuluGSMSft{} & -- & -- & \TuluGSMN{} \\
+        DROP & F1 & \TuluDropBase{} & \TuluDropSft{} & -- & -- & \TuluDropN{} \\
+        Minerva Math (avg) & Exact match & \TuluMinervaBase{} & -- & -- & -- & \TuluMinervaN{} \\
+        HumanEval & pass@10 & \TuluHumanEvalBase{} & \TuluHumanEvalSft{} & -- & -- & \TuluHumanEvalN{} \\
+        HumanEval+ & pass@10 & \TuluHumanEvalPlusBase{} & \TuluHumanEvalPlusSft{} & -- & -- & \TuluHumanEvalPlusN{} \\
+        IFEval & Prompt loose acc & \TuluIFEvalBase{} & \TuluIFEvalSft{} & -- & -- & \TuluIFEvalN{} \\
+        PopQA & Accuracy & \TuluPopQABase{} & \TuluPopQASft{} & -- & -- & \TuluPopQAN{} \\
+        MMLU (mc) & Macro accuracy & \TuluMMLUBase{} & \TuluMMLUSft{} & -- & -- & \TuluMMLUN{} \\
+        AlpacaEval v2 & Len-ctrl win rate & \TuluAlpacaBase{} & -- & -- & -- & \TuluAlpacaN{} \\
+        BBH (cot-v1) & Macro accuracy & -- & -- & -- & -- & -- \\
+        TruthfulQA & MC2 & \TuluTruthBase{} & \TuluTruthSft{} & -- & -- & \TuluTruthN{} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Primary metrics for the T\"ULU-3 dev suite (Qwen3-4B-Base, 100-example subsets).
+    The BBH run is still executing at this scale; results will be inserted once the evaluation completes.}
+    \label{tab:tulu}
+\end{table}
+
+\paragraph{Filtering cost.}
+The current filtering pass uses GPT-5-mini with batch requests at \$0.25/\$2.00 per 1M input/output tokens; the batch discount halves these rates to \$0.125/\$1.00.
+\Cref{tab:filtering-costs} summarizes per-sample token averages, current costs, and projections for the full SFT/preference corpus plus the RLVR targets.
+T\"ULU-3 still requires filtering \CostSFTRemaining{} SFT examples and \CostPrefRemaining{} preference examples beyond the current subset; projected costs scale linearly with per-sample token counts.
+For prompts under \GeminiFlashPromptLimit{} tokens, Gemini 3 Flash is priced at \$\GeminiFlashInCost/\$\GeminiFlashOutCost{} per 1M input/output tokens (similar to GPT-5-mini), while Gemini 3 Pro is \$\GeminiProInCost/\$\GeminiProOutCost{} (similar to GPT-5.2).
+
+\begin{table}[t]
+    \centering
+    \small
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lrrrrrrr}
+        \toprule
+        Dataset & Current $n$ & Tokens/sample & Current cost & Projected $n$ & GPT-5-mini & GPT-5.2 & GPT-5.2 Pro \\
+        \midrule
+        SFT & \CostSFTCurrentN{} & \CostSFTTokens{} & \$\CostSFTCurrentCost{} & \CostSFTProjectedN{} & \$\CostSFTMini{} & \$\CostSFTFiveTwo{} & \$\CostSFTFiveTwoPro{} \\
+        Preference & \CostPrefCurrentN{} & \CostPrefTokens{} & \$\CostPrefCurrentCost{} & \CostPrefProjectedN{} & \$\CostPrefMini{} & \$\CostPrefFiveTwo{} & \$\CostPrefFiveTwoPro{} \\
+        RLVR GSM & \CostGsmCurrentN{} & \CostGsmTokens{} & \$\CostGsmCurrentCost{} & \CostGsmProjectedN{} & \$\CostGsmMini{} & \$\CostGsmFiveTwo{} & \$\CostGsmFiveTwoPro{} \\
+        RLVR MATH & \CostMathCurrentN{} & \CostMathTokens{} & \$\CostMathCurrentCost{} & \CostMathProjectedN{} & \$\CostMathMini{} & \$\CostMathFiveTwo{} & \$\CostMathFiveTwoPro{} \\
+        RLVR IFEval & \CostIFEvalCurrentN{} & \CostIFEvalTokens{} & \$\CostIFEvalCurrentCost{} & \CostIFEvalProjectedN{} & \$\CostIFEvalMini{} & \$\CostIFEvalFiveTwo{} & \$\CostIFEvalFiveTwoPro{} \\
+        \bottomrule
+    \end{tabular}
+    }
+    \caption{Filtering costs (USD) under batch pricing.
+    Projected counts use \CostSFTRemaining{} and \CostPrefRemaining{} additional SFT/preference samples and RLVR targets of \CostRlvrsGsmTarget{} (GSM), \CostRlvrsMathTarget{} (MATH), and \CostRlvrsIfevalTarget{} (IFeval).}
+    \label{tab:filtering-costs}
+\end{table}
+
+Downstream, we select shards with a year-bounded loader to enforce knowledge cutoffs (e.g., 2014).

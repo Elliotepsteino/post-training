@@ -132,9 +132,11 @@ def run_live(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run Gemini labeling for year prediction.")
+    file_storage = os.environ.get("FILE_STORAGE_ROOT", "/home/epsteine/post-training/file_storage")
+    default_pred_dir = os.path.join(file_storage, "data_filtering/filtering_eval/predictions")
     parser.add_argument("--samples", default="/home/epsteine/post-training/data_filtering/filtering_eval/data/samples.jsonl")
     parser.add_argument("--model", required=True)
-    parser.add_argument("--out", default="/home/epsteine/post-training/data_filtering/filtering_eval/predictions/preds_gemini.jsonl")
+    parser.add_argument("--out", default=os.path.join(default_pred_dir, "preds_gemini.jsonl"))
     parser.add_argument("--sleep", type=float, default=0.0, help="Sleep between requests")
     parser.add_argument("--parallel", action="store_true", help="Run requests in parallel")
     parser.add_argument("--max-workers", type=int, default=200, help="Parallel worker count")

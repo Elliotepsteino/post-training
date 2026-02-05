@@ -1,0 +1,101 @@
+{
+  "grounding_impact_conservative.pdf": {
+    "script": "data_filtering/filtering_eval/analyze_grounding_impact.py",
+    "inputs": [
+      "file_storage/data_filtering/filtering_eval/predictions/*_grounded_updated.jsonl",
+      "data_filtering/filtering_eval/data/gold_dataset_dev.jsonl"
+    ],
+    "make_target": "make -C data_filtering/filtering_eval analyze"
+  },
+  "grounding_impact_delta_search_grid.pdf": {
+    "script": "data_filtering/filtering_eval/analyze_grounding_impact.py",
+    "inputs": [
+      "file_storage/data_filtering/filtering_eval/predictions/*_grounded_updated.jsonl",
+      "data_filtering/filtering_eval/data/gold_dataset_dev.jsonl"
+    ],
+    "make_target": "make -C data_filtering/filtering_eval analyze"
+  },
+  "grounding_impact_test_delta_search_grid.pdf": {
+    "script": "data_filtering/filtering_eval/analyze_grounding_impact.py",
+    "inputs": [
+      "file_storage/data_filtering/filtering_eval/predictions/test_elliot/*.jsonl",
+      "data_filtering/filtering_eval/data/gold_dataset_test_elliot.jsonl"
+    ],
+    "make_target": "make -C data_filtering/filtering_eval analyze"
+  },
+  "year_shards_allenai-tulu-3-sft-mixture_2026-01-06_22-10Z_n49948_year_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "year_shards_allenai-tulu-3-sft-mixture_2026-01-06_22-10Z_n49948_category_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "year_shards_allenai-llama-3-1-tulu-3-8b-preference-mixture_2026-01-06_22-10Z_n50000_year_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "year_shards_allenai-llama-3-1-tulu-3-8b-preference-mixture_2026-01-06_22-10Z_n50000_category_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "year_shards_allenai-rlvr-gsm_2026-01-06_22-10Z_n7473_year_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "year_shards_allenai-rlvr-gsm_2026-01-06_22-10Z_n7473_category_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "year_shards_allenai-rlvr-math_2026-01-06_22-10Z_n7500_year_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "year_shards_allenai-rlvr-math_2026-01-06_22-10Z_n7500_category_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "year_shards_allenai-rlvr-ifeval_2026-01-06_22-10Z_n14973_year_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "year_shards_allenai-rlvr-ifeval_2026-01-06_22-10Z_n14973_category_histogram.pdf": {
+    "script": "data_filtering/year_histogram.py",
+    "inputs": [
+      "file_storage/data_filtering/tulu_year_shards/**/year_shards_*"
+    ],
+    "make_target": "make -C data_filtering year_hist SHARD_DIR=..."
+  },
+  "lora_ft_metrics.png": {
+    "script": "unknown",
+    "inputs": [],
+    "make_target": ""
+  }
+}

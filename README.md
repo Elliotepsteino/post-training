@@ -12,7 +12,7 @@ Use these three entry points to navigate the pipeline from data prep to evaluati
 
 ## LaTeX results summary
 
-The `post-training/latex/` folder contains a concise summary of results; see `post-training/latex/main.tex`.
+The `post-training/paper/` folder contains the paper sources; see `post-training/paper/main.tex`.
 
 ## Tulu-3 Filtered SFT
 

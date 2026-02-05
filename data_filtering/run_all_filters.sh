@@ -13,7 +13,7 @@ DATASETS=(
 )
 
 SUBSET_SIZE=${SUBSET_SIZE:-10}
-OUTPUT_ROOT=${OUTPUT_ROOT:-"data_filtering/tulu_year_shards"}
+OUTPUT_ROOT=${OUTPUT_ROOT:-"file_storage/data_filtering/tulu_year_shards"}
 DATASET_SPLIT=${DATASET_SPLIT:-"train"}
 SESSION_STAMP=${SESSION_STAMP:-$(TZ=America/Los_Angeles date +"%Y-%m-%d_%H-%MPT")}
 SESSION_DIR="${OUTPUT_ROOT}/${SESSION_STAMP}"

@@ -12,7 +12,7 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-DEFAULT_OUTPUT_DIR="$SCRIPT_DIR/tulu_year_shards"
+DEFAULT_OUTPUT_DIR="$REPO_ROOT/file_storage/data_filtering/tulu_year_shards"
 OUTPUT_DIR="$DEFAULT_OUTPUT_DIR"
 
 # Preserve original args for forwarding

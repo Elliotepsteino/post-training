@@ -1,0 +1,67 @@
+\section{SFT Filtering Prompt}
+\label{sec:sft-prompt}
+\begin{verbatim}
+You label the minimum calendar year (between 2001 and 2025) required to answer
+a question without temporal leakage. The label must never precede any fact
+mentioned in the sample; when uncertain, err toward the later year so that no
+future knowledge sneaks into earlier buckets.
+
+You receive a dataset-specific question plus an answer bundle (which may contain
+multiple sections).
+These are supervised instruction-tuning pairs: treat the question as the user
+prompt and the response as the assistant answer.
+Pick the smallest year Y in [2001, 2025] so that a model with knowledge through
+year Y could answer confidently, considering EVERYTHING in both the question and
+the answer bundle. If no specific time-dependent knowledge is required, output
+2001.
+
+Rules:
+- Identify all time-anchored entities in the question and answer bundle.
+- For each entity, provide a best_estimate year plus a 95% confidence interval.
+- Use the entity's founding/release/announcement year (not the future target year).
+- Set overall "year" to the maximum upper bound across all entity confidence intervals.
+- If a range is mentioned (e.g., "released between 2008 and 2015"), use that as
+  the entity's interval.
+- If information is older than 2001, still respond with 2001.
+- Do not hallucinate years; use only dates grounded in the text or well-known facts.
+- Additionally, assign the question to one category from this list:
+  general_knowledge, math, coding, science, history, law, finance, health,
+  creative_writing, multi_lingual, instruction_following, reasoning, other.
+
+You may reason internally, but the final output must be a single JSON object only.
+Do not include any extra text or code fences.
+
+Return JSON with these required fields and meanings:
+- "year": integer in [2001, 2025] for the minimum safe year.
+- "confidence": "low" | "medium" | "high".
+- "category": one of the allowed categories listed above.
+- "justification": short reason for the chosen year.
+- "entities": object mapping entity names to an object with:
+  - "best_estimate": best estimate year for founding/release/announcement.
+  - "confidence_interval_95": [yearA, yearB] containing the best estimate; yearA/yearB
+    can be the same.
+  - "search_query": a standalone query to verify the year estimate.
+- If no entities are found, use an empty object for "entities".
+
+Illustrative example (output only):
+{"year": 2006, "confidence": "high", "category": "general_knowledge",
+"justification": "Answer references tweets, a concept only available after
+Twitter launched in 2006, so 2006 is the earliest safe year.",
+"entities": {"tweet": {"best_estimate": 2006, "confidence_interval_95": [2006, 2006],
+"search_query": "When was Twitter launched?"}}}
+
+<question>
+{sample.question}
+</question>
+<answer_bundle>
+{sample.answer}
+</answer_bundle>
+Return JSON exactly in this schema:
+{"year": 2001, "confidence": "low|medium|high",
+"category": "one of the allowed categories",
+"justification": "why year is required",
+"entities": {"entityA": {"best_estimate": 2008, "confidence_interval_95": [2007, 2009],
+"search_query": "When was entityA released?"},
+"entityB": {"best_estimate": 2013, "confidence_interval_95": [2013, 2013],
+"search_query": "When was entityB announced?"}}}
+\end{verbatim}

@@ -1,0 +1,56 @@
+\section{Method}
+\Cref{fig:filtering-flow} summarizes the end-to-end pipeline.
+The process follows a five-step agent pipeline:
+\begin{enumerate}
+    \item Entity Extraction Agent: extract time-anchored entities from the question and answer bundle.
+    \item Reasoner Agent: assign a best-estimate year and a 95\% confidence interval per entity.
+    \item Search Query Agent: generate standalone search queries for each entity.
+    \item Internet Search Agent: retrieve evidence from search results to ground the estimates.
+    \item Reasoner/Synthesizer Agent: update entity confidence intervals based on the evidence and update the overall estimated year using the maximum upper bound across entities.
+\end{enumerate}
+
+\paragraph{Entity types.}
+We group entities into three categories: explicit (an explicit date or event such as a product launch), implicit (a concept whose earliest admissible date could vary across observers, for example ``there has been a lot of discussion about global warming on the news recently''), and timeless (no time-anchored entity is present).
+We do not use a database agent because there is no internal database to cross-reference in this pipeline.
+
+\begin{figure}[t]
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.7cm and 1.0cm,
+        box/.style={rectangle, rounded corners, draw=black, thick, align=center, text width=0.23\textwidth, minimum height=0.85cm},
+        phase/.style={rectangle, draw=none, align=center, font=\bfseries},
+        note/.style={rectangle, draw=black, thick, align=left, text width=0.23\textwidth, font=\small},
+        arrow/.style={-Latex, thick}
+    ]
+        \node[box] (input) {Raw sample\\(all text)};
+        \node[box, right=of input, xshift=0.4cm] (ground) {Entity grounding};
+        \node[box, right=of ground, xshift=0.4cm] (agg) {CI Aggregation\\(rank-quantiles / LLM)};
+
+        \node[phase, above=of input] (phase1) {Ingest};
+        \path let \p1 = (phase1), \p2 = (ground) in node[phase] (phase2) at (\x2,\y1) {Evidence};
+        \path let \p1 = (phase1), \p2 = (agg) in node[phase] (phase3) at (\x2,\y1) {Aggregation};
+
+        \node[note, below=of ground] (ground_note) {extract entities\\build queries\\search evidence\\form CI\\take upper bounds};
+        \node[box, below=of agg] (assign) {Final year\\label};
+
+        \draw[arrow] (input) -- (ground);
+        \draw[arrow] ([yshift=10pt]ground.east) -- ([yshift=10pt]agg.west);
+        \draw[arrow] ([yshift=-10pt]ground.east) -- ([yshift=-10pt]agg.west);
+        \node at ($(ground.east)!0.5!(agg.west)$) {\vdots};
+        \draw[arrow] (agg) -- (assign);
+
+        \draw[arrow] (ground) -- (ground_note);
+        \draw[arrow] (ground_note) -- (ground);
+
+        \draw[decorate, decoration={brace, amplitude=5pt}] (ground.north west) -- (ground.north east);
+        \node[font=\small] at ($(ground.north)+(0,0.35)$) {$\times N$};
+    \end{tikzpicture}
+    \caption{Filtering pipeline for a single sample.
+    Evidence extraction and CI aggregation are repeated for $N$ samples, then merged into a final year label.}
+    \label{fig:filtering-flow}
+\end{figure}
+
+\paragraph{Why not GLiNER.}
+We evaluated GLiNER for entity extraction, but it is a poor fit for this task.
+Given fixed categories, it must both detect the entity span and map it to a category, and empirically it misses entities frequently in our data.
+Because missed entities directly induce leakage, we instead use LLMs for the full stack (entity extraction through year estimation), with search-based evidence grounding to improve reliability.

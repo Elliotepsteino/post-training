@@ -1,0 +1,50 @@
+\section{Results}
+Key plots for this analysis are \Cref{fig:grounding-conservative,fig:grounding-delta-search}.
+\Cref{fig:grounding-conservative} shows that search grounding improves no-leak accuracy by roughly \NoLeakGainPoints{} points across models, with Gemini models reaching \DevNoLeakBest{} no-leak accuracy on the dev set.
+\Cref{fig:grounding-delta-search} shows the distribution of predicted year minus gold year, where the most common failure is entity extraction and search grounding appears reliable.
+We categorize error types using an LLM with access to the ground-truth answer.
+\Cref{fig:test-delta-search} shows the search-aided prediction error (predicted year minus gold year) by model on the test set, with negative deltas colored by failure type.
+In many cases the difference reflects the LLM finding later references than the human annotator; this should improve once multiple annotators review each example.
+Without gold labels, we estimate model conservatism by counting how often each model provides the maximum year for the same prompt.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/grounding_impact_conservative.pdf}
+    \caption{No-leak accuracy (predicted year $\ge$ gold) before vs. after search grounding on the dev set ($N=\DevSetSize$).
+    Values are proportions without uncertainty bars because each point aggregates the full dev set.}
+    \label{fig:grounding-conservative}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/grounding_impact_delta_search_grid.pdf}
+    \caption{Search-aided prediction error (predicted year minus gold year) by model on the dev set ($N=\DevSetSize$), with negative deltas colored by failure type.
+    Panels correspond to models.}
+    \label{fig:grounding-delta-search}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/grounding_impact_test_delta_search_grid.pdf}
+    \caption{Search-aided prediction error (predicted year minus gold year) by model on the test set ($N=\TestSetSize$), with negative deltas colored by failure type.
+    Panels correspond to models.}
+    \label{fig:test-delta-search}
+\end{figure}
+
+\subsection{Next Steps}
+Finalize the test-set plots and tables, then:
+\begin{enumerate}
+    \item Measure inter-LLM consistency.
+    \item Measure inter-human-rater consistency.
+    \item Measure human/LLM correlation.
+    \item Add a simple LLM prompting baseline.
+    \item Quantify the gain from sampling $N$ times rather than 1 time.
+    \item Update the test set with improved gold years once multiple annotations can be merged.
+\end{enumerate}
+
+\paragraph{Other performance metrics.}
+Possible options include an asymmetric error loss averaged over samples,
+$L = \max(0, -e) + \beta \cdot \max(0, e)$ where $e = \hat{y} - y$,
+$\hat{y}$ is the predicted year, and $y$ is the gold year.
+This penalizes underestimates more than overestimates when $\beta < 1$, but it is harder to interpret and requires choosing $\beta$.
+Another option is an equally weighted average of exact year match and no-leak accuracy, which is easy to interpret but does not distinguish between off-by-one errors and large errors.

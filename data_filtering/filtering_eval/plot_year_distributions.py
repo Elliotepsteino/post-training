@@ -33,9 +33,12 @@ def count_years(rows: List[dict]) -> Dict[int, int]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Plot year distributions across models.")
+    file_storage = os.environ.get("FILE_STORAGE_ROOT", "/home/epsteine/post-training/file_storage")
+    default_pred_dir = os.path.join(file_storage, "data_filtering/filtering_eval/predictions")
+    default_results_dir = os.path.join(file_storage, "data_filtering/filtering_eval/results")
     parser.add_argument(
         "--pred-dir",
-        default="/home/epsteine/post-training/data_filtering/filtering_eval/predictions",
+        default=default_pred_dir,
     )
     parser.add_argument(
         "--models",
@@ -44,7 +47,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--out-pdf",
-        default="/home/epsteine/post-training/data_filtering/filtering_eval/results/year_distributions.pdf",
+        default=os.path.join(default_results_dir, "year_distributions.pdf"),
     )
     args = parser.parse_args()
 

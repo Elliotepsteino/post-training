@@ -80,6 +80,9 @@ def write_tex_table(path: str, rows: List[dict]) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Score filtering predictions.")
+    file_storage = os.environ.get("FILE_STORAGE_ROOT", "/home/epsteine/post-training/file_storage")
+    default_pred_dir = os.path.join(file_storage, "data_filtering/filtering_eval/predictions")
+    default_results_dir = os.path.join(file_storage, "data_filtering/filtering_eval/results")
     parser.add_argument("--samples", default="/home/epsteine/post-training/data_filtering/filtering_eval/data/samples.jsonl")
     parser.add_argument("--gold-from-model", default="gpt-5.2-pro")
     parser.add_argument(
@@ -92,9 +95,9 @@ def main() -> None:
         default="",
         help="Path to gold dataset JSONL (overrides --samples for gold labels).",
     )
-    parser.add_argument("--pred-dir", default="/home/epsteine/post-training/data_filtering/filtering_eval/predictions")
-    parser.add_argument("--out-json", default="/home/epsteine/post-training/data_filtering/filtering_eval/results/summary.json")
-    parser.add_argument("--out-tex", default="/home/epsteine/post-training/data_filtering/filtering_eval/results/filtering_eval_table.tex")
+    parser.add_argument("--pred-dir", default=default_pred_dir)
+    parser.add_argument("--out-json", default=os.path.join(default_results_dir, "summary.json"))
+    parser.add_argument("--out-tex", default=os.path.join(default_results_dir, "filtering_eval_table.tex"))
     args = parser.parse_args()
 
     if args.gold_field:

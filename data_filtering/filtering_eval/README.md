@@ -68,29 +68,25 @@ MODEL=gemini-3-flash-preview make agg_plot
 ```
 
 Pipeline outputs:
-- `results/grounding_summary.json`
-- `results/grounding_impact_*.pdf`
-- `results/grounding_aggregation_delta_grid.pdf`
+- `file_storage/data_filtering/filtering_eval/results/grounding_summary.json`
+- `file_storage/data_filtering/filtering_eval/results/grounding_impact_*.pdf`
+- `file_storage/data_filtering/filtering_eval/results/grounding_aggregation_delta_grid.pdf`
 
 ## 3) Score and emit LaTeX table
 
 Gold labels are taken from the `gpt-5.2-pro` predictions:
 
 ```bash
-python score_predictions.py \
-  --gold-from-model gpt-5.2-pro \
-  --out-tex /home/epsteine/post-training/data_filtering/filtering_eval/results/filtering_eval_table.tex
+make score
 ```
 
 If you manually label years in `samples.jsonl` (e.g., add a `gold_year` field), use:
 
 ```bash
-python score_predictions.py \
-  --gold-field gold_year \
-  --gold-path /home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset_dev.jsonl
+make score GOLD_PATH=/home/epsteine/post-training/data_filtering/filtering_eval/data/gold_dataset_dev.jsonl GOLD_FIELD=gold_year
 ```
 
-The script writes `results/summary.json` and `results/filtering_eval_table.tex`.
+The script writes `file_storage/data_filtering/filtering_eval/results/summary.json` and `file_storage/data_filtering/filtering_eval/results/filtering_eval_table.tex`.
 
 To score against the manually annotated `gold_dataset_test_elliot.jsonl`, use:
 
@@ -98,8 +94,8 @@ To score against the manually annotated `gold_dataset_test_elliot.jsonl`, use:
 make score_elliot
 ```
 
-This writes `results/summary_elliot.json` and `results/filtering_eval_table_elliot.tex`.
-It expects predictions in `predictions/test_elliot/` by default.
+This writes `file_storage/data_filtering/filtering_eval/results/summary_elliot.json` and `file_storage/data_filtering/filtering_eval/results/filtering_eval_table_elliot.tex`.
+It expects predictions in `file_storage/data_filtering/filtering_eval/predictions/test_elliot/` by default.
 
 ## Metrics
 

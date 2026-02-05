@@ -15,7 +15,7 @@ This folder contains a batch-friendly pipeline that labels samples from `allenai
 If you prefer isolating dependencies with [uv](https://github.com/astral-sh/uv):
 
 ```bash
-cd /home/epsteine/qwen
+cd /home/epsteine/post-training
 uv venv .venv-tulu-year
 source .venv-tulu-year/bin/activate
 uv pip install datasets openai matplotlib
@@ -34,7 +34,7 @@ cd /home/epsteine/qwen
 python -m data_filtering.tulu-3 \
   --dataset-name allenai/tulu-3-sft-mixture \
   --subset-size 50 \
-  --output-dir data_filtering/tulu_year_shards
+  --output-dir file_storage/data_filtering/tulu_year_shards
 ```
 
 Switch `--dataset-name` (default `allenai/tulu-3-sft-mixture`) to target additional corpora such as `allenai/llama-3.1-tulu-3-8b-preference-mixture`, `allenai/RLVR-GSM`, `allenai/RLVR-MATH`, or `allenai/RLVR-IFeval`. Pair it with `--dataset-split` (default `train`) if you need a different partition. The sampler now understands each schema: DPO runs feed both the preferred and rejected completions to the classifier, while RLVR runs include the full conversation, gold rationale, and any constraint metadata so the assigned year reflects the newest fact anywhere in the bundle.
@@ -44,7 +44,7 @@ To run the exact same pipeline without the Batch API (synchronous Chat Completio
 ```bash
 python -m data_filtering.tulu-3 \
   --subset-size 50 \
-  --output-dir data_filtering/tulu_year_shards \
+  --output-dir file_storage/data_filtering/tulu_year_shards \
   --no-use-batch
 ```
 
@@ -53,28 +53,26 @@ python -m data_filtering.tulu-3 \
 To run the classifier and produce both histograms in one go, pass any desired flags to the helper script (they are forwarded to `tulu-3.py`):
 
 ```bash
-bash data_filtering/run_full_pipeline.sh \
-  --subset-size 50 \
-  --output-dir data_filtering/tulu_year_shards
+make -C data_filtering full_pipeline ARGS="--subset-size 50"
 ```
 
-The script forwards every argument to `tulu-3.py`, detects the `--output-dir` value (defaulting to `data_filtering/tulu_year_shards`), reads `batch_metadata_latest.json` from that directory to locate the newest `year_shards_<run_id>` folder, and then renders both histograms there.
+The script forwards every argument to `tulu-3.py`, detects the `--output-dir` value (defaulting to `file_storage/data_filtering/tulu_year_shards`), reads `batch_metadata_latest.json` from that directory to locate the newest `year_shards_<run_id>` folder, and then renders both histograms there.
 
 ### Multi-dataset helper
 
 To classify several datasets in one sweep (currently the SFT mixture, the Tulu-3 DPO mixture, and the three RLVR sets) with a uniform configuration, use:
 
 ```bash
-bash data_filtering/run_all_filters.sh --no-use-batch
+make -C data_filtering all_filters ARGS="--no-use-batch"
 ```
 
 Environment variables control the shared knobs:
 
 - `SUBSET_SIZE` (default `10`)
-- `OUTPUT_ROOT` (default `data_filtering/tulu_year_shards`)
+- `OUTPUT_ROOT` (default `file_storage/data_filtering/tulu_year_shards`)
 - `DATASET_SPLIT` (default `train`)
 
-Any additional CLI flags (e.g., `--no-use-batch`, `--model gpt-4.1`) are forwarded to each `python -m data_filtering.tulu-3` invocation. The helper now launches every dataset pipeline in parallel, so batches for SFT/DPO/RLVR are submitted simultaneously; expect higher instantaneous OpenAI/HF traffic. After each dataset finishes it calls `python -m data_filtering.year_histogram --shard-dir ...` so year/category PDFs are rendered automatically (requires `matplotlib`). Every invocation of the helper creates a session directory named after the current U.S. Pacific time (PT) stamp (override with `SESSION_STAMP=...`). All dataset-specific outputs for that session live under `data_filtering/tulu_year_shards/<session_stamp>/<dataset-slug>/...`, making it easy to compare artifacts produced in the same sweep.
+Any additional CLI flags (e.g., `--no-use-batch`, `--model gpt-4.1`) are forwarded to each `python -m data_filtering.tulu-3` invocation. The helper now launches every dataset pipeline in parallel, so batches for SFT/DPO/RLVR are submitted simultaneously; expect higher instantaneous OpenAI/HF traffic. After each dataset finishes it calls `python -m data_filtering.year_histogram --shard-dir ...` so year/category PDFs are rendered automatically (requires `matplotlib`). Every invocation of the helper creates a session directory named after the current U.S. Pacific time (PT) stamp (override with `SESSION_STAMP=...`). All dataset-specific outputs for that session live under `file_storage/data_filtering/tulu_year_shards/<session_stamp>/<dataset-slug>/...`, making it easy to compare artifacts produced in the same sweep.
 
 Key behavior:
 
@@ -106,40 +104,23 @@ Note: the filtering eval client does not set `temperature` because some GPT-5.x 
 Step-by-step (non-batch):
 
 ```bash
-python data_filtering/filtering_eval/sample_questions.py --num-samples 50
-python data_filtering/filtering_eval/run_openai_eval.py --model gpt-5.2 \
-  --out data_filtering/filtering_eval/predictions/preds_gpt-5.2.jsonl
-python data_filtering/filtering_eval/create_gold_dataset.py \
-  --preds data_filtering/filtering_eval/predictions/preds_gpt-5.2.jsonl \
-  --gold-model gpt-5.2 \
-  --sequential-ids
-python data_filtering/filtering_eval/run_openai_eval.py --model gpt-5-mini \
-  --samples data_filtering/filtering_eval/data/gold_dataset.jsonl \
-  --out data_filtering/filtering_eval/predictions/preds_gpt-5-mini.jsonl
-python data_filtering/filtering_eval/score_predictions.py \
-  --samples data_filtering/filtering_eval/data/gold_dataset.jsonl \
-  --gold-field gold_year \
-  --out-tex data_filtering/filtering_eval/results/filtering_eval_table.tex
+make -C data_filtering/filtering_eval sample
+make -C data_filtering/filtering_eval predict
+make -C data_filtering/filtering_eval score
 ```
 
 Optional Gemini models (requires `GEMINI_API_KEY` or `GOOGLE_API_KEY`):
 
 ```bash
-python data_filtering/filtering_eval/run_gemini_eval.py --model gemini-1.5-pro \
-  --samples data_filtering/filtering_eval/data/gold_dataset.jsonl \
-  --out data_filtering/filtering_eval/predictions/preds_gemini-1.5-pro.jsonl
+make -C data_filtering/filtering_eval predict_flash
 ```
 
-```bash
-bash data_filtering/filtering_eval/run_all.sh batch-wait
-```
+The batch submissions run in parallel, then the script waits for completion and writes the table under `file_storage/data_filtering/filtering_eval/results/`.
 
-The batch submissions run in parallel, then the script waits for completion and writes the table.
-
-To change the sample size, set `SAMPLE_SIZE`:
+To change the sample size, set `NUM_SAMPLES` or `SAMPLES`/`GOLD_PATH` in the Makefile environment:
 
 ```bash
-SAMPLE_SIZE=50 bash data_filtering/filtering_eval/run_all.sh batch-wait
+NUM_SAMPLES=5 make -C data_filtering/filtering_eval grounded_pipeline_multisample
 ```
 
 To include Gemini models in the batch-wait or live flows, set `GEMINI_MODELS`:
@@ -159,15 +140,15 @@ bash data_filtering/filtering_eval/run_all.sh fetch <BATCH_ID_MINI> <BATCH_ID_52
 Non-batch mode:
 
 ```bash
-bash data_filtering/filtering_eval/run_all.sh live
+make -C data_filtering/filtering_eval grounded_pipeline
 ```
 
 Outputs:
 
 - Samples: `data_filtering/filtering_eval/data/samples.jsonl`
-- Predictions: `data_filtering/filtering_eval/predictions/preds_<model>.jsonl`
-- Summary: `data_filtering/filtering_eval/results/summary.json`
-- LaTeX table: `data_filtering/filtering_eval/results/filtering_eval_table.tex`
+- Predictions: `file_storage/data_filtering/filtering_eval/predictions/preds_<model>.jsonl`
+- Summary: `file_storage/data_filtering/filtering_eval/results/summary.json`
+- LaTeX table: `file_storage/data_filtering/filtering_eval/results/filtering_eval_table.tex`
 
 If you later add a manual label field (e.g., `gold_year`) to `samples.jsonl`, re-score with:
 
@@ -177,13 +158,13 @@ python data_filtering/filtering_eval/score_predictions.py --gold-field gold_year
 
 ## Consuming the shards
 
-The script exposes `YearBoundedTuluLoader` for merging and shuffling data up to a cutoff. Point it at a specific run directory (e.g., `data_filtering/tulu_year_shards/2026-01-05_12-21PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-05_20-21Z_n10`):
+The script exposes `YearBoundedTuluLoader` for merging and shuffling data up to a cutoff. Point it at a specific run directory (e.g., `file_storage/data_filtering/tulu_year_shards/2026-01-05_12-21PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-05_20-21Z_n10`):
 
 ```python
 from pathlib import Path
 from data_filtering.tulu-3 import YearBoundedTuluLoader
 
-run_dir = Path("data_filtering/tulu_year_shards/2026-01-05_12-21PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-05_20-21Z_n10")
+run_dir = Path("file_storage/data_filtering/tulu_year_shards/2026-01-05_12-21PT/allenai-tulu-3-sft-mixture/year_shards_allenai-tulu-3-sft-mixture_2026-01-05_20-21Z_n10")
 loader = YearBoundedTuluLoader(run_dir)
 dataset = loader.load(max_year=2014, shuffle=True, seed=7)
 print(dataset[:2])
@@ -199,7 +180,7 @@ To inspect the distributions for any run, point the helper at its shard director
 
 ```bash
 python -m data_filtering.year_histogram \
-  --shard-dir data_filtering/tulu_year_shards/year_shards_2025-12-01_19-03Z_n3000
+  --shard-dir file_storage/data_filtering/tulu_year_shards/year_shards_2025-12-01_19-03Z_n3000
 ```
 
 The script prints counts per year and saves publication-grade PDF histograms for both year and question-category distributions (default filenames `year_histogram.pdf` and `category_histogram.pdf`) in the shard directory. Year plots use the last two digits for readability and a log-scaled y-axis by default to handle heavy 2001 skew. Override the year plot location with `--output-file` if needed.

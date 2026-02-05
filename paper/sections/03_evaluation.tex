@@ -1,0 +1,13 @@
+\section{Evaluation}
+\paragraph{Annotation protocol.}
+For each sample, the annotator read the question and answer, extracted relevant entities (omitting entities that are clearly older than the dominant ones), and searched to find the concept date for each entity.
+For each entity, we include a source link to the article stating the concept date unless the fact is trivially known.
+The full dev-set annotation pass took about \DevAnnotationHours{} hours, or roughly \DevAnnotationMinutesPerQ{} minutes per question.
+
+\paragraph{Dev set.}
+We build a \DevSetSize-question dev set sampled from Tulu-3 and labeled by human annotators to design and iterate on the prompting scheme, entity grounding, and aggregation rules.
+We use the dev set to refine the prompting scheme and aggregation rules; test-set results are reported separately once all plots are finalized.
+
+\paragraph{Test set.}
+We prepared a held-out test set of \TestSetSize{} samples from Tulu-3.
+The test set is constructed and annotated in the same way as the dev set, with human annotators providing gold years and source links.

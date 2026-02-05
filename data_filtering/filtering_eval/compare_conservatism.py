@@ -23,9 +23,12 @@ def load_jsonl(path: str) -> List[dict]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Compare model conservatism.")
-    parser.add_argument("--pred-dir", default="/home/epsteine/post-training/data_filtering/filtering_eval/predictions")
-    parser.add_argument("--out-json", default="/home/epsteine/post-training/data_filtering/filtering_eval/results/conservatism_counts.json")
-    parser.add_argument("--out-pdf", default="/home/epsteine/post-training/data_filtering/filtering_eval/results/conservatism_counts.pdf")
+    file_storage = os.environ.get("FILE_STORAGE_ROOT", "/home/epsteine/post-training/file_storage")
+    default_pred_dir = os.path.join(file_storage, "data_filtering/filtering_eval/predictions")
+    default_results_dir = os.path.join(file_storage, "data_filtering/filtering_eval/results")
+    parser.add_argument("--pred-dir", default=default_pred_dir)
+    parser.add_argument("--out-json", default=os.path.join(default_results_dir, "conservatism_counts.json"))
+    parser.add_argument("--out-pdf", default=os.path.join(default_results_dir, "conservatism_counts.pdf"))
     parser.add_argument(
         "--max-ensemble",
         default="",

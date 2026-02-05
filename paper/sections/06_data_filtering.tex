@@ -1,0 +1,85 @@
+\section{Data Filtering}
+\label{sec:data-filtering}
+We label each supervised (SFT), preference, and RLVR sample with the minimum calendar year consistent with its question--answer bundle.
+The prompt structure is detailed in \Cref{sec:sft-prompt}.
+We considered deterministic filtering, but it was difficult to capture all edge cases with a rule-based approach.
+The latest sweep (session \texttt{\FilteringSession}) processed \SFTProcessedCount{} SFT examples, \PreferenceProcessedCount{} preference examples, and three RLVR datasets (\RlvrsGsmCount{} GSM, \RlvrsMathCount{} MATH, \RlvrsIfevalCount{} IFEval) with a conservative policy that uses the most recent referenced year.
+\Cref{fig:sft,fig:dpo,fig:rlvr} show year and category distributions for each dataset family and validate cutoff integrity.
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-tulu-3-sft-mixture_2026-01-06_22-10Z_n49948_year_histogram.pdf}
+        \caption{Year distribution (SFT).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-tulu-3-sft-mixture_2026-01-06_22-10Z_n49948_category_histogram.pdf}
+        \caption{Category distribution (SFT).}
+    \end{subfigure}
+    \caption{Filtering summary for the T\"ULU-3 SFT mixture (session \texttt{\FilteringSession}, $n=\SFTProcessedCount$).
+    Histograms are computed from the filtered sample set.}
+    \label{fig:sft}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-llama-3-1-tulu-3-8b-preference-mixture_2026-01-06_22-10Z_n50000_year_histogram.pdf}
+        \caption{Year distribution (DPO).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-llama-3-1-tulu-3-8b-preference-mixture_2026-01-06_22-10Z_n50000_category_histogram.pdf}
+        \caption{Category distribution (DPO).}
+    \end{subfigure}
+    \caption{Filtering summary for the T\"ULU-3 preference mixture (session \texttt{\FilteringSession}, $n=\PreferenceProcessedCount$).
+    Histograms are computed from the filtered sample set.}
+    \label{fig:dpo}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-rlvr-gsm_2026-01-06_22-10Z_n7473_year_histogram.pdf}
+        \caption{Year distribution (RLVR-GSM).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-rlvr-gsm_2026-01-06_22-10Z_n7473_category_histogram.pdf}
+        \caption{Category distribution (RLVR-GSM).}
+    \end{subfigure}
+
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-rlvr-math_2026-01-06_22-10Z_n7500_year_histogram.pdf}
+        \caption{Year distribution (RLVR-MATH).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-rlvr-math_2026-01-06_22-10Z_n7500_category_histogram.pdf}
+        \caption{Category distribution (RLVR-MATH).}
+    \end{subfigure}
+
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-rlvr-ifeval_2026-01-06_22-10Z_n14973_year_histogram.pdf}
+        \caption{Year distribution (RLVR-IFeval).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/year_shards_allenai-rlvr-ifeval_2026-01-06_22-10Z_n14973_category_histogram.pdf}
+        \caption{Category distribution (RLVR-IFeval).}
+    \end{subfigure}
+    \caption{Filtering summary for the RLVR datasets (session \texttt{\FilteringSession}, GSM $n=\RlvrsGsmCount$, MATH $n=\RlvrsMathCount$, IFEval $n=\RlvrsIfevalCount$).
+    Histograms are computed from the filtered sample sets.}
+    \label{fig:rlvr}
+\end{figure}

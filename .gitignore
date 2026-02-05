@@ -20,14 +20,15 @@ PLOTTING_GUIDE.md
 LATEX_PAPER_GUIDE.md
 
 # LaTeX build artifacts
-latex/*.aux
-latex/*.log
-latex/*.out
-latex/*.toc
-latex/*.nav
-latex/*.snm
-latex/*.fls
-latex/*.fdb_latexmk
+paper/build/
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.nav
+paper/*.snm
+paper/*.fls
+paper/*.fdb_latexmk
 
 # Data artifacts
 data/*.parquet
@@ -38,6 +39,7 @@ data/*_test_*.jsonl
 data/*_train_*.parquet
 data/*_test_*.parquet
 datasets/
+file_storage/
 data_filtering/tulu_year_shards/
 data_filtering/filtering_eval/predictions/test_elliot/
 data_filtering/filtering_eval/plan.md
