@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv*/
+.mypy_cache/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS/editor noise
+.DS_Store
+*.swp
+*.tmp
+
+# Local guidance files (kept in workspace, not tracked)
+AGENTS.md
+GITBUD.md
+SLACK_RESULTS.md
+PLOTTING_GUIDE.md
+LATEX_PAPER_GUIDE.md
+
+# LaTeX build artifacts
+latex/*.aux
+latex/*.log
+latex/*.out
+latex/*.toc
+latex/*.nav
+latex/*.snm
+latex/*.fls
+latex/*.fdb_latexmk
+
+# Data artifacts
+data/*.parquet
+data/*_train.jsonl
+data/*_test.jsonl
+data/*_train_*.jsonl
+data/*_test_*.jsonl
+data/*_train_*.parquet
+data/*_test_*.parquet
+datasets/
+data_filtering/tulu_year_shards/
+
+# Model outputs / weights
+checkpoints/
+model_weights/
+outputs/
+wandb/
+workspaces/
+qwen3-4b-*/
+adapter_config.json
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+pytorch_model*.bin
+adapter_model*.bin
+
+# Subproject outputs
+open-instruct/output/
+open-instruct/wandb/
+olmes/logs/
