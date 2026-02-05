@@ -192,7 +192,16 @@ chmod +x run_tulu3_dev_limit100.sh
 ./run_tulu3_dev_limit100.sh
 ```
 
-The script fans tasks across all 5 local A6000s, writes results to `/home/epsteine/post-training/workspaces/olmes/tulu3_dev_limit${LIMIT}/`, and logs under `olmes/logs/tulu3_dev_limit${LIMIT}/`. Override the default limit by exporting `LIMIT` (for example, `LIMIT=50 ./run_tulu3_dev_limit100.sh`) to experiment with shorter or longer passes without editing the script.
+The script fans tasks across all 5 local A6000s, writes results to `/home/epsteine/post-training/workspaces/olmes/tulu3_dev_limit${LIMIT}_<model_slug>/`, and logs under `olmes/logs/tulu3_dev_limit${LIMIT}_<model_slug>/`. The model slug is derived from `MODEL_PATH`. Override the default limit by exporting `LIMIT` (for example, `LIMIT=50 ./run_tulu3_dev_limit100.sh`) to experiment with shorter or longer passes without editing the script.
+
+To evaluate the newest LoRA merged model, point the script at the merged checkpoint:
+
+```bash
+source /home/epsteine/post-training/olmes/.venv/bin/activate
+cd /home/epsteine/post-training
+MODEL_PATH=/home/epsteine/post-training/model_weights/qwen3_year2007_full_n26431_lora_merged \
+  ./run_tulu3_dev_limit100.sh
+```
 
 
 ## Running Eval Suites

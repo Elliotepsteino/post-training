@@ -146,6 +146,20 @@ Use the filtered shards under `/home/epsteine/post-training/data_filtering/tulu_
      configs/train_configs/tulu3/tulu3_sft_year2007_full_n26431_lora.yaml
    ```
 
+7. **Merge a ZeRO checkpoint into a full model (LoRA runs).**
+   ```bash
+   # From the final DeepSpeed ZeRO checkpoint directory
+   cd /home/epsteine/post-training/open-instruct/output/qwen3_year2007_full_n26431_lora/finetune__17__1767752720/step_500
+   python zero_to_fp32.py . /home/epsteine/post-training/open-instruct/output/qwen3_year2007_full_n26431_lora/finetune__17__1767752720/step_500_fp32
+
+   # Merge the LoRA adapter into the base model
+   python /home/epsteine/post-training/merge_lora.py \
+     --base-model Qwen/Qwen3-4B-Base \
+     --lora-adapter /home/epsteine/post-training/open-instruct/output/qwen3_year2007_full_n26431_lora/finetune__17__1767752720 \
+     --output-dir /home/epsteine/post-training/model_weights/qwen3_year2007_full_n26431_lora_merged
+   ```
+   The first command consolidates the ZeRO shards into a full-precision checkpoint. The second merges the LoRA adapter (from the run output that contains `adapter_config.json`) into the base model for evaluation.
+
 
 ### Preference Tuning
 

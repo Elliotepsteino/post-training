@@ -92,6 +92,15 @@ python score_predictions.py \
 
 The script writes `results/summary.json` and `results/filtering_eval_table.tex`.
 
+To score against the manually annotated `gold_dataset_test_elliot.jsonl`, use:
+
+```bash
+make score_elliot
+```
+
+This writes `results/summary_elliot.json` and `results/filtering_eval_table_elliot.tex`.
+It expects predictions in `predictions/test_elliot/` by default.
+
 ## Metrics
 
 - Exact accuracy: predicted year equals gold year.

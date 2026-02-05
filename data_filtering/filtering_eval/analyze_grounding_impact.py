@@ -457,8 +457,19 @@ def main() -> None:
         if m in {"gpt-5-mini", "gpt-5.2", "gemini-3-flash-preview", "gemini-3-pro-preview"}
     ]
     if search_only_models:
-        fig5b, axes5b = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=False, sharey=True)
-        axes_flat = [ax for row in axes5b for ax in row]
+        n_models = len(search_only_models)
+        if n_models <= 3:
+            fig5b, axes5b = plt.subplots(
+                1,
+                n_models,
+                figsize=(4.2 * n_models, 4.2),
+                constrained_layout=False,
+                sharey=True,
+            )
+            axes_flat = list(axes5b) if n_models > 1 else [axes5b]
+        else:
+            fig5b, axes5b = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=False, sharey=True)
+            axes_flat = [ax for row in axes5b for ax in row]
         legend_patches = [
             Patch(facecolor=FAILURE_COLORS[k], label=FAILURE_BUCKETS[k]) for k in sorted(FAILURE_BUCKETS)
         ]
@@ -520,7 +531,10 @@ def main() -> None:
 
         for ax in axes_flat[len(search_only_models) :]:
             ax.axis("off")
-        fig5b.subplots_adjust(bottom=0.16, hspace=0.35)
+        if n_models <= 3:
+            fig5b.subplots_adjust(bottom=0.28, wspace=0.25)
+        else:
+            fig5b.subplots_adjust(bottom=0.16, hspace=0.35)
         fig5b.legend(
             handles=legend_patches,
             loc="lower center",
