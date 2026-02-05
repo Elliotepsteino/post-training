@@ -1,5 +1,5 @@
 LATEX=pdflatex
-TEX=main
+TEX=filtering
 
 all: $(TEX).pdf
 
