@@ -1,5 +1,26 @@
 \section{Introduction}
-We propose a methodology for assigning the earliest calendar year in which a question--answer bundle could likely have been written, and we apply it to produce a large, time-grounded post-training dataset based on Tulu-3.
+Given a text sample, a natural high-level problem is to assign a year label that reflects its temporal compatibility, which depends on the downstream application.
+Such labels can be used for dataset auditing, evaluation, and data selection.
+
+In this paper we focus on the year-assignment task needed to bucket training data for an LLM whose knowledge is restricted to a cutoff year $\tau$ (e.g., backtesting NLP-based models and what-if scenario analysis under historical knowledge constraints).
+Supporting such models requires time-bucketed data so that a model trained through year $\tau$ only sees samples that are admissible at $\tau$.
+
+\paragraph{Key considerations for year bucketing.}
+We highlight three key considerations.
+\begin{enumerate}
+    \item Explicit facts should become available on time.
+    If an explicit fact became publicly knowable in year $y$ (e.g., a product launch), then a model trained through year $y$ should be able to state it.
+    \item Implicit social knowledge should match contemporaneous public understanding.
+    For example, consider the implicit statement ``There has been a lot of talk about global warming on the news.''
+    Media coverage and public salience increased over time, so it is hard to pinpoint the earliest year when that sentence could have been said.
+    If a model trained only through the 1970s were highly knowledgeable and concerned about climate change in a way that matches much later discourse, this would be viewed as temporal leakage.
+    \item Explicit and implicit cues correspond to different temporal notions.
+    For explicit entities, the earliest admissible time is often close to a single year.
+    For implicit entities, admissibility is ambiguous, so the earliest admissible time is naturally distributed over a range.
+    These distinctions align with different notions of time: \emph{event time} (when a fact becomes true), \emph{epistemic availability time} (when a well-informed observer could know it), \emph{authorship or publication time} (when the text was written), and \emph{stylistic or discourse time} (when the language and norms are typical).
+    For downstream applications, \emph{epistemic availability time} is the best-aligned notion: an event may be known to insiders months or years before it becomes public, but a useful time-bounded LLM should not depend on insider knowledge.
+    Likewise, \emph{authorship or publication time} can be misleading: a contemporary expert can write text that is fully consistent with 19th-century knowledge and style, in which case the relevant label is when the text could have been written rather than when it actually was.
+\end{enumerate}
 
 \paragraph{Task.}
 Let $x$ be a text sample.
@@ -16,14 +37,10 @@ A fraction $\alpha$ of informed observers would judge time $t_\alpha(x)$ (or ear
 Times earlier than $t_\alpha(x)$ lie in the premature tail.
 
 \paragraph{Temporal semantics and probabilistic formulation.}
-A single ``year'' label conflates several distinct notions of time.
-Relevant notions include event time (when a fact becomes true in the world), epistemic availability time (when a well-informed observer could know and state the fact), authorship or publication time (when the text was written), and stylistic or discourse time (when the language and norms of the text are typical).
 Document dating methods implicitly target authorship time by estimating $\operatorname*{arg\,max}_{t} p(T=t \mid x)$.
 This is a different goal from ours: we care about which knowledge cutoff makes the text admissible, not when it was authored.
-In our setting, the texts of interest are fully digital, so classical forensic dating signals (e.g., ink age, paper composition, and physical provenance) are unavailable.
-We also emphasize scalability, since many downstream applications require time-grounding large corpora of documents.
+Our setting is fully digital, so classical forensic signals (e.g., ink age, paper composition, and physical provenance) are unavailable, and we emphasize scalability for large corpora.
 In contrast, training time-bounded LLMs requires reasoning about admissibility: for which times a text can be produced without relying on future or speculative knowledge.
-\!
 
 Formally, let $p_x(t)$ denote a latent distribution over admissible times for a text $x$, reflecting epistemic uncertainty rather than authorship likelihood.
 One option is to collapse this distribution to an earliest admissible time

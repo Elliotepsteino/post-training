@@ -1,6 +1,17 @@
 \section{Method}
-\Cref{fig:filtering-flow} summarizes the end-to-end pipeline.
-The process follows a five-step agent pipeline:
+
+\paragraph{Entity types.}
+We group entities into three categories: explicit, implicit, and timeless.
+We define \emph{explicit} entities as those with a single right admissible year under our notion of epistemic availability (e.g., a concrete product launch year), so their admissible-time uncertainty is negligible at year granularity and can be treated as a point mass.
+For example, ``I just bought the first iPhone that was released last week'' is explicit: the admissible time concentrates on the release year of the first iPhone, so $P_{x,\mathrm{gt}}(t)$ is effectively a delta mass on that year.
+We define \emph{implicit} entities as those without a single right year, where admissibility depends on diffuse public salience and can vary across observers.
+For example, ``There has been a lot of talk about global warming on the news'' is implicit: coverage has intensified over decades, so it is difficult to pinpoint the earliest year when the statement becomes true. As a result, the earliest-admissible time is itself distributed, and our goal is to return a sample from that distribution.
+Finally, \emph{timeless} samples contain no time-anchored entity.
+We do not use a database agent because there is no internal database to cross-reference in this pipeline.
+
+\paragraph{Operational pipeline.}
+\Cref{fig:filtering-flow} summarizes our end-to-end implementation.
+We operationalize the method as a five-step agent pipeline:
 \begin{enumerate}
     \item Entity Extraction Agent: extract time-anchored entities from the question and answer bundle.
     \item Reasoner Agent: assign a best-estimate year and a 95\% confidence interval per entity.
@@ -8,12 +19,6 @@ The process follows a five-step agent pipeline:
     \item Internet Search Agent: retrieve evidence from search results to ground the estimates.
     \item Reasoner/Synthesizer Agent: update entity confidence intervals based on the evidence and update the overall estimated year using the maximum upper bound across entities.
 \end{enumerate}
-
-\paragraph{Entity types.}
-We group entities into three categories: explicit (an explicit date or event such as a product launch), implicit (a concept whose earliest admissible date could vary across observers), and timeless (no time-anchored entity is present).
-For example, ``I just bought the first iPhone that was released last week'' is explicit: the admissible time distribution concentrates on the release year of the first iPhone, so $P_{x,\mathrm{gt}}(t)$ is effectively a delta mass on that year.
-By contrast, ``There has been a lot of talk about global warming on the news'' is implicit: coverage has intensified over time, so it is difficult to pinpoint the earliest year when that statement becomes true. As a result, the earliest-admissible time is itself distributed, and our goal is to return a sample from that distribution.
-We do not use a database agent because there is no internal database to cross-reference in this pipeline.
 
 \begin{figure}[t]
     \centering
