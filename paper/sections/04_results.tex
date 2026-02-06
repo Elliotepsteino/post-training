@@ -31,17 +31,6 @@ Without gold labels, we estimate model conservatism by counting how often each m
     \label{fig:test-delta-search}
 \end{figure}
 
-\subsection{Next Steps}
-Finalize the test-set plots and tables, then:
-\begin{enumerate}
-    \item Measure inter-LLM consistency.
-    \item Measure inter-human-rater consistency.
-    \item Measure human/LLM correlation.
-    \item Add a simple LLM prompting baseline.
-    \item Quantify the gain from sampling $N$ times rather than 1 time.
-    \item Update the test set with improved gold years once multiple annotations can be merged.
-\end{enumerate}
-
 \paragraph{Other performance metrics.}
 Possible options include an asymmetric error loss averaged over samples,
 $L = \max(0, -e) + \beta \cdot \max(0, e)$ where $e = \hat{y} - y$,

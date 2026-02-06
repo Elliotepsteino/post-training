@@ -1,0 +1,90 @@
+% Related Work section (drop-in) for inclusion in your paper.
+% Notes:
+% - This file intentionally does NOT cite the current paper.
+% - It uses natbib-style commands (\citet, \citep). If your paper uses biblatex or different
+%   commands, you may need to adapt citation macros.
+
+\section{Related Work}
+We study a reliability problem that arises in both benchmark construction and downstream deployment:
+for a natural-language item (question/claim/prompt/answer bundle), what is the \emph{earliest time}
+at which the item could be produced (or answered) without implicitly using information that only
+appears later? This section situates our approach at the intersection of (i) methods for tracing
+\emph{effective} knowledge cutoffs and temporal alignment in LLMs, (ii) time-sensitive QA and temporal
+reasoning benchmarks, (iii) dynamic evaluation for factual drift/outdatedness, (iv) time-aware modeling
+(conditioning or routing by time), and (v) leakage/contamination detection and mitigation. While these
+areas are individually mature, general-purpose \emph{sample-level} dating procedures for arbitrary
+natural-language items remain comparatively less standardized.
+
+\paragraph{Tracing cutoffs and temporal validity in LLM evaluation.}
+A close conceptual neighbor is \citet{cheng2024dated}, which defines \emph{resource-level effective cutoffs}
+and estimates them by probing model perplexity over time-versioned datasets (e.g., monthly Wikipedia
+snapshots and news buckets). They show that ``knowledge cutoffs'' are rarely a single clean date: effective
+cutoffs vary by source and can be blurred by crawl artifacts and near-duplicate content. This motivates
+item-level temporal controls, since a single global cutoff can be too coarse for evaluation hygiene.
+
+Temporal validity can also break through the retrieval layer. In retrospective settings, practitioners
+often rely on search-engine date filters to restrict evidence to pre-cutoff time windows. \citet{ellahib2026temporalleakage}
+audit this practice and show that it can still leak future information even when retrieval appears date-restricted.
+This supports the need for item-level evidence validation when temporal causality matters.
+
+Temporal generalization analyses broaden the picture: models can be systematically biased across past/present/future
+contexts. \citet{zhu2025outdated} propose temporal generalization as an evaluation axis and provide evidence of temporal
+biases and performance decay. Their perspective reinforces that time-indexed evaluation suites should be treated as a
+first-class design choice rather than an afterthought.
+
+\paragraph{Time-aware modeling.}
+Beyond evaluation, several works treat time as an explicit modeling variable. \citet{dhingra2022timeaware} interpret language
+models as temporal knowledge bases and study time-varying facts, proposing timestamp conditioning to better represent and
+retrieve temporally scoped knowledge. Such mechanisms reduce ambiguity about ``what was true when'' and provide a natural
+sink for timestamped supervision derived from curated data.
+
+A complementary architectural approach is temporal routing. \citet{faro2025timoe} train experts on disjoint temporal slices
+and mask experts whose training windows end after the query time, enforcing a strict ``no future knowledge'' constraint at
+inference time. Relative to our approach, which focuses on assigning time constraints to arbitrary items and using them to
+filter/stratify data, time-routed models directly encode temporal constraints in the model architecture. Together, they offer
+a path to both (i) temporally consistent data and (ii) temporally constrained inference.
+
+\paragraph{Time-sensitive QA and temporal reasoning benchmarks.}
+Benchmark families study temporality from different angles: time-sensitive \emph{facts} (answers change over time), temporal
+\emph{context} (answers depend on when/where asked), and temporal \emph{reasoning} (ordering and temporal relations in text).
+TimeQA focuses on time-sensitive factual questions grounded in evolving Wikidata facts and aligned evidence sources \citep{chen2021timeqa}.
+SituatedQA analyzes questions whose answers depend on temporal and geographic context, showing that systems can fail when context is implicit
+or mismatched \citep{zhang2021situatedqa}. TORQUE targets temporal reasoning about event ordering in passages (before/after/during) via a
+reading-comprehension format \citep{ning2020torque}. Collectively, these datasets motivate making temporal scope explicit, since evaluation can be
+confounded when the temporal frame is implicit or inconsistent.
+
+A core difficulty in time-sensitive QA is disentangling genuine temporal reasoning from memorized factual recall. UnSeenTimeQA addresses this by
+constructing contamination-resistant scenarios intended to reduce web-searchable memorization \citep{uddin2025unseentimeqa}. TDBench proposes a
+systematic evaluation of factual time-sensitive QA using temporal databases \citep{anonymous2026tdbench}. In contrast to work that assumes timestamps
+are known by construction (e.g., from structured sources), our setting targets arbitrary natural-language items whose temporal requirements must be inferred
+from content and evidence.
+
+\paragraph{Dynamic evaluation and outdatedness detection.}
+Another stream evaluates time-sensitive knowledge by validating against continuously updated structured sources. DyKnow dynamically checks whether LLM
+outputs match current Wikidata values and measures outdatedness and inconsistency under prompt perturbations \citep{mousavi2024dyknow}. Dynamic benchmarking
+work similarly generates time-bucketed test sets from Wikidata and evaluates robustness to factual drift under multiple evaluation ``views'' \citep{margatina2023dynamictemplama}.
+These methods are well-suited to entity-centric facts with structured ground truth; evidence-grounded dating aims to generalize the same instinct to open-ended
+claims and questions that do not map cleanly onto a knowledge graph.
+
+\paragraph{Contamination, leakage, and decontamination methods.}
+Temporal grounding is also motivated by the contamination literature, which shows that benchmark scores can be inflated by overlap between training and evaluation
+data. \citet{golchin2024timetravel} present black-box strategies for tracing contamination, while \citet{golchin2025dcq} introduce a quiz-based tool to detect and
+estimate contamination without training-data access. \citet{li2024taskcontam} highlight task-level contamination effects by showing that models often perform markedly
+better on datasets released before their pretraining collection windows than on datasets released after, complicating ``few-shot'' claims.
+
+Mitigation approaches include rewriting and filtering evaluation items. CLEAN--EVAL creates cleaner benchmark variants via transformations (e.g., paraphrasing/translation)
+and semantic filtering to reduce memorization-based score inflation \citep{zhu2024cleaneval}. Inference-Time Decontamination (ITD) combines detection with rewriting
+during evaluation to ``revive'' leaked benchmarks while preserving difficulty \citep{zhu2024itd}. These strategies are largely orthogonal to temporal dating: rewriting
+targets surface-form memorization, whereas dating targets causal validity and future-only information. In practice, they can be combined: a time-dated benchmark can also
+be rewritten to stress-test generalization.
+
+Finally, pretraining-data detection methods offer another complementary tool family. \citet{shi2024detectpretrain} introduce benchmarks like WIKIMIA and the Min-K\%
+Prob detector to infer whether text was included in pretraining from black-box probabilities. While temporal dating aims to infer the \emph{earliest} plausible time a text
+could be written, pretraining-data detection aims to infer whether a model has \emph{seen} the text; together, they help diagnose whether strong performance stems from
+reasoning under appropriate temporal constraints or from memorization/leakage.
+
+\paragraph{Synthesis and remaining gaps.}
+Across these strands, a consistent message emerges: effective cutoffs vary by resource \citep{cheng2024dated}, date-filtered retrieval can leak \citep{ellahib2026temporalleakage},
+temporal biases exist \citep{zhu2025outdated}, and contamination can systematically inflate scores \citep{li2024taskcontam}. What remains less standardized is a general-purpose,
+sample-level mechanism that assigns an earliest admissible time to arbitrary natural-language items using evidence and reasoning, and that is convenient enough to serve as a dataset
+filtering primitive and evaluation control.

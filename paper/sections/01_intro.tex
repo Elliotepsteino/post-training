@@ -15,6 +15,29 @@ t_\alpha(x)
 A fraction $\alpha$ of informed observers would judge time $t_\alpha(x)$ (or earlier) to be admissible.
 Times earlier than $t_\alpha(x)$ lie in the premature tail.
 
+\paragraph{Temporal semantics and probabilistic formulation.}
+A single ``year'' label conflates several distinct notions of time.
+Relevant notions include event time (when a fact becomes true in the world), epistemic availability time (when a well-informed observer could know and state the fact), authorship or publication time (when the text was written), and stylistic or discourse time (when the language and norms of the text are typical).
+Document dating methods implicitly target authorship time by estimating $\operatorname*{arg\,max}_{t} p(T=t \mid x)$.
+This is a different goal from ours: we care about which knowledge cutoff makes the text admissible, not when it was authored.
+In our setting, the texts of interest are fully digital, so classical forensic dating signals (e.g., ink age, paper composition, and physical provenance) are unavailable.
+We also emphasize scalability, since many downstream applications require time-grounding large corpora of documents.
+In contrast, training time-bounded LLMs requires reasoning about admissibility: for which times a text can be produced without relying on future or speculative knowledge.
+\!
+
+Formally, let $p_x(t)$ denote a latent distribution over admissible times for a text $x$, reflecting epistemic uncertainty rather than authorship likelihood.
+One option is to collapse this distribution to an earliest admissible time
+\[
+t_{\min}(x)
+\;=\;
+\inf\Bigl\{ t \;:\; \Pr_{T \sim p_x}\!\bigl(T \le t\bigr) > 0 \Bigr\},
+\]
+yielding a conservative lower bound that enforces strict temporal monotonicity and minimizes leakage.
+However, this approach discards uncertainty and tends to assign temporally ambiguous or timeless text to early years.
+An alternative is to treat $x$ as compatible with a distribution over admissible times, including it in training for a model at time $t$ with weight proportional to $\Pr_{T \sim p_x}(T \le t)$.
+This preserves uncertainty and yields smoother knowledge accumulation, at the cost of weaker worst-case leakage guarantees.
+These two formulations reflect different probabilistic assumptions (pointwise lower bounds versus cumulative compatibility) and should be chosen explicitly based on the intended use of the model.
+
 \paragraph{Applications.}
 Synchronos LLMs are models trained on data restricted to specific year ranges.
 Potential applications include finance backtesting to avoid look-ahead bias, historical analysis with time-bounded knowledge, auditing model behavior under controlled knowledge cutoffs, and reproducible evaluations that fix the temporal scope of training data.

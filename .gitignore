@@ -48,6 +48,7 @@ data_filtering/filtering_eval/plan.md
 configs/
 olmes/oe_eval/
 verl/
+lit_review_bundle_no_self/
 
 # Model outputs / weights
 checkpoints/

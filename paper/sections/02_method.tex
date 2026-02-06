@@ -10,7 +10,9 @@ The process follows a five-step agent pipeline:
 \end{enumerate}
 
 \paragraph{Entity types.}
-We group entities into three categories: explicit (an explicit date or event such as a product launch), implicit (a concept whose earliest admissible date could vary across observers, for example ``there has been a lot of discussion about global warming on the news recently''), and timeless (no time-anchored entity is present).
+We group entities into three categories: explicit (an explicit date or event such as a product launch), implicit (a concept whose earliest admissible date could vary across observers), and timeless (no time-anchored entity is present).
+For example, ``I just bought the first iPhone that was released last week'' is explicit: the admissible time distribution concentrates on the release year of the first iPhone, so $P_{x,\mathrm{gt}}(t)$ is effectively a delta mass on that year.
+By contrast, ``There has been a lot of talk about global warming on the news'' is implicit: coverage has intensified over time, so it is difficult to pinpoint the earliest year when that statement becomes true. As a result, the earliest-admissible time is itself distributed, and our goal is to return a sample from that distribution.
 We do not use a database agent because there is no internal database to cross-reference in this pipeline.
 
 \begin{figure}[t]

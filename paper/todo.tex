@@ -1,0 +1,29 @@
+\section*{Next Steps}
+Finalize the test-set plots and tables, then:
+\begin{enumerate}
+    \item Measure inter-LLM consistency.
+    \item Measure inter-human-rater consistency.
+    \item Measure human/LLM correlation.
+    \item Add a simple LLM prompting baseline.
+    \item Quantify the gain from sampling $N$ times rather than 1 time.
+    \item Update the test set with improved gold years once multiple annotations can be merged.
+    \item Develop baselines: simplest baseline with a single prompt.
+    \item Develop baselines: include entity extraction, entity type, and search query.
+    \item Develop baselines: add a search and update step.
+    \item Develop baselines: update step combines $N$ LLM outputs.
+    \item Define comparison metrics:
+    \item Metric: exact-year accuracy.
+    \item Metric: no-leak accuracy (predicted year $\ge$ gold).
+    \item Metric: mean absolute error in years.
+    \item Metric: signed error bias (mean predicted minus gold year).
+    \item Metric: coverage of 95\% intervals (if intervals are produced).
+    \item Metric: interval width (median and mean, if intervals are produced).
+    \item Metric: fraction of samples with any grounded source link.
+    \item Metric: average number of entities extracted per sample.
+    \item Metric: average number of sources per entity.
+    \item Metric: search cost per sample (queries and total tokens).
+    \item Metric: runtime per sample (end-to-end latency).
+    \item Refine the task definition.
+    \item Add a literature review.
+    \item Update the protocol to explicitly include the LLM steps.
+\end{enumerate}
