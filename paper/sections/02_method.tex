@@ -1,13 +1,27 @@
 \section{Method}
 
+\paragraph{Task.}
+Let $x$ be a text sample.
+Let $p_x(t)$ denote the (latent) distribution over earliest times $t$ such that the text could be produced without relying on unavailable or speculative knowledge at time $t$, as judged by a well-informed public observer.
+Given $x$, predict the $\alpha$-quantile of $p_x$:
+\[
+t_\alpha(x)
+\;=\;
+\inf\Bigl\{ t \;:\; \Pr_{T \sim p_x}\!\bigl(T \le t\bigr) \ge \alpha \Bigr\}.
+\]
+
+\paragraph{Interpretation.}
+A fraction $\alpha$ of observers would judge time $t_\alpha(x)$ (or earlier) to be admissible.
+Times earlier than $t_\alpha(x)$ lie in the premature tail.
+
 \paragraph{Entity types.}
 We group entities into three categories: explicit, implicit, and timeless.
 We define \emph{explicit} entities as those with a single right admissible year under our notion of epistemic availability (e.g., a concrete product launch year), so their admissible-time uncertainty is negligible at year granularity and can be treated as a point mass.
-For example, ``I just bought the first iPhone that was released last week'' is explicit: the admissible time concentrates on the release year of the first iPhone, so $P_{x,\mathrm{gt}}(t)$ is effectively a delta mass on that year.
+For example, ``I just bought the first iPhone that was released last week'' is explicit: the admissible time concentrates on the release year of the first iPhone, so $p_x(t)$ is effectively a delta mass on that year.
 We define \emph{implicit} entities as those without a single right year, where admissibility depends on diffuse public salience and can vary across observers.
 For example, ``There has been a lot of talk about global warming on the news'' is implicit: coverage has intensified over decades, so it is difficult to pinpoint the earliest year when the statement becomes true. As a result, the earliest-admissible time is itself distributed, and our goal is to return a sample from that distribution.
 Finally, \emph{timeless} samples contain no time-anchored entity.
-We do not use a database agent because there is no internal database to cross-reference in this pipeline.
+%We do not use a database agent because there is no internal database to cross-reference in this pipeline.
 
 \paragraph{Operational pipeline.}
 \Cref{fig:filtering-flow} summarizes our end-to-end implementation.
@@ -57,7 +71,7 @@ We operationalize the method as a five-step agent pipeline:
     \label{fig:filtering-flow}
 \end{figure}
 
-\paragraph{Why not GLiNER.}
-We evaluated GLiNER for entity extraction, but it is a poor fit for this task.
-Given fixed categories, it must both detect the entity span and map it to a category, and empirically it misses entities frequently in our data.
-Because missed entities directly induce leakage, we instead use LLMs for the full stack (entity extraction through year estimation), with search-based evidence grounding to improve reliability.
+%\paragraph{Why not GLiNER.}
+%We evaluated GLiNER for entity extraction, but it is a poor fit for this task.%
+%Given fixed categories, it must both detect the entity span and map it to a category, and empirically it misses entities frequently in our data.
+%Because missed entities directly induce leakage, we instead use LLMs for the full stack (entity extraction through year estimation), with search-based evidence grounding to improve reliability.
