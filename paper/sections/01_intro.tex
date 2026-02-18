@@ -5,7 +5,7 @@ For each text sample $x$, our goal is to produce a probability distribution
 \[
 x \;\mapsto\; p_x(t),
 \]
-where $p_x(t)$ represents a probability density over times at which $x$ could have been written using only publicly available knowledge as of time $t$.
+where $p_x(t)$ represents a probability density over times at which $x$ could have been produced using only publicly available knowledge as of time $t$.
 We refer to this notion of time as the \emph{epistemic availability time}.
 
 We refer to the task of estimating $p_x(t)$ as \emph{temporal grounding}.
@@ -17,10 +17,10 @@ For our downstream application, we highlight four desired properties that $p_x(t
 \begin{enumerate}
     \item \textbf{No temporal leakage.}
     A model trained with data up to year $\tau$ should not encode knowledge of facts that became publicly knowable after $\tau$.
-    Accordingly, $p_x(t)$ should assign negligible mass to times earlier than $\tau$ for text that depends on post-$\tau$ knowledge.
+    Accordingly, $p_x(t)$ should not assign mass to times earlier than $\tau$ for text that depends on post-$\tau$ knowledge.
 
     \item \textbf{Timely availability of explicit events.}
-    If a text references an explicit, time-anchored event that became publicly knowable in year $y$ (e.g., a product launch), then $p_x(t)$ should place substantial mass at or after year $y$, ensuring that a model trained through year $y$ can correctly state the fact.
+    If a text references an explicit, time-anchored event that became publicly knowable in year $y$ (e.g., a product launch), then $p_x(t)$ should place all probability mass at that year, ensuring that a model trained through year $y$ can correctly recall that fact.
 
     \item \textbf{Historically appropriate implicit knowledge.}
     Text often reflects implicit social knowledge or public salience rather than discrete events.
@@ -36,3 +36,21 @@ For our downstream application, we highlight four desired properties that $p_x(t
     In such cases, the relevant quantity is when the text \emph{could have been written}, rather than when it actually was.
 \end{enumerate}
 
+\subsection{Examples}
+The following examples illustrate when a point mass is appropriate and when a distribution over time is more appropriate.
+
+\textbf{Explicit example 1 (point mass).}
+``The first iPhone was released in 2007.''
+This statement is anchored to a specific public event year, so $p_x(t)$ should concentrate at 2007.
+
+\textbf{Explicit example 2 (point mass).}
+``Barack Obama was inaugurated for a second term as president last week.''
+This is tied to a single widely known public event, so $p_x(t)$ should be concentrated at 2013.
+
+\textbf{Implicit example 1 (spread distribution).}
+``There has been a lot of talk about global warming on the news.''
+Public salience grows gradually over time rather than changing at one date, so admissibility is naturally spread across years.
+
+\textbf{Implicit example 2 (spread distribution).}
+``People are increasingly using smartphones for everyday tasks.''
+Adoption and social visibility increase over multiple years, so a distribution over admissible years is more appropriate than a single year.

@@ -1,38 +1,49 @@
 \section{Method}
 
-\paragraph{Task.}
-Let $x$ be a text sample.
-Let $p_x(t)$ denote the (latent) distribution over earliest times $t$ such that the text could be produced without relying on unavailable or speculative knowledge at time $t$, as judged by a well-informed public observer.
-Given $x$, predict the $\alpha$-quantile of $p_x$:
-\[
-t_\alpha(x)
-\;=\;
-\inf\Bigl\{ t \;:\; \Pr_{T \sim p_x}\!\bigl(T \le t\bigr) \ge \alpha \Bigr\}.
-\]
-
-\paragraph{Interpretation.}
-A fraction $\alpha$ of observers would judge time $t_\alpha(x)$ (or earlier) to be admissible.
-Times earlier than $t_\alpha(x)$ lie in the premature tail.
-
 \paragraph{Entity types.}
-We group entities into three categories: explicit, implicit, and timeless.
-We define \emph{explicit} entities as those with a single right admissible year under our notion of epistemic availability (e.g., a concrete product launch year), so their admissible-time uncertainty is negligible at year granularity and can be treated as a point mass.
-For example, ``I just bought the first iPhone that was released last week'' is explicit: the admissible time concentrates on the release year of the first iPhone, so $p_x(t)$ is effectively a delta mass on that year.
-We define \emph{implicit} entities as those without a single right year, where admissibility depends on diffuse public salience and can vary across observers.
-For example, ``There has been a lot of talk about global warming on the news'' is implicit: coverage has intensified over decades, so it is difficult to pinpoint the earliest year when the statement becomes true. As a result, the earliest-admissible time is itself distributed, and our goal is to return a sample from that distribution.
-Finally, \emph{timeless} samples contain no time-anchored entity.
-%We do not use a database agent because there is no internal database to cross-reference in this pipeline.
+We group time-anchored entities into three categories: explicit, implicit, and timeless, based on how their admissible time is determined under our notion of epistemic availability.
+
+We define \emph{explicit} entities as those with a single earliest admissible year at year-level granularity (e.g., a concrete product launch, public announcement, or release date). For such entities, admissibility uncertainty is negligible, and the entity induces a point-mass distribution over time. For example, ``I just bought the first iPhone that was released last week'' is explicit: the admissible time concentrates on the release year of the first iPhone, so the entity-level admissible-time distribution is a delta mass at that year.
+
+We define \emph{implicit} entities as those without a single right admissible year, where admissibility depends on diffuse public salience, gradual adoption, or evolving discourse, and may reasonably vary across observers. For example, ``There has been a lot of talk about global warming on the news'' is implicit: media coverage and public concern intensified over decades, making it difficult to identify a unique earliest admissible year. As a result, the admissible time for an implicit entity is itself distributed over a range of years.
+
+Finally, \emph{timeless} samples contain no time-anchored entities and impose no temporal constraints.
+
+\paragraph{Entity-level admissible-time representation.}
+For each extracted entity $e$, we first classify it as explicit or implicit with respect to epistemic availability, and then assign an admissible-time representation:
+
+\begin{itemize}
+    \item For an explicit entity, we assign a single admissible year $y_e$, corresponding to a degenerate admissible-time distribution $T_e = y_e$.
+    \item For an implicit entity, we assign an admissible-time support interval $[a_e, b_e]$ and, optionally, a discrete probability mass function $p_e(t)$ over years in this interval. The interval defines the support of admissible times, while the probabilities capture uncertainty over when the entity becomes publicly salient.
+\end{itemize}
+
+When probabilities are not explicitly specified, the interval alone is retained (e.g., for conservative aggregation). The representation for implicit entities is intentionally flexible: downstream applications may interpret it as inducing a distribution, while our core method does not assume a particular parametric form.
 
 \paragraph{Operational pipeline.}
-\Cref{fig:filtering-flow} summarizes our end-to-end implementation.
-We operationalize the method as a five-step agent pipeline:
+\Cref{fig:filtering-flow} summarizes our end-to-end implementation. We operationalize the method as a multi-agent pipeline with the following steps:
 \begin{enumerate}
-    \item Entity Extraction Agent: extract time-anchored entities from the question and answer bundle.
-    \item Reasoner Agent: assign a best-estimate year and a 95\% confidence interval per entity.
-    \item Search Query Agent: generate standalone search queries for each entity.
-    \item Internet Search Agent: retrieve evidence from search results to ground the estimates.
-    \item Reasoner/Synthesizer Agent: update entity confidence intervals based on the evidence and update the overall estimated year using the maximum upper bound across entities.
+    \item \textbf{Entity Extraction Agent:} Extract time-anchored entities from the question and answer bundle.
+    \item \textbf{Entity Type Classification Agent:} Classify each extracted entity as explicit or implicit with respect to epistemic availability.
+    \item \textbf{Reasoner Agent:} For each entity, assign an initial admissible-time estimate:
+    \begin{itemize}
+        \item explicit entities receive a best-estimate year,
+        \item implicit entities receive an admissible-time interval and, optionally, per-year probabilities.
+    \end{itemize}
+    \item \textbf{Search Query Agent:} Generate standalone search queries for each entity.
+    \item \textbf{Internet Search Agent:} Retrieve external evidence to ground admissible-time estimates.
+    \item \textbf{Reasoner/Synthesizer Agent:} Update entity-level admissible-time representations based on retrieved evidence.
 \end{enumerate}
+
+\paragraph{Sample-level aggregation.}
+Let $T_e$ denote the admissible-time random variable induced by entity $e$. The admissible time of the full sample is defined as
+\[
+T_{\text{sample}} = \max_e T_e,
+\]
+corresponding to the earliest year at which all required knowledge could simultaneously be publicly available. This aggregation rule enforces a strict no-leak constraint: the sample is admissible at year $t$ if and only if every referenced entity is admissible by $t$.
+
+Operationally, this definition induces a sample-level admissible-time distribution. In particular, when a sample contains both explicit and implicit entities, probability mass from implicit entities that falls before an explicit entity’s admissible year is clipped to that year, resulting in a spike at the explicit year and a tail over later years.
+
+For conservative filtering and labeling, we collapse the sample-level distribution to a single year by taking the maximum upper bound across entity-level admissible-time supports. However, retaining the full distribution enables alternative downstream policies, such as random bucketing, stochastic cutoff simulation, or soft inclusion weighting for year-bounded training.
 
 \begin{figure}[t]
     \centering
@@ -71,7 +82,57 @@ We operationalize the method as a five-step agent pipeline:
     \label{fig:filtering-flow}
 \end{figure}
 
+\paragraph{Evaluation metrics.}
+For now, we evaluate metrics on the \emph{implicit} subset, where gold labels are distributions rather than single years. Let $p_x^{\mathrm{gt}}(t)$ be the gold admissible-time distribution and let $y_x^{\min} = \inf\{t : p_x^{\mathrm{gt}}(t) > 0\}$ be its earliest admissible support year.
+
+\paragraph{Unified primary metric.}
+To evaluate both point and distribution outputs with one score, we use a leakage-penalized Wasserstein objective:
+\[
+\text{Score}_{\lambda}(x)
+= W_1\!\left(q_x,p_x^{\mathrm{gt}}\right)
++ \lambda \sum_{t<y_x^{\min}} q_x(t),
+\]
+where
+\[
+W_1\!\left(q_x,p_x^{\mathrm{gt}}\right)=\sum_t \left|F_{q_x}(t)-F_{p_x^{\mathrm{gt}}}(t)\right|.
+\]
+The Wasserstein term is interpretable in year units and works uniformly for delta and spread-out distributions; the second term explicitly penalizes leaked mass before the earliest admissible year. We report no-leak accuracy and $\text{Score}_{\lambda}$ as the primary pair.
+
+Because temporal leakage is asymmetric, we also report a hard leakage indicator:
+\[
+\text{NoLeak}(x)
+= \mathbf{1}\!\left[\forall\, t < y_x^{\min},\; q_x(t) = 0\right].
+\]
+For a single-year prediction $\hat{y}_x$, we treat it as a degenerate distribution $q_x(t)=\mathbf{1}[t=\hat{y}_x]$, so the same definition applies.
+
+
+\begin{comment}
+\section{Method}
+
+\paragraph{Entity types.}
+We group entities into three categories: explicit, implicit, and timeless.
+We define \emph{explicit} entities as those with a single right admissible year under our notion of epistemic availability (e.g., a concrete product launch year), so their admissible-time uncertainty is negligible at year granularity and can be treated as a point mass.
+For example, ``I just bought the first iPhone that was released last week'' is explicit: the admissible time concentrates on the release year of the first iPhone, so $p_x(t)$ is effectively a delta mass on that year.
+We define \emph{implicit} entities as those without a single right year, where admissibility depends on diffuse public salience and can vary across observers.
+For example, ``There has been a lot of talk about global warming on the news'' is implicit: coverage has intensified over decades, so it is difficult to pinpoint the earliest year when the statement becomes true. As a result, the earliest-admissible time is itself distributed, and our goal is to return a sample from that distribution.
+Finally, \emph{timeless} samples contain no time-anchored entity.
+%We do not use a database agent because there is no internal database to cross-reference in this pipeline.
+
+\paragraph{Operational pipeline.}
+\Cref{fig:filtering-flow} summarizes our end-to-end implementation.
+We operationalize the method as a five-step agent pipeline:
+\begin{enumerate}
+    \item Entity Extraction Agent: extract time-anchored entities from the question and answer bundle.
+    \item Reasoner Agent: assign a best-estimate year and a 95\% confidence interval per entity.
+    \item Search Query Agent: generate standalone search queries for each entity.
+    \item Internet Search Agent: retrieve evidence from search results to ground the estimates.
+    \item Reasoner/Synthesizer Agent: update entity confidence intervals based on the evidence and update the overall estimated year using the maximum upper bound across entities.
+\end{enumerate}
+
+
+
 %\paragraph{Why not GLiNER.}
 %We evaluated GLiNER for entity extraction, but it is a poor fit for this task.%
 %Given fixed categories, it must both detect the entity span and map it to a category, and empirically it misses entities frequently in our data.
 %Because missed entities directly induce leakage, we instead use LLMs for the full stack (entity extraction through year estimation), with search-based evidence grounding to improve reliability.
+\end{comment}

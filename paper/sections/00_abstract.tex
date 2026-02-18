@@ -1,4 +1,5 @@
-We study temporal grounding: predicting a distribution over earliest admissible years for a text sample, reflecting when it could be produced without relying on unavailable knowledge, to support temporal data bucketing for LLM training.
+
+We study temporal grounding: predicting a distribution over times a text sample could have been produced using public information, to support temporal data bucketing for LLM training.
 We introduce a multi-agent pipeline that extracts time-anchored entities, grounds them with web evidence, and aggregates conservative year estimates.
 We introduce an evaluation suite based on human-annotated samples from Tulu-3 to measure the efficiency of the approach and compare against several baselines.
 We then demonstrate scalability by applying the pipeline to a large subset of the Tulu-3 SFT, RLVR, and DPO datasets.
