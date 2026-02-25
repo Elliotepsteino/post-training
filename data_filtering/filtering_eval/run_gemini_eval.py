@@ -11,6 +11,7 @@ from typing import List
 
 from prompt_templates import SYSTEM_PROMPT, build_user_prompt
 from run_openai_eval import parse_single_response
+from temporal_schema import MIN_YEAR, normalize_sample_prediction, to_int
 
 
 def load_samples(path: str) -> List[dict]:
@@ -66,7 +67,7 @@ def run_live(
                 if sleep_s:
                     time.sleep(sleep_s)
                 return sample
-            except Exception as exc:
+            except Exception:
                 attempt += 1
                 if attempt > max_retries:
                     if not fallback_model:
@@ -91,7 +92,13 @@ def run_live(
             done = 0
             for future in as_completed(futures):
                 row, sample_idx = futures[future]
-                sample = future.result()
+                try:
+                    sample = future.result()
+                except Exception as exc:
+                    sample = normalize_sample_prediction({}, fallback_year=MIN_YEAR)
+                    sample["model"] = model
+                    sample["error"] = str(exc)
+                    print(f"[{model}] sample failed for row {row.get('id')} sample_{sample_idx}: {exc}")
                 row_id = str(row["id"])
                 existing = next((p for p in preds if p["id"] == row_id), None)
                 if existing is None:
@@ -117,13 +124,16 @@ def run_live(
         entry = next((p for p in preds if p["id"] == row_id), None)
         if entry is None:
             entry = {"id": row_id, "model": model}
+        samples_for_row = {}
         for sample_idx in range(1, count + 1):
             key = f"sample_{sample_idx}"
             if key not in entry:
-                entry[key] = parse_single_response("")
+                entry[key] = normalize_sample_prediction({}, fallback_year=MIN_YEAR)
                 entry[key]["model"] = model
-        year = max((entry[f"sample_{idx}"].get("year", 2001) for idx in range(1, count + 1)), default=2001)
-        entry["year"] = year
+            samples_for_row[key] = entry[key]
+
+        year = max((to_int(sample.get("year")) for sample in samples_for_row.values()), default=MIN_YEAR)
+        entry["year"] = max(MIN_YEAR, min(2025, int(year)))
         normalized_preds.append(entry)
 
     write_predictions(out_path, normalized_preds)
@@ -143,7 +153,7 @@ def main() -> None:
     parser.add_argument("--fallback-model", default="", help="Fallback Gemini model")
     parser.add_argument("--max-retries", type=int, default=4, help="Retry count before fallback")
     parser.add_argument("--retry-sleep", type=float, default=10.0, help="Seconds between retries")
-    parser.add_argument("--num-samples", type=int, default=1, help="Number of samples per input")
+    parser.add_argument("--num-samples", type=int, default=2, help="Number of samples per input")
     args = parser.parse_args()
 
     configure_gemini()

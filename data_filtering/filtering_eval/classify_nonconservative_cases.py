@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 from typing import Dict, List
 
 from openai import OpenAI
@@ -95,6 +96,8 @@ def main() -> None:
     parser.add_argument("--gold-path", required=True, help="Gold dataset JSONL")
     parser.add_argument("--out", required=True, help="Output JSONL for classifications")
     parser.add_argument("--model", default="gpt-5-mini", help="LLM used to classify failures")
+    parser.add_argument("--timeout", type=float, default=60.0, help="Per-request timeout in seconds")
+    parser.add_argument("--max-retries", type=int, default=3, help="Retries per failure case")
     args = parser.parse_args()
 
     gold_rows = {row["id"]: row for row in load_jsonl(args.gold_path)}
@@ -102,6 +105,7 @@ def main() -> None:
 
     client = OpenAI()
     results: List[dict] = []
+    non_conservative_rows = []
     for row in preds:
         gid = row.get("id")
         if gid not in gold_rows:
@@ -110,18 +114,32 @@ def main() -> None:
         pred_year = get_pred_year(row)
         if pred_year is None or pred_year >= gold_year:
             continue
+        non_conservative_rows.append((gid, row, pred_year, gold_year))
 
+    total = len(non_conservative_rows)
+    for idx, (gid, row, pred_year, gold_year) in enumerate(non_conservative_rows, start=1):
         prompt = build_prompt(gold_rows[gid], row)
-        resp = client.chat.completions.create(
-            model=args.model,
-            messages=[
-                {"role": "system", "content": "Return JSON only, no extra text."},
-                {"role": "user", "content": prompt},
-            ],
-            response_format={"type": "json_object"},
-        )
-        text = resp.choices[0].message.content or ""
-        payload = extract_json_object(text)
+        payload = {}
+        for attempt in range(1, args.max_retries + 1):
+            try:
+                resp = client.chat.completions.create(
+                    model=args.model,
+                    messages=[
+                        {"role": "system", "content": "Return JSON only, no extra text."},
+                        {"role": "user", "content": prompt},
+                    ],
+                    response_format={"type": "json_object"},
+                    timeout=args.timeout,
+                )
+                text = resp.choices[0].message.content or ""
+                payload = extract_json_object(text)
+                break
+            except Exception as exc:
+                if attempt >= args.max_retries:
+                    payload = {"bucket": 5, "label": BUCKETS[5], "rationale": f"classification_error: {exc}"}
+                    break
+                time.sleep(1.0)
+
         bucket = payload.get("bucket", 5)
         try:
             bucket = int(bucket)
@@ -142,6 +160,7 @@ def main() -> None:
                 "rationale": rationale,
             }
         )
+        print(f"Classified {idx}/{total}")
 
     write_jsonl(args.out, results)
 

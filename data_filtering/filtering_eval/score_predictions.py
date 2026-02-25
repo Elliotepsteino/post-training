@@ -18,22 +18,40 @@ def load_jsonl(path: str) -> List[dict]:
     return rows
 
 
-def load_gold_from_predictions(pred_path: str) -> Dict[str, int]:
-    gold: Dict[str, int] = {}
+def canonical_temporal_type(value: object) -> str:
+    text = str(value or "").strip().lower()
+    if text in {"explicit", "implicit"}:
+        return text
+    if text == "timeless":
+        return "explicit"
+    return "unknown"
+
+
+def load_gold_from_predictions(pred_path: str) -> Dict[str, dict]:
+    gold: Dict[str, dict] = {}
     for row in load_jsonl(pred_path):
         year = row.get("year", row.get("pred_year"))
         if year is None:
             continue
-        gold[row["id"]] = int(year)
+        gold[row["id"]] = {
+            "year": int(year),
+            "sample_temporal_type": canonical_temporal_type(row.get("sample_temporal_type", "unknown")),
+        }
     return gold
 
 
-def load_gold_from_samples(samples_path: str, field: str) -> Dict[str, int]:
-    gold: Dict[str, int] = {}
+def load_gold_from_samples(samples_path: str, field: str) -> Dict[str, dict]:
+    gold: Dict[str, dict] = {}
     for row in load_jsonl(samples_path):
         if field not in row:
             continue
-        gold[row["id"]] = int(row[field])
+        temporal_type = canonical_temporal_type(
+            row.get("sample_temporal_type", row.get("temporal_type", row.get("gold_temporal_type", "unknown")))
+        )
+        gold[row["id"]] = {
+            "year": int(row[field]),
+            "sample_temporal_type": temporal_type,
+        }
     return gold
 
 
@@ -65,17 +83,31 @@ def write_tex_table(path: str, rows: List[dict]) -> None:
         f.write("    \\centering\n")
         f.write("    \\begin{tabular}{lccc}\n")
         f.write("        \\toprule\n")
-        f.write("        Model & Exact acc & Conservative acc & Weighted acc \\\\\n")
+        f.write("        Model & Joint (weighted) & Explicit (weighted) & Implicit (weighted) \\\\\n")
         f.write("        \\midrule\n")
         for row in rows:
-            f.write(
-                f"        {row['model']} & {row['exact']:.2f} & {row['conservative']:.2f} & {row['weighted']:.2f} \\\\\n"
-            )
+            splits = row.get("splits", {})
+            joint = splits.get("joint", {}).get("weighted", 0.0)
+            explicit = splits.get("explicit", {}).get("weighted", 0.0)
+            implicit = splits.get("implicit", {}).get("weighted", 0.0)
+            f.write(f"        {row['model']} & {joint:.2f} & {explicit:.2f} & {implicit:.2f} \\\\\n")
         f.write("        \\bottomrule\n")
         f.write("    \\end{tabular}\n")
-        f.write("    \\caption{Filtering label accuracy on 50 questions. Exact is year match; conservative is predicted year $\\ge$ gold year; weighted is mean of the two.}\n")
+        f.write(
+            "    \\caption{Filtering accuracy by subset. Weighted accuracy is the mean of exact and conservative accuracy.}\n"
+        )
         f.write("    \\label{tab:filtering-eval}\n")
         f.write("\\end{table}\n")
+
+
+def select_gold_subset(gold_meta: Dict[str, dict], split: str) -> Dict[str, int]:
+    if split == "joint":
+        return {gid: data["year"] for gid, data in gold_meta.items()}
+    if split == "explicit":
+        return {gid: data["year"] for gid, data in gold_meta.items() if data.get("sample_temporal_type") == "explicit"}
+    if split == "implicit":
+        return {gid: data["year"] for gid, data in gold_meta.items() if data.get("sample_temporal_type") == "implicit"}
+    return {}
 
 
 def main() -> None:
@@ -102,10 +134,10 @@ def main() -> None:
 
     if args.gold_field:
         gold_source = args.gold_path or args.samples
-        gold = load_gold_from_samples(gold_source, args.gold_field)
+        gold_meta = load_gold_from_samples(gold_source, args.gold_field)
     else:
         gold_pred_path = os.path.join(args.pred_dir, f"preds_{args.gold_from_model}.jsonl")
-        gold = load_gold_from_predictions(gold_pred_path)
+        gold_meta = load_gold_from_predictions(gold_pred_path)
 
     results = []
     for fname in sorted(os.listdir(args.pred_dir)):
@@ -118,14 +150,26 @@ def main() -> None:
             if year is None:
                 continue
             preds[row["id"]] = int(year)
-        exact, cons, weighted, total = score(preds, gold)
-        results.append(
-            {
-                "model": model,
+
+        split_scores = {}
+        for split in ("joint", "explicit", "implicit"):
+            split_gold = select_gold_subset(gold_meta, split)
+            exact, cons, weighted, total = score(preds, split_gold)
+            split_scores[split] = {
                 "exact": exact * 100,
                 "conservative": cons * 100,
                 "weighted": weighted * 100,
                 "n": total,
+            }
+
+        results.append(
+            {
+                "model": model,
+                "exact": split_scores["joint"]["exact"],
+                "conservative": split_scores["joint"]["conservative"],
+                "weighted": split_scores["joint"]["weighted"],
+                "n": split_scores["joint"]["n"],
+                "splits": split_scores,
             }
         )
 

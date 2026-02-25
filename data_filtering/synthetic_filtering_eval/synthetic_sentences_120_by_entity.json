@@ -1,0 +1,2428 @@
+[
+  {
+    "id": "1",
+    "entity": "Smoking negative health effects",
+    "category": "public health",
+    "question_type": "implicit",
+    "ground_truth_year": 1964,
+    "sentences": [
+      "Federal health authorities have officially concluded that cigarette smoking is a primary cause of lung cancer and chronic bronchitis."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      1964,
+      1965,
+      1966,
+      1967,
+      1968
+    ],
+    "plausible_years_probs": [
+      0.5000000000000001,
+      0.20000000000000004,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "2",
+    "entity": "High-glycemic diets are harmful",
+    "category": "nutrition",
+    "question_type": "implicit",
+    "ground_truth_year": 2003,
+    "sentences": [
+      "Nutritional research indicates that high-glycemic diets play a critical role in the development of obesity and chronic metabolic conditions."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2003,
+      2004,
+      2005,
+      2006,
+      2007
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1
+    ]
+  },
+  {
+    "id": "3",
+    "entity": "Freedom of Information Act (US)",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1966,
+    "sentences": [
+      "The Freedom of Information Act was enacted to improve government transparency well after the passage of the Administrative Procedure Act.",
+      "President Johnson signed the Freedom of Information Act into law shortly after the legislative success of the Voting Rights Act.",
+      "The Freedom of Information Act became law in the United States several years after the launch of the satellite Sputnik."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "4",
+    "entity": "mRNA vaccine deployment",
+    "category": "biomedicine",
+    "question_type": "implicit",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "Incorporating modified nucleosides into mRNA effectively suppresses its innate immunogenicity, thereby enabling its potential use in therapeutic settings."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2005,
+      2006,
+      2007,
+      2008,
+      2009
+    ],
+    "plausible_years_probs": [
+      0.5,
+      0.2,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "5",
+    "entity": "Twitter",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2006,
+    "sentences": [
+      "The social networking service Twitter was founded by Jack Dorsey, Noah Glass, Biz Stone, and Evan Williams.",
+      "Jack Dorsey sent the very first message on the microblogging platform known as Twitter.",
+      "Twitter officially launched its microblogging service to the public."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "6",
+    "entity": "Microsoft",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1975,
+    "sentences": [
+      "Bill Gates and Paul Allen officially found Microsoft to develop and sell BASIC interpreters for the Altair 8800.",
+      "The software company Microsoft is established in Albuquerque, New Mexico, to provide software for the MITS Altair.",
+      "Paul Allen and Bill Gates form the partnership known as Microsoft to create software for personal computers."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "7",
+    "entity": "Gender inequality is harmful",
+    "category": "society",
+    "question_type": "implicit",
+    "ground_truth_year": 1948,
+    "sentences": [
+      "Gender inequality is recognized as a fundamental societal harm that obstructs the development of human potential and violates basic rights."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      1948,
+      1949,
+      1950,
+      1951,
+      1952
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.2,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "8",
+    "entity": "Swift (programming language)",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2014,
+    "sentences": [
+      "Apple unveiled Swift as a modern successor to the much older Objective-C language.",
+      "The introduction of Swift occurred several years after Google released the Go programming language.",
+      "Developers adopted Swift for iOS apps long after the Python language had become a standard in the industry."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "9",
+    "entity": "Antibiotic resistance is harmful",
+    "category": "medicine",
+    "question_type": "implicit",
+    "ground_truth_year": 1945,
+    "sentences": [
+      "There is a danger that improper dosage may expose microbes to non-lethal quantities of the drug and thereby educate them to be resistant."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      1945,
+      1946,
+      1947,
+      1948,
+      1949
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.25,
+      0.15,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "10",
+    "entity": "Ransomware awareness + 5G cellular deployment",
+    "category": "cybersecurity + telecommunications",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2019,
+    "sentences": [
+      "As commercial 5G networks begin their global rollout, cybersecurity firms warn that the increased connectivity could coincide with a surge in sophisticated ransomware attacks targeting critical infrastructure."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Ransomware awareness",
+    "primary_category": "cybersecurity",
+    "primary_year": 2015,
+    "secondary_entity": "5G cellular deployment",
+    "secondary_category": "telecommunications",
+    "secondary_year": 2019,
+    "plausible_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "plausible_years_probs": [
+      0.5,
+      0.3,
+      0.1,
+      0.05,
+      0.05
+    ]
+  },
+  {
+    "id": "11",
+    "entity": "The Matrix",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "The Wachowskis introduced the world to the sci-fi action film The Matrix.",
+      "Keanu Reeves debuted as the character Neo in the first installment of The Matrix series.",
+      "This groundbreaking film popularized the bullet time visual effect upon its theatrical release."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "12",
+    "entity": "Snapchat",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2011,
+    "sentences": [
+      "The ephemeral messaging application Snapchat was officially launched on the iOS App Store.",
+      "Evan Spiegel, Bobby Murphy, and Reggie Brown released the initial version of Snapchat to the public.",
+      "Disappearing messages became a social media phenomenon with the debut of the Snapchat application."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "13",
+    "entity": "C++",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1985,
+    "sentences": [
+      "Bjarne Stroustrup released the first commercial implementation of C++ well after the original C programming language was established.",
+      "The initial commercial release of C++ coincided with the North American launch of the Nintendo Entertainment System.",
+      "The C++ programming language became commercially available in the same year that Microsoft released Windows 1.0."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "14",
+    "entity": "AI fairness and bias concerns",
+    "category": "artificial intelligence",
+    "question_type": "implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "The potential for artificial intelligence systems to perpetuate and amplify existing societal prejudices has become a primary focus of ethical scrutiny in the technology sector."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "plausible_years_probs": [
+      0.2,
+      0.15,
+      0.15,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.05,
+      0.05
+    ]
+  },
+  {
+    "id": "15",
+    "entity": "Harry Potter and the Sorcerer\u2019s Stone",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "The film adaptation of Harry Potter and the Sorcerer's Stone premiered in movie theaters.",
+      "Chris Columbus directed the first feature film bringing the Hogwarts School of Witchcraft and Wizardry to the big screen.",
+      "Daniel Radcliffe first starred as the boy wizard in the opening installment of the Harry Potter film franchise."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "16",
+    "entity": "SpaceX",
+    "category": "company",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "SpaceX was founded in the same year that the Euro officially entered circulation as physical cash.",
+      "Elon Musk established SpaceX the year following the launch of Wikipedia.",
+      "The private aerospace company SpaceX was created in the same year that the first Spider-Man movie starring Tobey Maguire hit theaters."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "17",
+    "entity": "Dell",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "Michael Dell founds the company originally known as PC's Limited in his dorm room at the University of Texas.",
+      "The computer technology corporation now known as Dell is established under the name PC's Limited.",
+      "Operations begin for PC's Limited, the predecessor to the modern Dell corporation, selling IBM PC-compatible computers."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "18",
+    "entity": "React (JavaScript library)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "React was open-sourced to provide a component-based architecture that contrasted with the bidirectional data binding of AngularJS.",
+      "Facebook introduced React to the public, offering a view-focused library distinct from the full framework approach of Ember.js.",
+      "React emerged as a declarative alternative to the imperative DOM manipulation often associated with jQuery."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "19",
+    "entity": "No Child Left Behind Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "President George W. Bush signed the No Child Left Behind Act into law to increase accountability in the United States education system.",
+      "The United States enacted the No Child Left Behind Act to hold schools accountable for student outcomes via standardized assessments.",
+      "New federal requirements for annual testing were established when the No Child Left Behind Act officially became law."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "20",
+    "entity": "Finding Nemo",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2003,
+    "sentences": [
+      "Finding Nemo debuted in theaters the same year as The Lord of the Rings: The Return of the King.",
+      "Pixar released Finding Nemo subsequent to the theatrical run of Monsters, Inc.",
+      "Finding Nemo arrived on the big screen following the release of Harry Potter and the Chamber of Secrets."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "21",
+    "entity": "Pulp Fiction",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "Quentin Tarantino released his iconic film Pulp Fiction two years after his debut feature Reservoir Dogs.",
+      "Cinema audiences were treated to both the animated classic The Lion King and the crime drama Pulp Fiction during the same release calendar.",
+      "The Palme d'Or was awarded to Pulp Fiction shortly after Schindler's List had dominated the previous awards season."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "22",
+    "entity": "TensorFlow",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "Google officially released the TensorFlow machine learning library as an open-source project.",
+      "The Google Brain team introduced TensorFlow to the public as a powerful library for numerical computation.",
+      "Software developers began using the newly launched TensorFlow framework for building deep learning models."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "23",
+    "entity": "Android (public release)",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "The HTC Dream became the first device to reach the market powered by the Android operating system.",
+      "Google officially launched the initial stable version of its Android mobile platform for public use.",
+      "Consumers were first able to purchase a smartphone running the Android operating system with the debut of the T-Mobile G1."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "24",
+    "entity": "Star Wars: A New Hope",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1977,
+    "sentences": [
+      "George Lucas introduced the world to a galaxy far, far away with the premiere of this space opera.",
+      "Audiences first met Luke Skywalker, Han Solo, and Princess Leia when this film debuted in theaters.",
+      "The original trilogy began with the release of this movie, which was initially titled simply Star Wars."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "25",
+    "entity": "Airbnb",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "Brian Chesky, Joe Gebbia, and Nathan Blecharczyk founded the hospitality exchange service initially called AirBed & Breakfast.",
+      "The San Francisco-based company launched its online marketplace to allow people to rent out their spare rooms to travelers.",
+      "This vacation rental platform was established by three co-founders to facilitate short-term lodging in residential properties."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "26",
+    "entity": "Inception",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "Christopher Nolan directed this sci-fi thriller starring Leonardo DiCaprio as a professional thief who steals information by infiltrating the subconscious.",
+      "Audiences were introduced to the concept of dream extraction and the spinning top totem in this mind-bending blockbuster.",
+      "This film features an ensemble cast navigating multiple layers of dreams to plant an idea in a target's mind."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "27",
+    "entity": "AngularJS",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "Google publicly released the initial version of the AngularJS framework to facilitate the creation of single-page applications.",
+      "Mi\u0161ko Hevery introduced this JavaScript framework to extend HTML attributes with Directives and bind data to HTML with Expressions.",
+      "This structural framework for dynamic web apps was launched to simplify frontend development through two-way data binding and dependency injection."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "28",
+    "entity": "Unsafe drinking water is harmful + Algorithmic bias is harmful",
+    "category": "public health + artificial intelligence",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "Activists emphasize that systemic inequality is manifested both through lead-contaminated municipal water supplies and through algorithmic bias in criminal risk assessment tools."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Unsafe drinking water is harmful",
+    "primary_category": "public health",
+    "primary_year": 1971,
+    "secondary_entity": "Algorithmic bias is harmful",
+    "secondary_category": "artificial intelligence",
+    "secondary_year": 2016,
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "plausible_years_probs": [
+      0.4000000000000001,
+      0.30000000000000004,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "29",
+    "entity": "Tesla Model S",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "Tesla commences retail deliveries of its Model S electric sedan to customers.",
+      "The Model S officially enters the market as Tesla's first fully designed and manufactured luxury vehicle.",
+      "Tesla begins mass production and distribution of the Model S sedan."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "30",
+    "entity": "Google Search",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "Larry Page and Sergey Brin officially incorporated the company and launched the Google search engine.",
+      "The Google search engine made its public debut, operating initially from a garage in Menlo Park.",
+      "A check from Andy Bechtolsheim helped fund the formal incorporation and launch of the Google search engine."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "31",
+    "entity": "Apple Macintosh",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "Apple revolutionized personal computing by releasing the original Macintosh with a graphical user interface.",
+      "The first Macintosh computer was introduced to the public by Steve Jobs at the Flint Center.",
+      "Consumers saw the release of the Macintosh 128K, which featured a mouse and a bitmap display."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "32",
+    "entity": "CRISPR gene editing + Algorithmic bias is harmful",
+    "category": "genetics + artificial intelligence",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "Bioethicists debating the long-term implications of CRISPR gene editing are increasingly drawing parallels to the sociotechnical harms caused by algorithmic bias."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "CRISPR gene editing",
+    "primary_category": "genetics",
+    "primary_year": 2012,
+    "secondary_entity": "Algorithmic bias is harmful",
+    "secondary_category": "artificial intelligence",
+    "secondary_year": 2016,
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1
+    ]
+  },
+  {
+    "id": "33",
+    "entity": "The Avengers",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "Nick Fury assembles Iron Man, Captain America, Thor, and the Hulk to stop Loki and the Chitauri invasion of New York City.",
+      "Joss Whedon directs the first live-action film uniting the major heroes of the Marvel Cinematic Universe against a common threat.",
+      "Audiences witness the Earth's mightiest heroes joining forces on the big screen to retrieve the Tesseract from the God of Mischief."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "34",
+    "entity": "Remote work as a mainstream practice + AI chatbots",
+    "category": "productivity + artificial intelligence",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2022,
+    "sentences": [
+      "With remote work now firmly established as a mainstream norm, the sudden emergence of highly capable generative AI chatbots is transforming how distributed teams handle content creation."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Remote work as a mainstream practice",
+    "primary_category": "productivity",
+    "primary_year": 2009,
+    "secondary_entity": "AI chatbots",
+    "secondary_category": "artificial intelligence",
+    "secondary_year": 2022,
+    "plausible_years": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "plausible_years_probs": [
+      0.30000000000000004,
+      0.4000000000000001,
+      0.20000000000000004,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "35",
+    "entity": "The Dark Knight",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "Christopher Nolan released the sequel to Batman Begins, showcasing Heath Ledger's iconic portrayal of the Joker.",
+      "Christian Bale faced off against the Joker in this second installment of Nolan's Batman trilogy.",
+      "Aaron Eckhart portrayed District Attorney Harvey Dent in this film that followed Batman Begins."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "36",
+    "entity": "Black Panther",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2018,
+    "sentences": [
+      "Ryan Coogler directs this Marvel Cinematic Universe installment centered on the newly crowned king of Wakanda.",
+      "Chadwick Boseman portrays the titular superhero in this film that follows the events of Captain America: Civil War.",
+      "Michael B. Jordan plays the antagonist Erik Killmonger in this superhero blockbuster featuring the Dora Milaje."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "37",
+    "entity": "Apple Inc.",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1976,
+    "sentences": [
+      "Steve Jobs, Steve Wozniak, and Ronald Wayne found the company originally named Apple Computer.",
+      "The Apple I personal computer kit is released as the first product of the newly formed Apple company.",
+      "Paul Terrell's Byte Shop places the first major order for the Apple I computer from Jobs and Wozniak."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "38",
+    "entity": "Rust (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "Mozilla formally introduced the Rust programming language to the public as a memory-safe systems language.",
+      "The Rust programming language was first revealed to the software development community by Mozilla Research.",
+      "Graydon Hoare's systems programming language, Rust, received its first public presentation."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "39",
+    "entity": "Affordable Care Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "President Barack Obama signed the Affordable Care Act into law to comprehensively reform the American healthcare system.",
+      "The 111th United States Congress enacted the Patient Protection and Affordable Care Act.",
+      "The landmark healthcare reform legislation commonly referred to as Obamacare was officially passed to expand health insurance coverage."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "40",
+    "entity": "Avatar",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "James Cameron released the science fiction blockbuster Avatar, introducing audiences to the Na'vi people on the moon Pandora.",
+      "Sam Worthington and Zoe Salda\u00f1a starred in the visually groundbreaking film Avatar.",
+      "The motion picture Avatar premiered in theaters, revolutionizing the use of 3D technology in cinema."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "41",
+    "entity": "Digital Millennium Copyright Act",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "The Digital Millennium Copyright Act was signed into law during the same year that Google was founded.",
+      "The release of Windows 98 occurred in the same year as the enactment of the Digital Millennium Copyright Act.",
+      "The Good Friday Agreement was signed in the same year that the United States passed the Digital Millennium Copyright Act."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "42",
+    "entity": "Online misinformation is harmful + Algorithmic bias is harmful",
+    "category": "media + artificial intelligence",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "Society is currently grappling with the realization that social media platforms not only accelerate the spread of harmful misinformation but also deploy algorithms that reinforce systemic bias."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Online misinformation is harmful",
+    "primary_category": "media",
+    "primary_year": 2016,
+    "secondary_entity": "Algorithmic bias is harmful",
+    "secondary_category": "artificial intelligence",
+    "secondary_year": 2016,
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.3,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "43",
+    "entity": "Gramm\u2013Leach\u2013Bliley Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "The Gramm\u2013Leach\u2013Bliley Act was enacted to repeal parts of the Glass\u2013Steagall Act and allow commercial banks, investment banks, and insurance companies to consolidate.",
+      "President Bill Clinton signed the Gramm\u2013Leach\u2013Bliley Act into law, officially removing barriers that separated banking, securities, and insurance activities.",
+      "The Financial Services Modernization Act, also known as the Gramm\u2013Leach\u2013Bliley Act, was established to modernize financial regulations and mandate consumer data privacy protections."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "44",
+    "entity": "E.T. the Extra-Terrestrial",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1982,
+    "sentences": [
+      "Steven Spielberg introduced the world to a candy-loving alien stranded on Earth in this heartwarming sci-fi blockbuster.",
+      "Universal Pictures released this film featuring a young Henry Thomas befriending a stranded extraterrestrial.",
+      "Cinema audiences flocked to see the story of a boy named Elliott and his bond with a gentle alien visitor."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "45",
+    "entity": "Adobe",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1982,
+    "sentences": [
+      "John Warnock and Charles Geschke leave Xerox PARC to establish Adobe Systems.",
+      "Adobe Systems is founded in the garage of John Warnock in Los Altos, California.",
+      "The software company Adobe is officially incorporated to develop the PostScript page description language."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "46",
+    "entity": "HIPAA",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "The Health Insurance Portability and Accountability Act became law in the same year that the Telecommunications Act was passed.",
+      "Legislators enacted HIPAA roughly a year after the debut of the Windows 95 operating system.",
+      "HIPAA was signed into law during the same year that the Nintendo 64 gaming console first launched."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "47",
+    "entity": "Toy Story",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "Pixar released the first feature-length computer-animated film, Toy Story.",
+      "Audiences were first introduced to Woody and Buzz Lightyear in the original Toy Story movie.",
+      "John Lasseter directed the groundbreaking CGI film Toy Story for Walt Disney Pictures."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "48",
+    "entity": "Endangered Species Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1973,
+    "sentences": [
+      "President Richard Nixon signed the Endangered Species Act into law.",
+      "The Endangered Species Act was enacted to protect critically imperiled species from extinction.",
+      "The United States Congress passed the Endangered Species Act to provide a program for the conservation of threatened and endangered plants and animals."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "49",
+    "entity": "Salesforce",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "Marc Benioff establishes Salesforce in a San Francisco apartment to revolutionize software delivery.",
+      "The company Salesforce officially launches its operations, aiming to replace traditional software installation with a cloud model.",
+      "Salesforce is incorporated by Parker Harris, Marc Benioff, Dave Moellenhoff, and Frank Dominguez."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "50",
+    "entity": "YouTube",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "The social networking platform Facebook had been active for about a year by the time YouTube was founded.",
+      "Google Maps and the video-sharing service YouTube both launched their initial versions during the same year.",
+      "The massively multiplayer online game World of Warcraft was released just a few months before the domain for YouTube was registered."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "51",
+    "entity": "Microplastics are harmful to oceans",
+    "category": "environment",
+    "question_type": "implicit",
+    "ground_truth_year": 2004,
+    "sentences": [
+      "The accumulation of microplastics in the world's oceans is increasingly recognized as a pervasive environmental threat."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2004,
+      2005,
+      2006,
+      2007,
+      2008
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.3,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "52",
+    "entity": "Oracle",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1977,
+    "sentences": [
+      "Larry Ellison, Bob Miner, and Ed Oates founded the company that would eventually become Oracle under the name Software Development Laboratories.",
+      "The multinational technology corporation Oracle began its operations as a startup called Software Development Laboratories.",
+      "Software Development Laboratories, which later renamed itself Oracle, was established by three engineers in Santa Clara."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "53",
+    "entity": "Paris Agreement",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "The Paris Agreement was adopted by consensus at the 21st Conference of the Parties to the UNFCCC.",
+      "Global leaders reached this landmark climate accord during the negotiations held at Le Bourget.",
+      "Parties to the United Nations Framework Convention on Climate Change formally adopted the Paris Agreement to limit global temperature rise."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "54",
+    "entity": "Ruby",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "Yukihiro Matsumoto publicly releases the first version of the Ruby programming language.",
+      "The object-oriented scripting language Ruby makes its debut in Japan.",
+      "Computer scientist Matz introduces the initial public release of Ruby."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "55",
+    "entity": "Gladiator",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2000,
+    "sentences": [
+      "Ridley Scott's Gladiator arrived in theaters one year after the release of The Matrix.",
+      "The historical epic Gladiator premiered the same year as the original X-Men movie.",
+      "Russell Crowe's performance in Gladiator captivated audiences a year after Fight Club polarized critics."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "56",
+    "entity": "Sony PlayStation",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "The Sony PlayStation was released to the public after the Super Nintendo Entertainment System had already popularized 16-bit gaming.",
+      "The debut of the original Sony PlayStation occurred the year following the theatrical release of Jurassic Park.",
+      "The launch of the first Sony PlayStation happened in the same year that Disney released The Lion King."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "57",
+    "entity": "Python (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1991,
+    "sentences": [
+      "Guido van Rossum first published the code for the Python programming language on the newsgroup alt.sources.",
+      "The initial public version of the Python programming language was released.",
+      "Python version 0.9.0 was officially made available as the language's first public distribution."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "58",
+    "entity": "Titanic",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1997,
+    "sentences": [
+      "James Cameron directed The Terminator long before achieving massive success with Titanic.",
+      "Leonardo DiCaprio starred in Romeo + Juliet just a year before the release of Titanic.",
+      "Kate Winslet appeared in Sense and Sensibility prior to starring in the blockbuster Titanic."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "59",
+    "entity": "AI chatbots + Fake news harms public trust",
+    "category": "artificial intelligence + media",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2022,
+    "sentences": [
+      "Experts warn that the ability of the new wave of consumer-facing AI chatbots to generate convincing falsehoods threatens to exacerbate the crisis of public trust in media ecosystems."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "AI chatbots",
+    "primary_category": "artificial intelligence",
+    "primary_year": 2022,
+    "secondary_entity": "Fake news harms public trust",
+    "secondary_category": "media",
+    "secondary_year": 2016,
+    "plausible_years": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "plausible_years_probs": [
+      0.15000000000000002,
+      0.45000000000000007,
+      0.30000000000000004,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "60",
+    "entity": "AI fairness and bias concerns + CRISPR gene editing",
+    "category": "artificial intelligence + genetics",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "Scholars are simultaneously grappling with the long-term implications of CRISPR-Cas9 gene editing and the emerging evidence of systemic bias in artificial intelligence algorithms."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "AI fairness and bias concerns",
+    "primary_category": "artificial intelligence",
+    "primary_year": 2016,
+    "secondary_entity": "CRISPR gene editing",
+    "secondary_category": "genetics",
+    "secondary_year": 2012,
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "plausible_years_probs": [
+      0.2,
+      0.2,
+      0.15,
+      0.1,
+      0.1,
+      0.1,
+      0.05,
+      0.05,
+      0.05
+    ]
+  },
+  {
+    "id": "61",
+    "entity": "Ransomware awareness",
+    "category": "cybersecurity",
+    "question_type": "implicit",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "Ransomware has escalated into a lucrative criminal business model that poses a severe risk to data integrity across all sectors."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019
+    ],
+    "plausible_years_probs": [
+      0.35000000000000003,
+      0.30000000000000004,
+      0.20000000000000004,
+      0.10000000000000002,
+      0.05000000000000001
+    ]
+  },
+  {
+    "id": "62",
+    "entity": "The Lord of the Rings: The Fellowship of the Ring",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "The Lord of the Rings: The Fellowship of the Ring premiered in theaters the same year as Harry Potter and the Sorcerer's Stone.",
+      "Peter Jackson's The Lord of the Rings: The Fellowship of the Ring was released one year after the historical epic Gladiator.",
+      "Both Shrek and The Lord of the Rings: The Fellowship of the Ring became major box office hits during the same year."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "63",
+    "entity": "Nintendo Switch",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2017,
+    "sentences": [
+      "Nintendo released the Switch as a hybrid successor to the Wii U home console.",
+      "The launch of the Nintendo Switch coincided with the release of The Legend of Zelda: Breath of the Wild.",
+      "Consumers welcomed the Nintendo Switch several years after the debut of the PlayStation 4."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "64",
+    "entity": "Spotify",
+    "category": "company",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2006,
+    "sentences": [
+      "Spotify was founded in the same year that the microblogging service Twitter was launched.",
+      "Daniel Ek co-founded Spotify exactly two years after Mark Zuckerberg created Facebook.",
+      "The music streaming service Spotify was established one year after the debut of YouTube."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "65",
+    "entity": "TypeScript",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "Microsoft announces the release of the first public preview of TypeScript to facilitate large-scale JavaScript application development.",
+      "Anders Hejlsberg unveils TypeScript as a strict syntactical superset of JavaScript that adds optional static typing.",
+      "The TypeScript programming language becomes publicly available as an open-source project for the first time."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "66",
+    "entity": "Unsafe drinking water is harmful",
+    "category": "public health",
+    "question_type": "implicit",
+    "ground_truth_year": 1971,
+    "sentences": [
+      "Public health officials emphasize that the ingestion of unsafe drinking water remains a critical source of disease transmission and mortality."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      1971,
+      1972,
+      1973,
+      1974,
+      1975
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.2,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "67",
+    "entity": "PyTorch",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "Facebook's AI Research lab released the open-source machine learning library PyTorch.",
+      "The deep learning framework PyTorch was officially introduced to the public.",
+      "The initial version of the PyTorch tensor library was launched by a team including Adam Paszke and Soumith Chintala."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "68",
+    "entity": "Gender inequality is harmful + High-glycemic diets are harmful",
+    "category": "society + nutrition",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2003,
+    "sentences": [
+      "Experts warn that high-glycemic diets significantly increase the risk of chronic disease, while simultaneous reports highlight gender inequality as a pervasive force that damages societal well-being."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Gender inequality is harmful",
+    "primary_category": "society",
+    "primary_year": 1948,
+    "secondary_entity": "High-glycemic diets are harmful",
+    "secondary_category": "nutrition",
+    "secondary_year": 2003,
+    "plausible_years": [
+      2003,
+      2004,
+      2005,
+      2006,
+      2007
+    ],
+    "plausible_years_probs": [
+      0.35,
+      0.25,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "69",
+    "entity": "Docker",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "Docker was first released as an open-source project to automate the deployment of applications inside software containers.",
+      "Solomon Hykes introduced the Docker platform during the PyCon conference in Santa Clara.",
+      "The initial public version of the Docker containerization engine made its debut."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "70",
+    "entity": "Climate-change adaptation planning + Smoking negative health effects",
+    "category": "policy + public health",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "The scientific community has formally recognized that adaptation is a necessary strategy to complement climate change mitigation, paralleling the established medical certainty regarding the severe health risks of smoking."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Climate-change adaptation planning",
+    "primary_category": "policy",
+    "primary_year": 2001,
+    "secondary_entity": "Smoking negative health effects",
+    "secondary_category": "public health",
+    "secondary_year": 1964,
+    "plausible_years": [
+      2001,
+      2002,
+      2003,
+      2004,
+      2005
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.3,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "71",
+    "entity": "Online misinformation is harmful",
+    "category": "media",
+    "question_type": "implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "The uncontrolled spread of misinformation across social media platforms is widely regarded as a fundamental threat to democratic institutions and public trust."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "plausible_years_probs": [
+      0.15000000000000002,
+      0.15000000000000002,
+      0.15000000000000002,
+      0.10000000000000003,
+      0.10000000000000003,
+      0.10000000000000003,
+      0.10000000000000003,
+      0.08000000000000002,
+      0.07000000000000002
+    ]
+  },
+  {
+    "id": "72",
+    "entity": "Climate-change adaptation planning",
+    "category": "policy",
+    "question_type": "implicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "Climate-change adaptation planning is increasingly recognized as a necessary complement to mitigation efforts in order to address inevitable environmental impacts."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2001,
+      2002,
+      2003,
+      2004,
+      2005
+    ],
+    "plausible_years_probs": [
+      0.35000000000000003,
+      0.30000000000000004,
+      0.20000000000000004,
+      0.10000000000000002,
+      0.05000000000000001
+    ]
+  },
+  {
+    "id": "73",
+    "entity": "Electric vehicle adoption",
+    "category": "transport",
+    "question_type": "implicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "Reducing the prohibitive cost of lithium-ion batteries is widely considered the most critical factor for enabling the mass adoption of electric vehicles."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1
+    ]
+  },
+  {
+    "id": "74",
+    "entity": "Kyoto Protocol",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1997,
+    "sentences": [
+      "The United Nations adopted this landmark international treaty in Japan to commit state parties to reduce greenhouse gas emissions.",
+      "Delegates finalized an agreement in a Japanese city that extends the UNFCCC by establishing binding emission reduction targets for industrialized nations.",
+      "This protocol operationalizing the United Nations Framework Convention on Climate Change was formally adopted at a conference in Japan."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "75",
+    "entity": "Nintendo 64",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "The Nintendo 64 was officially released to the public in Japan and North America.",
+      "Nintendo launched the Nintendo 64 console alongside its flagship title Super Mario 64.",
+      "The Nintendo 64 arrived on the market as the successor to the Super Nintendo Entertainment System."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "76",
+    "entity": "MySQL",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "The open-source relational database management system MySQL is first released to the public.",
+      "Michael Widenius and David Axmark introduce the initial version of the MySQL database software.",
+      "The MySQL database server makes its debut as a lightweight SQL solution."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "77",
+    "entity": "Deforestation is harmful",
+    "category": "environment",
+    "question_type": "implicit",
+    "ground_truth_year": 1992,
+    "sentences": [
+      "There is now a widespread consensus that deforestation causes irreversible damage to the global climate and biodiversity."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      1992,
+      1993,
+      1994,
+      1995,
+      1996
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.25,
+      0.2,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "78",
+    "entity": "Jaws",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1975,
+    "sentences": [
+      "Steven Spielberg's thriller about a giant man-eating great white shark terrorizing a summer resort town was released.",
+      "The concept of the modern summer blockbuster was established by the theatrical debut of this film starring Roy Scheider.",
+      "This movie, featuring the famous line about needing a bigger boat, premiered in cinemas to massive commercial success."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "79",
+    "entity": "Children\u2019s Online Privacy Protection Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "The Children\u2019s Online Privacy Protection Act was enacted by the United States Congress to protect the privacy of children under 13.",
+      "This federal law was signed to place parents in control over what information is collected from their young children online.",
+      "Federal legislation known as the Children\u2019s Online Privacy Protection Act was passed to regulate the online collection of personal information from minors."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "80",
+    "entity": "Git",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "Linus Torvalds developed the Git version control system to better manage the source code of the Linux kernel.",
+      "The distributed version control system Git was launched as an alternative to the proprietary BitKeeper software.",
+      "Git introduced a decentralized approach to version control that challenged the dominance of Subversion."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "81",
+    "entity": "Frozen",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "Walt Disney Animation Studios released Frozen the year after the video game-themed Wreck-It Ralph hit theaters.",
+      "The animated musical Frozen arrived in cinemas three years following the debut of Tangled.",
+      "Frozen premiered during the same year that Universal released the sequel Despicable Me 2."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "82",
+    "entity": "PayPal",
+    "category": "company",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "The digital payments landscape began to evolve when PayPal's parent company was founded in the same year that Google was incorporated.",
+      "Microsoft released the operating system Windows 98 just months before the company that would become PayPal was established.",
+      "The handheld gaming market welcomed the Game Boy Color around the same time that the initial iteration of the PayPal service's parent company was founded."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "83",
+    "entity": "Microplastics are harmful to oceans + Antibiotic resistance",
+    "category": "environment + medicine",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2004,
+    "sentences": [
+      "Scientists are currently addressing the accumulation of microplastics in marine environments while simultaneously combating the persistent threat of antibiotic resistance."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Microplastics are harmful to oceans",
+    "primary_category": "environment",
+    "primary_year": 2004,
+    "secondary_entity": "Antibiotic resistance",
+    "secondary_category": "medicine",
+    "secondary_year": 1945,
+    "plausible_years": [
+      2004,
+      2005,
+      2006,
+      2007,
+      2008
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.25,
+      0.15,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "84",
+    "entity": "Google",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "Larry Page and Sergey Brin officially incorporated Google as a company.",
+      "The technology company Google was founded in a garage in Menlo Park.",
+      "Google was established as a private entity to organize the world's information."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "85",
+    "entity": "YouTube",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "Former PayPal employees Chad Hurley, Steve Chen, and Jawed Karim found the video-sharing website YouTube.",
+      "The first ever video, titled Me at the zoo, is uploaded to the YouTube platform.",
+      "The domain name for the video hosting service YouTube is officially activated."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "86",
+    "entity": "Java (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "Sun Microsystems officially unveils the Java programming language to the public.",
+      "The Java programming language makes its public debut under Sun Microsystems.",
+      "James Gosling and his team at Sun Microsystems introduce the Java language to the world."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "87",
+    "entity": "Digital addiction is harmful",
+    "category": "technology",
+    "question_type": "implicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "Psychologists represent a growing consensus that digital addiction poses real and significant risks to mental health and social development."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015
+    ],
+    "plausible_years_probs": [
+      0.2,
+      0.2,
+      0.2,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "88",
+    "entity": "Clean Air Act (US major expansion)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1970,
+    "sentences": [
+      "National Ambient Air Quality Standards were established under this major expansion of United States federal air pollution laws.",
+      "President Nixon signed this landmark legislation which mandated a ninety percent reduction in automotive emissions within a few years.",
+      "This comprehensive act authorized the newly created Environmental Protection Agency to limit emissions from both industrial and mobile sources."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "89",
+    "entity": "Social distancing + AI fairness and bias concerns",
+    "category": "public health + artificial intelligence",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2020,
+    "sentences": [
+      "The global implementation of social distancing protocols has intensified the debate over how to detect and mitigate algorithmic bias in AI-driven tools used for remote monitoring and allocation."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Social distancing",
+    "primary_category": "public health",
+    "primary_year": 2020,
+    "secondary_entity": "AI fairness and bias concerns",
+    "secondary_category": "artificial intelligence",
+    "secondary_year": 2016,
+    "plausible_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.3,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "90",
+    "entity": "GDPR",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "The European Parliament and the Council of the European Union officially adopted the General Data Protection Regulation to unify data privacy laws.",
+      "European legislators formally approved the final text of the General Data Protection Regulation to replace the earlier Data Protection Directive.",
+      "The General Data Protection Regulation was enacted by the European Union, establishing a new framework for data privacy and security."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "91",
+    "entity": "Reusable launch vehicles + Global warming",
+    "category": "aerospace + science",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2006,
+    "sentences": [
+      "While NASA begins funding commercial development of reusable orbital transport services, the release of 'An Inconvenient Truth' has simultaneously thrust the climate crisis into the mainstream spotlight."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Reusable launch vehicles",
+    "primary_category": "aerospace",
+    "primary_year": 2006,
+    "secondary_entity": "Global warming",
+    "secondary_category": "science",
+    "secondary_year": 1988,
+    "plausible_years": [
+      2006,
+      2007,
+      2008
+    ],
+    "plausible_years_probs": [
+      0.5,
+      0.3,
+      0.2
+    ]
+  },
+  {
+    "id": "92",
+    "entity": "The Godfather",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1972,
+    "sentences": [
+      "Francis Ford Coppola released his landmark crime film The Godfather to American audiences.",
+      "Marlon Brando starred as Don Vito Corleone in the theatrical debut of The Godfather.",
+      "The film adaptation of Mario Puzo's best-selling novel The Godfather made its official premiere."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "93",
+    "entity": "Federal Election Campaign Act (major amendments)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1971,
+    "sentences": [
+      "The Federal Election Campaign Act is enacted to require full reporting of campaign contributions and expenditures for federal candidates.",
+      "This legislation is established as the primary United States federal law regulating political campaign spending and fundraising.",
+      "Congress passes the Federal Election Campaign Act to consolidate earlier reform efforts and mandate comprehensive financial disclosure in elections."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "94",
+    "entity": "DVD (consumer format)",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "The Nintendo 64 console was released to the public in the same year that the DVD format was launched.",
+      "The DVD format arrived on the market the year after Pixar released its first feature film, Toy Story.",
+      "The release of the DVD format occurred in the same year that the Spice Girls issued their debut single Wannabe."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "95",
+    "entity": "Climate-change adaptation planning + 5G cellular deployment",
+    "category": "policy + telecommunications",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2019,
+    "sentences": [
+      "Urban resilience strategies now incorporate the high bandwidth of active commercial 5G networks to facilitate real-time climate adaptation monitoring systems."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Climate-change adaptation planning",
+    "primary_category": "policy",
+    "primary_year": 2001,
+    "secondary_entity": "5G cellular deployment",
+    "secondary_category": "telecommunications",
+    "secondary_year": 2019,
+    "plausible_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.3,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "96",
+    "entity": "Lead exposure is harmful + mRNA vaccine deployment",
+    "category": "medicine + biomedicine",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "Groundbreaking research has just demonstrated that nucleoside modifications can suppress the immunogenicity of RNA, opening the door for future mRNA vaccine development, while public health authorities continue to enforce strict protocols to mitigate the known dangers of lead exposure."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Lead exposure is harmful",
+    "primary_category": "medicine",
+    "primary_year": 1973,
+    "secondary_entity": "mRNA vaccine deployment",
+    "secondary_category": "biomedicine",
+    "secondary_year": 2005,
+    "plausible_years": [
+      2005,
+      2006,
+      2007,
+      2008,
+      2009
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.3,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "97",
+    "entity": "TikTok",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "ByteDance releases the application Douyin, which serves as the foundational version of the global platform TikTok.",
+      "The short-form video hosting service TikTok traces its beginning to the launch of its Chinese counterpart by ByteDance.",
+      "ByteDance introduces the social media app Douyin, marking the debut of the platform that would internationally be known as TikTok."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "98",
+    "entity": "C (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1972,
+    "sentences": [
+      "Dennis Ritchie introduced the C programming language at Bell Labs as a successor to the B language.",
+      "The general-purpose programming language C was created to facilitate the development of the Unix operating system.",
+      "This procedural language, designed by Dennis Ritchie for system programming on the PDP-11, was first released to the public."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "99",
+    "entity": "Ransomware awareness + Microplastics are harmful to oceans",
+    "category": "cybersecurity + environment",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "While environmental agencies struggle to mitigate the long-term damage of microplastics in ocean waters, cybersecurity firms are developing advanced heuristics to detect the aggressive spread of ransomware."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Ransomware awareness",
+    "primary_category": "cybersecurity",
+    "primary_year": 2015,
+    "secondary_entity": "Microplastics are harmful to oceans",
+    "secondary_category": "environment",
+    "secondary_year": 2004,
+    "plausible_years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1
+    ]
+  },
+  {
+    "id": "100",
+    "entity": "Child labor is harmful",
+    "category": "human rights",
+    "question_type": "implicit",
+    "ground_truth_year": 1919,
+    "sentences": [
+      "International consensus asserts that industrial child labor is physically and morally injurious to the young and must be systematically eradicated."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      1919,
+      1920,
+      1921,
+      1922,
+      1923
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.2,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "101",
+    "entity": "PHP",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "Rasmus Lerdorf first released the source code for the Personal Home Page Tools to the public.",
+      "The server-side scripting language known as PHP was originally introduced to the web development community.",
+      "Development of the PHP language began with the release of a set of Common Gateway Interface binaries written in C."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "102",
+    "entity": "Apache HTTP Server",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "The Apache HTTP Server was initially released shortly after the NCSA Mosaic web browser helped popularize the World Wide Web.",
+      "The initial release of the Apache HTTP Server occurred in the same year that the first version of the PHP scripting language was introduced.",
+      "The Apache HTTP Server was launched to the public the year after the Netscape Navigator web browser made its debut."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "103",
+    "entity": "Kubernetes",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2014,
+    "sentences": [
+      "Google announces the release of Kubernetes as an open-source container orchestration tool.",
+      "The Kubernetes project is first introduced to the development community by Google engineers.",
+      "Open-source contributors gain access to the initial codebase of Kubernetes for container management."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "104",
+    "entity": "Voting Rights Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1965,
+    "sentences": [
+      "President Lyndon B. Johnson signs the Voting Rights Act into law to overcome legal barriers at the state and local levels that prevented African Americans from exercising their right to vote.",
+      "The United States Congress passes the Voting Rights Act to prohibit racial discrimination in voting and enforce the guarantees of the Fifteenth Amendment.",
+      "This landmark federal legislation is enacted to outlaw discriminatory voting practices such as literacy tests."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "105",
+    "entity": "AI chatbots + Remote work as a mainstream practice",
+    "category": "artificial intelligence + productivity",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2022,
+    "sentences": [
+      "While remote work continues to serve as a primary operating model for many companies, the recent explosion of generative AI chatbots has fundamentally altered how distributed teams draft content and solve coding problems."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "AI chatbots",
+    "primary_category": "artificial intelligence",
+    "primary_year": 2022,
+    "secondary_entity": "Remote work as a mainstream practice",
+    "secondary_category": "productivity",
+    "secondary_year": 2009,
+    "plausible_years": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "plausible_years_probs": [
+      0.30000000000000004,
+      0.4000000000000001,
+      0.20000000000000004,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "106",
+    "entity": "Plant-based protein as mainstream diet",
+    "category": "food",
+    "question_type": "implicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "Plant-based protein sources have effectively transitioned from niche health food aisles to becoming a staple in mainstream diets."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2017
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.3,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "107",
+    "entity": "Fake news harms public trust",
+    "category": "media",
+    "question_type": "implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "The rapid proliferation of fake news is increasingly recognized as a corrosive force that undermines public trust in media and democratic institutions."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.2,
+      0.15,
+      0.1,
+      0.1,
+      0.05,
+      0.04,
+      0.03,
+      0.03
+    ]
+  },
+  {
+    "id": "108",
+    "entity": "California Consumer Privacy Act (CCPA)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2018,
+    "sentences": [
+      "The California Consumer Privacy Act was signed into law to grant consumers new rights regarding their personal information.",
+      "Governor Jerry Brown signed this landmark privacy legislation, establishing strict data protection standards for California residents.",
+      "The California State Legislature passed this act, which became the first comprehensive consumer privacy law enacted in the United States."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "109",
+    "entity": "Civil Rights Act (US, 1964)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1964,
+    "sentences": [
+      "President Lyndon B. Johnson signed this landmark legislation that outlawed discrimination based on race, color, religion, sex, or national origin.",
+      "This act ended segregation in public places and banned employment discrimination on the basis of race, color, religion, sex, or national origin.",
+      "Congress passed this sweeping civil rights law which established the Equal Employment Opportunity Commission and prohibited segregation in public accommodations."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "110",
+    "entity": "Social distancing",
+    "category": "public health",
+    "question_type": "implicit",
+    "ground_truth_year": 2020,
+    "sentences": [
+      "Public health authorities emphasize social distancing as a critical non-pharmaceutical intervention to flatten the curve and prevent healthcare systems from being overwhelmed."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.3,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "111",
+    "entity": "NVIDIA",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1993,
+    "sentences": [
+      "Jensen Huang, Chris Malachowsky, and Curtis Priem founded NVIDIA to bring 3D graphics to the gaming and multimedia markets.",
+      "The technology company NVIDIA was established in Santa Clara with a primary focus on solving the challenge of 3D graphics on PCs.",
+      "NVIDIA officially began its corporate operations as a startup dedicated to the development of graphics processing units."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "112",
+    "entity": "Lead exposure is harmful",
+    "category": "medicine",
+    "question_type": "implicit",
+    "ground_truth_year": 1973,
+    "sentences": [
+      "Mounting scientific evidence confirms that lead exposure poses a significant threat to public health and requires stricter regulatory control."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      1973,
+      1974,
+      1975,
+      1976,
+      1977
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.3,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "113",
+    "entity": "Intel",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1968,
+    "sentences": [
+      "Gordon Moore and Robert Noyce found Intel Corporation in Mountain View, California.",
+      "Intel is incorporated to develop semiconductor memory products.",
+      "Robert Noyce and Gordon Moore leave Fairchild Semiconductor to establish Intel."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "114",
+    "entity": "Microplastics as an ocean pollutant + Smoking is harmful to health",
+    "category": "environment + public health",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2004,
+    "sentences": [
+      "Scientists are urging immediate action to address the newly identified threat of microplastics accumulating in the oceans, parallel to the ongoing public health efforts to reduce cigarette smoking."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Microplastics as an ocean pollutant",
+    "primary_category": "environment",
+    "primary_year": 2004,
+    "secondary_entity": "Smoking is harmful to health",
+    "secondary_category": "public health",
+    "secondary_year": 1964,
+    "plausible_years": [
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009
+    ],
+    "plausible_years_probs": [
+      0.35,
+      0.25,
+      0.15,
+      0.1,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "115",
+    "entity": "Microplastics as an ocean pollutant + Social distancing",
+    "category": "environment + public health",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2020,
+    "sentences": [
+      "Volunteer groups focused on filtering microplastics from ocean waters have modified their operations to ensure strict adherence to social distancing mandates."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Microplastics as an ocean pollutant",
+    "primary_category": "environment",
+    "primary_year": 2004,
+    "secondary_entity": "Social distancing",
+    "secondary_category": "public health",
+    "secondary_year": 2020,
+    "plausible_years": [
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "plausible_years_probs": [
+      0.5,
+      0.3,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "116",
+    "entity": "Online misinformation is harmful + Carbon-neutral targets",
+    "category": "media + policy",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "Global leaders are currently focusing on transitioning to carbon-neutral economies while simultaneously combating the destabilizing effects of online misinformation on public discourse."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "Online misinformation is harmful",
+    "primary_category": "media",
+    "primary_year": 2016,
+    "secondary_entity": "Carbon-neutral targets",
+    "secondary_category": "policy",
+    "secondary_year": 2015,
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "plausible_years_probs": [
+      0.15,
+      0.2,
+      0.2,
+      0.15,
+      0.1,
+      0.1,
+      0.05,
+      0.05
+    ]
+  },
+  {
+    "id": "117",
+    "entity": "AI chatbots + Smoking negative health effects",
+    "category": "artificial intelligence + public health",
+    "question_type": "multi_implicit",
+    "ground_truth_year": 2022,
+    "sentences": [
+      "Generative AI chatbots are now widely used to summarize the decades of medical consensus regarding the severe health risks associated with cigarette smoking."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "primary_entity": "AI chatbots",
+    "primary_category": "artificial intelligence",
+    "primary_year": 2022,
+    "secondary_entity": "Smoking negative health effects",
+    "secondary_category": "public health",
+    "secondary_year": 1964,
+    "plausible_years": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "plausible_years_probs": [
+      0.30000000000000004,
+      0.4000000000000001,
+      0.20000000000000004,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "118",
+    "entity": "AI chatbots",
+    "category": "artificial intelligence",
+    "question_type": "implicit",
+    "ground_truth_year": 2022,
+    "sentences": [
+      "AI chatbots exhibit advanced generative capabilities that allow them to draft essays, debug code, and maintain context throughout lengthy human-like conversations."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00",
+    "plausible_years": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "plausible_years_probs": [
+      0.4000000000000001,
+      0.30000000000000004,
+      0.20000000000000004,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "119",
+    "entity": "Sarbanes\u2013Oxley Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "The United States Congress enacts the Sarbanes\u2013Oxley Act to mandate strict reforms to existing securities regulations and protect investors.",
+      "President George W. Bush signs the Sarbanes\u2013Oxley Act into law in response to major corporate accounting scandals involving Enron and WorldCom.",
+      "The Sarbanes\u2013Oxley Act establishes the Public Company Accounting Oversight Board to oversee auditors of public companies."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  },
+  {
+    "id": "120",
+    "entity": "iPod",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "Apple unveils a portable digital music player marketed with the slogan \"1,000 songs in your pocket.\"",
+      "The original iPod with a mechanical scroll wheel and 5GB capacity is introduced to the market.",
+      "Steve Jobs announces the release of the first-generation iPod at a special event."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T23:09:18.132545+00:00"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {"entity": "Global warming", "category": "science", "year": 1988},
+  {"entity": "Smoking negative health effects", "category": "public health", "year": 1964},
+  {"entity": "Antibiotic resistance", "category": "medicine", "year": 1945},
+  {"entity": "Microplastics as an ocean pollutant", "category": "environment", "year": 2004},
+  {"entity": "Genetically modified crops adoption", "category": "agriculture", "year": 1996},
+  {"entity": "Climate-change adaptation planning", "category": "policy", "year": 2001},
+  {"entity": "AI fairness and bias concerns", "category": "artificial intelligence", "year": 2016},
+  {"entity": "Ransomware awareness", "category": "cybersecurity", "year": 2015},
+  {"entity": "Reusable launch vehicles", "category": "aerospace", "year": 2006},
+  {"entity": "Remote work as a mainstream practice", "category": "productivity", "year": 2009},
+  {"entity": "Social media misinformation concerns", "category": "media", "year": 2016},
+  {"entity": "Plant-based protein as mainstream diet", "category": "food", "year": 2013},
+  {"entity": "Electric vehicle adoption", "category": "transport", "year": 2010},
+  {"entity": "CRISPR gene editing", "category": "genetics", "year": 2012},
+  {"entity": "5G cellular deployment", "category": "telecommunications", "year": 2019},
+  {"entity": "Social distancing", "category": "public health", "year": 2020},
+  {"entity": "Carbon-neutral targets", "category": "policy", "year": 2015},
+  {"entity": "mRNA vaccine deployment", "category": "biomedicine", "year": 2005},
+  {"entity": "Online learning from home", "category": "education", "year": 2003},
+  {"entity": "AI chatbots", "category": "artificial intelligence", "year": 2022}
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "model": "gpt-5-mini",
+    "estimate_changed_frac": 0.0,
+    "ci_changed_frac": 0.0,
+    "exact_original": 0.2857142857142857,
+    "conservative_original": 0.9142857142857143,
+    "weighted_original": 0.6,
+    "exact_updated": 0.4,
+    "conservative_updated": 0.8571428571428571,
+    "weighted_updated": 0.6285714285714286,
+    "sample_consistency_icc": 0.6772369218339732,
+    "sample_all_same_frac": 0.5142857142857142,
+    "splits": {
+      "joint": {
+        "exact_original": 0.2857142857142857,
+        "conservative_original": 0.9142857142857143,
+        "weighted_original": 0.6,
+        "exact_updated": 0.4,
+        "conservative_updated": 0.8571428571428571,
+        "weighted_updated": 0.6285714285714286,
+        "n": 35
+      },
+      "explicit": {
+        "exact_original": 0.2857142857142857,
+        "conservative_original": 0.9142857142857143,
+        "weighted_original": 0.6,
+        "exact_updated": 0.4,
+        "conservative_updated": 0.8571428571428571,
+        "weighted_updated": 0.6285714285714286,
+        "n": 35
+      },
+      "implicit": {
+        "exact_original": 0.0,
+        "conservative_original": 0.0,
+        "weighted_original": 0.0,
+        "exact_updated": 0.0,
+        "conservative_updated": 0.0,
+        "weighted_updated": 0.0,
+        "n": 0
+      }
+    }
+  }
+]

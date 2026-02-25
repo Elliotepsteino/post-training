@@ -1,0 +1,502 @@
+[
+  {
+    "entity": "C (programming language)",
+    "category": "software",
+    "year": 1972
+  },
+  {
+    "entity": "C++",
+    "category": "software",
+    "year": 1985
+  },
+  {
+    "entity": "Python (programming language)",
+    "category": "software",
+    "year": 1991
+  },
+  {
+    "entity": "Java (programming language)",
+    "category": "software",
+    "year": 1995
+  },
+  {
+    "entity": "JavaScript",
+    "category": "software",
+    "year": 1995
+  },
+  {
+    "entity": "PHP",
+    "category": "software",
+    "year": 1995
+  },
+  {
+    "entity": "Ruby",
+    "category": "software",
+    "year": 1995
+  },
+  {
+    "entity": "MySQL",
+    "category": "software",
+    "year": 1995
+  },
+  {
+    "entity": "Apache HTTP Server",
+    "category": "software",
+    "year": 1995
+  },
+  {
+    "entity": "Git",
+    "category": "software",
+    "year": 2005
+  },
+  {
+    "entity": "Docker",
+    "category": "software",
+    "year": 2013
+  },
+  {
+    "entity": "Kubernetes",
+    "category": "software",
+    "year": 2014
+  },
+  {
+    "entity": "TensorFlow",
+    "category": "software",
+    "year": 2015
+  },
+  {
+    "entity": "PyTorch",
+    "category": "software",
+    "year": 2016
+  },
+  {
+    "entity": "React (JavaScript library)",
+    "category": "software",
+    "year": 2013
+  },
+  {
+    "entity": "AngularJS",
+    "category": "software",
+    "year": 2010
+  },
+  {
+    "entity": "Swift (programming language)",
+    "category": "software",
+    "year": 2014
+  },
+  {
+    "entity": "Rust (programming language)",
+    "category": "software",
+    "year": 2010
+  },
+  {
+    "entity": "Go (programming language)",
+    "category": "software",
+    "year": 2009
+  },
+  {
+    "entity": "TypeScript",
+    "category": "software",
+    "year": 2012
+  },
+  {
+    "entity": "IBM Personal Computer",
+    "category": "product",
+    "year": 1981
+  },
+  {
+    "entity": "Apple Macintosh",
+    "category": "product",
+    "year": 1984
+  },
+  {
+    "entity": "Sony PlayStation",
+    "category": "product",
+    "year": 1994
+  },
+  {
+    "entity": "Nintendo 64",
+    "category": "product",
+    "year": 1996
+  },
+  {
+    "entity": "DVD (consumer format)",
+    "category": "product",
+    "year": 1996
+  },
+  {
+    "entity": "Google Search",
+    "category": "product",
+    "year": 1998
+  },
+  {
+    "entity": "iPod",
+    "category": "product",
+    "year": 2001
+  },
+  {
+    "entity": "Facebook (platform launch)",
+    "category": "product",
+    "year": 2004
+  },
+  {
+    "entity": "YouTube",
+    "category": "product",
+    "year": 2005
+  },
+  {
+    "entity": "Twitter",
+    "category": "product",
+    "year": 2006
+  },
+  {
+    "entity": "Amazon Kindle",
+    "category": "product",
+    "year": 2007
+  },
+  {
+    "entity": "iPhone",
+    "category": "product",
+    "year": 2007
+  },
+  {
+    "entity": "Android (public release)",
+    "category": "product",
+    "year": 2008
+  },
+  {
+    "entity": "Instagram",
+    "category": "product",
+    "year": 2010
+  },
+  {
+    "entity": "Snapchat",
+    "category": "product",
+    "year": 2011
+  },
+  {
+    "entity": "Tesla Model S",
+    "category": "product",
+    "year": 2012
+  },
+  {
+    "entity": "Amazon Echo",
+    "category": "product",
+    "year": 2014
+  },
+  {
+    "entity": "Apple Watch",
+    "category": "product",
+    "year": 2015
+  },
+  {
+    "entity": "Nintendo Switch",
+    "category": "product",
+    "year": 2017
+  },
+  {
+    "entity": "TikTok",
+    "category": "product",
+    "year": 2016
+  },
+  {
+    "entity": "Civil Rights Act (US, 1964)",
+    "category": "law",
+    "year": 1964
+  },
+  {
+    "entity": "Freedom of Information Act (US)",
+    "category": "law",
+    "year": 1966
+  },
+  {
+    "entity": "Clean Air Act (US major expansion)",
+    "category": "law",
+    "year": 1970
+  },
+  {
+    "entity": "HIPAA",
+    "category": "law",
+    "year": 1996
+  },
+  {
+    "entity": "Sarbanes–Oxley Act",
+    "category": "law",
+    "year": 2002
+  },
+  {
+    "entity": "USA PATRIOT Act",
+    "category": "law",
+    "year": 2001
+  },
+  {
+    "entity": "No Child Left Behind Act",
+    "category": "law",
+    "year": 2002
+  },
+  {
+    "entity": "Affordable Care Act",
+    "category": "law",
+    "year": 2010
+  },
+  {
+    "entity": "Dodd–Frank Act",
+    "category": "law",
+    "year": 2010
+  },
+  {
+    "entity": "GDPR",
+    "category": "law",
+    "year": 2016
+  },
+  {
+    "entity": "California Consumer Privacy Act (CCPA)",
+    "category": "law",
+    "year": 2018
+  },
+  {
+    "entity": "Digital Millennium Copyright Act",
+    "category": "law",
+    "year": 1998
+  },
+  {
+    "entity": "Kyoto Protocol",
+    "category": "law",
+    "year": 1997
+  },
+  {
+    "entity": "Paris Agreement",
+    "category": "law",
+    "year": 2015
+  },
+  {
+    "entity": "Americans with Disabilities Act",
+    "category": "law",
+    "year": 1990
+  },
+  {
+    "entity": "Children’s Online Privacy Protection Act",
+    "category": "law",
+    "year": 1998
+  },
+  {
+    "entity": "Gramm–Leach–Bliley Act",
+    "category": "law",
+    "year": 1999
+  },
+  {
+    "entity": "Federal Election Campaign Act (major amendments)",
+    "category": "law",
+    "year": 1971
+  },
+  {
+    "entity": "Voting Rights Act",
+    "category": "law",
+    "year": 1965
+  },
+  {
+    "entity": "Endangered Species Act",
+    "category": "law",
+    "year": 1973
+  },
+  {
+    "entity": "Star Wars: A New Hope",
+    "category": "film",
+    "year": 1977
+  },
+  {
+    "entity": "The Godfather",
+    "category": "film",
+    "year": 1972
+  },
+  {
+    "entity": "Jaws",
+    "category": "film",
+    "year": 1975
+  },
+  {
+    "entity": "E.T. the Extra-Terrestrial",
+    "category": "film",
+    "year": 1982
+  },
+  {
+    "entity": "Jurassic Park",
+    "category": "film",
+    "year": 1993
+  },
+  {
+    "entity": "Titanic",
+    "category": "film",
+    "year": 1997
+  },
+  {
+    "entity": "The Matrix",
+    "category": "film",
+    "year": 1999
+  },
+  {
+    "entity": "The Lord of the Rings: The Fellowship of the Ring",
+    "category": "film",
+    "year": 2001
+  },
+  {
+    "entity": "Finding Nemo",
+    "category": "film",
+    "year": 2003
+  },
+  {
+    "entity": "The Dark Knight",
+    "category": "film",
+    "year": 2008
+  },
+  {
+    "entity": "Avatar",
+    "category": "film",
+    "year": 2009
+  },
+  {
+    "entity": "Frozen",
+    "category": "film",
+    "year": 2013
+  },
+  {
+    "entity": "Inception",
+    "category": "film",
+    "year": 2010
+  },
+  {
+    "entity": "Gladiator",
+    "category": "film",
+    "year": 2000
+  },
+  {
+    "entity": "Pulp Fiction",
+    "category": "film",
+    "year": 1994
+  },
+  {
+    "entity": "The Shawshank Redemption",
+    "category": "film",
+    "year": 1994
+  },
+  {
+    "entity": "Black Panther",
+    "category": "film",
+    "year": 2018
+  },
+  {
+    "entity": "The Avengers",
+    "category": "film",
+    "year": 2012
+  },
+  {
+    "entity": "Toy Story",
+    "category": "film",
+    "year": 1995
+  },
+  {
+    "entity": "Harry Potter and the Sorcerer’s Stone",
+    "category": "film",
+    "year": 2001
+  },
+  {
+    "entity": "Intel",
+    "category": "company",
+    "year": 1968
+  },
+  {
+    "entity": "Microsoft",
+    "category": "company",
+    "year": 1975
+  },
+  {
+    "entity": "Apple Inc.",
+    "category": "company",
+    "year": 1976
+  },
+  {
+    "entity": "Oracle",
+    "category": "company",
+    "year": 1977
+  },
+  {
+    "entity": "Adobe",
+    "category": "company",
+    "year": 1982
+  },
+  {
+    "entity": "Dell",
+    "category": "company",
+    "year": 1984
+  },
+  {
+    "entity": "Cisco",
+    "category": "company",
+    "year": 1984
+  },
+  {
+    "entity": "Amazon",
+    "category": "company",
+    "year": 1994
+  },
+  {
+    "entity": "Google",
+    "category": "company",
+    "year": 1998
+  },
+  {
+    "entity": "PayPal",
+    "category": "company",
+    "year": 1998
+  },
+  {
+    "entity": "Alibaba",
+    "category": "company",
+    "year": 1999
+  },
+  {
+    "entity": "Tesla, Inc.",
+    "category": "company",
+    "year": 2003
+  },
+  {
+    "entity": "Meta Platforms (Facebook)",
+    "category": "company",
+    "year": 2004
+  },
+  {
+    "entity": "YouTube",
+    "category": "company",
+    "year": 2005
+  },
+  {
+    "entity": "Airbnb",
+    "category": "company",
+    "year": 2008
+  },
+  {
+    "entity": "Uber",
+    "category": "company",
+    "year": 2009
+  },
+  {
+    "entity": "Spotify",
+    "category": "company",
+    "year": 2006
+  },
+  {
+    "entity": "SpaceX",
+    "category": "company",
+    "year": 2002
+  },
+  {
+    "entity": "NVIDIA",
+    "category": "company",
+    "year": 1993
+  },
+  {
+    "entity": "Salesforce",
+    "category": "company",
+    "year": 1999
+  }
+]

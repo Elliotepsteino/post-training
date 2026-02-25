@@ -27,7 +27,12 @@ def main() -> None:
     parser.add_argument("--sequential-ids", action="store_true", help="Rewrite ids as 1..N")
     args = parser.parse_args()
 
-    preds = {row["id"]: int(row["pred_year"]) for row in load_jsonl(args.preds)}
+    preds = {}
+    for row in load_jsonl(args.preds):
+        year = row.get("year", row.get("pred_year"))
+        if year is None:
+            continue
+        preds[row["id"]] = int(year)
     samples = load_jsonl(args.samples)
 
     os.makedirs(os.path.dirname(args.out), exist_ok=True)

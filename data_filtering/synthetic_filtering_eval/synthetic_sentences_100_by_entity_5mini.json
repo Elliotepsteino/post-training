@@ -1,0 +1,1502 @@
+[
+  {
+    "id": "1",
+    "entity": "C (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1972,
+    "sentences": [
+      "What year was the C programming language first publicly introduced?",
+      "When was the C programming language first released to the public?",
+      "Which year marks the first public introduction of the C programming language?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "2",
+    "entity": "C++",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1985,
+    "sentences": [
+      "Given that C++ was created by Bjarne Stroustrup at Bell Laboratories as an extension of the C language introducing classes and other object-oriented features, what is the earliest year C++ could have been first released to the public?",
+      "Considering that the creator of C++ published the first authoritative book on the language in the same year the language was first made commercially available and that it originated as an extension of C developed at Bell Labs, what is the earliest year this could have occurred?",
+      "If C++ began as 'C with Classes' developed by Bjarne Stroustrup at Bell Labs and compilers supporting the newly named language were being distributed alongside its initial commercial release, what is the earliest year that initial release could have taken place?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "3",
+    "entity": "Python (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1991,
+    "sentences": [
+      "When was the Python programming language first publicly released?",
+      "What year did Python make its first public appearance as a programming language?",
+      "When did the Python language have its initial public introduction to programmers?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "4",
+    "entity": "Java (programming language)",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "When was Java, the class-based object-oriented programming language created by James Gosling at Sun Microsystems to run on a virtual machine and popularized for use in web browser applets, first released?",
+      "When did Java, designed to produce platform-independent bytecode executed by the Java Virtual Machine and originally developed by Sun Microsystems, become available to the public?",
+      "When was Java, the language developed at Sun Microsystems that emphasized write-once-run-anywhere portability and was distributed alongside the HotJava browser to enable applets, first made public?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "5",
+    "entity": "JavaScript",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "When was JavaScript first introduced to the public?",
+      "What year did JavaScript first appear as a publicly released programming language?",
+      "Which year marks the initial public release of JavaScript?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "6",
+    "entity": "PHP",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "When was PHP first released to the public?",
+      "What year saw the public debut of the PHP scripting language?",
+      "When did PHP make its initial public appearance?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "7",
+    "entity": "Ruby",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "When was Ruby first publicly released by its creator Yukihiro Matsumoto as a dynamic, object-oriented scripting language?",
+      "When did Yukihiro Matsumoto release Ruby to the public after developing it as an interpreted language that combined ideas from Perl and Smalltalk?",
+      "When did the programming language Ruby, designed by Yukihiro Matsumoto to increase programmer productivity by blending features of his favorite languages such as Perl, Smalltalk, and Lisp, receive its initial public release?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "8",
+    "entity": "MySQL",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "What year was MySQL first made publicly available?",
+      "When was MySQL initially introduced to the public?",
+      "Can you state the year MySQL had its first public release?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "9",
+    "entity": "Apache HTTP Server",
+    "category": "software",
+    "question_type": "implicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "When did the Apache HTTP Server first become widely adopted by website operators?",
+      "At what point did the Apache HTTP Server start appearing as the default web server on many public web hosts?",
+      "When did the Apache HTTP Server first gain widespread use among early web communities?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "10",
+    "entity": "Git",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "Given that Git was developed by Linus Torvalds specifically to manage the Linux kernel source after the community stopped using BitKeeper due to a licensing dispute, when did Git first become available?",
+      "Considering that Git was created as a new distributed version control system to replace BitKeeper following the licensing controversy affecting Linux kernel contributors and that its initial public release coincided with the rise of several competing open-source DVCS projects, when did Git first appear?",
+      "When did Git, authored by Linus Torvalds and designed to address the Linux kernel project's need for a fast, distributed version control system after the BitKeeper arrangement ended, first become available?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "11",
+    "entity": "Docker",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "The debut of Docker marked its first public availability.",
+      "Docker entered public use when it was first introduced.",
+      "The initial release of Docker established it as a new offering."
+    ],
+    "generation_status": "fallback",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "12",
+    "entity": "Kubernetes",
+    "category": "software",
+    "question_type": "implicit",
+    "ground_truth_year": 2014,
+    "sentences": [
+      "When did Kubernetes first appear as a Google-announced open-source container orchestration project that began attracting external contributors?",
+      "At what point did Kubernetes become publicly available and start drawing significant attention from cloud providers and independent developers?",
+      "When did Kubernetes evolve from an internal effort into a public open-source project with an active upstream community and contributions from outside organizations?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "13",
+    "entity": "TensorFlow",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "When was TensorFlow, the open-source machine learning framework developed by Google's Brain team as the successor to the DistBelief system and built to run dataflow computations on both CPUs and GPUs, first released to the public?",
+      "What year did TensorFlow, Google's open-source library for deep learning that was created by the Brain team, announced as a replacement for an earlier internal platform and designed for distributed training across multiple devices, become publicly available?",
+      "When did TensorFlow, the dataflow-based open-source machine learning framework from Google developed by the Brain team to support both research and production with native GPU support and distributed execution, first appear as a public release?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "14",
+    "entity": "PyTorch",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "When was PyTorch first released to the public as an open-source deep learning framework?",
+      "What year saw the initial public release of the PyTorch software?",
+      "When did PyTorch become publicly available for use by researchers and developers?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "15",
+    "entity": "React (JavaScript library)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "What year was the React JavaScript library first released to the public?",
+      "When was the React JavaScript library first introduced to the public?",
+      "Which year saw the first public release of the React JavaScript library?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "16",
+    "entity": "AngularJS",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "When was AngularJS first released to the public?",
+      "What year did AngularJS debut as a publicly available web framework?",
+      "Which year saw the first public release of AngularJS?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "17",
+    "entity": "Swift (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2014,
+    "sentences": [
+      "In what year did Apple publicly reveal the Swift programming language for the first time?",
+      "What year marks the initial public announcement of the Swift programming language by Apple?",
+      "Which year corresponds to the first public unveiling of Apple's Swift programming language?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "18",
+    "entity": "Rust (programming language)",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "When was Rust, the systems programming language created to provide memory safety without a garbage collector and developed under Mozilla's sponsorship, first released to the public?",
+      "When did Rust, designed by Graydon Hoare to combine safety and concurrency with a modern type system and hosted as an open-source project on Mozilla infrastructure, first become available to users?",
+      "When was Rust, the open-source language emphasizing zero-cost abstractions and ownership-based memory management while being maintained by Mozilla Research, initially published for public use?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "19",
+    "entity": "Go (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "In which year was the Go programming language first announced to the public?",
+      "What year did the Go programming language make its initial public debut?",
+      "When was the Go programming language first released for public use?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "20",
+    "entity": "TypeScript",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "When was TypeScript first released to the public?",
+      "What year was TypeScript initially introduced as a publicly available programming language?",
+      "When did TypeScript make its first public debut?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "21",
+    "entity": "IBM Personal Computer",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1981,
+    "sentences": [
+      "What year was the IBM Personal Computer first introduced to the public?",
+      "In what year did IBM publicly unveil the Personal Computer for the first time?",
+      "When was the IBM Personal Computer first made available to consumers?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "22",
+    "entity": "Apple Macintosh",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "What year was the Apple Macintosh first introduced to the public?",
+      "When did Apple publicly introduce the Macintosh for the first time?",
+      "In which year did the Apple Macintosh make its public debut?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "23",
+    "entity": "Sony PlayStation",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "When was the Sony PlayStation first introduced to the public?",
+      "What year did the Sony PlayStation make its initial public debut?",
+      "What year marked the Sony PlayStation's first official launch?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "24",
+    "entity": "Nintendo 64",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "What year was the Nintendo 64 first introduced to consumers?",
+      "When did Nintendo officially introduce the Nintendo 64 to the public?",
+      "Which year corresponds to the Nintendo 64's initial public introduction?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "25",
+    "entity": "DVD (consumer format)",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "What year was the DVD consumer-format optical disc first introduced to the public?",
+      "When was the DVD format for home video first launched commercially?",
+      "In what year did the DVD optical-disc format make its initial public debut as a consumer product?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "26",
+    "entity": "Google Search",
+    "category": "product",
+    "question_type": "implicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "When did Google Search first become publicly available beyond its origins as an academic prototype after the company was formed?",
+      "When did Google Search begin offering a public web search service that ordinary internet users could access rather than remaining a campus research tool?",
+      "When did Google Search launch as a product accessible to general users following the founding of its company?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "27",
+    "entity": "iPod",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "What year was the first iPod introduced to the public?",
+      "Which year did Apple first release the original iPod to consumers?",
+      "Which year marks the public launch of the original iPod?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "28",
+    "entity": "Facebook (platform launch)",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2004,
+    "sentences": [
+      "Was Facebook launched as a social networking platform by Harvard undergraduates including Mark Zuckerberg and his college roommates?",
+      "Did Facebook start as a college-only directory created at Harvard for linking students by their photos and profiles under the leadership of Mark Zuckerberg?",
+      "Was Facebook originally released as a university-focused social site developed by a small team at Harvard that later expanded beyond campus?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "29",
+    "entity": "YouTube",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "Was YouTube the online video-sharing platform founded by three former PayPal employees that let users upload and watch videos and was later acquired by Google?",
+      "Did YouTube begin as a website for user-uploaded videos created by former PayPal colleagues that quickly attracted venture capital funding and was subsequently bought by Google?",
+      "Was YouTube launched to let people share and stream videos, founded by ex-PayPal employees and growing so popular that it resulted in a Google acquisition?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "30",
+    "entity": "Twitter",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2006,
+    "sentences": [
+      "What year was Twitter first launched to the public?",
+      "Which year marked Twitter's public launch as a product?",
+      "What year did Twitter first go live for public use?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "31",
+    "entity": "Amazon Kindle",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2007,
+    "sentences": [
+      "When was the Amazon Kindle first introduced to the public?",
+      "What year did Amazon release the Kindle for the first time?",
+      "When did Amazon make the Kindle available to consumers for the first time?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "32",
+    "entity": "iPhone",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2007,
+    "sentences": [
+      "What year was the iPhone first introduced to the public?",
+      "What year did Apple officially release the first iPhone?",
+      "Which year marks the initial public introduction of the iPhone?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "33",
+    "entity": "Android (public release)",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "When was Android first released to the public?",
+      "What year did Android receive its initial public release?",
+      "When did the Android platform become publicly available for the first time?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "34",
+    "entity": "Instagram",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "When did Instagram, the photo-sharing app created by Kevin Systrom and Mike Krieger that launched as an iPhone-only service offering square-format photos and built-in filters, first become available?",
+      "What year did Instagram, the mobile app that evolved from the Burbn project and reached one million users within its first two months as an iPhone-exclusive photo-sharing product, debut?",
+      "When was Instagram, the social photo product originally focused on iOS with square images and retro-style filters before expanding to other platforms, initially released?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "35",
+    "entity": "Snapchat",
+    "category": "product",
+    "question_type": "implicit",
+    "ground_truth_year": 2011,
+    "sentences": [
+      "When did Snapchat first start being used by college students and friends to send ephemeral photos?",
+      "When did people begin installing Snapchat to send disappearing photo messages instead of relying on traditional text chat?",
+      "When did Snapchat first emerge from a small campus experiment into an app widely adopted for ephemeral photo sharing?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "36",
+    "entity": "Tesla Model S",
+    "category": "product",
+    "question_type": "implicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "Was the Tesla Model S already being delivered to retail customers by the time mainstream automotive reviewers were comparing electric luxury sedans with established gasoline models?",
+      "Had the Tesla Model S reached general customer availability by the stage when major automotive awards began listing all-electric cars among their finalists?",
+      "Was the Tesla Model S already on sale to ordinary buyers when rental companies and corporate fleets first started trialing electric luxury sedans?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "37",
+    "entity": "Amazon Echo",
+    "category": "product",
+    "question_type": "implicit",
+    "ground_truth_year": 2014,
+    "sentences": [
+      "When did the Amazon Echo first begin appearing in many consumers' homes and become a common smart-speaker choice?",
+      "At what point did the Amazon Echo shift from limited previews to being widely available through major retail and online channels?",
+      "When did the Amazon Echo move from an early-adopter novelty to a mainstream product adopted by a broad range of households?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "38",
+    "entity": "Apple Watch",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "Given that the Apple Watch was the first smartwatch Apple sold commercially, required pairing with an iPhone via an iOS companion update (version 8.2) and supported contactless payments through an NFC chip, what is the earliest year it could have been released?",
+      "Considering that the Apple Watch shipped running watchOS with a built-in heart rate sensor and was made available for purchase through Apple Stores and Apple's online store, what is the earliest year consistent with those facts?",
+      "Which earliest year is compatible with the Apple Watch being sold commercially as Apple's first wearable featuring the digital crown, requiring setup through a companion iPhone app, and subsequently gaining native third-party app support via a watchOS update?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "39",
+    "entity": "Nintendo Switch",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2017,
+    "sentences": [
+      "Was the Nintendo Switch released as a hybrid home console and portable system with detachable Joy-Con controllers, a TV dock, and a bundled launch title The Legend of Zelda: Breath of the Wild?",
+      "Is the Nintendo Switch a Nintendo-made console built around an NVIDIA Tegra system-on-chip that offers removable Joy-Con controllers, HD Rumble, and television docking?",
+      "Did Nintendo market the Switch as the successor to the Wii U, combining handheld and TV play with detachable controllers and launch support for Breath of the Wild?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "40",
+    "entity": "TikTok",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "Given that TikTok is the international brand of ByteDance's short-form video app which first launched in China under a different name before expanding worldwide, what is the earliest admissible year for its initial launch?",
+      "Considering that TikTok originated as the Chinese app Douyin developed by ByteDance and was later rebranded or merged for global markets, what is the earliest admissible year the service could have been introduced?",
+      "If TikTok is the globally recognized version of a short-video platform created by ByteDance that initially released domestically in China prior to an international rollout, what is the earliest admissible year of that initial domestic release?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "41",
+    "entity": "Civil Rights Act (US, 1964)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1964,
+    "sentences": [
+      "What year was the Civil Rights Act enacted into United States law?",
+      "In what year did the United States Congress pass the Civil Rights Act?",
+      "Which year marks the enactment of the Civil Rights Act in the United States?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "42",
+    "entity": "Freedom of Information Act (US)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1966,
+    "sentences": [
+      "In what year was the Freedom of Information Act enacted into United States law?",
+      "When was the Freedom of Information Act first signed into law by the U.S. President?",
+      "What year did the United States Congress pass the Freedom of Information Act for the first time?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "43",
+    "entity": "Clean Air Act (US major expansion)",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1970,
+    "sentences": [
+      "When did the Clean Air Act major expansion establish national ambient air quality standards and grant the federal government broad authority to regulate emissions from stationary and mobile sources?",
+      "When did the Clean Air Act major expansion create a comprehensive federal permitting and enforcement framework while requiring states to develop and implement plans to meet national air quality goals?",
+      "When did the Clean Air Act major expansion significantly strengthen federal air pollution control by setting national emissions standards and empowering federal enforcement over interstate pollution?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "44",
+    "entity": "HIPAA",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "In what year was the Health Insurance Portability and Accountability Act (HIPAA) first enacted into federal law?",
+      "Which year marks the original passage of HIPAA as United States federal legislation?",
+      "When did HIPAA first become law at the federal level?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "45",
+    "entity": "Sarbanes\u2013Oxley Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "What year was the Sarbanes\u2013Oxley Act first enacted into U.S. law?",
+      "When was the Sarbanes\u2013Oxley Act originally passed by the U.S. Congress?",
+      "Which year marked the initial introduction of the Sarbanes\u2013Oxley Act to the public record?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "46",
+    "entity": "USA PATRIOT Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "When was the USA PATRIOT Act enacted into federal law?",
+      "What year was the USA PATRIOT Act passed by the United States Congress?",
+      "In which year did the USA PATRIOT Act become law?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "47",
+    "entity": "No Child Left Behind Act",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "Which federal statute titled the No Child Left Behind Act was signed by President George W. Bush, reauthorized the Elementary and Secondary Education Act, and instituted annual statewide testing along with sanctions for underperforming schools?",
+      "What federal law called the No Child Left Behind Act, championed by the Bush administration, expanded the federal role in K\u201312 education by establishing Adequate Yearly Progress measures, annual assessments, and district reporting requirements?",
+      "Which law known as the No Child Left Behind Act mandated yearly standardized testing in reading and math for public schools, linked federal Title I support to accountability measures, and introduced consequences for schools that failed to make progress?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "48",
+    "entity": "Affordable Care Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "When was the Affordable Care Act first signed into law by the President?",
+      "When did the Affordable Care Act become law after being passed by Congress?",
+      "When did Congress first enact the Affordable Care Act?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "49",
+    "entity": "Dodd\u2013Frank Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "In which year was the Dodd\u2013Frank Act signed into law during President Barack Obama's second year in office?",
+      "Which year saw the Dodd\u2013Frank Act become law roughly a year and a half after President Obama's inauguration?",
+      "What year did the Dodd\u2013Frank Act, the major U.S. financial reform enacted after the president completed his first full year in office, take effect?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "50",
+    "entity": "GDPR",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "What year was the GDPR first adopted by the European Union's legislative bodies?",
+      "In which year did the GDPR first become formally published as an EU regulation?",
+      "Which year marks the initial official introduction of the GDPR by EU authorities?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "51",
+    "entity": "California Consumer Privacy Act (CCPA)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2018,
+    "sentences": [
+      "When was the California Consumer Privacy Act first introduced?",
+      "What year did California formally introduce the Consumer Privacy Act known as the CCPA?",
+      "In which year was the CCPA first made public by California lawmakers?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "52",
+    "entity": "Digital Millennium Copyright Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "What year was the Digital Millennium Copyright Act first enacted as federal law?",
+      "When was the Digital Millennium Copyright Act first introduced into U.S. law?",
+      "What is the original introduction year of the Digital Millennium Copyright Act?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "53",
+    "entity": "Kyoto Protocol",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1997,
+    "sentences": [
+      "Was the Kyoto Protocol the international treaty adopted at the third Conference of the Parties to the UN Framework Convention on Climate Change held in Kyoto that set binding greenhouse gas emission reduction targets for developed countries?",
+      "Did the Kyoto Protocol, negotiated under the UNFCCC at COP3, establish legally binding emissions reduction obligations for Annex I parties and create market mechanisms such as emissions trading and the Clean Development Mechanism?",
+      "Is the Kyoto Protocol the multilateral environmental treaty finalized at the UN climate conference in Kyoto that obligated industrialized nations to quantified emission reduction commitments and provided mechanisms for compliance and flexibility?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "54",
+    "entity": "Paris Agreement",
+    "category": "law",
+    "question_type": "implicit",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "When was the Paris Agreement adopted by the international community at the UN climate summit held in Paris?",
+      "When did parties agree on the final text of the Paris Agreement during the major climate negotiations hosted in the French capital?",
+      "When was the global accord known as the Paris Agreement reached at the international conference on climate change in Paris?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "55",
+    "entity": "Americans with Disabilities Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1990,
+    "sentences": [
+      "What year was the Americans with Disabilities Act enacted as federal law?",
+      "Which year marked the introduction of the Americans with Disabilities Act into federal legislation?",
+      "When did the Americans with Disabilities Act officially become law at the federal level?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "56",
+    "entity": "Children\u2019s Online Privacy Protection Act",
+    "category": "law",
+    "question_type": "implicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "When did the Children\u2019s Online Privacy Protection Act first require online operators to obtain parental consent before collecting personal information from children?",
+      "When did the Children\u2019s Online Privacy Protection Act begin to impose federal limits on how commercial websites gather and use kids' data?",
+      "Around what time did the Children\u2019s Online Privacy Protection Act come into force as the principal federal rule governing children's online privacy?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "57",
+    "entity": "Gramm\u2013Leach\u2013Bliley Act",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "Did the Gramm\u2013Leach\u2013Bliley Act, approved by Congress and signed by President Bill Clinton, repeal portions of the Glass\u2013Steagall Act and create federal privacy protections for consumers of financial services?",
+      "Was the Gramm\u2013Leach\u2013Bliley Act the federal law that allowed affiliations among banks, securities firms, and insurance companies while imposing new financial privacy rules and being enacted under President Clinton?",
+      "Did the Gramm\u2013Leach\u2013Bliley Act, passed by Congress to modernize the banking industry and replace key restrictions from the Glass\u2013Steagall Act, establish obligations for consumer financial privacy?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "58",
+    "entity": "Federal Election Campaign Act (major amendments)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1971,
+    "sentences": [
+      "What year were the major amendments to the Federal Election Campaign Act first enacted into law?",
+      "When were the major amendments to the Federal Election Campaign Act initially passed by Congress?",
+      "In what year did the major amendments to the Federal Election Campaign Act first become effective federal law?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "59",
+    "entity": "Voting Rights Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1965,
+    "sentences": [
+      "When was the Voting Rights Act first enacted as federal law?",
+      "What year was the Voting Rights Act originally passed by the United States Congress?",
+      "When did the Voting Rights Act first become law in the United States?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "60",
+    "entity": "Endangered Species Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1973,
+    "sentences": [
+      "What year was the Endangered Species Act first enacted into federal law?",
+      "When was the Endangered Species Act originally passed by the United States Congress?",
+      "Which year marks the original passage of the Endangered Species Act as a federal statute?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "61",
+    "entity": "Star Wars: A New Hope",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1977,
+    "sentences": [
+      "What year was Star Wars: A New Hope first released to the public?",
+      "What year did Star Wars: A New Hope receive its first theatrical release?",
+      "What year marks the debut of Star Wars: A New Hope for general audiences?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "62",
+    "entity": "The Godfather",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1972,
+    "sentences": [
+      "What year was the film 'The Godfather' first released to the public?",
+      "Which year marked the theatrical debut of the film 'The Godfather'?",
+      "What year did 'The Godfather' first premiere in cinemas?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "63",
+    "entity": "Jaws",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1975,
+    "sentences": [
+      "In what year was the film Jaws first released to the public in theaters?",
+      "What year did the movie Jaws first premiere for general audiences?",
+      "When was Jaws initially made available to the public as a feature film?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "64",
+    "entity": "E.T. the Extra-Terrestrial",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1982,
+    "sentences": [
+      "What year was the film E.T. the Extra-Terrestrial first released to the public?",
+      "When did E.T. the Extra-Terrestrial make its initial theatrical debut?",
+      "In what year did the movie E.T. the Extra-Terrestrial have its first public release?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "65",
+    "entity": "Jurassic Park",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1993,
+    "sentences": [
+      "What year was the film Jurassic Park, directed by Steven Spielberg and adapted from Michael Crichton's novel that starred Sam Neill, Laura Dern, and Jeff Goldblum, released?",
+      "What year did Jurassic Park, the first film in its franchise produced by Amblin Entertainment and distributed by Universal Pictures with a score by John Williams, premiere?",
+      "What year was the Jurassic Park film, known for its pioneering CGI dinosaurs created by Industrial Light & Magic and winner of multiple Academy Awards, first released?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "66",
+    "entity": "Titanic",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1997,
+    "sentences": [
+      "What year was the film Titanic first released to the public?",
+      "Which year marks the initial public release of the film Titanic?",
+      "What year did the film Titanic make its debut in cinemas?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "67",
+    "entity": "The Matrix",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "When did the film The Matrix first premiere for general audiences?",
+      "What year was The Matrix first shown in cinemas?",
+      "When was The Matrix initially released to the public?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "68",
+    "entity": "The Lord of the Rings: The Fellowship of the Ring",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "Given that The Lord of the Rings: The Fellowship of the Ring premiered at the 58th Venice International Film Festival and was released by New Line Cinema as the first installment of Peter Jackson's live-action trilogy, what is the earliest admissible year of its theatrical release?",
+      "If The Lord of the Rings: The Fellowship of the Ring had its world premiere at the 58th Venice Film Festival, opened in theaters that December, and went on to receive multiple Academy Award nominations the following awards season, what is the earliest year it could have been released?",
+      "Considering that the film starring Elijah Wood as Frodo and Ian McKellen as Gandalf premiered at the 58th Venice International Film Festival and later won several Academy Awards at the ceremony honoring films released that same year, what is the earliest admissible year of its release?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "69",
+    "entity": "Finding Nemo",
+    "category": "film",
+    "question_type": "implicit",
+    "ground_truth_year": 2003,
+    "sentences": [
+      "When did Finding Nemo first appear in theaters for general audiences?",
+      "Approximately when did Finding Nemo begin playing widely in cinemas around the world?",
+      "When did the original release of Finding Nemo become available to moviegoers?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "70",
+    "entity": "The Dark Knight",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "What year was the film The Dark Knight first released to theaters?",
+      "Which year marks the initial public release of The Dark Knight as a motion picture?",
+      "What year did The Dark Knight first premiere for general audiences?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "71",
+    "entity": "Avatar",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "When did the film Avatar first premiere for general audiences?",
+      "What year marked Avatar's initial public theatrical release?",
+      "When was Avatar first shown in theaters to the public?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "72",
+    "entity": "Frozen",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "What year was the film Frozen first released?",
+      "Which year marks the theatrical debut of the film Frozen?",
+      "What year did the motion picture Frozen make its public debut?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "73",
+    "entity": "Inception",
+    "category": "film",
+    "question_type": "implicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "When did Inception first open in theaters and spark widespread mainstream discussion?",
+      "When did casual moviegoers begin arguing about Inception's plot twists after seeing it in cinemas?",
+      "When did Inception first become a common topic of mainstream media coverage and watercooler conversation during its theatrical run?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "74",
+    "entity": "Gladiator",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2000,
+    "sentences": [
+      "Did Gladiator premiere the same year the Sydney Summer Olympics were held?",
+      "Was Gladiator first released the same year the International Space Station received its first long-duration crew?",
+      "Did Gladiator debut the same year the first draft of the human genome was publicly announced?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "75",
+    "entity": "Pulp Fiction",
+    "category": "film",
+    "question_type": "implicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "When did Pulp Fiction first hit theaters and begin influencing both mainstream and independent filmmakers?",
+      "When did Pulp Fiction first draw long lines at cinemas and become a defining conversation piece among moviegoers?",
+      "When did Pulp Fiction premiere at prominent film festivals and start receiving widespread critical acclaim?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "76",
+    "entity": "The Shawshank Redemption",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "What year was the film 'The Shawshank Redemption' first released to the public?",
+      "Which year marks the original theatrical release of the film 'The Shawshank Redemption'?",
+      "In what year did the movie 'The Shawshank Redemption' have its initial public release?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "77",
+    "entity": "Black Panther",
+    "category": "film",
+    "question_type": "implicit",
+    "ground_truth_year": 2018,
+    "sentences": [
+      "Was Black Panther released the same year as Avengers: Infinity War, during a peak moment for large-scale Marvel crossovers?",
+      "Was Black Panther the first superhero film from Marvel Studios to earn a Best Picture nomination at the Academy Awards?",
+      "Did Black Panther premiere the year before Avengers: Endgame and subsequently win multiple Oscars at the next awards ceremony?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "78",
+    "entity": "The Avengers",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "When was the film 'The Avengers' first released to the public?",
+      "What year did the film 'The Avengers' premiere in theaters?",
+      "Which year saw the theatrical debut of the film 'The Avengers'?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "79",
+    "entity": "Toy Story",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "What year was the film Toy Story first released to theaters?",
+      "When did Toy Story premiere as a widely released feature film?",
+      "Which year marked the initial public theatrical release of the film Toy Story?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "80",
+    "entity": "Harry Potter and the Sorcerer\u2019s Stone",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "Given that the film is the first cinematic adaptation of J.K. Rowling's Harry Potter novels, was directed by Chris Columbus, and stars Daniel Radcliffe as the title character, what is the earliest year it could have been released?",
+      "Considering that the movie is the inaugural installment of the Harry Potter film series, features a young lead cast including Daniel Radcliffe, Rupert Grint, and Emma Watson, and was produced by David Heyman for Warner Bros., what is the earliest year it could have premiered?",
+      "If a film adaptation of J.K. Rowling's first Harry Potter book was directed by Chris Columbus, introduced Daniel Radcliffe in the role of Harry Potter, and launched a multi-film franchise, what is the earliest year it could have been released?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "81",
+    "entity": "Intel",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 1968,
+    "sentences": [
+      "When did Intel first start operating as a company that customers, partners, and the broader tech community could engage with?",
+      "When did the name Intel begin to appear in commerce as a supplier of semiconductor technology?",
+      "When did Intel first emerge as an active company on the commercial technology scene?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "82",
+    "entity": "Microsoft",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1975,
+    "sentences": [
+      "The debut of Microsoft marked its first public availability.",
+      "Microsoft entered public use when it was first introduced.",
+      "The initial release of Microsoft established it as a new offering."
+    ],
+    "generation_status": "fallback",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "83",
+    "entity": "Apple Inc.",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1976,
+    "sentences": [
+      "What year was Apple Inc. first introduced to the public?",
+      "What year was Apple Inc. founded as a company?",
+      "What year did Apple Inc. first begin operations as a company?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "84",
+    "entity": "Oracle",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 1977,
+    "sentences": [
+      "When did Oracle first form as a company?",
+      "When did Oracle first begin operating as a business entity?",
+      "When did Oracle first start doing business as an independent software company?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "85",
+    "entity": "Adobe",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1982,
+    "sentences": [
+      "In what year was the company Adobe founded?",
+      "What year marks the founding of Adobe as a company?",
+      "Which year did Adobe officially come into existence as a business entity?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "86",
+    "entity": "Dell",
+    "category": "company",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "When did Dell, the computer company started by Michael Dell while he was a student at the University of Texas and initially selling custom-built PCs directly to customers, begin operations?",
+      "What year was Dell, the personal-computer company launched by Michael Dell from his college dorm and known for pioneering direct-to-consumer sales of customizable PCs, established?",
+      "When was the company Dell, created by Michael Dell as a student venture at the University of Texas and originally offering customizable PCs sold directly to end users, officially formed?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "87",
+    "entity": "Cisco",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "When did Cisco first become a publicly traded company?",
+      "What year did Cisco first list its shares on a public stock exchange?",
+      "When did Cisco conduct its initial public offering?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "88",
+    "entity": "Amazon",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "What year was Amazon first launched to the public?",
+      "What year did Amazon first begin offering services to customers?",
+      "What year was Amazon initially introduced as a public online retailer?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "89",
+    "entity": "Google",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "When did Google first become publicly accessible as a web search service?",
+      "When did Google begin operating as a company offering its search engine to the general public?",
+      "When did Google launch its search service and start serving users beyond its original research circle?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "90",
+    "entity": "PayPal",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "When did PayPal first form as a company to develop its early peer-to-peer payment software?",
+      "When did PayPal originally register and begin operating as the company behind its early online money-transfer tool?",
+      "When did PayPal first come into existence as a company organizing the creation of its initial digital-payment product?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "91",
+    "entity": "Alibaba",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "The debut of Alibaba marked its first public availability.",
+      "Alibaba entered public use when it was first introduced.",
+      "The initial release of Alibaba established it as a new offering."
+    ],
+    "generation_status": "fallback",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "92",
+    "entity": "Tesla, Inc.",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2003,
+    "sentences": [
+      "The debut of Tesla, Inc. marked its first public availability.",
+      "Tesla, Inc. entered public use when it was first introduced.",
+      "The initial release of Tesla, Inc. established it as a new offering."
+    ],
+    "generation_status": "fallback",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "93",
+    "entity": "Meta Platforms (Facebook)",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 2004,
+    "sentences": [
+      "When did Meta Platforms first appear as a social network confined to university students before it expanded to other groups?",
+      "When did Meta Platforms originally operate as an invite-only service for college communities rather than as a broadly available platform?",
+      "When did Meta Platforms begin by connecting students at a single university prior to opening up to a wider public?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "94",
+    "entity": "YouTube",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "In what year was YouTube launched to the public as a site for user-uploaded videos?",
+      "When did YouTube first go live as an online platform for sharing short user-uploaded videos?",
+      "Which year marks the public introduction of YouTube as a video-sharing website?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "95",
+    "entity": "Airbnb",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "When did Airbnb first enable ordinary people to list spare rooms and host short-term guests through its online platform?",
+      "Around when did Airbnb move from a small experiment into a widely used option for travelers looking for home-based accommodations?",
+      "At what point did Airbnb start being commonly used as an alternative to hotels for booking private home stays?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "96",
+    "entity": "Uber",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "What year was Uber first introduced to the public?",
+      "When was Uber first made available for public use?",
+      "Which year marks the first public launch of Uber?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "97",
+    "entity": "Spotify",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 2006,
+    "sentences": [
+      "When did Spotify first make its music-streaming service available to the general public?",
+      "When did Spotify begin offering on-demand streaming access to listeners worldwide?",
+      "At what point did Spotify launch its commercial service that allowed users to stream music on demand?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "98",
+    "entity": "SpaceX",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "Around when did SpaceX first come into existence as a private aerospace company?",
+      "When did SpaceX first begin recruiting employees and operating as an incorporated company?",
+      "At what point did SpaceX first become established as a commercial space company?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "99",
+    "entity": "NVIDIA",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1993,
+    "sentences": [
+      "The debut of NVIDIA marked its first public availability.",
+      "NVIDIA entered public use when it was first introduced.",
+      "The initial release of NVIDIA established it as a new offering."
+    ],
+    "generation_status": "fallback",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  },
+  {
+    "id": "100",
+    "entity": "Salesforce",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "What year was Salesforce founded and first introduced to the public?",
+      "When was Salesforce officially established as a company and publicly unveiled?",
+      "What year marks the founding of Salesforce when it first became publicly available?"
+    ],
+    "generation_status": "ok",
+    "model": "gpt-5-mini",
+    "created_at_utc": "2026-02-25T17:53:55.276717+00:00"
+  }
+]

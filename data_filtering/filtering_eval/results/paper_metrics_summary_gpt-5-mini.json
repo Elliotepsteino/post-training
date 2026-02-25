@@ -1,0 +1,31 @@
+{
+  "model": "gpt-5-mini",
+  "lambda_penalty": 1.0,
+  "stages": {
+    "pre_search_sample_1": {
+      "label": "Pre-search (sample_1)",
+      "explicit_n": 23,
+      "explicit_exact": 0.43478260869565216,
+      "implicit_n": 12,
+      "implicit_score_lambda": 4.384326923083331,
+      "implicit_noleak": 0.5833333333333334
+    },
+    "post_search_sample_1": {
+      "label": "Post-search (sample_1)",
+      "explicit_n": 23,
+      "explicit_exact": 0.43478260869565216,
+      "implicit_n": 12,
+      "implicit_score_lambda": 4.964049145305554,
+      "implicit_noleak": 0.6666666666666666
+    },
+    "post_search_agg_2samples": {
+      "label": "Post-search + 2-sample aggregation",
+      "explicit_n": 23,
+      "explicit_exact": 0.43478260869565216,
+      "implicit_n": 12,
+      "implicit_score_lambda": 1.7358333333333331,
+      "implicit_noleak": 0.9166666666666666
+    }
+  },
+  "reconciliation_rows_stage3": 7
+}

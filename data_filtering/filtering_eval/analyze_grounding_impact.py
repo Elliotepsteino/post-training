@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 from typing import Dict, List, Tuple
 
@@ -45,6 +46,32 @@ def iter_samples(row: dict) -> List[Tuple[str, dict]]:
 def display_name(model: str) -> str:
     return DISPLAY_NAMES.get(model, model)
 
+
+def parse_models_arg(value: str) -> set[str] | None:
+    text = (value or "").strip()
+    if not text:
+        return None
+    models = {m.strip() for m in text.replace(";", ",").split(",") if m.strip()}
+    return models or None
+
+
+def _flatten_axes(axes) -> List[plt.Axes]:
+    if hasattr(axes, "flat"):
+        return list(axes.flat)
+    if isinstance(axes, (list, tuple)):
+        flat: List[plt.Axes] = []
+        for item in axes:
+            flat.extend(_flatten_axes(item))
+        return flat
+    return [axes]
+
+
+def make_dynamic_grid(n_items: int, *, max_cols: int = 3, width: float = 4.2, height: float = 4.0):
+    cols = max(1, min(max_cols, n_items))
+    rows = max(1, math.ceil(n_items / cols))
+    fig, axes = plt.subplots(rows, cols, figsize=(width * cols, height * rows), constrained_layout=True, sharey=True)
+    return fig, _flatten_axes(axes), rows, cols
+
 def load_jsonl(path: str) -> List[dict]:
     rows: List[dict] = []
     with open(path, "r", encoding="utf-8") as f:
@@ -75,12 +102,26 @@ def load_nonconservative_buckets(pred_dir: str, model: str) -> Dict[str, int]:
     return buckets
 
 
-def load_gold(path: str, field: str) -> Dict[str, int]:
+def normalize_temporal_type(value: object) -> str:
+    if not isinstance(value, str):
+        return "joint"
+    key = value.strip().lower()
+    if key in {"explicit", "implicit"}:
+        return key
+    return "joint"
+
+
+def load_gold(path: str, field: str) -> Tuple[Dict[str, int], Dict[str, str]]:
     gold: Dict[str, int] = {}
+    sample_types: Dict[str, str] = {}
     for row in load_jsonl(path):
         if field in row:
-            gold[row["id"]] = int(row[field])
-    return gold
+            gid = str(row["id"])
+            gold[gid] = int(row[field])
+            sample_types[gid] = normalize_temporal_type(
+                row.get("sample_temporal_type", row.get("temporal_type", row.get("question_temporal_type")))
+            )
+    return gold, sample_types
 
 
 def to_int(value: object) -> int | None:
@@ -92,6 +133,11 @@ def to_int(value: object) -> int | None:
 
 
 def sample_year(sample: dict) -> int | None:
+    possible_years = sample.get("possible_years")
+    if isinstance(possible_years, list) and len(possible_years) == 2:
+        upper = to_int(possible_years[1])
+        if upper is not None:
+            return max(2001, upper)
     entities = sample.get("entities", {})
     upper_bounds: List[int] = []
     if isinstance(entities, dict):
@@ -140,11 +186,13 @@ def compute_icc(groups: Dict[str, List[int]]) -> float:
     return (ms_between - ms_within) / denom
 
 
-def score(preds: Dict[str, int], gold: Dict[str, int]) -> Tuple[float, float, float]:
+def score(preds: Dict[str, int], gold: Dict[str, int], subset_ids: set[str] | None = None) -> Tuple[float, float, float]:
     total = 0
     exact = 0
     conservative = 0
     for k, gold_year in gold.items():
+        if subset_ids is not None and k not in subset_ids:
+            continue
         if k not in preds:
             continue
         total += 1
@@ -202,6 +250,11 @@ def main() -> None:
     )
     parser.add_argument("--gold-path", required=True, help="Path to gold dataset JSONL")
     parser.add_argument("--gold-field", default="gold_year", help="Gold year field")
+    parser.add_argument(
+        "--models",
+        default="",
+        help="Optional comma/semicolon-separated model filter (e.g., gpt-5-mini).",
+    )
     parser.add_argument("--out-json", required=True, help="Path to write summary JSON")
     parser.add_argument(
         "--out-plot",
@@ -209,8 +262,14 @@ def main() -> None:
         help="Output base path for PDF plots (extension optional).",
     )
     args = parser.parse_args()
+    model_filter = parse_models_arg(args.models)
 
-    gold = load_gold(args.gold_path, args.gold_field)
+    gold, gold_sample_types = load_gold(args.gold_path, args.gold_field)
+    split_ids: Dict[str, set[str]] = {
+        "joint": set(gold.keys()),
+        "explicit": {gid for gid, stype in gold_sample_types.items() if stype == "explicit"},
+        "implicit": {gid for gid, stype in gold_sample_types.items() if stype == "implicit"},
+    }
 
     summary: List[dict] = []
     models_for_changes: List[str] = []
@@ -227,6 +286,8 @@ def main() -> None:
         if not fname.startswith("preds_") or not fname.endswith(args.updated_suffix):
             continue
         model = fname.replace("preds_", "").replace(args.updated_suffix, "")
+        if model_filter is not None and model not in model_filter:
+            continue
         updated_path = os.path.join(args.updated_dir, fname)
         original_path = os.path.join(args.pred_dir, f"preds_{model}.jsonl")
         if not os.path.exists(original_path):
@@ -248,9 +309,22 @@ def main() -> None:
             if year is not None:
                 preds_updated[row["id"]] = year
 
-        exact_o, cons_o, weighted_o = score(preds_original, gold)
-        exact_u, cons_u, weighted_u = score(preds_updated, gold)
+        exact_o, cons_o, weighted_o = score(preds_original, gold, split_ids["joint"])
+        exact_u, cons_u, weighted_u = score(preds_updated, gold, split_ids["joint"])
         est_frac, ci_frac = entity_change_stats(updated_rows)
+        split_metrics = {}
+        for split_name, split_set in split_ids.items():
+            ex_o, co_o, we_o = score(preds_original, gold, split_set)
+            ex_u, co_u, we_u = score(preds_updated, gold, split_set)
+            split_metrics[split_name] = {
+                "exact_original": ex_o,
+                "conservative_original": co_o,
+                "weighted_original": we_o,
+                "exact_updated": ex_u,
+                "conservative_updated": co_u,
+                "weighted_updated": we_u,
+                "n": len(split_set),
+            }
 
         sample_groups: Dict[str, List[int]] = {}
         all_same_count = 0
@@ -283,6 +357,7 @@ def main() -> None:
                 "weighted_updated": weighted_u,
                 "sample_consistency_icc": sample_icc,
                 "sample_all_same_frac": all_same_frac,
+                "splits": split_metrics,
             }
         )
         models_for_changes.append(model)
@@ -304,9 +379,12 @@ def main() -> None:
         deltas_by_model[model] = {"orig": orig_deltas, "updated": upd_deltas}
 
     combo_models = ("gemini-3-flash-preview", "gpt-5-mini")
-    if all(m in preds_original_by_model for m in combo_models) and all(
-        m in preds_updated_by_model for m in combo_models
-    ):
+    include_combo = (
+        model_filter is None
+        and all(m in preds_original_by_model for m in combo_models)
+        and all(m in preds_updated_by_model for m in combo_models)
+    )
+    if include_combo:
         combo_name = "max(flash, gpt-5-mini)"
         preds_a = preds_original_by_model[combo_models[0]]
         preds_b = preds_original_by_model[combo_models[1]]
@@ -315,8 +393,21 @@ def main() -> None:
         preds_b_u = preds_updated_by_model[combo_models[1]]
         preds_combined_u = {k: max(preds_a_u.get(k, 0), preds_b_u.get(k, 0)) for k in gold.keys()}
 
-        exact_o, cons_o, weighted_o = score(preds_combined, gold)
-        exact_u, cons_u, weighted_u = score(preds_combined_u, gold)
+        exact_o, cons_o, weighted_o = score(preds_combined, gold, split_ids["joint"])
+        exact_u, cons_u, weighted_u = score(preds_combined_u, gold, split_ids["joint"])
+        combo_split_metrics = {}
+        for split_name, split_set in split_ids.items():
+            ex_o, co_o, we_o = score(preds_combined, gold, split_set)
+            ex_u, co_u, we_u = score(preds_combined_u, gold, split_set)
+            combo_split_metrics[split_name] = {
+                "exact_original": ex_o,
+                "conservative_original": co_o,
+                "weighted_original": we_o,
+                "exact_updated": ex_u,
+                "conservative_updated": co_u,
+                "weighted_updated": we_u,
+                "n": len(split_set),
+            }
         summary.append(
             {
                 "model": combo_name,
@@ -328,6 +419,7 @@ def main() -> None:
                 "exact_updated": exact_u,
                 "conservative_updated": cons_u,
                 "weighted_updated": weighted_u,
+                "splits": combo_split_metrics,
             }
         )
         models_for_accuracy.insert(0, combo_name)
@@ -550,16 +642,19 @@ def main() -> None:
     failure_files = []
     for fname in sorted(os.listdir(args.pred_dir)):
         if fname.startswith("preds_") and fname.endswith("_nonconservative.jsonl"):
+            model = fname.replace("preds_", "").replace("_nonconservative.jsonl", "")
+            if model_filter is not None and model not in model_filter:
+                continue
             failure_files.append(fname)
 
     if failure_files:
-        fig6, axes6 = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True)
-        axes_flat = [ax for row in axes6 for ax in row]
+        n_fail = len(failure_files)
+        fig6, axes_flat, _, _ = make_dynamic_grid(n_fail, max_cols=2, width=5.0, height=4.0)
         labels = [FAILURE_BUCKETS[k] for k in sorted(FAILURE_BUCKETS)]
         max_count = 1
         counts_by_model: List[List[int]] = []
         models_for_failures: List[str] = []
-        for fname in failure_files[:4]:
+        for fname in failure_files:
             model = fname.replace("preds_", "").replace("_nonconservative.jsonl", "")
             rows = load_jsonl(os.path.join(args.pred_dir, fname))
             counts = {k: 0 for k in FAILURE_BUCKETS}
@@ -586,7 +681,7 @@ def main() -> None:
             ax.yaxis.set_major_locator(MaxNLocator(integer=True))
             ax.tick_params(axis="both", labelsize=9)
 
-        for ax in axes_flat[len(failure_files[:4]) :]:
+        for ax in axes_flat[len(failure_files) :]:
             ax.axis("off")
 
         legend_patches = [
@@ -605,8 +700,7 @@ def main() -> None:
 
     # Plot 7: search-only accuracy (2x2 grid)
     if search_only_models:
-        fig7, axes7 = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True, sharey=True)
-        axes_flat = [ax for row in axes7 for ax in row]
+        fig7, axes_flat, _, _ = make_dynamic_grid(len(search_only_models), max_cols=2, width=5.0, height=4.0)
         for ax, model in zip(axes_flat, search_only_models):
             idx = models_for_accuracy.index(model)
             vals = metrics_updated[idx]
@@ -617,6 +711,26 @@ def main() -> None:
         for ax in axes_flat[len(search_only_models) :]:
             ax.axis("off")
         fig7.savefig(f"{base}_accuracy_search_only.pdf")
+
+    # Plot 8: split-specific weighted accuracy after search (joint / explicit / implicit)
+    if models_for_accuracy:
+        summary_by_model = {row["model"]: row for row in summary}
+        split_order = ["joint", "explicit", "implicit"]
+        fig8, axes8 = plt.subplots(1, 3, figsize=(15, 4), constrained_layout=True, sharey=True)
+        for ax, split_name in zip(axes8, split_order):
+            labels: List[str] = []
+            values: List[float] = []
+            for model in models_for_accuracy:
+                row = summary_by_model.get(model, {})
+                split_payload = row.get("splits", {}).get(split_name, {})
+                labels.append(display_name(model))
+                values.append(float(split_payload.get("weighted_updated", 0.0)))
+            ax.bar(labels, values, color="#4C78A8")
+            ax.set_title(f"{split_name.title()} subset")
+            ax.set_ylabel("Weighted accuracy")
+            ax.set_ylim(0, 1)
+            ax.tick_params(axis="x", labelrotation=30)
+        fig8.savefig(f"{base}_accuracy_by_split.pdf")
 
 
 if __name__ == "__main__":

@@ -1,15 +1,27 @@
 #!/usr/bin/env python3
-"""Update entity estimates using search evidence."""
+"""Update entity estimates using search evidence and aggregate multi-sample outputs."""
 from __future__ import annotations
 
 import argparse
 import json
-import time
 import os
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any, Dict, List, Tuple
 
 from openai import OpenAI
+from temporal_schema import (
+    MAX_YEAR,
+    MIN_YEAR,
+    aggregate_row_samples,
+    apply_temporal_fields,
+    iter_samples,
+    merge_sample_temporal_fields,
+    normalize_entities,
+    normalize_entity,
+    sample_year,
+    to_int,
+)
 
 
 def load_jsonl(path: str) -> List[dict]:
@@ -27,34 +39,8 @@ def write_jsonl(path: str, rows: List[dict]) -> None:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
-def iter_samples(row: dict) -> List[Tuple[str, dict]]:
-    sample_keys = [k for k in row.keys() if k.startswith("sample_") and isinstance(row.get(k), dict)]
-    if sample_keys:
-        return [(key, row[key]) for key in sorted(sample_keys)]
-    return [("sample_1", row)]
-
-
-def to_int(value: Any) -> int | None:
-    if isinstance(value, int):
-        return value
-    if isinstance(value, str) and value.isdigit():
-        return int(value)
-    return None
-
-
-def normalize_interval(interval: Any, best: int | None) -> List[int]:
-    if isinstance(interval, list) and len(interval) == 2:
-        low = to_int(interval[0])
-        high = to_int(interval[1])
-        if low is not None and high is not None:
-            return [low, high]
-    if best is not None:
-        return [best, best]
-    return []
-
-
 def extract_json_object(text: str) -> dict:
-    text = text.strip()
+    text = (text or "").strip()
     try:
         return json.loads(text)
     except Exception:
@@ -86,75 +72,92 @@ def extract_json_object(text: str) -> dict:
 def build_prompt(sample: dict) -> str:
     entities = sample.get("entities", {})
     return (
-        "You are updating year estimates using evidence from web search.\n"
-        "Use the prior justification and evidence snippets to update each entity's estimate.\n"
+        "You are updating temporal entity estimates using web evidence.\n"
         "Return JSON only.\n"
         "\n"
-        "Input:\n"
+        "For each entity, output one of:\n"
+        "- explicit: updated_temporal_type='explicit' and updated_explicit_year=YYYY\n"
+        "- implicit: updated_temporal_type='implicit', updated_implicit_interval=[a,b], updated_implicit_probabilities=[...]\n"
+        "\n"
+        "Rules:\n"
+        "- Use evidence fields (url/evidence/estimate) when available.\n"
+        "- For implicit probabilities, provide one value per year in [a,b], sum to 1.\n"
+        "- Keep years in [2001, 2025] at output.\n"
+        "\n"
         f"Justification: {sample.get('justification', '')}\n"
         f"Entities: {json.dumps(entities, ensure_ascii=False)}\n"
         "\n"
-        "Output JSON schema:\n"
-        '{'
-        '"entities": {"Entity Name": {"updated_best_estimate": 2019, "updated_confidence_interval": [2019, 2020]}}'
-        '}\n'
-        "\n"
-        "Rules:\n"
-        "- Use evidence (url/evidence/estimate) when present; otherwise keep prior best_estimate/interval.\n"
-        "- Confidence interval must include updated_best_estimate.\n"
-        "- Never output a year lower than 2001; cap any lower evidence to 2001.\n"
+        "Output schema:\n"
+        '{"entities": {"Entity Name": {"updated_temporal_type": "explicit|implicit", "updated_explicit_year": 2019, "updated_implicit_interval": [2017, 2020], "updated_implicit_probabilities": [0.2, 0.4, 0.25, 0.15]}}}'
     )
 
 
+def _update_entity_from_payload(name: str, ent: dict, update: dict) -> dict:
+    if not isinstance(ent, dict):
+        ent = {}
+    if not isinstance(update, dict):
+        update = {}
+
+    merged = dict(ent)
+    updated_type = str(update.get("updated_temporal_type", update.get("temporal_type", ""))).strip().lower()
+
+    if updated_type == "explicit":
+        year = to_int(update.get("updated_explicit_year"))
+        if year is None:
+            year = to_int(update.get("updated_best_estimate"))
+        if year is None:
+            year = to_int(ent.get("explicit_year", ent.get("best_estimate")))
+        if year is None:
+            year = MIN_YEAR
+        year = min(max(year, MIN_YEAR), MAX_YEAR)
+        merged["temporal_type"] = "explicit"
+        merged["explicit_year"] = year
+        merged["implicit_interval"] = []
+        merged["implicit_probabilities"] = []
+    elif updated_type == "implicit":
+        merged["temporal_type"] = "implicit"
+        if isinstance(update.get("updated_implicit_interval"), list):
+            merged["implicit_interval"] = update.get("updated_implicit_interval")
+        elif isinstance(update.get("updated_confidence_interval"), list):
+            merged["implicit_interval"] = update.get("updated_confidence_interval")
+        if isinstance(update.get("updated_implicit_probabilities"), list):
+            merged["implicit_probabilities"] = update.get("updated_implicit_probabilities")
+    else:
+        legacy_best = to_int(update.get("updated_best_estimate"))
+        legacy_ci = update.get("updated_confidence_interval")
+        if legacy_best is not None:
+            merged["explicit_year"] = min(max(legacy_best, MIN_YEAR), MAX_YEAR)
+            merged["temporal_type"] = merged.get("temporal_type", "explicit")
+        if isinstance(legacy_ci, list) and len(legacy_ci) == 2:
+            merged["confidence_interval_95"] = legacy_ci
+            if merged.get("temporal_type") == "implicit":
+                merged["implicit_interval"] = legacy_ci
+
+    normalized = normalize_entity(name, merged)
+    normalized["updated_best_estimate"] = normalized.get("best_estimate", "")
+    normalized["updated_confidence_interval"] = normalized.get("confidence_interval_95", [])
+    return normalized
+
+
 def apply_sample_updates(sample: dict, updates: dict) -> None:
-    entities = sample.get("entities", {})
-    if not isinstance(entities, dict):
-        return
-    updates_entities = updates.get("entities", {})
+    entities = normalize_entities(sample.get("entities", {}))
+    updates_entities = updates.get("entities", {}) if isinstance(updates, dict) else {}
     if not isinstance(updates_entities, dict):
         updates_entities = {}
 
+    updated_entities: Dict[str, dict] = {}
     for name, ent in entities.items():
-        if not isinstance(ent, dict):
-            continue
-        update = updates_entities.get(name, {}) if isinstance(updates_entities, dict) else {}
-        updated_best = to_int(update.get("updated_best_estimate"))
-        updated_ci = update.get("updated_confidence_interval")
-        updated_ci = normalize_interval(updated_ci, updated_best)
+        updated_entities[name] = _update_entity_from_payload(name, ent, updates_entities.get(name, {}))
 
-        if updated_best is None:
-            prior_best = to_int(ent.get("best_estimate"))
-            updated_best = prior_best
-            updated_ci = normalize_interval(ent.get("confidence_interval_95"), prior_best)
-
-        ent["updated_best_estimate"] = updated_best if updated_best is not None else ""
-        ent["updated_confidence_interval"] = updated_ci
-
-
-def sample_year(sample: dict) -> int | None:
-    entities = sample.get("entities", {})
-    upper_bounds: List[int] = []
-    if isinstance(entities, dict):
-        for ent in entities.values():
-            if not isinstance(ent, dict):
-                continue
-            ci = ent.get("updated_confidence_interval") or ent.get("confidence_interval_95")
-            if isinstance(ci, list) and len(ci) == 2:
-                upper = to_int(ci[1])
-                if upper is not None:
-                    upper_bounds.append(upper)
-    if upper_bounds:
-        return max(2001, max(upper_bounds))
-    fallback = to_int(sample.get("year", sample.get("pred_year")))
-    if fallback is not None:
-        return max(2001, fallback)
-    return None
+    sample["entities"] = updated_entities
+    merged = merge_sample_temporal_fields(updated_entities, fallback_year=to_int(sample.get("year")) or MIN_YEAR)
+    apply_temporal_fields(sample, merged)
 
 
 def aggregate_years(years: List[int], method: str) -> int:
-    years = [max(2001, y) for y in years]
+    years = [min(max(y, MIN_YEAR), MAX_YEAR) for y in years]
     if not years:
-        return 2001
+        return MIN_YEAR
     if method == "median":
         years_sorted = sorted(years)
         return years_sorted[len(years_sorted) // 2]
@@ -171,25 +174,17 @@ def aggregate_years(years: List[int], method: str) -> int:
 def build_aggregate_prompt(sample_payload: Dict[str, dict]) -> str:
     return (
         "You are aggregating multiple independently grounded samples.\n"
-        "Use the evidence-backed entities to choose a single final year.\n"
+        "Use evidence-backed entities to choose a final year.\n"
         "Return JSON only.\n"
-        "\n"
-        "Input samples:\n"
-        f"{json.dumps(sample_payload, ensure_ascii=False)}\n"
-        "\n"
-        "Output JSON schema:\n"
-        '{"year": 2019, "justification": "why this year is safest across samples"}\n'
-        "\n"
-        "Rules:\n"
-        "- Use the maximum upper bound implied by evidence when in doubt.\n"
-        "- Never output a year lower than 2001; cap any lower evidence to 2001.\n"
+        f"Input: {json.dumps(sample_payload, ensure_ascii=False)}\n"
+        "Output schema: {\"year\": 2019, \"justification\": \"...\"}"
     )
 
 
 def aggregate_rank(years: List[int], rank: int) -> int:
-    years = sorted(max(2001, y) for y in years)
+    years = sorted(min(max(y, MIN_YEAR), MAX_YEAR) for y in years)
     if not years:
-        return 2001
+        return MIN_YEAR
     rank = max(1, min(rank, len(years)))
     return years[rank - 1]
 
@@ -201,6 +196,117 @@ def format_progress_bar(completed: int, total: int, width: int = 30) -> str:
     return "[{}{}] {}/{}".format("#" * filled, "-" * (width - filled), completed, total)
 
 
+def _build_reconcile_prompt(sample_a: dict, sample_b: dict) -> str:
+    payload = {
+        "sample_a": {
+            "latest_explicit_year": sample_a.get("latest_explicit_year"),
+            "sample_temporal_type": sample_a.get("sample_temporal_type"),
+            "possible_years": sample_a.get("possible_years"),
+            "possible_years_probabilities": sample_a.get("possible_years_probabilities"),
+            "justification": sample_a.get("justification", ""),
+            "entities": sample_a.get("entities", {}),
+        },
+        "sample_b": {
+            "latest_explicit_year": sample_b.get("latest_explicit_year"),
+            "sample_temporal_type": sample_b.get("sample_temporal_type"),
+            "possible_years": sample_b.get("possible_years"),
+            "possible_years_probabilities": sample_b.get("possible_years_probabilities"),
+            "justification": sample_b.get("justification", ""),
+            "entities": sample_b.get("entities", {}),
+        },
+    }
+    return (
+        "You arbitrate conflicting explicit-year estimates from two temporal-labeling agents.\n"
+        "Step 1: Write argument_a where Agent A seriously considers Agent B's view and argues for the better explicit year.\n"
+        "Step 2: Write argument_b where Agent B seriously considers Agent A's view and argues for the better explicit year.\n"
+        "Step 3: Judge and output judge_explicit_year.\n"
+        "Return JSON only.\n"
+        f"Input: {json.dumps(payload, ensure_ascii=False)}\n"
+        "Output schema:\n"
+        '{"argument_a": "...", "argument_b": "...", "judge_explicit_year": 2018, "judge_reason": "..."}'
+    )
+
+
+def _make_reconcile_fn(model: str):
+    if model.startswith("gemini-"):
+        import google.generativeai as genai
+
+        api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            raise RuntimeError("Set GEMINI_API_KEY or GOOGLE_API_KEY for Gemini reconciliation.")
+        genai.configure(api_key=api_key)
+
+        def _fn(sample_a_key: str, sample_a: dict, sample_b_key: str, sample_b: dict) -> Tuple[int | None, Dict[str, Any]]:
+            details: Dict[str, Any] = {
+                "reconcile_model": model,
+                "sample_a_key": sample_a_key,
+                "sample_b_key": sample_b_key,
+            }
+            prompt = _build_reconcile_prompt(sample_a, sample_b)
+            try:
+                gm = genai.GenerativeModel(model_name=model, system_instruction="Return JSON only, no markdown.")
+                resp = gm.generate_content(prompt)
+                payload = extract_json_object(resp.text or "")
+                details["argument_a"] = payload.get("argument_a", "")
+                details["argument_b"] = payload.get("argument_b", "")
+                details["judge_reason"] = payload.get("judge_reason", "")
+                year = to_int(payload.get("judge_explicit_year"))
+                if year is None:
+                    year = max(
+                        to_int(sample_a.get("latest_explicit_year")) or MIN_YEAR,
+                        to_int(sample_b.get("latest_explicit_year")) or MIN_YEAR,
+                    )
+                return min(max(year, MIN_YEAR), MAX_YEAR), details
+            except Exception as exc:
+                details["error"] = str(exc)
+                fallback = max(
+                    to_int(sample_a.get("latest_explicit_year")) or MIN_YEAR,
+                    to_int(sample_b.get("latest_explicit_year")) or MIN_YEAR,
+                )
+                return fallback, details
+
+        return _fn
+
+    client = OpenAI()
+
+    def _fn(sample_a_key: str, sample_a: dict, sample_b_key: str, sample_b: dict) -> Tuple[int | None, Dict[str, Any]]:
+        details: Dict[str, Any] = {
+            "reconcile_model": model,
+            "sample_a_key": sample_a_key,
+            "sample_b_key": sample_b_key,
+        }
+        prompt = _build_reconcile_prompt(sample_a, sample_b)
+        try:
+            resp = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": "Return JSON only, no markdown."},
+                    {"role": "user", "content": prompt},
+                ],
+                response_format={"type": "json_object"},
+            )
+            payload = extract_json_object(resp.choices[0].message.content or "")
+            details["argument_a"] = payload.get("argument_a", "")
+            details["argument_b"] = payload.get("argument_b", "")
+            details["judge_reason"] = payload.get("judge_reason", "")
+            year = to_int(payload.get("judge_explicit_year"))
+            if year is None:
+                year = max(
+                    to_int(sample_a.get("latest_explicit_year")) or MIN_YEAR,
+                    to_int(sample_b.get("latest_explicit_year")) or MIN_YEAR,
+                )
+            return min(max(year, MIN_YEAR), MAX_YEAR), details
+        except Exception as exc:
+            details["error"] = str(exc)
+            fallback = max(
+                to_int(sample_a.get("latest_explicit_year")) or MIN_YEAR,
+                to_int(sample_b.get("latest_explicit_year")) or MIN_YEAR,
+            )
+            return fallback, details
+
+    return _fn
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Update estimates using grounded evidence.")
     parser.add_argument("--preds", required=True, help="Input grounded predictions JSONL")
@@ -209,14 +315,14 @@ def main() -> None:
     parser.add_argument("--model", default="gpt-5-mini", help="LLM used to update estimates")
     parser.add_argument(
         "--aggregation",
-        choices=["max", "median", "majority", "llm"],
-        default="max",
-        help="How to aggregate sample years into updated_year",
+        choices=["temporal_merge", "max", "median", "majority", "llm"],
+        default="temporal_merge",
+        help="How to set updated_year after temporal merge",
     )
     parser.add_argument(
         "--aggregate-model",
         default="gemini-3-flash-preview",
-        help="LLM used to aggregate across samples when --aggregation=llm",
+        help="LLM used for llm aggregation and explicit-year reconciliation",
     )
     parser.add_argument(
         "--aggregate-max-workers",
@@ -242,8 +348,7 @@ def main() -> None:
             response_format={"type": "json_object"},
         )
         text = resp.choices[0].message.content or ""
-        payload = extract_json_object(text)
-        return payload
+        return extract_json_object(text)
 
     def run_aggregate(sample_payload: Dict[str, dict]) -> dict:
         prompt = build_aggregate_prompt(sample_payload)
@@ -296,15 +401,25 @@ def main() -> None:
                 time.sleep(args.sleep)
 
     aggregation_inputs: Dict[int, Dict[str, dict]] = {}
+    reconcile_fn = _make_reconcile_fn(args.aggregate_model)
+
     for idx, row in enumerate(updated_rows):
         if row is None:
             updated_rows[idx] = rows[idx]
-            continue
+            row = updated_rows[idx]
+
         sample_payload: Dict[str, dict] = {}
         sample_years: List[int] = []
+        samples_map: Dict[str, dict] = {}
+
         for key, sample in iter_samples(row):
+            samples_map[key] = sample
             sample_payload[key] = {
                 "justification": sample.get("justification", ""),
+                "sample_temporal_type": sample.get("sample_temporal_type", "timeless"),
+                "latest_explicit_year": sample.get("latest_explicit_year"),
+                "possible_years": sample.get("possible_years"),
+                "possible_years_probabilities": sample.get("possible_years_probabilities"),
                 "entities": sample.get("entities", {}),
             }
             year = sample_year(sample)
@@ -320,10 +435,20 @@ def main() -> None:
         row["updated_year_rank4"] = aggregate_rank(sample_years, 4)
         row["updated_year_rank5"] = aggregate_rank(sample_years, 5)
 
+        merged = aggregate_row_samples(samples_map, reconcile_explicit_fn=reconcile_fn)
+        apply_temporal_fields(row, merged)
+        row["updated_year_temporal_merge"] = row["year"]
+
         if args.aggregation == "llm":
             aggregation_inputs[idx] = sample_payload
+        elif args.aggregation == "max":
+            row["updated_year"] = row["updated_year_rule_max"]
+        elif args.aggregation == "median":
+            row["updated_year"] = row["updated_year_rule_median"]
+        elif args.aggregation == "majority":
+            row["updated_year"] = row["updated_year_rule_majority"]
         else:
-            row["updated_year"] = aggregate_years(sample_years, args.aggregation)
+            row["updated_year"] = row["updated_year_temporal_merge"]
 
     if args.aggregation == "llm":
         with ThreadPoolExecutor(max_workers=args.aggregate_max_workers) as executor:
@@ -338,8 +463,8 @@ def main() -> None:
                 aggregate_payload = future.result()
                 agg_year = to_int(aggregate_payload.get("year"))
                 if agg_year is None:
-                    agg_year = row.get("updated_year_rule_max", 2001)
-                row["updated_year_llm"] = max(2001, int(agg_year))
+                    agg_year = row.get("updated_year_temporal_merge", MIN_YEAR)
+                row["updated_year_llm"] = min(max(int(agg_year), MIN_YEAR), MAX_YEAR)
                 row["updated_year"] = row["updated_year_llm"]
                 completed += 1
                 bar = format_progress_bar(completed, total)

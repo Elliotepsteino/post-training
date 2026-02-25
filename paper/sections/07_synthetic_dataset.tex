@@ -1,0 +1,12 @@
+\section{Synthetic Dataset Extension}
+\label{sec:synthetic-dataset}
+To strengthen coverage and reduce annotation noise, we propose extending the benchmark with a synthetic split that has auditable provenance and controllable temporal labels.
+
+\paragraph{Pipeline for explicit facts.}
+We first scrape date-grounded facts from Wikipedia and retain source provenance (page title, revision ID, and supporting sentence). Each fact is normalized into an atomic record $(\text{subject}, \text{relation}, \text{object}, y)$ where $y$ is the first year the fact is publicly true from the source record. We then generate paraphrased QA forms from each atomic record (multiple wording variants, distractor context, and style controls), while keeping $y$ fixed as the explicit gold label. This produces a large explicit set with exact-year supervision and traceable evidence.
+
+\paragraph{Generating implicit facts with true distributions.}
+We can also synthesize implicit examples with a known ground-truth distribution over years. For each concept/event, construct a salience trajectory over time (e.g., Wikipedia pageview signal, linked-topic publication counts, or mention volume). Convert that trajectory into a normalized yearly PMF $p(t)$ on $[a,b]$. Prompts are then generated to reference the concept in a way that depends on social/public salience rather than a single release event, and the gold label is the full $( [a,b], p(t) )$ object.
+
+\paragraph{Why this helps.}
+This setup gives exact control of the target distribution for implicit cases, enabling direct calibration checks (Wasserstein distance, leakage mass, and no-leak rate) against known truth. It also supports stress tests by changing distribution shape (sharp onset, long tail, bimodal) and measuring whether model behavior remains conservative under each regime.

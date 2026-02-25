@@ -3,11 +3,11 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PRED_DIR="${PRED_DIR:-$ROOT/predictions}"
-GOLD_PATH="${GOLD_PATH:-$ROOT/data/gold_dataset_dev.jsonl}"
+GOLD_PATH="${GOLD_PATH:-$ROOT/data/gold_dataset_dev_categorized.jsonl}"
 OUT_JSON="${OUT_JSON:-$ROOT/results/grounding_summary.json}"
 OUT_PLOT="${OUT_PLOT:-$ROOT/results/grounding_impact.pdf}"
 
-OPENAI_MODELS="${OPENAI_MODELS-gpt-5-mini,gpt-5.2}"
+OPENAI_MODELS="${OPENAI_MODELS-gpt-5-mini}"
 GEMINI_MODELS="${GEMINI_MODELS-gemini-3-flash-preview,gemini-3-pro-preview}"
 OPENAI_MAX_WORKERS="${OPENAI_MAX_WORKERS:-10}"
 GEMINI_MAX_WORKERS="${GEMINI_MAX_WORKERS:-10}"

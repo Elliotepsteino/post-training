@@ -3,45 +3,165 @@
   "results": [
     {
       "model": "gemini-3-flash-preview",
-      "exact": 40.0,
-      "conservative": 97.14285714285714,
-      "weighted": 68.57142857142857,
-      "n": 35
+      "exact": 17.142857142857142,
+      "conservative": 17.142857142857142,
+      "weighted": 17.142857142857142,
+      "n": 35,
+      "splits": {
+        "joint": {
+          "exact": 17.142857142857142,
+          "conservative": 17.142857142857142,
+          "weighted": 17.142857142857142,
+          "n": 35
+        },
+        "explicit": {
+          "exact": 17.142857142857142,
+          "conservative": 17.142857142857142,
+          "weighted": 17.142857142857142,
+          "n": 35
+        },
+        "implicit": {
+          "exact": 0.0,
+          "conservative": 0.0,
+          "weighted": 0.0,
+          "n": 0
+        }
+      }
     },
     {
       "model": "gemini-3-flash-preview_grounded",
-      "exact": 42.857142857142854,
-      "conservative": 97.14285714285714,
-      "weighted": 70.0,
-      "n": 35
+      "exact": 17.142857142857142,
+      "conservative": 17.142857142857142,
+      "weighted": 17.142857142857142,
+      "n": 35,
+      "splits": {
+        "joint": {
+          "exact": 17.142857142857142,
+          "conservative": 17.142857142857142,
+          "weighted": 17.142857142857142,
+          "n": 35
+        },
+        "explicit": {
+          "exact": 17.142857142857142,
+          "conservative": 17.142857142857142,
+          "weighted": 17.142857142857142,
+          "n": 35
+        },
+        "implicit": {
+          "exact": 0.0,
+          "conservative": 0.0,
+          "weighted": 0.0,
+          "n": 0
+        }
+      }
     },
     {
       "model": "gemini-3-flash-preview_grounded_updated",
-      "exact": 42.857142857142854,
-      "conservative": 97.14285714285714,
-      "weighted": 70.0,
-      "n": 35
+      "exact": 17.142857142857142,
+      "conservative": 17.142857142857142,
+      "weighted": 17.142857142857142,
+      "n": 35,
+      "splits": {
+        "joint": {
+          "exact": 17.142857142857142,
+          "conservative": 17.142857142857142,
+          "weighted": 17.142857142857142,
+          "n": 35
+        },
+        "explicit": {
+          "exact": 17.142857142857142,
+          "conservative": 17.142857142857142,
+          "weighted": 17.142857142857142,
+          "n": 35
+        },
+        "implicit": {
+          "exact": 0.0,
+          "conservative": 0.0,
+          "weighted": 0.0,
+          "n": 0
+        }
+      }
     },
     {
       "model": "gemini-3-flash-preview_nonconservative",
       "exact": 0.0,
       "conservative": 0.0,
       "weighted": 0.0,
-      "n": 0
+      "n": 29,
+      "splits": {
+        "joint": {
+          "exact": 0.0,
+          "conservative": 0.0,
+          "weighted": 0.0,
+          "n": 29
+        },
+        "explicit": {
+          "exact": 0.0,
+          "conservative": 0.0,
+          "weighted": 0.0,
+          "n": 29
+        },
+        "implicit": {
+          "exact": 0.0,
+          "conservative": 0.0,
+          "weighted": 0.0,
+          "n": 0
+        }
+      }
     },
     {
       "model": "gpt-5-mini",
-      "exact": 45.714285714285715,
-      "conservative": 88.57142857142857,
-      "weighted": 67.14285714285714,
-      "n": 35
+      "exact": 28.57142857142857,
+      "conservative": 91.42857142857143,
+      "weighted": 60.0,
+      "n": 35,
+      "splits": {
+        "joint": {
+          "exact": 28.57142857142857,
+          "conservative": 91.42857142857143,
+          "weighted": 60.0,
+          "n": 35
+        },
+        "explicit": {
+          "exact": 28.57142857142857,
+          "conservative": 91.42857142857143,
+          "weighted": 60.0,
+          "n": 35
+        },
+        "implicit": {
+          "exact": 0.0,
+          "conservative": 0.0,
+          "weighted": 0.0,
+          "n": 0
+        }
+      }
     },
     {
       "model": "gpt-5.2",
-      "exact": 25.71428571428571,
-      "conservative": 82.85714285714286,
-      "weighted": 54.28571428571429,
-      "n": 35
+      "exact": 17.142857142857142,
+      "conservative": 17.142857142857142,
+      "weighted": 17.142857142857142,
+      "n": 35,
+      "splits": {
+        "joint": {
+          "exact": 17.142857142857142,
+          "conservative": 17.142857142857142,
+          "weighted": 17.142857142857142,
+          "n": 35
+        },
+        "explicit": {
+          "exact": 17.142857142857142,
+          "conservative": 17.142857142857142,
+          "weighted": 17.142857142857142,
+          "n": 35
+        },
+        "implicit": {
+          "exact": 0.0,
+          "conservative": 0.0,
+          "weighted": 0.0,
+          "n": 0
+        }
+      }
     }
   ]
 }

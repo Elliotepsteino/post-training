@@ -1,0 +1,22 @@
+[
+  {"entity": "Smoking is harmful to health", "category": "public health", "year": 1964},
+  {"entity": "Air pollution is harmful", "category": "environment", "year": 1952},
+  {"entity": "Antibiotic resistance is harmful", "category": "medicine", "year": 1945},
+  {"entity": "Child labor is harmful", "category": "human rights", "year": 1919},
+  {"entity": "Gender inequality is harmful", "category": "society", "year": 1948},
+  {"entity": "Corruption is harmful", "category": "governance", "year": 1995},
+  {"entity": "Microplastics are harmful to oceans", "category": "environment", "year": 2004},
+  {"entity": "Racial profiling is harmful", "category": "law", "year": 2014},
+  {"entity": "Food waste is harmful", "category": "sustainability", "year": 1986},
+  {"entity": "Lead exposure is harmful", "category": "medicine", "year": 1973},
+  {"entity": "Unsafe drinking water is harmful", "category": "public health", "year": 1971},
+  {"entity": "High-glycemic diets are harmful", "category": "nutrition", "year": 2003},
+  {"entity": "Fake news harms public trust", "category": "media", "year": 2016},
+  {"entity": "Overfishing is harmful", "category": "environment", "year": 1980},
+  {"entity": "Algorithmic bias is harmful", "category": "artificial intelligence", "year": 2016},
+  {"entity": "Workplace burnout is harmful", "category": "workplace", "year": 2012},
+  {"entity": "Deforestation is harmful", "category": "environment", "year": 1992},
+  {"entity": "Food insecurity is harmful", "category": "social policy", "year": 1974},
+  {"entity": "Online misinformation is harmful", "category": "media", "year": 2016},
+  {"entity": "Digital addiction is harmful", "category": "technology", "year": 2010}
+]

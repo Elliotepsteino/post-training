@@ -35,6 +35,11 @@ def _to_int(value: object) -> int | None:
 
 
 def sample_year(sample: dict) -> int | None:
+    possible_years = sample.get("possible_years")
+    if isinstance(possible_years, list) and len(possible_years) == 2:
+        upper = _to_int(possible_years[1])
+        if upper is not None:
+            return max(2001, upper)
     entities = sample.get("entities", {})
     upper_bounds: List[int] = []
     if isinstance(entities, dict):

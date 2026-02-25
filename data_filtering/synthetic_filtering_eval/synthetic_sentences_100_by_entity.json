@@ -1,0 +1,1744 @@
+[
+  {
+    "id": "1",
+    "entity": "C (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1972,
+    "sentences": [
+      "Dennis Ritchie creates the C programming language at Bell Labs as a successor to the B language.",
+      "The C programming language is developed to facilitate the implementation of the Unix operating system on the PDP-11.",
+      "Bell Labs introduces the initial version of the C programming language for system programming tasks."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "2",
+    "entity": "C++",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1985,
+    "sentences": [
+      "Bjarne Stroustrup published the first edition of The C++ Programming Language coincident with the language's first commercial release.",
+      "The first commercial implementation of C++ was released in October, making the language available to the general public.",
+      "This language became commercially available for the first time in the same year Bjarne Stroustrup released the first edition of his famous book describing it."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "3",
+    "entity": "Python (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1991,
+    "sentences": [
+      "Guido van Rossum first released the Python programming language code to the public.",
+      "The initial version of the Python programming language, labeled 0.9.0, was published on alt.sources.",
+      "This high-level programming language created by Guido van Rossum made its public debut."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "4",
+    "entity": "Java (programming language)",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "James Gosling's team at Sun Microsystems officially released the first public alpha and beta versions of the language famously marketed with the slogan 'Write Once, Run Anywhere'.",
+      "Following its rebranding from the Oak project, Sun Microsystems formally introduced the language to the public at the SunWorld conference.",
+      "The technology industry witnessed the debut of the HotJava browser alongside the official launch of this object-oriented language by Sun Microsystems."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "5",
+    "entity": "JavaScript",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "Brendan Eich developed this programming language for Netscape Navigator over a ten-day period.",
+      "Netscape Communications first released this scripting language under the name LiveScript before renaming it shortly after.",
+      "This client-side scripting language was introduced to the public with the beta release of Netscape Navigator 2.0."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "6",
+    "entity": "PHP",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "Rasmus Lerdorf released the source code for Personal Home Page Tools to the public for the first time.",
+      "The initial version of the server-side scripting language PHP made its debut.",
+      "Web development changed when the very first iteration of what would become the PHP language was officially launched."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "7",
+    "entity": "Ruby",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "Yukihiro Matsumoto publicly released the first version of the Ruby programming language in the same year that JavaScript was introduced in Netscape Navigator.",
+      "The Ruby programming language was first released to the public in the same year that the DVD optical disc storage format was announced.",
+      "Matz released the initial version of Ruby during the same year that the online auction site eBay was founded."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "8",
+    "entity": "MySQL",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "Michael Widenius and David Axmark publicly release the very first version of the MySQL relational database management system.",
+      "The open-source RDBMS known as MySQL makes its initial debut on the software market.",
+      "MySQL AB officially launches its namesake database management system for the first time."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "9",
+    "entity": "Global warming",
+    "category": "science",
+    "question_type": "implicit",
+    "ground_truth_year": 1988,
+    "sentences": [
+      "The scientific community is asserting with high confidence that the current global warming trend is a result of the greenhouse effect."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      1988,
+      1989,
+      1990,
+      1991,
+      1992
+    ],
+    "plausible_years_probs": [
+      0.35,
+      0.25,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "10",
+    "entity": "Git",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "Linus Torvalds created this distributed version control system to manage the Linux kernel source code immediately after the free license for BitKeeper was revoked.",
+      "The initial development of this software began when the relationship between the Linux kernel community and BitMover broke down, necessitating a replacement for their previous system.",
+      "This tool was released by Linus Torvalds for the Linux kernel community just days after he decided to write a replacement for the proprietary BitKeeper SCM."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "11",
+    "entity": "Docker",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "Docker was first released as an open-source project to automate the deployment of applications inside software containers.",
+      "Solomon Hykes publicly debuted the Docker platform for the first time during a lightning talk at PyCon.",
+      "The initial version of the Docker engine was launched, popularizing containerization for developers."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "12",
+    "entity": "Smoking negative health effects",
+    "category": "public health",
+    "question_type": "implicit",
+    "ground_truth_year": 1964,
+    "sentences": [
+      "Federal health authorities have officially determined that cigarette smoking is a direct cause of lung cancer and other serious respiratory diseases."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      1964,
+      1965,
+      1966,
+      1967,
+      1968
+    ],
+    "plausible_years_probs": [
+      0.5000000000000001,
+      0.20000000000000004,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "13",
+    "entity": "TensorFlow",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "The Google Brain team open-sourced this library in November, transitioning from their earlier DistBelief system.",
+      "It was first released to the public as an open-source machine learning framework under the Apache 2.0 license.",
+      "The initial version of this library was released by Google in November as the successor to DistBelief."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "14",
+    "entity": "PyTorch",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "Facebook's AI Research lab publicly releases the initial version of the PyTorch deep learning library.",
+      "The open-source machine learning framework known as PyTorch launches as a Python-centric successor to the Lua-based Torch.",
+      "Developers gain access to the first public release of PyTorch, featuring dynamic computation graphs for deep learning."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "15",
+    "entity": "React (JavaScript library)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "Facebook officially open-sourced the React JavaScript library at JSConf US.",
+      "The React library for building user interfaces was first released to the public.",
+      "Jordan Walke announced the initial open-source availability of React."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "16",
+    "entity": "AngularJS",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "Google originally released the first version of the AngularJS framework for dynamic web apps.",
+      "Mi\u0161ko Hevery and Adam Abrons introduced AngularJS to the public as a tool for simplifying front-end development.",
+      "The open-source JavaScript framework known as AngularJS made its debut to support single-page application architecture."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "17",
+    "entity": "Swift (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2014,
+    "sentences": [
+      "Apple unveiled the Swift programming language at the Worldwide Developers Conference as a modern successor to Objective-C.",
+      "The Swift programming language made its public debut for iOS and OS X development.",
+      "Developers gained their first access to the Swift programming language when Apple launched it alongside Xcode 6."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "18",
+    "entity": "Rust (programming language)",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "Mozilla officially unveiled the Rust programming language to the public for the first time during the Mozilla Summit.",
+      "Following its incubation as a personal project, Rust was first announced to the world by Mozilla researchers.",
+      "The initial public presentation of the Rust language took place at the Mozilla annual summit."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "19",
+    "entity": "Go (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "Google announces the public release of the Go programming language.",
+      "Robert Griesemer, Rob Pike, and Ken Thompson officially introduce the open-source language Go.",
+      "The Go programming language is first made available to the public."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "20",
+    "entity": "TypeScript",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "Microsoft first releases TypeScript to the public as a strict syntactical superset of JavaScript.",
+      "Anders Hejlsberg unveils the initial preview of TypeScript, aiming to bring static typing to JavaScript development.",
+      "The software community sees the debut of TypeScript as an open-source language for application-scale JavaScript."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "21",
+    "entity": "IBM Personal Computer",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1981,
+    "sentences": [
+      "IBM unveils its first personal computer, the Model 5150, which establishes the hardware architecture for future compatible machines.",
+      "The computing giant releases the IBM Personal Computer equipped with an Intel 8088 microprocessor and running MS-DOS 1.0.",
+      "Business computing changes significantly as IBM officially enters the microcomputer market with the launch of its original PC."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "22",
+    "entity": "Apple Macintosh",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "Ridley Scott's iconic Super Bowl commercial introduces the original Macintosh personal computer to the public.",
+      "Apple launches the first Macintosh, popularizing the graphical user interface and mouse for the mass market.",
+      "Steve Jobs pulls the very first Macintosh out of a bag during its debut at the Flint Center."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "23",
+    "entity": "Sony PlayStation",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "Sony Computer Entertainment releases the original PlayStation console in Japan.",
+      "The first PlayStation home video game console is officially launched by Sony.",
+      "Sony makes its major debut in the video game hardware market with the introduction of the PlayStation."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "24",
+    "entity": "Nintendo 64",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "The Nintendo 64 console officially launched in Japan and North America, bringing 64-bit graphics to the mass market.",
+      "Nintendo released its third home video game console, the Nintendo 64, featuring the revolutionary analog stick.",
+      "Consumers were able to purchase the Nintendo 64 for the first time, marking the company's transition into 3D gaming."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "25",
+    "entity": "DVD (consumer format)",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "The digital video disc format makes its consumer debut as the first players go on sale.",
+      "Toshiba releases the first commercially available DVD player to the public.",
+      "Movie enthusiasts can finally purchase the first titles released on the newly launched DVD format."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "26",
+    "entity": "Antibiotic resistance",
+    "category": "medicine",
+    "question_type": "implicit",
+    "ground_truth_year": 1945,
+    "sentences": [
+      "There is a distinct danger that the under-dosage of penicillin will educate microbes to become resistant to the drug."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      1945,
+      1946,
+      1947,
+      1948,
+      1949,
+      1950
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.25,
+      0.2,
+      0.1,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "27",
+    "entity": "iPod",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "Apple introduced the original iPod, famously advertising it as having '1,000 songs in your pocket.'",
+      "Steve Jobs unveiled the first-generation iPod, featuring a 5GB hard drive and a mechanical scroll wheel.",
+      "The portable music player market changed significantly when Apple launched the very first iPod device."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "28",
+    "entity": "Facebook (platform launch)",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2004,
+    "sentences": [
+      "Mark Zuckerberg launched the social network at Harvard during the same year that Google held its initial public offering.",
+      "The platform originally known as TheFacebook was introduced in the same year that the sitcom Friends aired its series finale.",
+      "This social media giant was founded in a Harvard dorm room during the same year that the Summer Olympics were held in Athens."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "29",
+    "entity": "YouTube",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "Founded by former PayPal employees, this video-sharing platform hosted its very first upload titled 'Me at the zoo' during its initial beta period.",
+      "The service was registered and launched, featuring a low-resolution clip of co-founder Jawed Karim at the San Diego Zoo as the inaugural content on the site.",
+      "Before being acquired by Google the following year, this website was established and saw its first video uploaded to the server."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "30",
+    "entity": "Twitter",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2006,
+    "sentences": [
+      "The microblogging platform Twitter officially launches to the public.",
+      "Jack Dorsey sends the first ever tweet on the platform, marking the service's inception.",
+      "The social networking service Twitter becomes available for general public use."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "31",
+    "entity": "Amazon Kindle",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2007,
+    "sentences": [
+      "Amazon releases its first dedicated e-reader, the Kindle, which features a physical keyboard and Whispernet wireless connectivity.",
+      "The original Kindle device officially launches, selling out within hours of its initial introduction to the consumer market.",
+      "Customers can finally purchase Amazon's debut e-reading hardware, a white device with an angled edge and E Ink display."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "32",
+    "entity": "iPhone",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2007,
+    "sentences": [
+      "Apple revolutionized the mobile industry by releasing its first-ever touchscreen smartphone.",
+      "Steve Jobs unveiled a device that combined a widescreen iPod with touch controls, a mobile phone, and an internet communicator.",
+      "The original iPhone officially became available for purchase in the United States."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "33",
+    "entity": "Android (public release)",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "The first commercially available smartphone running the Android operating system was released to the public.",
+      "Google officially launched version 1.0 of the Android mobile platform.",
+      "The T-Mobile G1 became the first consumer device to ship with the Android operating system."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "34",
+    "entity": "Instagram",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "Kevin Systrom and Mike Krieger launched the Instagram mobile application exclusively on the iOS App Store in October.",
+      "Following a pivot from the prototype Burbn, the photo-sharing service was officially released to the public in October.",
+      "The app garnered twenty-five thousand users on its first day after being released on the App Store in October."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "35",
+    "entity": "Microplastics as an ocean pollutant",
+    "category": "environment",
+    "question_type": "implicit",
+    "ground_truth_year": 2004,
+    "sentences": [
+      "The accumulation of microplastics in marine environments is recognized as a pervasive global pollution issue."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010
+    ],
+    "plausible_years_probs": [
+      0.25000000000000006,
+      0.20000000000000004,
+      0.15000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "36",
+    "entity": "Genetically modified crops adoption",
+    "category": "agriculture",
+    "question_type": "implicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "Farmers are actively adopting genetically modified crops on a commercial scale to improve resistance against pests and weeds."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      1996,
+      1997,
+      1998,
+      1999,
+      2000
+    ],
+    "plausible_years_probs": [
+      0.35000000000000003,
+      0.30000000000000004,
+      0.20000000000000004,
+      0.10000000000000002,
+      0.05000000000000001
+    ]
+  },
+  {
+    "id": "37",
+    "entity": "Climate-change adaptation planning",
+    "category": "policy",
+    "question_type": "implicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "Effective climate policy now requires the integration of adaptation planning to address unavoidable impacts, rather than focusing solely on mitigation strategies."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2001,
+      2002,
+      2003,
+      2004,
+      2005
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.3,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "38",
+    "entity": "Apple Watch",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "The first generation Apple Watch became available in April featuring watchOS 1 and the Digital Crown, marking the company's first new product category since the iPad.",
+      "After being unveiled alongside the iPhone 6 the previous autumn, this wearable device finally hit retail stores in April.",
+      "This smartwatch was released to the public in April with a Taptic Engine and Force Touch, inaugurating the Series 0 lineup."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "39",
+    "entity": "Nintendo Switch",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2017,
+    "sentences": [
+      "Nintendo launched this hybrid video game console worldwide as the successor to the Wii U, accompanied by the release of The Legend of Zelda: Breath of the Wild.",
+      "Marking a shift to hybrid gaming, this device hit the markets alongside launch titles like 1-2-Switch and Snipperclips.",
+      "The console, known for its detachable Joy-Con controllers, was released globally just months before Super Mario Odyssey arrived on the platform."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "40",
+    "entity": "TikTok",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "ByteDance originally released the application in the Chinese market under the name Douyin.",
+      "Two years prior to its merger with Musical.ly, the short-form video platform was launched by ByteDance as Douyin.",
+      "The service debuted in China as Douyin exactly one year before its international release under the name TikTok."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "41",
+    "entity": "Civil Rights Act (US, 1964)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1964,
+    "sentences": [
+      "President Lyndon B. Johnson signs the landmark legislation prohibiting discrimination based on race, color, religion, sex, or national origin into law.",
+      "The United States Congress passes the act that ends unequal application of voter registration requirements and racial segregation in schools, at the workplace, and by facilities that serve the general public.",
+      "Following a lengthy filibuster in the Senate, this sweeping civil rights bill is enacted to outlaw major forms of discrimination against African Americans and women."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "42",
+    "entity": "Freedom of Information Act (US)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1966,
+    "sentences": [
+      "President Lyndon B. Johnson signs the Freedom of Information Act into law, ensuring public access to federal agency records.",
+      "The Freedom of Information Act is enacted to establish a legal right for individuals to obtain information from federal government agencies.",
+      "Congress passes the Freedom of Information Act to promote transparency by allowing citizens to request government documents."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "43",
+    "entity": "Clean Air Act (US major expansion)",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1970,
+    "sentences": [
+      "President Richard Nixon signed this legislation authorizing the establishment of National Ambient Air Quality Standards to regulate emissions from stationary and mobile sources.",
+      "Enacted by the 91st United States Congress, this major expansion of environmental law shifted the federal role from advisory to active enforcement of pollution controls.",
+      "Signed into law on New Year's Eve by President Nixon, this act coincided with the founding year of the Environmental Protection Agency and mandated strict automobile emission reductions."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "44",
+    "entity": "HIPAA",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "President Bill Clinton signed the Health Insurance Portability and Accountability Act into federal law.",
+      "The Kassebaum\u2013Kennedy Act was enacted to protect health insurance coverage for workers and their families when they change or lose their jobs.",
+      "The 104th United States Congress passed the legislation commonly known as HIPAA."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "45",
+    "entity": "Sarbanes\u2013Oxley Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "The Sarbanes\u2013Oxley Act mandates strict reforms to improve financial disclosures from corporations and prevent accounting fraud.",
+      "The Public Company Accounting Oversight Board is established by the passage of the Sarbanes\u2013Oxley Act.",
+      "Congress enacts the Sarbanes\u2013Oxley Act to restore investor confidence following major corporate accounting scandals like Enron and WorldCom."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "46",
+    "entity": "USA PATRIOT Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "President George W. Bush signed the USA PATRIOT Act into law to expand the surveillance capabilities of law enforcement agencies.",
+      "The Uniting and Strengthening America by Providing Appropriate Tools Required to Intercept and Obstruct Terrorism Act was overwhelmingly passed by Congress.",
+      "This legislation became law shortly after the attacks on the World Trade Center and the Pentagon to strengthen national security."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "47",
+    "entity": "No Child Left Behind Act",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "President George W. Bush signed the No Child Left Behind Act into law on January 8, introducing broad federal testing standards.",
+      "Passed by the 107th Congress, this bipartisan legislation was enacted when President Bush signed it on January 8.",
+      "On January 8, President George W. Bush signed this act, which served as a reauthorization of the Elementary and Secondary Education Act."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "48",
+    "entity": "Affordable Care Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "President Barack Obama signed the landmark Affordable Care Act into law at a White House ceremony.",
+      "The 111th United States Congress successfully passed the Affordable Care Act, initiating a major overhaul of the healthcare system.",
+      "The Patient Protection and Affordable Care Act was formally enacted to expand medical coverage and reduce healthcare costs."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "49",
+    "entity": "Dodd\u2013Frank Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "President Barack Obama signs the Dodd\u2013Frank Wall Street Reform and Consumer Protection Act into federal law.",
+      "The United States Congress enacts the Dodd\u2013Frank Act to overhaul financial regulation in response to the recent financial crisis.",
+      "Comprehensive legislation known as the Dodd\u2013Frank Act is officially approved to increase transparency and accountability in the financial system."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "50",
+    "entity": "GDPR",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "The European Parliament and the Council adopted the General Data Protection Regulation to unify data privacy laws across the European Union.",
+      "This comprehensive regulation was enacted to replace the Data Protection Directive, initiating a two-year transition period for compliance.",
+      "European legislators officially passed the General Data Protection Regulation, establishing strict new rules for data processing and privacy."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "51",
+    "entity": "California Consumer Privacy Act (CCPA)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2018,
+    "sentences": [
+      "Governor Jerry Brown signs the California Consumer Privacy Act, establishing new data privacy rights for state residents.",
+      "The California State Legislature unanimously approves the California Consumer Privacy Act, securing its place as a landmark data privacy law.",
+      "California becomes the first state to adopt a comprehensive consumer privacy framework with the passage of the CCPA."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "52",
+    "entity": "Digital Millennium Copyright Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "President Bill Clinton signed the Digital Millennium Copyright Act into law to implement global internet treaties.",
+      "The Digital Millennium Copyright Act was enacted by the United States Congress to criminalize the circumvention of digital access controls.",
+      "Unanimously passed by the Senate, the Digital Millennium Copyright Act became United States law to address copyright challenges in the digital age."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "53",
+    "entity": "Kyoto Protocol",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1997,
+    "sentences": [
+      "This international treaty was adopted on December 11 at the third Conference of the Parties to the UNFCCC held in Kyoto.",
+      "Delegates adopted this landmark climate agreement on December 11 in the Japanese city for which it is named.",
+      "The protocol was formally adopted on December 11 following negotiations in Japan, establishing binding obligations for developed countries to reduce emissions."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "54",
+    "entity": "AI fairness and bias concerns",
+    "category": "artificial intelligence",
+    "question_type": "implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "The artificial intelligence community is increasingly recognizing that machine learning models trained on historical data can inadvertently learn and perpetuate societal biases."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "plausible_years_probs": [
+      0.35000000000000003,
+      0.30000000000000004,
+      0.20000000000000004,
+      0.10000000000000002,
+      0.05000000000000001
+    ]
+  },
+  {
+    "id": "55",
+    "entity": "Americans with Disabilities Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1990,
+    "sentences": [
+      "President George H.W. Bush signed the Americans with Disabilities Act into law during a ceremony on the White House South Lawn.",
+      "This landmark civil rights legislation was enacted to prohibit discrimination against individuals with disabilities in all areas of public life.",
+      "Congress passed this comprehensive statute to guarantee equal opportunity for individuals with disabilities in public accommodations, employment, and transportation."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "56",
+    "entity": "Ransomware awareness",
+    "category": "cybersecurity",
+    "question_type": "implicit",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "Ransomware is now recognized as a pervasive danger that requires organizations to implement dedicated awareness programs and offline backup solutions."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.3,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "57",
+    "entity": "Gramm\u2013Leach\u2013Bliley Act",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "President Bill Clinton signed the Financial Services Modernization Act into law on November 12, effectively repealing parts of the Glass\u2013Steagall Act.",
+      "Enacted by the 106th United States Congress and signed by President Clinton, this legislation removed barriers between commercial banks, investment banks, and insurance companies.",
+      "On November 12, this act sponsored by Senators Gramm, Leach, and Bliley was signed into law to allow the consolidation of commercial and investment banking institutions."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "58",
+    "entity": "Federal Election Campaign Act (major amendments)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1971,
+    "sentences": [
+      "Congress passed the Federal Election Campaign Act to increase transparency regarding financial contributions to federal candidates.",
+      "The Federal Election Campaign Act was enacted to replace the earlier Federal Corrupt Practices Act with stricter disclosure requirements.",
+      "Primary legislation known as the Federal Election Campaign Act was introduced to regulate political campaign spending and fundraising."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "59",
+    "entity": "Voting Rights Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1965,
+    "sentences": [
+      "President Lyndon B. Johnson signed the Voting Rights Act into law to prohibit racial discrimination in voting.",
+      "This legislation was enacted to outlaw discriminatory voting practices adopted in many southern states, such as literacy tests.",
+      "Congress passed this landmark federal law to enforce the voting rights guaranteed by the Fourteenth and Fifteenth Amendments."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "60",
+    "entity": "Endangered Species Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1973,
+    "sentences": [
+      "President Richard Nixon signed the Endangered Species Act into law to protect critically imperiled species from extinction.",
+      "The 93rd United States Congress passed the Endangered Species Act with overwhelming bipartisan support to conserve threatened wildlife.",
+      "The Endangered Species Act was enacted as United States federal law in late December to provide a framework for conserving endangered plants and animals."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "61",
+    "entity": "Star Wars: A New Hope",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1977,
+    "sentences": [
+      "George Lucas first introduced the world to the galaxy far, far away with the theatrical debut of this seminal space opera.",
+      "Audiences first witnessed the destruction of the Death Star on the big screen during the original release of this film.",
+      "The movie that launched the Skywalker saga and revolutionized special effects premiered in theaters."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "62",
+    "entity": "The Godfather",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1972,
+    "sentences": [
+      "Francis Ford Coppola's adaptation of Mario Puzo's novel first premiered in New York City theaters.",
+      "This crime film starring Marlon Brando as Don Vito Corleone was released to universal acclaim.",
+      "Paramount Pictures distributed this landmark gangster movie, which became the highest-grossing film of its time shortly after opening."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "63",
+    "entity": "Jaws",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1975,
+    "sentences": [
+      "Steven Spielberg's thriller Jaws was released to theaters.",
+      "The film adaptation of Peter Benchley's novel Jaws, directed by Steven Spielberg, made its theatrical debut.",
+      "The first true summer blockbuster, Jaws, arrived in movie theaters."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "64",
+    "entity": "E.T. the Extra-Terrestrial",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1982,
+    "sentences": [
+      "Steven Spielberg's iconic film about a boy befriending a stranded extraterrestrial makes its theatrical debut.",
+      "The cinematic world first meets a candy-loving alien and his human friend Elliott in this blockbuster release.",
+      "This film becomes the highest-grossing movie of all time upon its release, overtaking the previous record holder Star Wars."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "65",
+    "entity": "Jurassic Park",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1993,
+    "sentences": [
+      "Steven Spielberg directed this sci-fi classic in the same calendar year that he released his historical drama Schindler's List.",
+      "This dinosaur adventure film swept the technical categories at the 66th Academy Awards, including winning Best Visual Effects.",
+      "Viewers first visited Isla Nublar in this film during the same summer that The Fugitive and Sleepless in Seattle premiered."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "66",
+    "entity": "Titanic",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1997,
+    "sentences": [
+      "James Cameron's epic romance starring Leonardo DiCaprio and Kate Winslet is released to cinemas.",
+      "Audiences first watch the fictional love story of Jack Dawson and Rose DeWitt Bukater set aboard the ill-fated ocean liner.",
+      "The blockbuster film featuring Celine Dion's hit song My Heart Will Go On debuts on the big screen."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "67",
+    "entity": "The Matrix",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "The Wachowskis released the first film in the franchise starring Keanu Reeves as the hacker Neo.",
+      "Cinema was revolutionized by the visual effects of this Keanu Reeves sci-fi film that introduced bullet time.",
+      "The initial installment of the cyberpunk series featuring the red and blue pill choice premiered."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "68",
+    "entity": "The Lord of the Rings: The Fellowship of the Ring",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "Peter Jackson directed this first installment of a fantasy trilogy, which premiered in theaters the same year as Harry Potter and the Sorcerer's Stone.",
+      "This film, starring Elijah Wood and Ian McKellen, lost the Academy Award for Best Picture to Ron Howard's A Beautiful Mind.",
+      "Released the same year as Shrek and Training Day, this fantasy epic introduced audiences to Middle-earth under Peter Jackson's direction."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "69",
+    "entity": "Reusable launch vehicles",
+    "category": "aerospace",
+    "question_type": "implicit",
+    "ground_truth_year": 2006,
+    "sentences": [
+      "The space industry is pivoting toward commercial partnerships to finally achieve the long-sought goal of cost-effective reusable launch vehicles."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2006,
+      2007,
+      2008,
+      2009,
+      2010
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.3,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "70",
+    "entity": "The Dark Knight",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "Christopher Nolan's second Batman film arrived in theaters, showcasing Heath Ledger's iconic portrayal of the Joker.",
+      "Christian Bale reprised his role as the Caped Crusader in a blockbuster that pitted him against the Joker and Two-Face.",
+      "The sequel to Batman Begins premiered globally, marking the first major motion picture filmed partly with IMAX cameras."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "71",
+    "entity": "Avatar",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "James Cameron released his visually groundbreaking sci-fi epic set on the moon Pandora.",
+      "Audiences were first introduced to the blue-skinned Na'vi people in this blockbuster film.",
+      "This motion picture, featuring Sam Worthington and Zoe Saldana, made its theatrical debut revolutionizing 3D cinema."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "72",
+    "entity": "Frozen",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "Walt Disney Animation Studios released its 53rd feature film, Frozen, to critical acclaim.",
+      "Audiences were first introduced to the kingdom of Arendelle and the sisters Anna and Elsa in this Disney musical.",
+      "The hit song Let It Go debuted as part of the original soundtrack for this animated blockbuster."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "73",
+    "entity": "Remote work as a mainstream practice",
+    "category": "productivity",
+    "question_type": "implicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "Companies are increasingly adopting remote work as a mainstream practice to reduce overhead costs and access a wider talent pool."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2009,
+      2010,
+      2011,
+      2012,
+      2013
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.3,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "74",
+    "entity": "Gladiator",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2000,
+    "sentences": [
+      "Ridley Scott's epic historical drama starring Russell Crowe as a betrayed Roman general was released in theaters.",
+      "Audiences first witnessed the story of Maximus Decimus Meridius seeking vengeance against Commodus in this film.",
+      "This sword-and-sandal blockbuster, which revitalized the genre, made its official debut."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "75",
+    "entity": "Social media misinformation concerns",
+    "category": "media",
+    "question_type": "implicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "The rapid viral spread of 'fake news' stories on social networks has emerged as a primary concern regarding the integrity of information ecosystems and democratic processes."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020
+    ],
+    "plausible_years_probs": [
+      0.4,
+      0.3,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "76",
+    "entity": "The Shawshank Redemption",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "Frank Darabont's adaptation of a Stephen King novella, starring Tim Robbins and Morgan Freeman, was first released in cinemas.",
+      "The drama featuring Andy Dufresne's incarceration and eventual escape from Shawshank State Penitentiary made its theatrical debut.",
+      "Tim Robbins and Morgan Freeman starred in this acclaimed prison drama that began its initial theatrical run."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "77",
+    "entity": "Plant-based protein as mainstream diet",
+    "category": "food",
+    "question_type": "implicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "Plant-based proteins are shifting from a niche alternative to a mainstream component of the modern diet."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2017
+    ],
+    "plausible_years_probs": [
+      0.15000000000000002,
+      0.25000000000000006,
+      0.30000000000000004,
+      0.20000000000000004,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "78",
+    "entity": "The Avengers",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "Joss Whedon directed the blockbuster film where the superheroes unite to stop Loki's invasion of New York.",
+      "Marvel Studios concluded Phase One of its cinematic universe with the release of this team-up movie.",
+      "This film marked the first time the primary Marvel heroes assembled on screen to form the titular team."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "79",
+    "entity": "Toy Story",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "Pixar released the world's first feature-length computer-animated film, Toy Story.",
+      "John Lasseter made his feature directorial debut with this movie that introduced Woody and Buzz Lightyear to audiences.",
+      "Walt Disney Pictures distributed this groundbreaking film as the first fully computer-animated feature produced by Pixar."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "80",
+    "entity": "Harry Potter and the Sorcerer\u2019s Stone",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "This Chris Columbus film became the highest-grossing release worldwide during the same year that The Lord of the Rings: The Fellowship of the Ring premiered.",
+      "This movie starring Daniel Radcliffe premiered in the same year as the public launch of Wikipedia and the release of the first iPod.",
+      "The first installment of the Wizarding World franchise was released in theaters exactly one year before Harry Potter and the Chamber of Secrets."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "81",
+    "entity": "Electric vehicle adoption",
+    "category": "transport",
+    "question_type": "implicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "The arrival of the first mass-market plug-in cars suggests that electric vehicle adoption is poised to move from niche experiments to mainstream reality."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2010,
+      2011,
+      2012
+    ],
+    "plausible_years_probs": [
+      0.6000000000000001,
+      0.30000000000000004,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "82",
+    "entity": "Microsoft",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1975,
+    "sentences": [
+      "Bill Gates and Paul Allen found the company in Albuquerque to develop a BASIC interpreter for the Altair 8800.",
+      "The software partnership originally styled as Micro-Soft is officially established.",
+      "This technology giant commences operations with the successful demonstration and distribution of Altair BASIC."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "83",
+    "entity": "Apple Inc.",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1976,
+    "sentences": [
+      "Steve Jobs, Steve Wozniak, and Ronald Wayne founded the company to sell the Apple I personal computer kit.",
+      "This technology giant began operations in a Los Altos garage with the release of a single-board computer.",
+      "The corporation was established in California by two college dropouts who aimed to make computers accessible to individuals."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "84",
+    "entity": "CRISPR gene editing",
+    "category": "genetics",
+    "question_type": "implicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "Researchers have gained access to a programmable and highly precise tool for genome engineering known as CRISPR-Cas9."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2012,
+      2013,
+      2014,
+      2015,
+      2016
+    ],
+    "plausible_years_probs": [
+      0.35,
+      0.25,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "85",
+    "entity": "Adobe",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1982,
+    "sentences": [
+      "John Warnock and Charles Geschke establish Adobe Systems after leaving Xerox PARC.",
+      "Adobe is founded in a garage in Los Altos, California.",
+      "The software company Adobe officially incorporates to develop the PostScript language."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "86",
+    "entity": "Dell",
+    "category": "company",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "Michael Dell established PC's Limited while studying as a pre-med student at the University of Texas at Austin.",
+      "The technology giant began as PC's Limited in Michael Dell's dorm room at the Dobie Center.",
+      "Registered initially as PC's Limited, the company was started by Michael Dell with $1,000 in start-up capital."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "87",
+    "entity": "Cisco",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "Leonard Bosack and Sandy Lerner founded Cisco Systems while working at Stanford University.",
+      "Cisco Systems was established to commercialize multi-protocol router technology.",
+      "The networking technology corporation Cisco began its operations in the San Francisco Bay Area."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "88",
+    "entity": "Amazon",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "Jeff Bezos founds the e-commerce company Amazon in a garage in Bellevue, Washington.",
+      "The company initially known as Cadabra is incorporated by Jeff Bezos.",
+      "Amazon is established as an online marketplace for books in Washington state."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "89",
+    "entity": "5G cellular deployment",
+    "category": "telecommunications",
+    "question_type": "implicit",
+    "ground_truth_year": 2019,
+    "sentences": [
+      "Telecommunications carriers are actively expanding the footprint of commercial 5G networks to deliver ultra-low latency and gigabit speeds to consumers."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "plausible_years_probs": [
+      0.25,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05
+    ]
+  },
+  {
+    "id": "90",
+    "entity": "Social distancing",
+    "category": "public health",
+    "question_type": "implicit",
+    "ground_truth_year": 2020,
+    "sentences": [
+      "Social distancing is widely advocated by public health authorities as a crucial strategy to flatten the curve of infection."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "plausible_years_probs": [
+      0.6,
+      0.25,
+      0.1,
+      0.025,
+      0.025
+    ]
+  },
+  {
+    "id": "91",
+    "entity": "Alibaba",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "Jack Ma and his team establish Alibaba in a small apartment in Hangzhou.",
+      "The company launches its first online marketplace to connect Chinese manufacturers with overseas buyers.",
+      "A group of eighteen founders comes together to formally create the Alibaba Group."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "92",
+    "entity": "Tesla, Inc.",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2003,
+    "sentences": [
+      "Martin Eberhard and Marc Tarpenning incorporate Tesla Motors to develop an electric sports car.",
+      "The electric vehicle manufacturer originally known as Tesla Motors is founded in San Carlos, California.",
+      "Engineers Martin Eberhard and Marc Tarpenning launch a new car company named after inventor Nikola Tesla."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "93",
+    "entity": "Carbon-neutral targets",
+    "category": "policy",
+    "question_type": "implicit",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "Adopting carbon-neutral targets is now widely regarded as the essential benchmark for credible climate policy frameworks."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019
+    ],
+    "plausible_years_probs": [
+      0.35000000000000003,
+      0.30000000000000004,
+      0.20000000000000004,
+      0.10000000000000002,
+      0.05000000000000001
+    ]
+  },
+  {
+    "id": "94",
+    "entity": "YouTube",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "The first video, titled 'Me at the zoo,' was uploaded to this video-sharing platform by co-founder Jawed Karim.",
+      "Three former PayPal employees registered the domain and launched the public beta version of this video hosting service.",
+      "This online video platform officially began its operations, allowing users to upload and share clips for the first time."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "95",
+    "entity": "mRNA vaccine deployment",
+    "category": "biomedicine",
+    "question_type": "implicit",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "The use of modified nucleosides to suppress innate immune recognition is paving the way for the practical deployment of mRNA vaccines."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2005,
+      2006,
+      2007,
+      2008,
+      2009
+    ],
+    "plausible_years_probs": [
+      0.5,
+      0.3,
+      0.1,
+      0.05,
+      0.05
+    ]
+  },
+  {
+    "id": "96",
+    "entity": "Uber",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "Travis Kalanick and Garrett Camp founded the transportation network company originally known as UberCab.",
+      "Uber was established as a black car service in San Francisco to connect riders with drivers.",
+      "The ride-hailing giant was initially incorporated by its founders under the name UberCab."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "97",
+    "entity": "Online learning from home",
+    "category": "education",
+    "question_type": "implicit",
+    "ground_truth_year": 2003,
+    "sentences": [
+      "With the proliferation of high-speed internet access, obtaining a full education from the comfort of one's home is becoming a practical reality for a growing number of students."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2003,
+      2004,
+      2005,
+      2006,
+      2007
+    ],
+    "plausible_years_probs": [
+      0.3,
+      0.3,
+      0.2,
+      0.1,
+      0.1
+    ]
+  },
+  {
+    "id": "98",
+    "entity": "AI chatbots",
+    "category": "artificial intelligence",
+    "question_type": "implicit",
+    "ground_truth_year": 2022,
+    "sentences": [
+      "AI chatbots have reached a level of sophistication where they can effortlessly generate human-like text and assist with complex coding tasks."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00",
+    "plausible_years": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "plausible_years_probs": [
+      0.4000000000000001,
+      0.30000000000000004,
+      0.20000000000000004,
+      0.10000000000000002
+    ]
+  },
+  {
+    "id": "99",
+    "entity": "NVIDIA",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1993,
+    "sentences": [
+      "Jensen Huang, Chris Malachowsky, and Curtis Priem found NVIDIA to bring 3D graphics to the PC market.",
+      "NVIDIA is incorporated with the vision of transforming computer graphics through parallel computing.",
+      "The graphics chip company NVIDIA officially begins its operations."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  },
+  {
+    "id": "100",
+    "entity": "Salesforce",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "Marc Benioff and his co-founders establish Salesforce in a San Francisco apartment.",
+      "Salesforce begins operations with the revolutionary idea of delivering enterprise software via a web browser.",
+      "The company launches its first customer relationship management product, effectively pioneering the Software-as-a-Service model."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-pro-preview",
+    "created_at_utc": "2026-02-25T21:19:45.696787+00:00"
+  }
+]

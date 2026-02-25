@@ -1,0 +1,1502 @@
+[
+  {
+    "id": "1",
+    "entity": "C (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1972,
+    "sentences": [
+      "In what year did Dennis Ritchie officially introduce the C programming language while working at Bell Laboratories?",
+      "What was the specific year that the C programming language was first released as the successor to the B language?",
+      "Identify the year in which the C programming language made its initial public debut."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "2",
+    "entity": "C++",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1985,
+    "sentences": [
+      "When was the programming language that evolved from 'C with Classes' at Bell Labs and was authored by Bjarne Stroustrup first commercially released?",
+      "Identify the year when Bjarne Stroustrup officially released the language he designed as an extension of C featuring classes, virtual functions, and operator overloading.",
+      "In what year did the software originally known as 'C with Classes' receive its first commercial implementation alongside the publication of its definitive reference book?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "3",
+    "entity": "Python (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1991,
+    "sentences": [
+      "In which year did Guido van Rossum first release the Python programming language to the public?",
+      "What year marks the initial official publication of the Python language as a successor to the ABC language?",
+      "When was the first version of the Python source code distributed to the public on the alt.sources newsgroup?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "4",
+    "entity": "Java (programming language)",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "When did Sun Microsystems officially release the object-oriented language developed by James Gosling that was originally conceived under the project name Oak?",
+      "In which year did the programming language famous for its 'Write Once, Run Anywhere' philosophy debut alongside the HotJava browser at the SunWorld conference?",
+      "What year saw the initial public release of the programming language that became famous for enabling applets within the Netscape Navigator web browser?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "5",
+    "entity": "JavaScript",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "In what year was the programming language originally developed by Brendan Eich at Netscape first introduced to the public?",
+      "What is the official release year for the web scripting language originally known as LiveScript?",
+      "During which year did Netscape Communications Corporation first debut the JavaScript language to developers?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "6",
+    "entity": "PHP",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "In what year was the initial version of the PHP scripting language first released to the public?",
+      "What year marks the official debut of Rasmus Lerdorf's Personal Home Page Tools?",
+      "In which year was the first public iteration of the software now known as PHP made available?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "7",
+    "entity": "Ruby",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "When did Yukihiro Matsumoto first release his dynamic, object-oriented programming language that combines features of Perl and Smalltalk?",
+      "In what year was the initial public version of the scripting language known for its focus on programmer happiness and its unique syntax blending Lisp and Eiffel made available?",
+      "When was the first official release of the open-source language developed in Japan that was designed to be more powerful than Perl and more object-oriented than Python?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "8",
+    "entity": "MySQL",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "In what year was the open-source relational database management system MySQL first released to the public?",
+      "Which year marks the initial debut of the MySQL database software?",
+      "When was the original version of the MySQL database system first introduced?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "9",
+    "entity": "Apache HTTP Server",
+    "category": "software",
+    "question_type": "implicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "When did the loose collection of webmasters first organize to release their combined improvements to the NCSA server as a distinct, communal project?",
+      "In what year did the public first gain access to the collaborative server project born from the shared need to maintain and extend the stalled NCSA HTTPd code?",
+      "When did the collective of developers originally known for their disparate patches first present their unified server software to the wider internet community?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "10",
+    "entity": "Git",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "After the BitKeeper license controversy, Linus Torvalds began development on this distributed version control system for the Linux kernel.",
+      "This open-source software was launched by the creator of Linux as a decentralized alternative to proprietary version control tools previously used for kernel maintenance.",
+      "Linus Torvalds released the initial version of this distributed version control tool specifically to manage the Linux kernel source code following the loss of free access to BitKeeper."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "11",
+    "entity": "Docker",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "In which year was the first public version of the Docker containerization software officially released?",
+      "What year marks the initial debut of Docker as an open-source project?",
+      "During which year did the Docker platform first become available to the software development community?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "12",
+    "entity": "Kubernetes",
+    "category": "software",
+    "question_type": "implicit",
+    "ground_truth_year": 2014,
+    "sentences": [
+      "In what year did Google first open-source its container orchestration platform to provide a public alternative to its internal Borg system?",
+      "When did the cloud-native community first witness the introduction of the project that would eventually become the industry standard for managing container clusters?",
+      "What year saw the initial announcement and first code commits for the orchestration tool that revolutionized how engineers scale containerized applications?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "13",
+    "entity": "TensorFlow",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "When was the Google Brain team's library for machine learning officially released to the public as the successor to their internal DistBelief system?",
+      "In what year did the open-source machine learning framework created by Google Brain become available to developers worldwide following its transition from an internal tool?",
+      "What is the release year of the software library designed for numerical computation and large-scale machine learning that followed the development of DistBelief by Google researchers?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "14",
+    "entity": "PyTorch",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "In which year did Facebook's AI Research lab first release the open-source machine learning library known as PyTorch?",
+      "What was the initial public launch year for the deep learning framework developed primarily by the FAIR team called PyTorch?",
+      "During which year was the PyTorch library first made available as a Python-based successor to the original Torch framework?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "15",
+    "entity": "React (JavaScript library)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "What was the official release year for the React JavaScript library when it was first open-sourced by Facebook?",
+      "In what year did Jordan Walke first debut the React library at JSConf US for public consumption?",
+      "During which year was the initial public version of the React framework made available to the developer community?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "16",
+    "entity": "AngularJS",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "In what year was the first version of the AngularJS framework publicly released by its creators?",
+      "Which year marks the official debut of AngularJS as an open-source JavaScript web framework?",
+      "When was the AngularJS library first made available to the public for front-end web development?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "17",
+    "entity": "Swift (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2014,
+    "sentences": [
+      "In what year did Apple first unveil the Swift programming language at the Worldwide Developers Conference?",
+      "When did the Swift programming language first make its debut to developers as a modern alternative to Objective-C?",
+      "In which year was the initial public release of the Swift programming language introduced by Apple?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "18",
+    "entity": "Rust (programming language)",
+    "category": "software",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "Graydon Hoare first presented this memory-safe systems programming language to his colleagues at Mozilla Research.",
+      "Mozilla Research publicly introduced a new systems language designed for high performance and safety, initially developed as a personal project by Graydon Hoare.",
+      "This systems programming language, which integrates features from OCaml and C++ while ensuring memory safety, was first revealed to the public through Mozilla Research."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "19",
+    "entity": "Go (programming language)",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "In what year did Google officially announce the open-source release of the Go programming language?",
+      "When was the Go programming language first introduced to the public by its creators at Google?",
+      "What is the official public debut year for the Go programming language?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "20",
+    "entity": "TypeScript",
+    "category": "software",
+    "question_type": "explicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "In what year did Microsoft first publicly release the TypeScript programming language?",
+      "What was the year of the initial public unveiling of TypeScript as an open-source superset of JavaScript?",
+      "During which year was TypeScript first introduced to the developer community by Anders Hejlsberg and his team?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "21",
+    "entity": "IBM Personal Computer",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1981,
+    "sentences": [
+      "What year did IBM officially unveil the Model 5150, marking its significant entry into the personal computer market?",
+      "In what year was the original IBM Personal Computer first made available for public purchase?",
+      "What year did the debut of the IBM PC occur, establishing the hardware platform that would define the era of desktop computing?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "22",
+    "entity": "Apple Macintosh",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "In which year did Steve Jobs famously unveil the first Macintosh computer during an Apple keynote event?",
+      "What was the year of the original Apple Macintosh's commercial release to the public?",
+      "During which year was the first Macintosh model launched following the broadcast of its iconic dystopian-themed Super Bowl commercial?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "23",
+    "entity": "Sony PlayStation",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "What was the specific year when Sony first launched the original PlayStation console in Japan?",
+      "In what year did the Sony PlayStation make its initial debut as the company's first home gaming system?",
+      "Which year marks the official public introduction of Sony's inaugural PlayStation hardware?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "24",
+    "entity": "Nintendo 64",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "During which year did the Nintendo 64 first launch in the Japanese and North American markets?",
+      "In what year did Nintendo's iconic 64-bit home video game console make its commercial debut?",
+      "Which year marked the official release of the cartridge-based successor to the Super Nintendo Entertainment System?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "25",
+    "entity": "DVD (consumer format)",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "In what year was the digital video disc format first commercially released to the public?",
+      "What year did the first DVD players and discs hit the retail market for consumers?",
+      "When was the optical disc storage format known as the DVD officially launched for commercial use?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "26",
+    "entity": "Google Search",
+    "category": "product",
+    "question_type": "implicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "When did the digital landscape transform with the public debut of the PageRank algorithm, moving operations from a Stanford dormitory to a suburban garage?",
+      "In what year did the simple, white search interface first appear as the successor to the creators' initial project known as Backrub?",
+      "At what point did web users first begin navigating the internet through the minimalist portal that used link analysis to prioritize results over the then-standard directory lists?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "27",
+    "entity": "iPod",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "In which year did Apple unveil the very first iPod model to the public?",
+      "What was the initial release year for the original iPod that featured a mechanical scroll wheel?",
+      "During which year did Steve Jobs introduce the first-generation iPod with the promise of putting a thousand songs in your pocket?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "28",
+    "entity": "Facebook (platform launch)",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2004,
+    "sentences": [
+      "When was the social networking service originally known as TheFacebook first launched by Mark Zuckerberg and his roommates at Harvard University?",
+      "In what year did Mark Zuckerberg, Eduardo Saverin, Dustin Moskovitz, and Chris Hughes officially release their college-based social platform to the Harvard student body?",
+      "At what point did the exclusive Harvard networking tool founded by Mark Zuckerberg and Andrew McCollum first become available for students to create digital profiles?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "29",
+    "entity": "YouTube",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "After leaving their roles at PayPal, the founding trio launched a video-sharing site and uploaded the historic clip titled \"Me at the zoo.\"",
+      "Former employees of an online payment processor established a platform for user-generated content and premiered it with a short video filmed at the San Diego Zoo.",
+      "Steve Chen and his partners introduced a global video hub by publishing the very first digital recording of a co-founder visiting an elephant enclosure."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "30",
+    "entity": "Twitter",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2006,
+    "sentences": [
+      "What year did Jack Dorsey and his team officially launch their microblogging service to the public?",
+      "In what year did the social media platform originally styled as 'twttr' make its public debut?",
+      "What year marks the initial introduction of the site that became famous for its original 140-character limit?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "31",
+    "entity": "Amazon Kindle",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2007,
+    "sentences": [
+      "What was the year when Amazon first launched its original Kindle e-reader?",
+      "In which year did the first generation of the Amazon Kindle become available for purchase?",
+      "Identify the year that marked the official public debut of Amazon's Kindle device."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "32",
+    "entity": "iPhone",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2007,
+    "sentences": [
+      "In what year did Steve Jobs first unveil the original iPhone during his keynote at the Macworld Conference?",
+      "What was the year when Apple officially released the very first generation of the iPhone to the public?",
+      "Which year marks the initial debut of the device famously described as a widescreen iPod with touch controls, a revolutionary mobile phone, and a breakthrough internet communications device?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "33",
+    "entity": "Android (public release)",
+    "category": "product",
+    "question_type": "explicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "What year marks the first commercial release of the Android operating system to the public market?",
+      "In what year was the T-Mobile G1 released as the first consumer smartphone running the Android platform?",
+      "What year did Google and its partners in the Open Handset Alliance first launch the Android software for consumer use?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "34",
+    "entity": "Instagram",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "In what year did the mobile application that popularized the square aspect ratio and instant digital filters first become available for download on Apple devices?",
+      "What was the release year of the software application developed by Kevin Systrom that rebranded the location-based service Burbn into a filtered image-sharing platform?",
+      "In what year did the iOS App Store first host the social media platform known for its X-Pro II and Earlybird filters and its unique portmanteau name?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "35",
+    "entity": "Snapchat",
+    "category": "product",
+    "question_type": "implicit",
+    "ground_truth_year": 2011,
+    "sentences": [
+      "When did the mobile application that pioneered the trend of sending self-destructing photo messages first appear on smartphones?",
+      "In what year was the social media platform that introduced the ghost-logo interface for ephemeral visual communication first launched?",
+      "In what year was the smartphone application that allows for fleeting digital interactions where images vanish immediately after viewing first released?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "36",
+    "entity": "Tesla Model S",
+    "category": "product",
+    "question_type": "implicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "When did drivers first experience the shift to high-end electric travel as this flagship luxury sedan began its initial deliveries to customers?",
+      "At what point did the automotive industry witness the arrival of the first mass-produced premium electric sedan that featured a signature massive vertical touchscreen?",
+      "When did the era of long-range electric luxury truly begin with the debut of the vehicle that first utilized the proprietary Supercharger network?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "37",
+    "entity": "Amazon Echo",
+    "category": "product",
+    "question_type": "implicit",
+    "ground_truth_year": 2014,
+    "sentences": [
+      "When did households first begin integrating the Alexa voice assistant via the initial limited release of Amazon's standalone smart speaker?",
+      "In what year did tech enthusiasts first receive exclusive invitations to purchase the debut cylinder-shaped home assistant from Amazon?",
+      "When did the market first see the introduction of the Amazon Echo, signaling the arrival of persistent voice-activated AI in the domestic sphere?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "38",
+    "entity": "Apple Watch",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "What year was the first Apple-branded smartwatch featuring the Digital Crown and Force Touch technology first released to consumers?",
+      "In which year did the initial Apple wearable device featuring a custom heart rate sensor and the Taptic Engine first become available for purchase?",
+      "Identify the year when Apple debuted its first line of smartwatches that integrated the S1 chip and operated using the original version of watchOS."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "39",
+    "entity": "Nintendo Switch",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2017,
+    "sentences": [
+      "In what year did Nintendo release the hybrid gaming console that succeeded the Wii U and launched alongside The Legend of Zelda: Breath of the Wild?",
+      "What was the debut year for the gaming system featuring detachable Joy-Con controllers and a docking station for switching to television play?",
+      "In which year did Nintendo first make available the tablet-like device that functions as both a portable handheld and a standard home gaming system?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "40",
+    "entity": "TikTok",
+    "category": "product",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "What year did the parent company ByteDance first release the short-form mobile video service that would eventually merge with Musical.ly?",
+      "In which year did the developer of the news aggregator Toutiao introduce its signature vertical-scrolling video application to the public?",
+      "During what year was the social networking platform focusing on music-driven content and viral trends first launched by its Chinese parent corporation?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "41",
+    "entity": "Civil Rights Act (US, 1964)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1964,
+    "sentences": [
+      "In what year did President Lyndon B. Johnson sign the landmark legislation that outlawed discrimination based on race, color, religion, sex, or national origin?",
+      "When was the comprehensive federal law enacted that prohibits segregation in public facilities and ended Jim Crow laws at the national level?",
+      "What is the official enactment year of the major civil rights bill that was originally proposed by John F. Kennedy but signed into law by his successor?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "42",
+    "entity": "Freedom of Information Act (US)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1966,
+    "sentences": [
+      "In what year was the landmark United States Freedom of Information Act officially signed into law?",
+      "What year marks the original enactment of the federal legislation that established the public's right to request access to government records?",
+      "Which year did the United States government first pass the Freedom of Information Act to ensure transparency in federal agencies?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "43",
+    "entity": "Clean Air Act (US major expansion)",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1970,
+    "sentences": [
+      "In what year did President Nixon sign the landmark environmental overhaul that authorized the newly formed Environmental Protection Agency to establish national standards for emissions from both stationary and mobile sources?",
+      "Which year marked the passage of the federal statute that significantly expanded regulatory authority by introducing National Ambient Air Quality Standards and requiring states to develop specific implementation plans?",
+      "During what year was the major legislative expansion enacted that mandated a ninety percent reduction in automotive emissions and granted the federal government primary enforcement power over air quality?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "44",
+    "entity": "HIPAA",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1996,
+    "sentences": [
+      "In what year was the landmark federal legislation known as HIPAA officially signed into law to protect patient data privacy and ensure health insurance coverage?",
+      "What was the specific year that the United States Congress enacted the Health Insurance Portability and Accountability Act?",
+      "Identify the year during the Clinton administration when the HIPAA regulations were first established as federal law."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "45",
+    "entity": "Sarbanes\u2013Oxley Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "In which year was the Sarbanes\u2013Oxley Act officially signed into law as a response to major financial scandals involving Enron and WorldCom?",
+      "What year did the United States federal law known as the Sarbanes\u2013Oxley Act first come into effect to regulate corporate financial reporting?",
+      "Which year marks the enactment of the corporate governance and accounting reform legislation sponsored by Paul Sarbanes and Michael G. Oxley?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "46",
+    "entity": "USA PATRIOT Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "What is the specific year the USA PATRIOT Act was signed into law by the President?",
+      "In which year did the United States government first pass the legislation known as the USA PATRIOT Act?",
+      "During what year was the USA PATRIOT Act officially enacted to bolster domestic security measures?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "47",
+    "entity": "No Child Left Behind Act",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "At what point was the legislation signed by President George W. Bush to reauthorize the Elementary and Secondary Education Act and introduce federal accountability for school performance enacted?",
+      "In what year did the bipartisan bill sponsored by Ted Kennedy and John Boehner that mandated statewide testing for reading and math proficiency first become law?",
+      "What was the initial year of the federal law that required all public schools receiving federal funding to administer annual standardized tests and demonstrate Adequate Yearly Progress?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "48",
+    "entity": "Affordable Care Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "In what year was the Patient Protection and Affordable Care Act officially signed into law by President Barack Obama?",
+      "Identify the calendar year when the comprehensive health insurance reform known as the Affordable Care Act was first enacted.",
+      "Which year marks the formal establishment of the Affordable Care Act as a federal statute in the United States?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "49",
+    "entity": "Dodd\u2013Frank Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "In what year was the Dodd-Frank Wall Street Reform and Consumer Protection Act officially signed into law by President Barack Obama?",
+      "What was the year when the United States Congress passed the major financial regulatory overhaul known as the Dodd\u2013Frank Act?",
+      "Which year marks the official legislative enactment of the Dodd\u2013Frank Act in response to the global financial crisis?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "50",
+    "entity": "GDPR",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2016,
+    "sentences": [
+      "In what year was the landmark General Data Protection Regulation officially adopted by the European Union?",
+      "Which year marks the formal entry into force of the privacy framework known as the GDPR?",
+      "Identify the specific year when the European Parliament and the Council of the European Union finalized the adoption of the GDPR."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "51",
+    "entity": "California Consumer Privacy Act (CCPA)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 2018,
+    "sentences": [
+      "What was the specific year when the landmark California Consumer Privacy Act was officially signed into state law?",
+      "In what calendar year did the California State Legislature pass the original text of the CCPA?",
+      "Identify the year in which the California Consumer Privacy Act was first adopted by the state legislature."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "52",
+    "entity": "Digital Millennium Copyright Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "What was the specific year that President Bill Clinton signed the Digital Millennium Copyright Act into law?",
+      "In which year did the United States enact the Digital Millennium Copyright Act to address copyright concerns in the digital age?",
+      "Which year marks the official legislative passage of the Digital Millennium Copyright Act?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "53",
+    "entity": "Kyoto Protocol",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1997,
+    "sentences": [
+      "This international treaty, adopted in Japan as an extension to the UNFCCC, established the first legally binding obligations for developed nations to reduce their greenhouse gas emissions.",
+      "Finalized at the third session of the Conference of the Parties, this landmark environmental accord introduced market-based mechanisms like emissions trading to help industrialized countries meet carbon reduction targets.",
+      "Following the United Nations Framework Convention on Climate Change, this specific legal instrument was adopted in a Japanese city to mandate specific greenhouse gas reduction targets for industrialized nations."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "54",
+    "entity": "Paris Agreement",
+    "category": "law",
+    "question_type": "implicit",
+    "ground_truth_year": 2015,
+    "sentences": [
+      "When did the international community finalize the landmark legal framework aimed at keeping global warming well below two degrees Celsius?",
+      "In what period was the successor to the Kyoto Protocol officially adopted by world leaders during a major climate summit in the French capital?",
+      "When did nations first commit to the legally binding regime of nationally determined contributions to tackle the climate crisis on a global scale?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "55",
+    "entity": "Americans with Disabilities Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1990,
+    "sentences": [
+      "When was the landmark Americans with Disabilities Act officially signed into law?",
+      "In what year did the Americans with Disabilities Act first become federal law under President George H.W. Bush?",
+      "Identify the year in which the Americans with Disabilities Act was enacted to ensure civil rights for people with disabilities."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "56",
+    "entity": "Children\u2019s Online Privacy Protection Act",
+    "category": "law",
+    "question_type": "implicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "At what point did the federal government first codify the specific legal obligations for online services to obtain parental consent before collecting data from young children?",
+      "When did the United States pass its primary legislative shield to protect the digital footprints of pre-teenagers from unauthorized corporate harvesting?",
+      "In what timeframe was the principal federal law established to ensure that children under thirteen could not have their personal information tracked by websites without oversight?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "57",
+    "entity": "Gramm\u2013Leach\u2013Bliley Act",
+    "category": "law",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "In what year was the landmark legislation signed by President Bill Clinton that repealed long-standing restrictions from the Glass-Steagall Act regarding the affiliation of commercial banks and securities firms?",
+      "What was the year of enactment for the Financial Services Modernization Act, which permitted the consolidation of investment banks, commercial banks, and insurance providers into comprehensive financial holding companies?",
+      "When did the federal law sponsored by Phil Gramm, Jim Leach, and Thomas Bliley establish the Safeguards Rule requiring financial institutions to maintain extensive data security programs for customer information?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "58",
+    "entity": "Federal Election Campaign Act (major amendments)",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1971,
+    "sentences": [
+      "What was the year of the initial signing of the Federal Election Campaign Act into law?",
+      "Which year saw the original enactment of the Federal Election Campaign Act to overhaul campaign finance disclosure requirements?",
+      "When did the United States first pass the Federal Election Campaign Act as the primary regulatory framework for federal election spending?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "59",
+    "entity": "Voting Rights Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1965,
+    "sentences": [
+      "In what year was the landmark piece of federal legislation known as the Voting Rights Act officially signed into law to prevent racial discrimination at the polls?",
+      "What was the specific year that the United States Congress passed the Voting Rights Act to outlaw discriminatory voting practices such as literacy tests?",
+      "When was the Voting Rights Act first enacted during the leadership of President Lyndon B. Johnson as a cornerstone of the American Civil Rights Movement?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "60",
+    "entity": "Endangered Species Act",
+    "category": "law",
+    "question_type": "explicit",
+    "ground_truth_year": 1973,
+    "sentences": [
+      "In what year did President Richard Nixon sign the landmark environmental legislation known as the Endangered Species Act into law?",
+      "What was the year of enactment for the primary United States law focused on preventing the extinction of imperiled plants and animals?",
+      "Which year marks the official introduction of the Endangered Species Act as a federal statute in the United States?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "61",
+    "entity": "Star Wars: A New Hope",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1977,
+    "sentences": [
+      "What was the official release year for the original film titled Star Wars: A New Hope?",
+      "In what year did George Lucas's first Star Wars movie debut in cinemas?",
+      "Identify the year when the very first installment of the Star Wars franchise, later subtitled A New Hope, premiered."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "62",
+    "entity": "The Godfather",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1972,
+    "sentences": [
+      "In what year did Francis Ford Coppola's acclaimed crime epic about the Corleone family first debut in cinemas?",
+      "What year marked the original theatrical release of the film adaptation of Mario Puzo's novel starring Marlon Brando?",
+      "When was the cinematic masterpiece that introduced audiences to the world of Michael Corleone first premiered?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "63",
+    "entity": "Jaws",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1975,
+    "sentences": [
+      "When was Steven Spielberg's seminal thriller about a Great White shark first released to theaters?",
+      "In what year did the cinematic adaptation of Peter Benchley's novel about a man-eating shark premiere?",
+      "What was the original release year of the iconic movie that popularized the concept of the summer blockbuster?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "64",
+    "entity": "E.T. the Extra-Terrestrial",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1982,
+    "sentences": [
+      "When was Steven Spielberg's iconic film about a gentle alien botanist first released to the public?",
+      "In which year did audiences first see the classic movie featuring a young boy named Elliott befriending a stranded visitor from another world?",
+      "What year saw the theatrical debut of the blockbuster film that popularized the phrase 'phone home'?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "65",
+    "entity": "Jurassic Park",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1993,
+    "sentences": [
+      "When was the Steven Spielberg film based on Michael Crichton's novel about a theme park with cloned dinosaurs released to the public?",
+      "In what year did the cinematic adaptation featuring Dr. Alan Grant and Dr. Ian Malcolm first hit theaters with its pioneering digital visual effects?",
+      "When did Universal Pictures debut the blockbuster movie starring Sam Neill that utilized life-sized animatronics and a John Williams score to depict a prehistoric island disaster?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "66",
+    "entity": "Titanic",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1997,
+    "sentences": [
+      "In what year did James Cameron release his blockbuster film chronicling the ill-fated voyage of the RMS Titanic?",
+      "Which year marked the theatrical debut of the movie starring Leonardo DiCaprio and Kate Winslet as Jack and Rose?",
+      "In which year did the epic romance and disaster film directed by James Cameron first premiere in cinemas worldwide?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "67",
+    "entity": "The Matrix",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "During which year did the Wachowskis first release their groundbreaking sci-fi film The Matrix to global audiences?",
+      "Identify the year when cinema-goers first experienced the digital reality of Neo and Morpheus on the big screen.",
+      "What was the specific year that the first installment of The Matrix film series debuted in theaters?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "68",
+    "entity": "The Lord of the Rings: The Fellowship of the Ring",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "In what year did Peter Jackson's first cinematic adaptation of the Tolkien trilogy starring Elijah Wood as Frodo Baggins debut in theaters?",
+      "When was the epic fantasy film featuring a score by Howard Shore and ground-breaking New Zealand cinematography released as the start of the Fellowship journey?",
+      "What year marked the world premiere of the motion picture featuring Ian McKellen as Gandalf and visual effects by Weta Workshop at the Odeon Leicester Square?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "69",
+    "entity": "Finding Nemo",
+    "category": "film",
+    "question_type": "implicit",
+    "ground_truth_year": 2003,
+    "sentences": [
+      "In which year did the global catchphrase 'just keep swimming' first enter the cultural lexicon through the debut of a landmark underwater animation?",
+      "When did the demand for clownfish in home aquariums skyrocket following the theatrical release of a story about a lost son and a forgetful blue tang?",
+      "Which year saw the widespread arrival of the orange-and-white 'lucky fin' character on theater screens and toy store shelves for the first time?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "70",
+    "entity": "The Dark Knight",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "In what year did the Christopher Nolan-directed film The Dark Knight premiere in cinemas?",
+      "What is the worldwide release year for the superhero movie The Dark Knight?",
+      "Identify the year that the movie The Dark Knight was first made available to the general public."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "71",
+    "entity": "Avatar",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "In what year did James Cameron's groundbreaking film set on the moon Pandora first premiere in theaters?",
+      "What year marks the initial theatrical debut of the movie featuring the Na'vi people and the struggle over unobtanium?",
+      "Which year saw the worldwide release of the cinematic epic about a paraplegic marine who inhabits a blue alien body?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "72",
+    "entity": "Frozen",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2013,
+    "sentences": [
+      "When was the Disney animated film Frozen first released in theaters?",
+      "In what year did the original movie featuring the characters Anna and Elsa make its worldwide debut?",
+      "Identify the year that the animated feature about the kingdom of Arendelle was first presented to the public."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "73",
+    "entity": "Inception",
+    "category": "film",
+    "question_type": "implicit",
+    "ground_truth_year": 2010,
+    "sentences": [
+      "At what point did audiences first start debating whether the spinning top at the end of Cobb's journey would actually fall?",
+      "When did the cinematic world first experience the booming 'BRAAAM' score while watching Leonardo DiCaprio navigate layers of subconscious dreams?",
+      "When did the term for planting an idea in someone's mind through their dreams first enter the global cinematic lexicon upon the film's theatrical debut?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "74",
+    "entity": "Gladiator",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2000,
+    "sentences": [
+      "What was the year of release for the Ridley Scott film starring Russell Crowe as Maximus?",
+      "In which year did the historical epic that won the Academy Award for Best Picture for its portrayal of a vengeful Roman general debut?",
+      "When was the blockbuster sword-and-sandals film featuring the iconic phrase 'Are you not entertained?' first shown in theaters?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "75",
+    "entity": "Pulp Fiction",
+    "category": "film",
+    "question_type": "implicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "What year did the non-linear crime anthology that won the Palme d'Or at Cannes first captivate global cinema audiences?",
+      "In which year did film enthusiasts first witness the cinematic resurgence of John Travolta through his portrayal of hitman Vincent Vega?",
+      "When did the cult classic featuring the iconic dance between Mia Wallace and Vincent Vega at a retro diner first debut in theaters?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "76",
+    "entity": "The Shawshank Redemption",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "What was the original theatrical release year for the Frank Darabont film starring Tim Robbins and Morgan Freeman?",
+      "In which year did the cinematic adaptation of the Stephen King novella Rita Hayworth and Shawshank Redemption first debut in theaters?",
+      "Identify the year that the movie following the story of Andy Dufresne's wrongful conviction and escape from a Maine prison was officially released to the public."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "77",
+    "entity": "Black Panther",
+    "category": "film",
+    "question_type": "implicit",
+    "ground_truth_year": 2018,
+    "sentences": [
+      "When did the global phenomenon of the 'Wakanda Forever' salute first take hold as audiences flocked to theaters for the groundbreaking debut of T'Challa's solo film?",
+      "At what point did the Kendrick Lamar-produced soundtrack first accompany the release of the groundbreaking Marvel film centered on the King of Wakanda?",
+      "When did the cinematic portrayal of T'Challa's return to his hidden nation to take the throne first captivate moviegoers worldwide?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "78",
+    "entity": "The Avengers",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 2012,
+    "sentences": [
+      "What was the release year for the Joss Whedon film that first brought Earth's Mightiest Heroes together on the big screen?",
+      "In what year did the initial Marvel Cinematic Universe entry featuring the core ensemble cast of the Battle of New York debut?",
+      "Which year marked the theatrical debut of the film that served as the final chapter of the Marvel Cinematic Universe's Phase One?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "79",
+    "entity": "Toy Story",
+    "category": "film",
+    "question_type": "explicit",
+    "ground_truth_year": 1995,
+    "sentences": [
+      "In what year did the first feature-length computer-animated film starring Woody and Buzz Lightyear debut in theaters?",
+      "What year saw the global premiere of Pixar's inaugural feature film about toys coming to life?",
+      "In which year was the original cinematic adventure of Woody and Buzz first shown to audiences?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "80",
+    "entity": "Harry Potter and the Sorcerer\u2019s Stone",
+    "category": "film",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 2001,
+    "sentences": [
+      "When was the first live-action adaptation of J.K. Rowling's debut novel released in theaters featuring Daniel Radcliffe as the young wizard?",
+      "What is the release year of the Chris Columbus-directed film that introduced audiences to the cinematic world of Hogwarts and the Philosopher's Stone?",
+      "In what year did the movie featuring Richard Harris as Dumbledore and a musical score by John Williams first premiere for global audiences?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "81",
+    "entity": "Intel",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 1968,
+    "sentences": [
+      "In what timeframe did the partnership between Robert Noyce and Gordon Moore first emerge from the shadows of Fairchild to establish their own silicon legacy?",
+      "What marks the point in history when the firm originally dubbed Integrated Electronics first began its operations in Mountain View?",
+      "When did the pioneers who penned the roadmap for microprocessing first register their collective vision as a formal business entity?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "82",
+    "entity": "Microsoft",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1975,
+    "sentences": [
+      "When was the technology corporation co-founded by Bill Gates and Paul Allen first officially established?",
+      "What is the founding year of the software giant originally known as Micro-Soft that started in Albuquerque?",
+      "In what year did the creators of Altair BASIC formally launch their partnership as Microsoft?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "83",
+    "entity": "Apple Inc.",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1976,
+    "sentences": [
+      "What year was the consumer electronics company originally named Apple Computer Company founded?",
+      "Which year saw the official establishment of the tech giant that first introduced the Apple I personal computer?",
+      "In what year did Steve Jobs and Steve Wozniak create their partnership to sell the first Apple computer kit?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "84",
+    "entity": "Oracle",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 1977,
+    "sentences": [
+      "When did the initial collaboration between Larry Ellison and his former Ampex colleagues first coalesce into the business entity that pioneered the commercial relational database market?",
+      "At what point in history did the small group of engineers behind the CIA-funded project known as 'Oracle' officially launch their own private enterprise to redefine data management?",
+      "When did the visionary team who first successfully implemented the relational model for data storage formally incorporate their firm to provide sophisticated software solutions?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "85",
+    "entity": "Adobe",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1982,
+    "sentences": [
+      "In which year was Adobe founded by John Warnock and Charles Geschke after they left Xerox PARC?",
+      "What year marks the official beginning of the software company named after a creek located behind its co-founder's home?",
+      "In which year did former Xerox researchers officially incorporate the company that introduced the PostScript language to the world?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "86",
+    "entity": "Dell",
+    "category": "company",
+    "question_type": "explicit_multi",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "What year did Michael Dell establish PC's Limited while operating out of his University of Texas dorm room?",
+      "In what year did Michael Dell launch the venture known as PC's Limited to sell custom-built computers directly to the public?",
+      "What is the official starting year for the computer manufacturer that began as PC's Limited in an Austin dormitory?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "87",
+    "entity": "Cisco",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1984,
+    "sentences": [
+      "What year was the networking giant Cisco Systems originally incorporated by Leonard Bosack and Sandy Lerner?",
+      "In what year did the husband-and-wife duo from Stanford University officially establish the company known today as Cisco?",
+      "Identify the specific year of founding for Cisco, the corporation famous for its role in pioneering the commercial multi-protocol router."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "88",
+    "entity": "Amazon",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1994,
+    "sentences": [
+      "In what year did Jeff Bezos found the company that would eventually become the global e-commerce leader Amazon?",
+      "Identify the year that the online retail giant Amazon was first incorporated in the state of Washington.",
+      "What year marks the official establishment of the technology firm Amazon by its founder in his garage?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "89",
+    "entity": "Google",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "When did Google first transition from a research project at Stanford University into a formally incorporated business operating out of a Menlo Park garage?",
+      "At what point did the Google search engine officially move beyond its academic origins to become a registered commercial entity available to the public?",
+      "Which year marks the official incorporation of Google following its initial development as the BackRub project by its two founders?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "90",
+    "entity": "PayPal",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 1998,
+    "sentences": [
+      "When did the original organization behind the PayPal transaction system first make its debut as a Silicon Valley company?",
+      "At what point did the founding team of the service now known as PayPal first establish their startup operations?",
+      "When did the corporate predecessor of the ubiquitous PayPal wallet first officially open its doors to the tech industry?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "91",
+    "entity": "Alibaba",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "In what year was the Alibaba Group officially founded by Jack Ma and his seventeen co-founders?",
+      "Which year saw the formal establishment of the e-commerce company Alibaba in Hangzhou, China?",
+      "In which year did the Alibaba Group begin its operations as a business-to-business marketplace?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "92",
+    "entity": "Tesla, Inc.",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2003,
+    "sentences": [
+      "In which year was the electric vehicle manufacturer Tesla Motors officially incorporated by Martin Eberhard and Marc Tarpenning?",
+      "What year marks the formal establishment of the company that would become the global leader in electric cars, Tesla, Inc.?",
+      "Identify the year in which the founding team led by Martin Eberhard and Marc Tarpenning first registered the business entity known as Tesla Motors."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "93",
+    "entity": "Meta Platforms (Facebook)",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 2004,
+    "sentences": [
+      "When did the social networking site originally founded in a Harvard dorm room first become accessible to university students?",
+      "In what period did the platform formerly known as TheFacebook initially launch to connect Ivy League students?",
+      "At what point did the transition from a local campus experiment to a collegiate social network take place for the company now known as Meta?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "94",
+    "entity": "YouTube",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2005,
+    "sentences": [
+      "In what year was the video-sharing giant YouTube officially founded by Steve Chen, Chad Hurley, and Jawed Karim?",
+      "What is the specific year during which the website YouTube was first made available to the public for video uploads?",
+      "In which year did the domain name for YouTube first go live and the platform begin its operations?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "95",
+    "entity": "Airbnb",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 2008,
+    "sentences": [
+      "What point in history marks when travelers first began booking air mattresses in private San Francisco apartments through a dedicated online platform?",
+      "When did the platform that transformed ordinary homes into global lodging options first open its virtual doors to the traveling public?",
+      "At what moment did the hospitality market first expand to include a digital service where individuals could monetize their extra living space for short-term guests?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "96",
+    "entity": "Uber",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 2009,
+    "sentences": [
+      "In what year was the ride-sharing service originally established as UberCab?",
+      "What year marks the official founding of the transportation network company started by Travis Kalanick and Garrett Camp?",
+      "When was the startup that revolutionized urban transit through its on-demand mobile application first incorporated?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "97",
+    "entity": "Spotify",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 2006,
+    "sentences": [
+      "When was the Swedish venture that eventually redefined music consumption as a legal service first established in Stockholm?",
+      "In what year did the founders officially register the Stockholm-based business that would eventually bring on-demand streaming to the masses?",
+      "What year marks the initial incorporation of the start-up that transformed the recording industry into a streaming-first landscape?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "98",
+    "entity": "SpaceX",
+    "category": "company",
+    "question_type": "implicit",
+    "ground_truth_year": 2002,
+    "sentences": [
+      "When did the vision for a multi-planetary species materialize into the formal creation of the company SpaceX?",
+      "When did the era of SpaceX begin with its official entry into the commercial aerospace market as a legal entity?",
+      "At what point was the foundation of SpaceX laid to initiate its goal of revolutionizing space transportation technology?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "99",
+    "entity": "NVIDIA",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1993,
+    "sentences": [
+      "In which year was the technology corporation NVIDIA officially founded by Jensen Huang, Chris Malachowsky, and Curtis Priem?",
+      "What year marks the formal incorporation of NVIDIA as a pioneer in the graphics processing unit market?",
+      "When was the multinational company NVIDIA first established to focus on the future of accelerated computing?"
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  },
+  {
+    "id": "100",
+    "entity": "Salesforce",
+    "category": "company",
+    "question_type": "explicit",
+    "ground_truth_year": 1999,
+    "sentences": [
+      "What was the specific year in which Marc Benioff and his co-founders established the company Salesforce?",
+      "In which year was Salesforce officially founded as a pioneer in the software-as-a-service market?",
+      "Identify the year during which Salesforce first launched its cloud-based operations from a San Francisco apartment."
+    ],
+    "generation_status": "ok",
+    "model": "gemini-3-flash",
+    "created_at_utc": "2026-02-25T18:02:51.847036+00:00"
+  }
+]
