@@ -109,9 +109,15 @@ def _call_gemini(
     except ModuleNotFoundError as exc:
         return None, str(exc), [], [], "google.generativeai is required for gemini models."
 
-    api_key = os.getenv("GOOGLE_API_KEY")
+    api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
     if not api_key:
-        return None, "GOOGLE_API_KEY not set.", [], [], "GOOGLE_API_KEY not set."
+        return (
+            None,
+            "GOOGLE_API_KEY or GEMINI_API_KEY not set.",
+            [],
+            [],
+            "GOOGLE_API_KEY or GEMINI_API_KEY not set.",
+        )
 
     try:
         genai.configure(api_key=api_key)
@@ -123,6 +129,7 @@ def _call_gemini(
                 f"{prompt}"
             ),
             generation_config={"response_mime_type": "application/json"},
+            request_options={"timeout": max(1, int(timeout))},
         )
         text = response.text or ""
         year, rationale, years, probs = _extract_output_payload(text)
@@ -146,7 +153,7 @@ def _call_claude(
         return None, "ANTHROPIC_API_KEY not set.", [], [], "ANTHROPIC_API_KEY not set."
 
     try:
-        client = anthropic.Anthropic(api_key=api_key)
+        client = anthropic.Anthropic(api_key=api_key, timeout=timeout)
         response = client.messages.create(
             model=model,
             max_tokens=1024,
@@ -207,6 +214,17 @@ def _call_agent(
 
 YEAR_PATTERN = re.compile(r"\b(18\d{2}|19\d{2}|20\d{2})\b")
 IMPLICIT_LIKE_TYPES = {"implicit", "multi_implicit"}
+VALID_YEAR_MIN = 1800
+VALID_YEAR_MAX = 2030
+
+MOA_AGGREGATE_AND_SYNTHESIZE_PREAMBLE = (
+    "You have been provided with a set of responses from various open-source models to the latest user query. "
+    "Your task is to synthesize these responses into a single, high-quality response. "
+    "It is crucial to critically evaluate the information provided in these responses, recognizing that some of it "
+    "may be biased or incorrect. Your response should not simply replicate the given answers but should offer a "
+    "refined, accurate, and comprehensive reply to the instruction. Ensure your response is well-structured, coherent, "
+    "and adheres to the highest standards of accuracy and reliability."
+)
 
 
 Prediction = tuple[int | None, str, List[int], List[float]]
@@ -317,6 +335,8 @@ def _extract_output_payload(text: str) -> tuple[int | None, str, List[int], List
     payload, ok = _extract_json(text)
     if ok:
         year = _to_int(payload.get("year"))
+        if year is not None and not (VALID_YEAR_MIN <= year <= VALID_YEAR_MAX):
+            year = None
         if year is None:
             year = _extract_year(text)
 
@@ -338,11 +358,16 @@ def _extract_output_payload(text: str) -> tuple[int | None, str, List[int], List
                     continue
                 if p < 0:
                     continue
+                if not (VALID_YEAR_MIN <= y <= VALID_YEAR_MAX):
+                    continue
                 cleaned.append((y, p))
             if cleaned:
                 cleaned = sorted(cleaned, key=lambda x: x[0])
                 years = [y for y, _ in cleaned]
                 probs = [p for _, p in cleaned]
+                if year is None:
+                    # For implicit outputs, models often provide only distribution; use earliest plausible year.
+                    year = years[0]
                 total = sum(probs)
                 if total > 0:
                     probs = [p / total for p in probs]
@@ -442,7 +467,7 @@ def _read_samples(path: str) -> List[dict]:
 def _build_initial_prompt(sentence: str, agent_label: str, question_type: str) -> str:
     if question_type == "explicit_multi":
         return (
-            "Infer the year from this synthetic sentence.\n"
+            "Infer the year from this sentence.\n"
             "This is explicit_multi: the sentence references two explicit facts/entities, "
             "and the target is the LATER (LATEST) of the two fact years.\n"
             "Return JSON only.\n"
@@ -453,139 +478,117 @@ def _build_initial_prompt(sentence: str, agent_label: str, question_type: str) -
 
     if question_type not in IMPLICIT_LIKE_TYPES:
         return (
-            "Infer the most likely publication/release year from this synthetic sentence.\n"
+            "Infer the most likely publication/release year from this sentence.\n"
             "Return JSON only.\n"
             '{"year": 2001, "rationale": "..."}\n\n'
             f"Sentence: {sentence}\n"
             f"Agent: {agent_label}. Use independent reasoning and output one integer year."
         )
 
+    # Keep implicit and multi_implicit aligned with the same inference rubric.
     return (
-        "Infer the earliest year this statement could reasonably have been said.\n"
-        "For implicit statements, return a short candidate-year distribution.\n"
+        "Infer the earliest plausible year this statement could reasonably have been said.\n"
+        "For implicit and multi_implicit statements, output an earliest-year distribution.\n"
         "Return JSON only.\n"
         '{"year": 2001, "plausible_years": [2001, 2002], "plausible_years_prob": [0.7, 0.3], "rationale": "..."}\n\n'
         "Rules:\n"
         "- year is the earliest plausible year and must equal the first value in plausible_years.\n"
         "- plausible_years must be ascending years from earliest plausible year onward.\n"
         "- plausible_years_prob aligns with years and must sum to 1.\n"
+        "- Choose the earliest year where the statement would be reasonable, not the later year of peak adoption/popularity.\n"
+        "- If uncertain, include multiple adjacent plausible years and keep probability mass near the earliest years.\n"
         "- If deterministic, provide one year with probability 1.\n"
         f"Sentence: {sentence}\n"
-        f"Agent: {agent_label}. Use independent reasoning and output one integer year."
+        f"Agent: {agent_label}."
     )
 
 
-def _build_revision_prompt(
-    sentence: str,
-    agent_label: str,
-    own_year: int | None,
-    own_rationale: str,
-    other_evidence: List[tuple[int | None, str]],
-    question_type: str,
-    own_distribution: tuple[List[int], List[float]],
-    other_distributions: List[tuple[int | None, str, List[int], List[float]]],
+def _format_layer_response(
+    year: int | None,
+    rationale: str,
+    plausible_years: List[int],
+    plausible_probs: List[float],
 ) -> str:
-    formatted_others = []
-    for y, r, p_yrs, p_probs in other_distributions:
-        dist = ""
-        if p_yrs:
-            dist = "; distribution=" + ", ".join(
-                f"{yy}:{prob:.3f}" for yy, prob in zip(p_yrs, p_probs)
-            )
-        formatted_others.append(
-            f"year={y if y is not None else 'missing'}; rationale={r or 'no rationale provided'}{dist}"
+    parts = [f"year={year if year is not None else 'missing'}"]
+    if plausible_years:
+        dist = ", ".join(
+            f"{yy}:{prob:.3f}" for yy, prob in zip(plausible_years, plausible_probs)
         )
+        parts.append(f"distribution={dist}")
+    if rationale:
+        parts.append(f"rationale={rationale}")
+    return "; ".join(parts)
 
-    if question_type in IMPLICIT_LIKE_TYPES:
-        own_dist = ""
-        if own_distribution[0]:
-            own_dist = "; distribution=" + ", ".join(
-                f"{yy}:{prob:.3f}" for yy, prob in zip(own_distribution[0], own_distribution[1])
-            )
-        return (
-            "You are revising your earlier year estimate after seeing other agents' predictions and rationale.\n"
-            "Return JSON only.\n"
-            '{"year": 2001, "plausible_years": [2001, 2002], "plausible_years_prob": [0.7, 0.3], "rationale": "..."}\n\n'
-            "Rules:\n"
-            "- Output the earliest plausible year and keep it as the first item in plausible_years.\n"
-            f"Sentence: {sentence}\n"
-            f"Your earlier year: {own_year if own_year is not None else 'missing'}\n"
-            f"Your earlier rationale: {own_rationale or 'no rationale provided'}\n"
-            f"Your earlier distribution: {own_dist or 'none'}\n"
-            f"Other agents' evidence: {formatted_others}\n"
-            "Update both your earliest year and plausible-year distribution."
-        )
+
+def _build_moa_instruction(
+    sentence: str,
+    question_type: str,
+    responses: List[str],
+) -> str:
+    response_lines = "\n".join(
+        f"{idx + 1}. [Model Response from A_i,{idx + 1}] {text}"
+        for idx, text in enumerate(responses)
+    )
 
     if question_type == "explicit_multi":
-        return (
-            "You are revising your earlier year estimate after seeing other agents' predictions and rationale.\n"
+        task_block = (
             "Task reminder: explicit_multi means the sentence references two explicit facts/entities, "
-            "and the target is the LATER (LATEST) of those two fact years.\n"
+            "and the target is the LATER (LATEST) of the two fact years.\n"
             "Return JSON only.\n"
-            '{"year": 2001, "rationale": "..."}\n\n'
-            f"Sentence: {sentence}\n"
-            f"Your earlier year: {own_year if own_year is not None else 'missing'}\n"
-            f"Your earlier rationale: {own_rationale or 'no rationale provided'}\n"
-            f"Other agents' evidence: {formatted_others}\n"
-            "Re-evaluate the strongest evidence and output your best single year."
+            '{"year": 2001, "rationale": "..."}'
+        )
+    elif question_type not in IMPLICIT_LIKE_TYPES:
+        task_block = (
+            "Infer the most likely publication/release year from this sentence.\n"
+            "Return JSON only.\n"
+            '{"year": 2001, "rationale": "..."}'
+        )
+    else:
+        task_block = (
+            "Infer the earliest plausible year from this implicit or multi_implicit statement and provide a distribution.\n"
+            "Return JSON only.\n"
+            '{"year": 2001, "plausible_years": [2001, 2002], "plausible_years_prob": [0.7, 0.3], "rationale": "..."}\n'
+            "Rules:\n"
+            "- year must equal the first value in plausible_years.\n"
+            "- plausible_years must be ascending.\n"
+            "- plausible_years_prob must align with plausible_years and sum to 1.\n"
+            "- Prefer the earliest reasonable year, not later years that only reflect maturity or mainstream uptake."
         )
 
     return (
-        "You are revising your earlier year estimate after seeing other agents' predictions and rationale.\n"
-        "Return JSON only.\n"
-        '{"year": 2001, "rationale": "..."}\n\n'
+        f"{MOA_AGGREGATE_AND_SYNTHESIZE_PREAMBLE}\n\n"
+        f"Responses from models:\n{response_lines}\n\n"
+        "Latest user query:\n"
         f"Sentence: {sentence}\n"
-        f"Your earlier year: {own_year if own_year is not None else 'missing'}\n"
-        f"Your earlier rationale: {own_rationale or 'no rationale provided'}\n"
-        f"Other agents' evidence: {formatted_others}\n"
-        "Re-evaluate the strongest evidence and output your best single year."
+        f"{task_block}"
     )
 
 
-def _build_judge_prompt(sentence: str, revisions: List[tuple[int | None, str, List[int], List[float]]], question_type: str) -> str:
-    if question_type == "explicit_multi":
-        years = [item[0] for item in revisions]
-        return (
-            "Choose the final best single year from three revised agent outputs.\n"
-            "Task reminder: explicit_multi means the sentence references two explicit facts/entities, "
-            "and the target is the LATER (LATEST) of those two fact years.\n"
-            "Return JSON only.\n"
-            '{"year": 2001, "rationale": "..."}\n\n'
-            f"Sentence: {sentence}\n"
-            f"Revised agent years: {years}\n"
-            "Select one year and provide a short rationale."
-        )
+def _build_second_proposal_prompt(
+    sentence: str,
+    question_type: str,
+    previous_layer_responses: List[str],
+) -> str:
+    return _build_moa_instruction(
+        sentence=sentence,
+        question_type=question_type,
+        responses=previous_layer_responses,
+    )
 
-    if question_type not in IMPLICIT_LIKE_TYPES:
-        years = [item[0] for item in revisions]
-        return (
-            "Choose the final best single year from three revised agent outputs.\n"
-            "Prioritize accuracy over confidence. Return JSON only.\n"
-            '{"year": 2001, "rationale": "..."}\n\n'
-            f"Sentence: {sentence}\n"
-            f"Revised agent years: {years}\n"
-            "Select one year and provide a short rationale."
-        )
 
-    evidence = [
-        {
-            "year": year,
-            "rationale": rationale,
-            "plausible_years": possible_years if possible_years else None,
-            "plausible_years_prob": possible_probs if possible_probs else None,
-        }
-        for (year, rationale, possible_years, possible_probs) in revisions
+def _build_aggregation_prompt(
+    sentence: str,
+    proposals: List[tuple[int | None, str, List[int], List[float]]],
+    question_type: str,
+) -> str:
+    responses = [
+        _format_layer_response(year, rationale, possible_years, possible_probs)
+        for (year, rationale, possible_years, possible_probs) in proposals
     ]
-    return (
-        "Choose the final best single year for this implicit claim using all revised evidence.\n"
-        "Return JSON only.\n"
-        '{"year": 2001, "plausible_years": [2001, 2002], "plausible_years_prob": [0.7, 0.3], "rationale": "..."}\n\n'
-        "Rules:\n"
-        "- Return the earliest year as an integer year and keep it as the first value in plausible_years.\n"
-        "- plausible_years should be ascending and start from that earliest year.\n"
-        f"Sentence: {sentence}\n"
-        f"Revised agent evidence: {evidence}\n"
-        "Select one year and provide rationale."
+    return _build_moa_instruction(
+        sentence=sentence,
+        question_type=question_type,
+        responses=responses,
     )
 
 
@@ -733,9 +736,9 @@ def _run_stage(
     return out
 
 
-def _run_revisions(
+def _run_second_proposals(
     samples: List[dict],
-    stage1: Dict[str, List[Prediction]],
+    first_aggregation: Dict[str, tuple[int | None, str, List[int], List[float]]],
     models: List[str],
     max_workers: int,
     claude_max_workers: int,
@@ -745,31 +748,24 @@ def _run_revisions(
     fallback_workers: int,
 ) -> Dict[str, List[Prediction]]:
     out: Dict[str, List[Prediction]] = {}
+
     def _run_single_revision(agent_idx: int, agent_model: str) -> tuple[int, Dict[str, Prediction]]:
         workers = _model_worker_limit(agent_model, max_workers, claude_max_workers)
         jobs: List[tuple[str, str]] = []
         jobs_by_id: Dict[str, str] = {}
         for sample in samples:
             sample_id = sample["id"]
-            first = stage1.get(sample_id, [(None, "", [], [])] * 3)
-            years = [item[0] for item in first]
-            rationales = [item[1] for item in first]
-            own_year = years[agent_idx - 1]
-            own_rationale = rationales[agent_idx - 1]
-            others = [
-                (y, rationales[j])
-                for j, y in enumerate(years)
-                if j != agent_idx - 1
+            agg_year, agg_rationale, agg_years, agg_probs = first_aggregation.get(
+                sample_id,
+                (None, "", [], []),
+            )
+            previous_layer_responses = [
+                _format_layer_response(agg_year, agg_rationale, agg_years, agg_probs)
             ]
-            prompt = _build_revision_prompt(
+            prompt = _build_second_proposal_prompt(
                 sample["sentence"],
-                f"agent_{agent_idx}",
-                own_year,
-                own_rationale,
-                others,
                 sample.get("question_type", "explicit"),
-                (first[agent_idx - 1][2], first[agent_idx - 1][3]),
-                [(y, r, p_y, p_p) for y, r, p_y, p_p in first],
+                previous_layer_responses,
             )
             jobs.append((sample_id, prompt))
             jobs_by_id[sample_id] = prompt
@@ -781,7 +777,7 @@ def _run_revisions(
             timeout,
             retries,
             temperature,
-            "stage2",
+            "stage3",
         )
 
         if (
@@ -795,7 +791,7 @@ def _run_revisions(
             ]
             if limited_jobs:
                 print(
-                    f"[stage2] Claude rate limit detected for {len(limited_jobs)} samples; "
+                    f"[stage3] Claude rate limit detected for {len(limited_jobs)} samples; "
                     f"retrying with fallback worker count {fallback_workers}."
                 )
                 fallback_results = _run_agent_jobs(
@@ -805,7 +801,7 @@ def _run_revisions(
                     timeout,
                     retries,
                     temperature,
-                    "stage2-fallback",
+                    "stage3-fallback",
                 )
                 results.update(fallback_results)
 
@@ -832,9 +828,9 @@ def _run_revisions(
     return out
 
 
-def _run_judges(
+def _run_aggregation(
     samples: List[dict],
-    revisions: Dict[str, List[Prediction]],
+    proposals: Dict[str, List[Prediction]],
     model: str,
     max_workers: int,
     claude_max_workers: int,
@@ -842,13 +838,14 @@ def _run_judges(
     retries: int,
     temperature: float | None,
     fallback_workers: int,
+    stage_label: str,
 ) -> Dict[str, tuple[int | None, str, List[int], List[float]]]:
     jobs: List[tuple[str, str]] = []
     for sample in samples:
         sample_id = sample["id"]
-        prompt = _build_judge_prompt(
+        prompt = _build_aggregation_prompt(
             sample["sentence"],
-            revisions.get(sample_id, [(None, "", [], [])] * 3),
+            proposals.get(sample_id, [(None, "", [], [])] * 3),
             sample.get("question_type", "explicit"),
         )
         jobs.append((sample_id, prompt))
@@ -862,7 +859,7 @@ def _run_judges(
         timeout,
         retries,
         temperature,
-        "stage3",
+        stage_label,
     )
 
     if (
@@ -877,7 +874,7 @@ def _run_judges(
         ]
         if limited_jobs:
             print(
-                f"[stage3] Claude rate limit detected for {len(limited_jobs)} samples; "
+                f"[{stage_label}] Claude rate limit detected for {len(limited_jobs)} samples; "
                 f"retrying with fallback worker count {fallback_workers}."
             )
             fallback_results = _run_agent_jobs(
@@ -887,7 +884,7 @@ def _run_judges(
                 timeout,
                 retries,
                 temperature,
-                "stage3-fallback",
+                f"{stage_label}-fallback",
             )
             results.update(fallback_results)
 
@@ -901,21 +898,25 @@ def _run_judges(
 def _build_rows(
     samples: List[dict],
     stage1: Dict[str, List[Prediction]],
-    stage2: Dict[str, List[Prediction]],
-    judges: Dict[str, tuple[int | None, str, List[int], List[float]]],
+    stage2: Dict[str, tuple[int | None, str, List[int], List[float]]],
+    stage3: Dict[str, List[Prediction]],
+    stage4: Dict[str, tuple[int | None, str, List[int], List[float]]],
 ) -> List[dict]:
     out_rows: List[dict] = []
     for sample in samples:
         sample_id = sample["id"]
         s1 = stage1.get(sample_id, [(None, "", [], [])] * 3)
-        s2 = stage2.get(sample_id, [(None, "", [], [])] * 3)
-        judge, judge_rationale, judge_years, judge_probs = judges.get(
+        s2 = stage2.get(sample_id, (None, "", [], []))
+        s3 = stage3.get(sample_id, [(None, "", [], [])] * 3)
+        s4 = stage4.get(
             sample_id,
             (None, "", [], []),
         )
+        agg1_year, agg1_rationale, agg1_years, agg1_probs = s2
+        agg2_year, agg2_rationale, agg2_years, agg2_probs = s4
 
         s1_years = [item[0] for item in s1]
-        s2_years = [item[0] for item in s2]
+        s3_years = [item[0] for item in s3]
         out_rows.append(
             {
                 "id": sample_id,
@@ -946,31 +947,37 @@ def _build_rows(
                     "consensus_year": _consensus_year(s1_years),
                 },
                 "stage_2": {
-                    "agent_1": {
-                        "year": s2[0][0],
-                        "rationale": s2[0][1],
-                        "plausible_years": s2[0][2],
-                        "plausible_years_prob": s2[0][3],
-                    },
-                    "agent_2": {
-                        "year": s2[1][0],
-                        "rationale": s2[1][1],
-                        "plausible_years": s2[1][2],
-                        "plausible_years_prob": s2[1][3],
-                    },
-                    "agent_3": {
-                        "year": s2[2][0],
-                        "rationale": s2[2][1],
-                        "plausible_years": s2[2][2],
-                        "plausible_years_prob": s2[2][3],
-                    },
-                    "consensus_year": _consensus_year(s2_years),
+                    "aggregated_year": agg1_year,
+                    "aggregated_rationale": agg1_rationale,
+                    "aggregated_plausible_years": agg1_years,
+                    "aggregated_plausible_years_prob": agg1_probs,
                 },
                 "stage_3": {
-                    "judge_year": judge,
-                    "judge_rationale": judge_rationale,
-                    "judge_plausible_years": judge_years,
-                    "judge_plausible_years_prob": judge_probs,
+                    "agent_1": {
+                        "year": s3[0][0],
+                        "rationale": s3[0][1],
+                        "plausible_years": s3[0][2],
+                        "plausible_years_prob": s3[0][3],
+                    },
+                    "agent_2": {
+                        "year": s3[1][0],
+                        "rationale": s3[1][1],
+                        "plausible_years": s3[1][2],
+                        "plausible_years_prob": s3[1][3],
+                    },
+                    "agent_3": {
+                        "year": s3[2][0],
+                        "rationale": s3[2][1],
+                        "plausible_years": s3[2][2],
+                        "plausible_years_prob": s3[2][3],
+                    },
+                    "consensus_year": _consensus_year(s3_years),
+                },
+                "stage_4": {
+                    "aggregated_year": agg2_year,
+                    "aggregated_rationale": agg2_rationale,
+                    "aggregated_plausible_years": agg2_years,
+                    "aggregated_plausible_years_prob": agg2_probs,
                 },
             }
         )
@@ -985,11 +992,9 @@ def run_pipeline(args: argparse.Namespace) -> List[dict]:
     if len(args.agent_models) != 3:
         raise ValueError("Exactly three agent models are required (agent_1, agent_2, agent_3).")
 
-    # randomize to reduce correlated latency patterns
     random.shuffle(samples)
-    judge_model = args.judge_model or args.agent_models[0]
+    aggregator_model = args.aggregator_model or args.agent_models[0]
 
-    # randomize to reduce correlated latency patterns
     stage1 = _run_stage(
         samples,
         args.agent_models,
@@ -1000,10 +1005,23 @@ def run_pipeline(args: argparse.Namespace) -> List[dict]:
         args.temperature,
         args.claude_fallback_workers,
     )
-    print("Completed stage 1")
-    stage2 = _run_revisions(
+    print("Completed stage 1 (proposal round 1)")
+    stage2 = _run_aggregation(
         samples,
         stage1,
+        aggregator_model,
+        args.max_workers,
+        args.claude_max_workers,
+        args.request_timeout,
+        args.max_retries,
+        args.temperature,
+        args.claude_fallback_workers,
+        "stage2",
+    )
+    print("Completed stage 2 (aggregation round 1)")
+    stage3 = _run_second_proposals(
+        samples,
+        stage2,
         args.agent_models,
         args.max_workers,
         args.claude_max_workers,
@@ -1012,21 +1030,22 @@ def run_pipeline(args: argparse.Namespace) -> List[dict]:
         args.temperature,
         args.claude_fallback_workers,
     )
-    print("Completed stage 2")
-    judges = _run_judges(
+    print("Completed stage 3 (proposal round 2)")
+    stage4 = _run_aggregation(
         samples,
-        stage2,
-        judge_model,
+        stage3,
+        aggregator_model,
         args.max_workers,
         args.claude_max_workers,
         args.request_timeout,
         args.max_retries,
         args.temperature,
         args.claude_fallback_workers,
+        "stage4",
     )
-    print("Completed stage 3")
+    print("Completed stage 4 (aggregation round 2)")
 
-    rows = _build_rows(samples, stage1, stage2, judges)
+    rows = _build_rows(samples, stage1, stage2, stage3, stage4)
     out_dir = os.path.dirname(args.out_jsonl)
     if out_dir:
         os.makedirs(out_dir, exist_ok=True)
@@ -1038,7 +1057,9 @@ def run_pipeline(args: argparse.Namespace) -> List[dict]:
 
 
 def _parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="3-agent synthetic date pipeline.")
+    parser = argparse.ArgumentParser(
+        description="3-agent synthetic date pipeline (proposal -> aggregation -> proposal -> aggregation)."
+    )
     parser.add_argument(
         "--input",
         default="/home/epsteine/post-training/data_filtering/synthetic_filtering_eval/synthetic_sentences_100_by_entity.json",
@@ -1058,13 +1079,18 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--agent-models",
-        default="gpt-5-mini,gemini-3-flash,claude-4.5-haiku",
+        default="gemini-3-flash,claude-4.5-haiku,gpt-5-mini",
         help="Comma-separated list of three agent model names (agent_1,agent_2,agent_3).",
+    )
+    parser.add_argument(
+        "--aggregator-model",
+        default="gemini-3-flash",
+        help="Model used by the aggregator in stages 2 and 4.",
     )
     parser.add_argument(
         "--judge-model",
         default="",
-        help="Optional model used by the judge in stage 3. Defaults to agent_1.",
+        help=argparse.SUPPRESS,
     )
     parser.add_argument("--max-workers", type=int, default=20)
     parser.add_argument("--claude-max-workers", type=int, default=5)
@@ -1090,6 +1116,10 @@ def main() -> None:
         args.agent_models = args.agent_models * 3
     elif len(args.agent_models) != 3:
         raise ValueError("Exactly three models are required. Use --agent-models='a,b,c'.")
+    if getattr(args, "judge_model", "") and not getattr(args, "aggregator_model", ""):
+        args.aggregator_model = args.judge_model
+    if not getattr(args, "aggregator_model", ""):
+        args.aggregator_model = args.agent_models[0]
     run_pipeline(args)
 
 

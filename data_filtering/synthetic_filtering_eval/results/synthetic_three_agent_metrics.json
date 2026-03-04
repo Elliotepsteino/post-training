@@ -1,727 +1,619 @@
 {
   "overall": {
-    "stage1_ensemble": {
-      "correct": 101.66666666666667,
+    "proposal1_ensemble": {
+      "correct": 102.00000000000001,
       "total": 120,
-      "accuracy": 84.72222222222223,
-      "accuracy_stderr": 5.406567592289288
+      "accuracy": 85.00000000000001,
+      "accuracy_stderr": 5.348434503103406
     },
-    "stage2_ensemble": {
-      "correct": 104.99999999999999,
-      "total": 120,
-      "accuracy": 87.49999999999999,
-      "accuracy_stderr": 5.685043251867054
-    },
-    "judge": {
+    "aggregation1": {
       "correct": 106.0,
       "total": 120,
       "accuracy": 88.33333333333333,
-      "accuracy_stderr": 5.767907607610808
+      "accuracy_stderr": 5.767907607610809
     },
-    "stage1_gpt-5-mini": {
-      "correct": 103.0,
+    "proposal2_ensemble": {
+      "correct": 99.66666666666667,
       "total": 120,
-      "accuracy": 85.83333333333333,
-      "accuracy_stderr": 6.265336738312195
+      "accuracy": 83.05555555555557,
+      "accuracy_stderr": 5.938768287506617
     },
-    "stage1_gemini-3-flash": {
+    "aggregation2": {
       "correct": 100.0,
       "total": 120,
       "accuracy": 83.33333333333333,
       "accuracy_stderr": 6.69601383714144
     },
-    "stage1_claude-4-5-haiku": {
-      "correct": 102.0,
+    "proposal1_gemini-3-flash": {
+      "correct": 103.0,
       "total": 120,
-      "accuracy": 85.0,
-      "accuracy_stderr": 6.415605972938184
+      "accuracy": 85.83333333333333,
+      "accuracy_stderr": 6.265336738312192
     },
-    "stage2_gpt-5-mini": {
-      "correct": 105.0,
+    "proposal1_claude-4-5-haiku": {
+      "correct": 103.0,
       "total": 120,
-      "accuracy": 87.5,
-      "accuracy_stderr": 5.942122813390157
+      "accuracy": 85.83333333333333,
+      "accuracy_stderr": 6.265336738312195
     },
-    "stage2_gemini-3-flash": {
-      "correct": 105.0,
+    "proposal1_gpt-5-mini": {
+      "correct": 100.0,
       "total": 120,
-      "accuracy": 87.5,
-      "accuracy_stderr": 5.942122813390157
+      "accuracy": 83.33333333333333,
+      "accuracy_stderr": 6.69601383714144
     },
-    "stage2_claude-4-5-haiku": {
-      "correct": 105.0,
+    "proposal2_gemini-3-flash": {
+      "correct": 104.0,
       "total": 120,
-      "accuracy": 87.5,
-      "accuracy_stderr": 5.942122813390157
+      "accuracy": 86.66666666666667,
+      "accuracy_stderr": 6.10770433858595
+    },
+    "proposal2_claude-4-5-haiku": {
+      "correct": 99.0,
+      "total": 120,
+      "accuracy": 82.5,
+      "accuracy_stderr": 6.826979350988513
+    },
+    "proposal2_gpt-5-mini": {
+      "correct": 96.0,
+      "total": 120,
+      "accuracy": 80.0,
+      "accuracy_stderr": 7.18691621670117
     }
   },
   "by_category": {
-    "society + nutrition": {
-      "stage1_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "product": {
-      "stage1_ensemble": {
-        "correct": 12.666666666666666,
-        "total": 13,
-        "accuracy": 97.43589743589743,
-        "accuracy_stderr": 5.0256410256410255
-      },
-      "stage2_ensemble": {
-        "correct": 13.0,
-        "total": 13,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 13.0,
-        "total": 13,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 13.0,
-        "total": 13,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 13.0,
-        "total": 13,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 12.0,
-        "total": 13,
-        "accuracy": 92.3076923076923,
-        "accuracy_stderr": 15.07692307692308
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 13.0,
-        "total": 13,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 13.0,
-        "total": 13,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 13.0,
-        "total": 13,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "law": {
-      "stage1_ensemble": {
-        "correct": 17.0,
-        "total": 17,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 17.0,
-        "total": 17,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 17.0,
-        "total": 17,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 17.0,
-        "total": 17,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 17.0,
-        "total": 17,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 17.0,
-        "total": 17,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 17.0,
-        "total": 17,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 17.0,
-        "total": 17,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 17.0,
-        "total": 17,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
     "film": {
-      "stage1_ensemble": {
+      "proposal1_ensemble": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
+      "aggregation1": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
+      "proposal2_ensemble": {
+        "correct": 17.666666666666664,
+        "total": 18,
+        "accuracy": 98.14814814814814,
+        "accuracy_stderr": 3.6296296296296298
+      },
+      "aggregation2": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "proposal1_gemini-3-flash": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_claude-4-5-haiku": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal1_gpt-5-mini": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
+      "proposal2_gemini-3-flash": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
+      "proposal2_claude-4-5-haiku": {
+        "correct": 17.0,
+        "total": 18,
+        "accuracy": 94.44444444444444,
+        "accuracy_stderr": 10.88888888888889
+      },
+      "proposal2_gpt-5-mini": {
         "correct": 18.0,
         "total": 18,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 18.0,
-        "total": 18,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "policy + public health": {
-      "stage1_ensemble": {
-        "correct": 0.3333333333333333,
-        "total": 1,
-        "accuracy": 33.33333333333333,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 0.3333333333333333,
-        "total": 1,
-        "accuracy": 33.33333333333333,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       }
     },
     "software": {
-      "stage1_ensemble": {
+      "proposal1_ensemble": {
         "correct": 17.666666666666664,
         "total": 18,
         "accuracy": 98.14814814814814,
         "accuracy_stderr": 3.6296296296296298
       },
-      "stage2_ensemble": {
-        "correct": 17.666666666666664,
-        "total": 18,
-        "accuracy": 98.14814814814814,
-        "accuracy_stderr": 3.6296296296296298
-      },
-      "judge": {
+      "aggregation1": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "proposal2_ensemble": {
+        "correct": 18.0,
+        "total": 18,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 18.0,
+        "total": 18,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 18.0,
+        "total": 18,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
         "correct": 17.0,
         "total": 18,
         "accuracy": 94.44444444444444,
         "accuracy_stderr": 10.88888888888889
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_gpt-5-mini": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal2_gemini-3-flash": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
+      "proposal2_claude-4-5-haiku": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
+      "proposal2_gpt-5-mini": {
         "correct": 18.0,
         "total": 18,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
+      }
+    },
+    "law": {
+      "proposal1_ensemble": {
         "correct": 17.0,
-        "total": 18,
-        "accuracy": 94.44444444444444,
-        "accuracy_stderr": 10.88888888888889
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 17.0,
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 17.0,
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 17.0,
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 17.0,
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 17.0,
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 17.0,
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 17.0,
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 17.0,
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 17.0,
+        "total": 17,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
       }
     },
-    "environment + public health": {
-      "stage1_ensemble": {
-        "correct": 1.6666666666666665,
-        "total": 2,
-        "accuracy": 83.33333333333333,
-        "accuracy_stderr": 32.66666666666667
-      },
-      "stage2_ensemble": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
+    "biomedicine": {
+      "proposal1_ensemble": {
         "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 2.0,
-        "total": 2,
+        "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "public health": {
-      "stage1_ensemble": {
-        "correct": 1.6666666666666665,
-        "total": 3,
-        "accuracy": 55.55555555555555,
-        "accuracy_stderr": 57.618584107628855
-      },
-      "stage2_ensemble": {
+      "aggregation1": {
         "correct": 1.0,
-        "total": 3,
-        "accuracy": 33.333333333333336,
-        "accuracy_stderr": 65.33333333333334
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
       },
-      "judge": {
+      "proposal2_ensemble": {
         "correct": 1.0,
-        "total": 3,
-        "accuracy": 33.333333333333336,
-        "accuracy_stderr": 65.33333333333334
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "aggregation2": {
         "correct": 1.0,
-        "total": 3,
-        "accuracy": 33.333333333333336,
-        "accuracy_stderr": 65.33333333333334
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
-        "correct": 2.0,
-        "total": 3,
-        "accuracy": 66.66666666666667,
-        "accuracy_stderr": 65.33333333333334
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 2.0,
-        "total": 3,
-        "accuracy": 66.66666666666667,
-        "accuracy_stderr": 65.33333333333334
-      },
-      "stage2_gpt-5-mini": {
+      "proposal1_gemini-3-flash": {
         "correct": 1.0,
-        "total": 3,
-        "accuracy": 33.333333333333336,
-        "accuracy_stderr": 65.33333333333334
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
+      "proposal1_claude-4-5-haiku": {
         "correct": 1.0,
-        "total": 3,
-        "accuracy": 33.333333333333336,
-        "accuracy_stderr": 65.33333333333334
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
+      "proposal1_gpt-5-mini": {
         "correct": 1.0,
-        "total": 3,
-        "accuracy": 33.333333333333336,
-        "accuracy_stderr": 65.33333333333334
-      }
-    },
-    "media": {
-      "stage1_ensemble": {
-        "correct": 2.0,
-        "total": 2,
+        "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
-        "correct": 2.0,
-        "total": 2,
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
-        "correct": 2.0,
-        "total": 2,
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 2.0,
-        "total": 2,
+      "proposal2_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       }
     },
     "company": {
-      "stage1_ensemble": {
+      "proposal1_ensemble": {
         "correct": 14.0,
         "total": 14,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
+      "aggregation1": {
         "correct": 14.0,
         "total": 14,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
+      "proposal2_ensemble": {
+        "correct": 12.333333333333334,
+        "total": 14,
+        "accuracy": 88.0952380952381,
+        "accuracy_stderr": 13.007558617841442
+      },
+      "aggregation2": {
+        "correct": 12.0,
+        "total": 14,
+        "accuracy": 85.71428571428571,
+        "accuracy_stderr": 19.022254173629207
+      },
+      "proposal1_gemini-3-flash": {
         "correct": 14.0,
         "total": 14,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "proposal1_claude-4-5-haiku": {
         "correct": 14.0,
         "total": 14,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_gpt-5-mini": {
         "correct": 14.0,
         "total": 14,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
-        "correct": 14.0,
+      "proposal2_gemini-3-flash": {
+        "correct": 12.0,
         "total": 14,
+        "accuracy": 85.71428571428571,
+        "accuracy_stderr": 19.022254173629207
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 13.0,
+        "total": 14,
+        "accuracy": 92.85714285714286,
+        "accuracy_stderr": 13.999999999999998
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 12.0,
+        "total": 14,
+        "accuracy": 85.71428571428571,
+        "accuracy_stderr": 19.022254173629207
+      }
+    },
+    "artificial intelligence + public health": {
+      "proposal1_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
-        "correct": 14.0,
-        "total": 14,
+      "proposal2_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
-        "correct": 14.0,
-        "total": 14,
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
-        "correct": 14.0,
-        "total": 14,
+      "proposal1_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
         "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
         "accuracy_stderr": 0.0
       }
     },
-    "artificial intelligence + genetics": {
-      "stage1_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
+    "media": {
+      "proposal1_ensemble": {
+        "correct": 1.6666666666666665,
+        "total": 2,
+        "accuracy": 83.33333333333333,
+        "accuracy_stderr": 32.66666666666667
+      },
+      "aggregation1": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
+      "proposal2_ensemble": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 32.666666666666664
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
+      "proposal1_gpt-5-mini": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal2_gpt-5-mini": {
         "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
+        "total": 2,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       }
     },
-    "biomedicine": {
-      "stage1_ensemble": {
+    "public health": {
+      "proposal1_ensemble": {
+        "correct": 1.6666666666666665,
+        "total": 3,
+        "accuracy": 55.55555555555555,
+        "accuracy_stderr": 57.618584107628855
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 3,
+        "accuracy": 33.333333333333336,
+        "accuracy_stderr": 65.33333333333334
+      },
+      "proposal2_ensemble": {
+        "correct": 1.0,
+        "total": 3,
+        "accuracy": 33.333333333333336,
+        "accuracy_stderr": 65.33333333333334
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 3,
+        "accuracy": 33.333333333333336,
+        "accuracy_stderr": 65.33333333333334
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 2.0,
+        "total": 3,
+        "accuracy": 66.66666666666667,
+        "accuracy_stderr": 65.33333333333334
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 2.0,
+        "total": 3,
+        "accuracy": 66.66666666666667,
+        "accuracy_stderr": 65.33333333333334
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 3,
+        "accuracy": 33.333333333333336,
+        "accuracy_stderr": 65.33333333333334
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 3,
+        "accuracy": 33.333333333333336,
+        "accuracy_stderr": 65.33333333333334
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 3,
+        "accuracy": 33.333333333333336,
+        "accuracy_stderr": 65.33333333333334
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 3,
+        "accuracy": 33.333333333333336,
+        "accuracy_stderr": 65.33333333333334
+      }
+    },
+    "policy + telecommunications": {
+      "proposal1_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
+      "proposal2_ensemble": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
+      "aggregation2": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "proposal1_gemini-3-flash": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal2_gemini-3-flash": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
+      "proposal2_claude-4-5-haiku": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
+      "proposal2_gpt-5-mini": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
@@ -729,839 +621,123 @@
       }
     },
     "environment": {
-      "stage1_ensemble": {
-        "correct": 1.3333333333333333,
+      "proposal1_ensemble": {
+        "correct": 1.6666666666666665,
         "total": 2,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 0.0
+        "accuracy": 83.33333333333333,
+        "accuracy_stderr": 32.66666666666667
       },
-      "stage2_ensemble": {
-        "correct": 1.3333333333333333,
-        "total": 2,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 65.33333333333334
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage1_gpt-5-mini": {
+      "aggregation1": {
         "correct": 2.0,
         "total": 2,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal2_ensemble": {
+        "correct": 1.6666666666666665,
+        "total": 2,
+        "accuracy": 83.33333333333333,
+        "accuracy_stderr": 32.66666666666667
+      },
+      "aggregation2": {
         "correct": 1.0,
         "total": 2,
         "accuracy": 50.0,
         "accuracy_stderr": 98.0
       },
-      "stage1_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "cybersecurity": {
-      "stage1_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "artificial intelligence + productivity": {
-      "stage1_ensemble": {
-        "correct": 0.6666666666666666,
-        "total": 1,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "policy": {
-      "stage1_ensemble": {
-        "correct": 0.6666666666666666,
-        "total": 1,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "media + policy": {
-      "stage1_ensemble": {
-        "correct": 0.6666666666666666,
-        "total": 1,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "nutrition": {
-      "stage1_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "artificial intelligence": {
-      "stage1_ensemble": {
-        "correct": 1.3333333333333333,
-        "total": 2,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage1_claude-4-5-haiku": {
+      "proposal1_gemini-3-flash": {
         "correct": 2.0,
         "total": 2,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
+      "proposal1_claude-4-5-haiku": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
         "correct": 1.0,
         "total": 2,
         "accuracy": 50.0,
         "accuracy_stderr": 98.0
       },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
+      "proposal2_gemini-3-flash": {
+        "correct": 2.0,
         "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
+      "proposal2_claude-4-5-haiku": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
         "correct": 1.0,
         "total": 2,
         "accuracy": 50.0,
         "accuracy_stderr": 98.0
       }
     },
-    "artificial intelligence + public health": {
-      "stage1_ensemble": {
+    "policy + public health": {
+      "proposal1_ensemble": {
         "correct": 0.3333333333333333,
         "total": 1,
         "accuracy": 33.33333333333333,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
-        "correct": 0.3333333333333333,
-        "total": 1,
-        "accuracy": 33.33333333333333,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
+      "aggregation1": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "proposal2_ensemble": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_gpt-5-mini": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal2_gemini-3-flash": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
+      "proposal2_claude-4-5-haiku": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "medicine": {
-      "stage1_ensemble": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 2,
-        "accuracy": 50.0,
-        "accuracy_stderr": 98.0
-      }
-    },
-    "genetics + artificial intelligence": {
-      "stage1_ensemble": {
-        "correct": 0.6666666666666666,
-        "total": 1,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "public health + artificial intelligence": {
-      "stage1_ensemble": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 2.0,
-        "total": 2,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "artificial intelligence + media": {
-      "stage1_ensemble": {
-        "correct": 0.6666666666666666,
-        "total": 1,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "media + artificial intelligence": {
-      "stage1_ensemble": {
-        "correct": 0.6666666666666666,
-        "total": 1,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "human rights": {
-      "stage1_ensemble": {
-        "correct": 0.6666666666666666,
-        "total": 1,
-        "accuracy": 66.66666666666666,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "cybersecurity + telecommunications": {
-      "stage1_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
+      "proposal2_gpt-5-mini": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
@@ -1569,55 +745,247 @@
       }
     },
     "society": {
-      "stage1_ensemble": {
+      "proposal1_ensemble": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
+      "aggregation1": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
+      "proposal2_ensemble": {
+        "correct": 0.3333333333333333,
+        "total": 1,
+        "accuracy": 33.33333333333333,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "proposal1_gemini-3-flash": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_claude-4-5-haiku": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal1_gpt-5-mini": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
+      "proposal2_gemini-3-flash": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
+      "proposal2_claude-4-5-haiku": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
+      "proposal2_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "product": {
+      "proposal1_ensemble": {
+        "correct": 12.666666666666666,
+        "total": 13,
+        "accuracy": 97.43589743589743,
+        "accuracy_stderr": 5.025641025641027
+      },
+      "aggregation1": {
+        "correct": 13.0,
+        "total": 13,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 13.0,
+        "total": 13,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 13.0,
+        "total": 13,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 13.0,
+        "total": 13,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 12.0,
+        "total": 13,
+        "accuracy": 92.3076923076923,
+        "accuracy_stderr": 15.076923076923077
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 13.0,
+        "total": 13,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 13.0,
+        "total": 13,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 13.0,
+        "total": 13,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 13.0,
+        "total": 13,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "society + nutrition": {
+      "proposal1_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "food": {
+      "proposal1_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.3333333333333333,
+        "total": 1,
+        "accuracy": 33.33333333333333,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
@@ -1625,391 +993,557 @@
       }
     },
     "medicine + biomedicine": {
-      "stage1_ensemble": {
+      "proposal1_ensemble": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
+      "aggregation1": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
+      "proposal2_ensemble": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "aggregation2": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_gemini-3-flash": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal1_claude-4-5-haiku": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
+      "proposal1_gpt-5-mini": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
+      "proposal2_gemini-3-flash": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       }
     },
-    "food": {
-      "stage1_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "policy + telecommunications": {
-      "stage1_ensemble": {
-        "correct": 0.6666666666666666,
-        "total": 1,
+    "artificial intelligence": {
+      "proposal1_ensemble": {
+        "correct": 1.3333333333333333,
+        "total": 2,
         "accuracy": 66.66666666666666,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
+      "aggregation1": {
         "correct": 0.0,
-        "total": 1,
+        "total": 2,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
+      "proposal2_ensemble": {
+        "correct": 0.0,
+        "total": 2,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 0.0,
+        "total": 2,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 2.0,
+        "total": 2,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
+      "proposal1_claude-4-5-haiku": {
+        "correct": 2.0,
+        "total": 2,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 2,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 2,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 2,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 2,
+        "accuracy": 0.0,
         "accuracy_stderr": 0.0
       }
     },
-    "transport": {
-      "stage1_ensemble": {
-        "correct": 0.0,
+    "cybersecurity + telecommunications": {
+      "proposal1_ensemble": {
+        "correct": 1.0,
         "total": 1,
-        "accuracy": 0.0,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
-        "correct": 0.0,
+      "aggregation1": {
+        "correct": 1.0,
         "total": 1,
-        "accuracy": 0.0,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
-        "correct": 0.0,
+      "proposal2_ensemble": {
+        "correct": 1.0,
         "total": 1,
-        "accuracy": 0.0,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
-        "correct": 0.0,
+      "aggregation2": {
+        "correct": 1.0,
         "total": 1,
-        "accuracy": 0.0,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
         "total": 1,
-        "accuracy": 0.0,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
         "total": 1,
-        "accuracy": 0.0,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
-        "correct": 0.0,
+      "proposal1_gpt-5-mini": {
+        "correct": 1.0,
         "total": 1,
-        "accuracy": 0.0,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
-        "correct": 0.0,
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
         "total": 1,
-        "accuracy": 0.0,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
-        "correct": 0.0,
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
         "total": 1,
-        "accuracy": 0.0,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
         "accuracy_stderr": 0.0
       }
     },
     "productivity + artificial intelligence": {
-      "stage1_ensemble": {
+      "proposal1_ensemble": {
         "correct": 0.3333333333333333,
         "total": 1,
         "accuracy": 33.33333333333333,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
+      "aggregation1": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 0.0,
-        "total": 1,
-        "accuracy": 0.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "aerospace + science": {
-      "stage1_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_ensemble": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      }
-    },
-    "environment + medicine": {
-      "stage1_ensemble": {
+      "proposal2_ensemble": {
         "correct": 0.6666666666666666,
         "total": 1,
         "accuracy": 66.66666666666666,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
+      "aggregation2": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gemini-3-flash": {
+      "proposal1_gemini-3-flash": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
+      "proposal2_gemini-3-flash": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
+      "proposal2_claude-4-5-haiku": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "environment + public health": {
+      "proposal1_ensemble": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "environment + medicine": {
+      "proposal1_ensemble": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.3333333333333333,
+        "total": 1,
+        "accuracy": 33.33333333333333,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "public health + artificial intelligence": {
+      "proposal1_ensemble": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 1.6666666666666665,
+        "total": 2,
+        "accuracy": 83.33333333333333,
+        "accuracy_stderr": 32.66666666666667
+      },
+      "aggregation2": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 2.0,
+        "total": 2,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "human rights": {
+      "proposal1_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "policy": {
+      "proposal1_ensemble": {
+        "correct": 0.3333333333333333,
+        "total": 1,
+        "accuracy": 33.33333333333333,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
@@ -2017,55 +1551,247 @@
       }
     },
     "technology": {
-      "stage1_ensemble": {
+      "proposal1_ensemble": {
         "correct": 0.3333333333333333,
         "total": 1,
         "accuracy": 33.33333333333333,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
+      "aggregation1": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "nutrition": {
+      "proposal1_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "cybersecurity": {
+      "proposal1_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "media + policy": {
+      "proposal1_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
         "correct": 0.3333333333333333,
         "total": 1,
         "accuracy": 33.33333333333333,
         "accuracy_stderr": 0.0
       },
-      "judge": {
-        "correct": 1.0,
-        "total": 1,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_gpt-5-mini": {
+      "aggregation2": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_gemini-3-flash": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal1_claude-4-5-haiku": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
+      "proposal1_gpt-5-mini": {
         "correct": 1.0,
         "total": 1,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
+      "proposal2_gpt-5-mini": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
@@ -2073,55 +1799,557 @@
       }
     },
     "cybersecurity + environment": {
-      "stage1_ensemble": {
+      "proposal1_ensemble": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_ensemble": {
+      "aggregation1": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
+      "proposal2_ensemble": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "aggregation2": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_gemini-3-flash": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal1_claude-4-5-haiku": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
+      "proposal1_gpt-5-mini": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
+      "proposal2_gemini-3-flash": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "aerospace + science": {
+      "proposal1_ensemble": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "genetics + artificial intelligence": {
+      "proposal1_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.3333333333333333,
+        "total": 1,
+        "accuracy": 33.33333333333333,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "media + artificial intelligence": {
+      "proposal1_ensemble": {
+        "correct": 0.3333333333333333,
+        "total": 1,
+        "accuracy": 33.33333333333333,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "medicine": {
+      "proposal1_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 2,
+        "accuracy": 33.33333333333333,
+        "accuracy_stderr": 65.33333333333333
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal2_ensemble": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 2,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 2,
+        "accuracy": 50.0,
+        "accuracy_stderr": 98.0
+      }
+    },
+    "artificial intelligence + genetics": {
+      "proposal1_ensemble": {
+        "correct": 0.3333333333333333,
+        "total": 1,
+        "accuracy": 33.33333333333333,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "artificial intelligence + media": {
+      "proposal1_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "artificial intelligence + productivity": {
+      "proposal1_ensemble": {
+        "correct": 0.6666666666666666,
+        "total": 1,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 1.0,
+        "total": 1,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      }
+    },
+    "transport": {
+      "proposal1_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation1": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_ensemble": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "aggregation2": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 0.0,
+        "total": 1,
+        "accuracy": 0.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal2_gpt-5-mini": {
         "correct": 0.0,
         "total": 1,
         "accuracy": 0.0,
@@ -2130,168 +2358,124 @@
     }
   },
   "by_question_type": {
-    "multi_implicit": {
-      "stage1_ensemble": {
-        "correct": 12.333333333333334,
-        "total": 20,
-        "accuracy": 61.66666666666667,
-        "accuracy_stderr": 15.19318868625478
-      },
-      "stage2_ensemble": {
-        "correct": 15.666666666666666,
-        "total": 20,
-        "accuracy": 78.33333333333333,
-        "accuracy_stderr": 17.26932174939741
-      },
-      "judge": {
-        "correct": 16.0,
-        "total": 20,
-        "accuracy": 80.0,
-        "accuracy_stderr": 17.986193535452045
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 14.0,
-        "total": 20,
-        "accuracy": 70.0,
-        "accuracy_stderr": 20.60577333508359
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 10.0,
-        "total": 20,
-        "accuracy": 50.0,
-        "accuracy_stderr": 22.482741919315053
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 13.0,
-        "total": 20,
-        "accuracy": 65.0,
-        "accuracy_stderr": 21.44716887217469
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 15.0,
-        "total": 20,
-        "accuracy": 75.0,
-        "accuracy_stderr": 19.470625648856142
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 16.0,
-        "total": 20,
-        "accuracy": 80.0,
-        "accuracy_stderr": 17.986193535452045
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 16.0,
-        "total": 20,
-        "accuracy": 80.0,
-        "accuracy_stderr": 17.986193535452045
-      }
-    },
     "explicit": {
-      "stage1_ensemble": {
+      "proposal1_ensemble": {
         "correct": 59.66666666666667,
         "total": 60,
         "accuracy": 99.44444444444444,
-        "accuracy_stderr": 1.0888888888888881
+        "accuracy_stderr": 1.088888888888888
       },
-      "stage2_ensemble": {
-        "correct": 59.66666666666667,
-        "total": 60,
-        "accuracy": 99.44444444444444,
-        "accuracy_stderr": 1.0888888888888881
-      },
-      "judge": {
+      "aggregation1": {
         "correct": 60.0,
         "total": 60,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "proposal2_ensemble": {
+        "correct": 58.66666666666667,
+        "total": 60,
+        "accuracy": 97.77777777777779,
+        "accuracy_stderr": 3.053630963818834
+      },
+      "aggregation2": {
+        "correct": 58.0,
+        "total": 60,
+        "accuracy": 96.66666666666667,
+        "accuracy_stderr": 4.580446445728249
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 60.0,
+        "total": 60,
+        "accuracy": 100.0,
+        "accuracy_stderr": 0.0
+      },
+      "proposal1_claude-4-5-haiku": {
         "correct": 59.0,
         "total": 60,
         "accuracy": 98.33333333333333,
-        "accuracy_stderr": 3.2666666666666697
+        "accuracy_stderr": 3.2666666666666706
       },
-      "stage1_gemini-3-flash": {
+      "proposal1_gpt-5-mini": {
         "correct": 60.0,
         "total": 60,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_claude-4-5-haiku": {
+      "proposal2_gemini-3-flash": {
+        "correct": 58.0,
+        "total": 60,
+        "accuracy": 96.66666666666667,
+        "accuracy_stderr": 4.580446445728249
+      },
+      "proposal2_claude-4-5-haiku": {
         "correct": 60.0,
         "total": 60,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gpt-5-mini": {
-        "correct": 60.0,
+      "proposal2_gpt-5-mini": {
+        "correct": 58.0,
         "total": 60,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_gemini-3-flash": {
-        "correct": 60.0,
-        "total": 60,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage2_claude-4-5-haiku": {
-        "correct": 59.0,
-        "total": 60,
-        "accuracy": 98.33333333333333,
-        "accuracy_stderr": 3.2666666666666697
+        "accuracy": 96.66666666666667,
+        "accuracy_stderr": 4.580446445728249
       }
     },
     "explicit_multi": {
-      "stage1_ensemble": {
-        "correct": 19.666666666666664,
+      "proposal1_ensemble": {
+        "correct": 19.666666666666668,
         "total": 20,
-        "accuracy": 98.33333333333333,
-        "accuracy_stderr": 3.2666666666666657
+        "accuracy": 98.33333333333334,
+        "accuracy_stderr": 3.266666666666667
       },
-      "stage2_ensemble": {
+      "aggregation1": {
         "correct": 20.0,
         "total": 20,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "judge": {
+      "proposal2_ensemble": {
+        "correct": 19.333333333333332,
+        "total": 20,
+        "accuracy": 96.66666666666666,
+        "accuracy_stderr": 4.496548383863011
+      },
+      "aggregation2": {
         "correct": 20.0,
         "total": 20,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gpt-5-mini": {
+      "proposal1_gemini-3-flash": {
         "correct": 20.0,
         "total": 20,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage1_gemini-3-flash": {
-        "correct": 20.0,
-        "total": 20,
-        "accuracy": 100.0,
-        "accuracy_stderr": 0.0
-      },
-      "stage1_claude-4-5-haiku": {
+      "proposal1_claude-4-5-haiku": {
         "correct": 19.0,
         "total": 20,
         "accuracy": 95.0,
-        "accuracy_stderr": 9.800000000000006
+        "accuracy_stderr": 9.8
       },
-      "stage2_gpt-5-mini": {
+      "proposal1_gpt-5-mini": {
         "correct": 20.0,
         "total": 20,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_gemini-3-flash": {
+      "proposal2_gemini-3-flash": {
         "correct": 20.0,
         "total": 20,
         "accuracy": 100.0,
         "accuracy_stderr": 0.0
       },
-      "stage2_claude-4-5-haiku": {
+      "proposal2_claude-4-5-haiku": {
+        "correct": 18.0,
+        "total": 20,
+        "accuracy": 90.0,
+        "accuracy_stderr": 13.48964515158903
+      },
+      "proposal2_gpt-5-mini": {
         "correct": 20.0,
         "total": 20,
         "accuracy": 100.0,
@@ -2299,110 +2483,190 @@
       }
     },
     "implicit": {
-      "stage1_ensemble": {
-        "correct": 10.0,
+      "proposal1_ensemble": {
+        "correct": 9.333333333333332,
         "total": 20,
-        "accuracy": 50.0,
-        "accuracy_stderr": 18.04853754746736
+        "accuracy": 46.666666666666664,
+        "accuracy_stderr": 17.35043690570106
       },
-      "stage2_ensemble": {
-        "correct": 9.666666666666666,
-        "total": 20,
-        "accuracy": 48.33333333333333,
-        "accuracy_stderr": 21.447168872174693
-      },
-      "judge": {
-        "correct": 10.0,
-        "total": 20,
-        "accuracy": 50.0,
-        "accuracy_stderr": 22.482741919315053
-      },
-      "stage1_gpt-5-mini": {
-        "correct": 10.0,
-        "total": 20,
-        "accuracy": 50.0,
-        "accuracy_stderr": 22.482741919315053
-      },
-      "stage1_gemini-3-flash": {
-        "correct": 10.0,
-        "total": 20,
-        "accuracy": 50.0,
-        "accuracy_stderr": 22.482741919315053
-      },
-      "stage1_claude-4-5-haiku": {
-        "correct": 10.0,
-        "total": 20,
-        "accuracy": 50.0,
-        "accuracy_stderr": 22.482741919315053
-      },
-      "stage2_gpt-5-mini": {
-        "correct": 10.0,
-        "total": 20,
-        "accuracy": 50.0,
-        "accuracy_stderr": 22.482741919315053
-      },
-      "stage2_gemini-3-flash": {
+      "aggregation1": {
         "correct": 9.0,
         "total": 20,
         "accuracy": 45.0,
         "accuracy_stderr": 22.370045761428855
       },
-      "stage2_claude-4-5-haiku": {
-        "correct": 10.0,
+      "proposal2_ensemble": {
+        "correct": 8.333333333333334,
         "total": 20,
-        "accuracy": 50.0,
-        "accuracy_stderr": 22.482741919315053
+        "accuracy": 41.66666666666667,
+        "accuracy_stderr": 19.470625648856142
+      },
+      "aggregation2": {
+        "correct": 7.0,
+        "total": 20,
+        "accuracy": 35.0,
+        "accuracy_stderr": 21.44716887217469
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 11.0,
+        "total": 20,
+        "accuracy": 55.0,
+        "accuracy_stderr": 22.370045761428855
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 11.0,
+        "total": 20,
+        "accuracy": 55.0,
+        "accuracy_stderr": 22.370045761428855
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 6.0,
+        "total": 20,
+        "accuracy": 30.0,
+        "accuracy_stderr": 20.60577333508359
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 9.0,
+        "total": 20,
+        "accuracy": 45.0,
+        "accuracy_stderr": 22.370045761428855
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 9.0,
+        "total": 20,
+        "accuracy": 45.0,
+        "accuracy_stderr": 22.370045761428855
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 7.0,
+        "total": 20,
+        "accuracy": 35.0,
+        "accuracy_stderr": 21.44716887217469
+      }
+    },
+    "multi_implicit": {
+      "proposal1_ensemble": {
+        "correct": 13.333333333333332,
+        "total": 20,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 14.988494612876705
+      },
+      "aggregation1": {
+        "correct": 17.0,
+        "total": 20,
+        "accuracy": 85.0,
+        "accuracy_stderr": 16.055889229418852
+      },
+      "proposal2_ensemble": {
+        "correct": 13.333333333333332,
+        "total": 20,
+        "accuracy": 66.66666666666666,
+        "accuracy_stderr": 16.41907320503447
+      },
+      "aggregation2": {
+        "correct": 15.0,
+        "total": 20,
+        "accuracy": 75.0,
+        "accuracy_stderr": 19.470625648856142
+      },
+      "proposal1_gemini-3-flash": {
+        "correct": 12.0,
+        "total": 20,
+        "accuracy": 60.0,
+        "accuracy_stderr": 22.028498288401444
+      },
+      "proposal1_claude-4-5-haiku": {
+        "correct": 14.0,
+        "total": 20,
+        "accuracy": 70.0,
+        "accuracy_stderr": 20.60577333508359
+      },
+      "proposal1_gpt-5-mini": {
+        "correct": 14.0,
+        "total": 20,
+        "accuracy": 70.0,
+        "accuracy_stderr": 20.60577333508359
+      },
+      "proposal2_gemini-3-flash": {
+        "correct": 17.0,
+        "total": 20,
+        "accuracy": 85.0,
+        "accuracy_stderr": 16.055889229418852
+      },
+      "proposal2_claude-4-5-haiku": {
+        "correct": 12.0,
+        "total": 20,
+        "accuracy": 60.0,
+        "accuracy_stderr": 22.028498288401444
+      },
+      "proposal2_gpt-5-mini": {
+        "correct": 11.0,
+        "total": 20,
+        "accuracy": 55.0,
+        "accuracy_stderr": 22.370045761428855
       }
     }
   },
   "implicit_wasserstein": {
-    "initial_independent_estimates": {
-      "median_distance": 2.4916666666666667,
-      "mean_distance": 8.815833333333334,
-      "distance_stderr": 8.021366166977845,
+    "proposal_round_1": {
+      "median_distance": 2.121666666666666,
+      "mean_distance": 8.797499999999998,
+      "distance_stderr": 8.673730925125897,
       "count": 20
     },
-    "reconciled_revisions": {
-      "median_distance": 1.6316666666666664,
-      "mean_distance": 8.251538333333334,
-      "distance_stderr": 7.830423525408683,
+    "aggregation_round_1": {
+      "median_distance": 0.55,
+      "mean_distance": 8.602500000000001,
+      "distance_stderr": 10.334589120215869,
       "count": 20
     },
-    "judge_synthesis": {
-      "median_distance": 1.55,
-      "mean_distance": 8.510299999999999,
-      "distance_stderr": 8.24863320929849,
+    "proposal_round_2": {
+      "median_distance": 1.5,
+      "mean_distance": 10.848166666666668,
+      "distance_stderr": 10.876325021305393,
+      "count": 20
+    },
+    "aggregation_round_2": {
+      "median_distance": 1.4000000000000001,
+      "mean_distance": 10.142500000000002,
+      "distance_stderr": 11.317400660533876,
       "count": 20
     }
   },
   "multi_implicit_wasserstein": {
-    "initial_independent_estimates": {
-      "median_distance": 1.1083333333333334,
-      "mean_distance": 1.7488333333333337,
-      "distance_stderr": 0.7769244326880205,
+    "proposal_round_1": {
+      "median_distance": 0.7166666666666667,
+      "mean_distance": 1.3658333333333332,
+      "distance_stderr": 0.7169158317982949,
       "count": 20
     },
-    "reconciled_revisions": {
-      "median_distance": 0.875,
-      "mean_distance": 1.313058333333333,
-      "distance_stderr": 0.6757076351919314,
+    "aggregation_round_1": {
+      "median_distance": 0.35,
+      "mean_distance": 1.0975,
+      "distance_stderr": 0.9823562594732704,
       "count": 20
     },
-    "judge_synthesis": {
-      "median_distance": 0.8999999999999999,
-      "mean_distance": 1.5170000000000001,
-      "distance_stderr": 0.8556898494197532,
+    "proposal_round_2": {
+      "median_distance": 0.45833333333333326,
+      "mean_distance": 1.8541666666666665,
+      "distance_stderr": 1.3987644204086584,
+      "count": 20
+    },
+    "aggregation_round_2": {
+      "median_distance": 0.32499999999999996,
+      "mean_distance": 1.2174999999999998,
+      "distance_stderr": 1.0313986954361387,
       "count": 20
     }
   },
   "model_keys": [
-    "gpt-5-mini",
     "gemini-3-flash",
-    "claude-4-5-haiku"
+    "claude-4-5-haiku",
+    "gpt-5-mini"
   ],
   "model_labels": [
-    "gpt-5-mini",
     "gemini-3-flash",
-    "claude-4.5-haiku"
+    "claude-4.5-haiku",
+    "gpt-5-mini"
   ]
 }

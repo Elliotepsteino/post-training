@@ -1,7 +1,9 @@
 question_type,pipeline_component,median_distance,mean_distance,distance_stderr,count
-implicit,initial_independent_estimates,2.491667,8.815833,8.021366,20
-implicit,reconciled_revisions,1.631667,8.251538,7.830424,20
-implicit,judge_synthesis,1.550000,8.510300,8.248633,20
-multi_implicit,initial_independent_estimates,1.108333,1.748833,0.776924,20
-multi_implicit,reconciled_revisions,0.875000,1.313058,0.675708,20
-multi_implicit,judge_synthesis,0.900000,1.517000,0.855690,20
+implicit,proposal_round_1,2.121667,8.797500,8.673731,20
+implicit,aggregation_round_1,0.550000,8.602500,10.334589,20
+implicit,proposal_round_2,1.500000,10.848167,10.876325,20
+implicit,aggregation_round_2,1.400000,10.142500,11.317401,20
+multi_implicit,proposal_round_1,0.716667,1.365833,0.716916,20
+multi_implicit,aggregation_round_1,0.350000,1.097500,0.982356,20
+multi_implicit,proposal_round_2,0.458333,1.854167,1.398764,20
+multi_implicit,aggregation_round_2,0.325000,1.217500,1.031399,20

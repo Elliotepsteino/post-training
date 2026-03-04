@@ -23,8 +23,8 @@ OUT_JSONL ?= $(ROOT)results/synthetic_three_agent_predictions.jsonl
 OUT_METRICS ?= $(ROOT)results/synthetic_three_agent_metrics.json
 OUT_DIR ?= $(ROOT)results/plots
 
-AGENT_MODELS ?= gpt-5-mini,gemini-3-flash,claude-4.5-haiku
-JUDGE_MODEL ?= gemini-3-flash
+AGENT_MODELS ?= gemini-3-flash,claude-4.5-haiku,gpt-5-mini
+AGGREGATOR_MODEL ?= gemini-3-flash
 MAX_WORKERS ?= 20
 CLAUDE_MAX_WORKERS ?= 20
 CLAUDE_FALLBACK_WORKERS ?= 0
@@ -36,7 +36,7 @@ help:
 	@echo "Synthetic temporal eval targets:"
 	@echo "  make generate_synthetic_data       # build synthetic by_entity + flat data (60 explicit, 20 explicit_multi, 20 implicit, 20 multi_implicit by default)"
 	@echo "  make eval_three_agent              # run three-agent eval and generate plots (no synthetic data regeneration)"
-	@echo "  make three_agent_eval              # run 3-agent + judge pipeline"
+	@echo "  make three_agent_eval              # run proposal -> agg -> proposal -> agg pipeline"
 	@echo "  make three_agent_plots             # plot metrics from existing predictions"
 	@echo "  make full_synthetic_eval           # generate data + run pipeline + plots"
 	@echo "  # Claude controls: CLAUDE_MAX_WORKERS (default 20), CLAUDE_FALLBACK_WORKERS (default 0)"
@@ -69,7 +69,7 @@ three_agent_eval:
 	  --input $(INPUT) \
 	  --out-jsonl $(OUT_JSONL) \
 	  --agent-models "$(AGENT_MODELS)" \
-	  --judge-model "$(JUDGE_MODEL)" \
+	  --aggregator-model "$(AGGREGATOR_MODEL)" \
 	  --max-workers $(MAX_WORKERS) \
 	  --claude-max-workers $(CLAUDE_MAX_WORKERS) \
 	  --claude-fallback-workers $(CLAUDE_FALLBACK_WORKERS) \

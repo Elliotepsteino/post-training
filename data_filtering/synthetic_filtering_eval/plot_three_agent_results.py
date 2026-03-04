@@ -70,12 +70,27 @@ def _slugify_model_name(model: str) -> str:
 def _empty_stage_metrics(model_keys: List[str] | None = None) -> dict[str, list[float]]:
     keys = list(model_keys or ["agent-1", "agent-2", "agent-3"])
     return {
-        "stage1_ensemble": [0.0, 0],
-        "stage2_ensemble": [0.0, 0],
-        "judge": [0.0, 0],
-        **{f"stage1_{k}": [0.0, 0] for k in keys},
-        **{f"stage2_{k}": [0.0, 0] for k in keys},
+        "proposal1_ensemble": [0.0, 0],
+        "aggregation1": [0.0, 0],
+        "proposal2_ensemble": [0.0, 0],
+        "aggregation2": [0.0, 0],
+        **{f"proposal1_{k}": [0.0, 0] for k in keys},
+        **{f"proposal2_{k}": [0.0, 0] for k in keys},
     }
+
+
+def _aggregated_prediction(stage: dict) -> tuple[int | None, List[int], List[float]]:
+    year = _to_int(stage.get("aggregated_year"))
+    years = stage.get("aggregated_plausible_years") or []
+    probs = stage.get("aggregated_plausible_years_prob") or []
+    if year is not None or years or probs:
+        return year, years, probs
+
+    # Backward compatibility with judge output naming.
+    year = _to_int(stage.get("judge_year"))
+    years = stage.get("judge_plausible_years") or []
+    probs = stage.get("judge_plausible_years_prob") or []
+    return year, years, probs
 
 
 def _extract_distribution(
@@ -137,8 +152,8 @@ def compute_metrics(
     if len(model_display) > 3:
         model_display = model_display[:3]
 
-    stage1_keys = {f"agent_{idx + 1}": model_keys[idx] for idx in range(3)}
-    stage2_keys = {f"agent_{idx + 1}": model_keys[idx] for idx in range(3)}
+    proposal1_keys = {f"agent_{idx + 1}": model_keys[idx] for idx in range(3)}
+    proposal2_keys = {f"agent_{idx + 1}": model_keys[idx] for idx in range(3)}
 
     totals = _empty_stage_metrics(model_keys)
     by_category = defaultdict(lambda: _empty_stage_metrics(model_keys))
@@ -157,13 +172,14 @@ def compute_metrics(
         s1 = row.get("stage_1", {})
         s2 = row.get("stage_2", {})
         s3 = row.get("stage_3", {})
+        s4 = row.get("stage_4", {})
         cat = row.get("category", "unknown")
         qtype = row.get("question_type", "unknown")
 
-        stage1_corrects = []
-        for key, model_key in stage1_keys.items():
+        proposal1_corrects = []
+        for key, model_key in proposal1_keys.items():
             p = s1.get(key, {}).get("year")
-            stage_key = f"stage1_{model_key}"
+            stage_key = f"proposal1_{model_key}"
             totals[stage_key][1] += 1
             by_category[cat][stage_key][1] += 1
             by_question_type[qtype][stage_key][1] += 1
@@ -172,26 +188,40 @@ def compute_metrics(
                 totals[stage_key][0] += 1
                 by_category[cat][stage_key][0] += 1
                 by_question_type[qtype][stage_key][0] += 1
-            stage1_corrects.append(c)
+            proposal1_corrects.append(c)
             totals_samples[stage_key].append(c)
             cat_samples[cat][stage_key].append(c)
             type_samples[qtype][stage_key].append(c)
 
-        stage1_ensemble = sum(stage1_corrects) / 3
-        totals["stage1_ensemble"][0] += stage1_ensemble
-        totals["stage1_ensemble"][1] += 1
-        by_category[cat]["stage1_ensemble"][1] += 1
-        by_category[cat]["stage1_ensemble"][0] += stage1_ensemble
-        by_question_type[qtype]["stage1_ensemble"][1] += 1
-        by_question_type[qtype]["stage1_ensemble"][0] += stage1_ensemble
-        totals_samples["stage1_ensemble"].append(stage1_ensemble)
-        cat_samples[cat]["stage1_ensemble"].append(stage1_ensemble)
-        type_samples[qtype]["stage1_ensemble"].append(stage1_ensemble)
+        proposal1_ensemble = sum(proposal1_corrects) / 3
+        totals["proposal1_ensemble"][0] += proposal1_ensemble
+        totals["proposal1_ensemble"][1] += 1
+        by_category[cat]["proposal1_ensemble"][1] += 1
+        by_category[cat]["proposal1_ensemble"][0] += proposal1_ensemble
+        by_question_type[qtype]["proposal1_ensemble"][1] += 1
+        by_question_type[qtype]["proposal1_ensemble"][0] += proposal1_ensemble
+        totals_samples["proposal1_ensemble"].append(proposal1_ensemble)
+        cat_samples[cat]["proposal1_ensemble"].append(proposal1_ensemble)
+        type_samples[qtype]["proposal1_ensemble"].append(proposal1_ensemble)
 
-        stage2_corrects = []
-        for key, model_key in stage2_keys.items():
-            p = s2.get(key, {}).get("year")
-            stage_key = f"stage2_{model_key}"
+        agg1_year, _, _ = _aggregated_prediction(s2)
+        totals["aggregation1"][1] += 1
+        by_category[cat]["aggregation1"][1] += 1
+        by_question_type[qtype]["aggregation1"][1] += 1
+        a1 = 1.0 if _is_correct(agg1_year, gt) else 0.0
+        if a1:
+            totals["aggregation1"][0] += 1
+            by_category[cat]["aggregation1"][0] += 1
+            by_question_type[qtype]["aggregation1"][0] += 1
+        totals_samples["aggregation1"].append(a1)
+        cat_samples[cat]["aggregation1"].append(a1)
+        type_samples[qtype]["aggregation1"].append(a1)
+
+        proposal2_stage = s3 if "agent_1" in s3 else s2
+        proposal2_corrects = []
+        for key, model_key in proposal2_keys.items():
+            p = proposal2_stage.get(key, {}).get("year")
+            stage_key = f"proposal2_{model_key}"
             totals[stage_key][1] += 1
             by_category[cat][stage_key][1] += 1
             by_question_type[qtype][stage_key][1] += 1
@@ -200,34 +230,35 @@ def compute_metrics(
                 totals[stage_key][0] += 1
                 by_category[cat][stage_key][0] += 1
                 by_question_type[qtype][stage_key][0] += 1
-            stage2_corrects.append(c)
+            proposal2_corrects.append(c)
             totals_samples[stage_key].append(c)
             cat_samples[cat][stage_key].append(c)
             type_samples[qtype][stage_key].append(c)
 
-        stage2_ensemble = sum(stage2_corrects) / 3
-        totals["stage2_ensemble"][0] += stage2_ensemble
-        totals["stage2_ensemble"][1] += 1
-        by_category[cat]["stage2_ensemble"][1] += 1
-        by_category[cat]["stage2_ensemble"][0] += stage2_ensemble
-        by_question_type[qtype]["stage2_ensemble"][1] += 1
-        by_question_type[qtype]["stage2_ensemble"][0] += stage2_ensemble
-        totals_samples["stage2_ensemble"].append(stage2_ensemble)
-        cat_samples[cat]["stage2_ensemble"].append(stage2_ensemble)
-        type_samples[qtype]["stage2_ensemble"].append(stage2_ensemble)
+        proposal2_ensemble = sum(proposal2_corrects) / 3
+        totals["proposal2_ensemble"][0] += proposal2_ensemble
+        totals["proposal2_ensemble"][1] += 1
+        by_category[cat]["proposal2_ensemble"][1] += 1
+        by_category[cat]["proposal2_ensemble"][0] += proposal2_ensemble
+        by_question_type[qtype]["proposal2_ensemble"][1] += 1
+        by_question_type[qtype]["proposal2_ensemble"][0] += proposal2_ensemble
+        totals_samples["proposal2_ensemble"].append(proposal2_ensemble)
+        cat_samples[cat]["proposal2_ensemble"].append(proposal2_ensemble)
+        type_samples[qtype]["proposal2_ensemble"].append(proposal2_ensemble)
 
-        judge_year = _to_int(s3.get("judge_year"))
-        totals["judge"][1] += 1
-        by_category[cat]["judge"][1] += 1
-        by_question_type[qtype]["judge"][1] += 1
-        j = 1.0 if _is_correct(judge_year, gt) else 0.0
-        if j:
-            totals["judge"][0] += 1
-            by_category[cat]["judge"][0] += 1
-            by_question_type[qtype]["judge"][0] += 1
-        totals_samples["judge"].append(j)
-        cat_samples[cat]["judge"].append(j)
-        type_samples[qtype]["judge"].append(j)
+        agg2_source = s4 if s4 else s3
+        agg2_year, _, _ = _aggregated_prediction(agg2_source)
+        totals["aggregation2"][1] += 1
+        by_category[cat]["aggregation2"][1] += 1
+        by_question_type[qtype]["aggregation2"][1] += 1
+        a2 = 1.0 if _is_correct(agg2_year, gt) else 0.0
+        if a2:
+            totals["aggregation2"][0] += 1
+            by_category[cat]["aggregation2"][0] += 1
+            by_question_type[qtype]["aggregation2"][0] += 1
+        totals_samples["aggregation2"].append(a2)
+        cat_samples[cat]["aggregation2"].append(a2)
+        type_samples[qtype]["aggregation2"].append(a2)
 
     overall = {}
     for key, val in totals.items():
@@ -274,9 +305,10 @@ def _compute_wasserstein_for_question_types(
         return {}
 
     stage_keys = [
-        "initial_independent_estimates",
-        "reconciled_revisions",
-        "judge_synthesis",
+        "proposal_round_1",
+        "aggregation_round_1",
+        "proposal_round_2",
+        "aggregation_round_2",
     ]
     samples: dict[str, List[float]] = {k: [] for k in stage_keys}
 
@@ -285,6 +317,7 @@ def _compute_wasserstein_for_question_types(
         s1 = row.get("stage_1", {})
         s2 = row.get("stage_2", {})
         s3 = row.get("stage_3", {})
+        s4 = row.get("stage_4", {})
 
         s1_dist = []
         for key in ("agent_1", "agent_2", "agent_3"):
@@ -298,12 +331,18 @@ def _compute_wasserstein_for_question_types(
                 )
             )
         if s1_dist:
-            samples["initial_independent_estimates"].append(sum(s1_dist) / 3)
+            samples["proposal_round_1"].append(sum(s1_dist) / 3)
 
-        s2_dist = []
+        agg1_year, agg1_years, agg1_probs = _aggregated_prediction(s2)
+        samples["aggregation_round_1"].append(
+            _wasserstein_distance(gt, agg1_years, agg1_probs, agg1_year)
+        )
+
+        proposal2_stage = s3 if "agent_1" in s3 else s2
+        s3_dist = []
         for key in ("agent_1", "agent_2", "agent_3"):
-            pred = s2.get(key, {})
-            s2_dist.append(
+            pred = proposal2_stage.get(key, {})
+            s3_dist.append(
                 _wasserstein_distance(
                     gt,
                     pred.get("plausible_years", []),
@@ -311,14 +350,13 @@ def _compute_wasserstein_for_question_types(
                     _to_int(pred.get("year")),
                 )
             )
-        if s2_dist:
-            samples["reconciled_revisions"].append(sum(s2_dist) / 3)
+        if s3_dist:
+            samples["proposal_round_2"].append(sum(s3_dist) / 3)
 
-        judge_years = s3.get("judge_plausible_years", [])
-        judge_probs = s3.get("judge_plausible_years_prob", [])
-        judge_year = _to_int(s3.get("judge_year"))
-        samples["judge_synthesis"].append(
-            _wasserstein_distance(gt, judge_years, judge_probs, judge_year)
+        agg2_source = s4 if s4 else s3
+        agg2_year, agg2_years, agg2_probs = _aggregated_prediction(agg2_source)
+        samples["aggregation_round_2"].append(
+            _wasserstein_distance(gt, agg2_years, agg2_probs, agg2_year)
         )
 
     return {
@@ -343,12 +381,14 @@ def compute_multi_implicit_wasserstein(rows: List[dict]) -> dict[str, dict[str, 
 
 def _stage_label(key: str) -> str:
     names = {
-        "stage1_ensemble": "Initial independent estimates",
-        "stage2_ensemble": "Reconciled revisions",
-        "judge": "Judge synthesis",
-        "initial_independent_estimates": "Initial independent estimates",
-        "reconciled_revisions": "Reconciled revisions",
-        "judge_synthesis": "Judge synthesis",
+        "proposal1_ensemble": "Proposal round 1 (ensemble)",
+        "aggregation1": "Aggregation round 1",
+        "proposal2_ensemble": "Proposal round 2 (ensemble)",
+        "aggregation2": "Aggregation round 2",
+        "proposal_round_1": "Proposal round 1",
+        "aggregation_round_1": "Aggregation round 1",
+        "proposal_round_2": "Proposal round 2",
+        "aggregation_round_2": "Aggregation round 2",
     }
     return names.get(key, key)
 
@@ -373,8 +413,8 @@ def _plot_model_pre_post_accuracy(
     pre_acc, post_acc = [], []
     pre_err, post_err = [], []
     for model_key in model_keys[:3]:
-        pre = overall.get(f"stage1_{model_key}", {})
-        post = overall.get(f"stage2_{model_key}", {})
+        pre = overall.get(f"proposal1_{model_key}", {})
+        post = overall.get(f"proposal2_{model_key}", {})
         pre_acc.append(pre.get("accuracy", 0.0))
         post_acc.append(post.get("accuracy", 0.0))
 
@@ -400,7 +440,7 @@ def _plot_model_pre_post_accuracy(
         width=bar_width,
         yerr=[pre_low, pre_high],
         capsize=4,
-        label="Initial independent estimates",
+        label="Proposal round 1",
     )
     ax.bar(
         [xi + bar_width / 2 for xi in x],
@@ -408,9 +448,9 @@ def _plot_model_pre_post_accuracy(
         width=bar_width,
         yerr=[post_low, post_high],
         capsize=4,
-        label="Reconciled revisions",
+        label="Proposal round 2",
     )
-    ax.set_title("Per-model exact-match accuracy: initial independent estimates vs reconciled revisions")
+    ax.set_title("Per-model exact-match accuracy: proposal round 1 vs proposal round 2")
     ax.set_ylabel("Exact match accuracy (%)")
     ax.set_xlabel("Model")
     ax.set_xticks(x)
@@ -435,7 +475,7 @@ def write_plots(
     plot_types = ["overall", "explicit", "explicit_multi", "implicit", "multi_implicit"]
     plot_types = [t for t in plot_types if t == "overall" or t in by_type]
 
-    stage_keys = ["stage1_ensemble", "stage2_ensemble", "judge"]
+    stage_keys = ["proposal1_ensemble", "aggregation1", "proposal2_ensemble", "aggregation2"]
     type_to_metrics = {
         "overall": overall,
         "explicit": by_type.get("explicit", {}),
@@ -444,9 +484,9 @@ def write_plots(
         "multi_implicit": by_type.get("multi_implicit", {}),
     }
 
-    fig, ax = plt.subplots(figsize=(10, 4.6), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(11.2, 4.8), constrained_layout=True)
     x = list(range(len(plot_types)))
-    bar_width = 0.2
+    bar_width = 0.18
     group_offset = -(len(stage_keys) - 1) * bar_width / 2
     for i, key in enumerate(stage_keys):
         acc = [type_to_metrics.get(t, {}).get(key, {}).get("accuracy", 0.0) for t in plot_types]
@@ -468,7 +508,7 @@ def write_plots(
             capsize=4,
             label=_label(key),
         )
-    ax.set_title("3-agent synthetic temporal accuracy by question type")
+    ax.set_title("MoA synthetic temporal accuracy by question type")
     ax.set_ylabel("Exact match accuracy (%)")
     ax.set_xlabel("Question type")
     ax.set_xticks(x)
@@ -481,16 +521,17 @@ def write_plots(
 
     if implicit_wasserstein:
         stage_order = [
-            "initial_independent_estimates",
-            "reconciled_revisions",
-            "judge_synthesis",
+            "proposal_round_1",
+            "aggregation_round_1",
+            "proposal_round_2",
+            "aggregation_round_2",
         ]
         medians = [implicit_wasserstein.get(k, {}).get("median_distance", 0.0) for k in stage_order]
 
         fig2, ax2 = plt.subplots(figsize=(7.2, 4.6), constrained_layout=True)
         x2 = list(range(len(stage_order)))
         ax2.bar(x2, medians, width=0.45)
-        ax2.set_title("Implicit-only Wasserstein distance by pipeline stage")
+        ax2.set_title("Implicit-only Wasserstein distance by MoA stage")
         ax2.set_ylabel("Median Earth mover distance (years)")
         ax2.set_xlabel("Pipeline stage")
         ax2.set_xticks(x2)
@@ -501,18 +542,19 @@ def write_plots(
 
     if multi_implicit_wasserstein:
         stage_order = [
-            "initial_independent_estimates",
-            "reconciled_revisions",
-            "judge_synthesis",
+            "proposal_round_1",
+            "aggregation_round_1",
+            "proposal_round_2",
+            "aggregation_round_2",
         ]
         medians = [multi_implicit_wasserstein.get(k, {}).get("median_distance", 0.0) for k in stage_order]
 
         fig3, ax3 = plt.subplots(figsize=(7.2, 4.6), constrained_layout=True)
         x3 = list(range(len(stage_order)))
         ax3.bar(x3, medians, width=0.45)
-        ax3.set_title("Multi-implicit Wasserstein distance by pipeline component")
+        ax3.set_title("Multi-implicit Wasserstein distance by MoA stage")
         ax3.set_ylabel("Median Earth mover distance (years)")
-        ax3.set_xlabel("Pipeline component")
+        ax3.set_xlabel("MoA stage")
         ax3.set_xticks(x3)
         ax3.set_xticklabels([_stage_label(k) for k in stage_order], rotation=12)
         ax3.grid(axis="y", alpha=0.2)
@@ -534,9 +576,10 @@ def write_wasserstein_table(
     os.makedirs(out_dir, exist_ok=True)
     table_path = os.path.join(out_dir, "three_agent_wasserstein_table.csv")
     stage_order = [
-        "initial_independent_estimates",
-        "reconciled_revisions",
-        "judge_synthesis",
+        "proposal_round_1",
+        "aggregation_round_1",
+        "proposal_round_2",
+        "aggregation_round_2",
     ]
     with open(table_path, "w", encoding="utf-8") as f:
         f.write("question_type,pipeline_component,median_distance,mean_distance,distance_stderr,count\n")
@@ -576,7 +619,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--model-names",
         default="",
-        help="Optional comma-separated model names used for stage1/stage2 per agent.",
+        help="Optional comma-separated model names used for proposal rounds per agent.",
     )
     return parser.parse_args()
 
