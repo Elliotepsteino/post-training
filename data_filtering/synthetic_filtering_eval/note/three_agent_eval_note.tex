@@ -38,6 +38,8 @@ Overall, aggregation round 1 is best (88.3\%), improving over proposal round 1 (
 After the second proposer pass, proposal round 2 is 83.1\%, and final aggregation round 2 is 83.3\%.
 Performance is near ceiling on explicit variants (96.7--100.0\%), while implicit remains hardest (35.0--46.7\%).
 Multi-implicit benefits most from early aggregation (85.0\% at aggregation round 1).
+Tables~\ref{tab:overall-stage-accuracy} and~\ref{tab:type-stage-accuracy} provide the exact numerical breakdown behind these statements: the first table reports overall stage-wise exact-match, while the second resolves those same stages by question type.
+Tables~\ref{tab:implicit-wasserstein} and~\ref{tab:multi-implicit-wasserstein} complement exact-match with distributional quality, showing where aggregation helps reduce temporal distance even when strict exact-year accuracy is difficult.
 
 \begin{table}[t]
     \centering
@@ -107,6 +109,8 @@ Multi-implicit benefits most from early aggregation (85.0\% at aggregation round
 \label{sec:three-agent-examples}
 Table~\ref{tab:three-agent-explicit-example} shows an explicit sample, Table~\ref{tab:three-agent-explicit-multi-example} shows an explicit-multi sample, Table~\ref{tab:three-agent-implicit-example} shows an implicit sample with distributional outputs, and Table~\ref{tab:three-agent-multi-implicit-example} shows a multi-implicit sample.
 Table~\ref{tab:three-agent-implicit-initial-all-models} isolates proposal round 1 outputs for the same implicit sentence across all three proposer models.
+Each example table uses the same row layout (\textit{Gold}, \textit{Input}, proposer outputs, and final aggregation output) so readers can compare how evidence changes between rounds.
+The intent is to make failure and recovery patterns auditable at the sample level: where round-2 proposals become more consistent, where aggregation corrects disagreement, and where the pipeline still drifts.
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.10}
 \begin{table}[t]
