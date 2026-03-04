@@ -9,18 +9,19 @@ You should use the earliest year (gold_year) the prompt/response pair could like
 - `entities`: A JSON object that maps each time-relevant entity or event to a dictionary with:
   - `year`: A 4-digit year as a string ("YYYY").
   - `source`: A URL to a reputable source that supports the year.
-  - `search_query`: The query string you used to find the source.
-- `gold_year`: A single integer year for the most salient time reference in the answer. Use `2001` if no time-based entity/event is present or the answer is explicitly timeless.
+  - `search_query`: The query string you used to find the source. (should be in English)
+  - `entity_type`: Either `explicit` or `implicit`. An explicit entity is one where the knowledge related to it was released in a specific year. This could be for instance a product launch. An implicit entity is one where the knowledge related to it was not released in a specific year. This could be for instance a general statement such as "Global warming is a real problem", where the year this could have been said is multiple years.
+  - `plausible_years`: A list of years that are plausible for the entity.
+  - `plausible_years_probs`: A list of probabilities for the years in `plausible_years` (sum to 1).
+- `gold_year`: A single integer year that is earliest year that the text could have been written. To determine this, take the max over the explicit years and if an event is implicit, use the min of the plausible years for that entity. Use `timeless` if the answer is explicitly timeless or if the answer is based on very old facts such as basic arithmetic.
 - `model`: Put an identifier such as your name. 
-- The goal is the have a gold dataset and compare it with LLM outputs, hence DONT use LLMs to fill in the fields.
 
-## How to fill missing values
+## Additional details
 1. Read the `question` and `answer` and identify any real-world entities, events, products, releases, or historical facts that imply a year.
 2. For each identified entity/event, add a key to `entities` using a concise name.
-3. Find a reliable source for the year and record it in `source`.
-4. Record the exact search query used in `search_query` (should be in English).
-5. Set `gold_year` to the single most central year for the answer (typically the main event year or release year).
-6. If **no** time-based entity/event is present, set `entities` to `2001`, and set `gold_year` to `2001`.
+3. For each entity, have a field `entity_type` that is either `explicit` or `implicit`. 
+4. If `entity_type` is `explicit`, plausible_years should be a list with one single year equal to `year` that is the earliest year that the entity could have been created/released/discovered/etc, and plausible_years_probs should be a list with one single probability equal to 1.
+5. If `entity_type` is `implicit`, plausible_years should be a list of years that are plausible for the entity, and plausible_years_probs should be a list of probabilities for the years in `plausible_years` (sum to 1).
 
 
 ## Examples from this dataset
