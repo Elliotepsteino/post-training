@@ -26,15 +26,15 @@ You should use the earliest year (gold_year) the prompt/response pair could like
 
 ## Examples from this dataset
 
-The first examples in gold_dataset_test.jsonl are already filled in, use them as examples.
+The first 5 examples in gold_dataset_test.jsonl are already filled in, use them as examples.
 
 ## Deliverable
 
-It suffices to fill out the id's up until 105 (i.e. the ids 106-141 can be skipped), and you dont need to adjust nr 1-5, as these are just examples for how to fill out the fields.
+It suffices to fill out the id's you dont need to adjust nr 1-5, as these are just examples for how to fill out the fields.
 
 Send back the annotated dataset with the name gold_dataset_test_{your_name}.jsonl. Your name should be the same as the one you used in the `model` field.
 
-Remember to change 'model' from 'human' to your name for all the examples (except the first 5) and remember to not use LLMs to fill in the fields.
+Remember to change 'model' from 'human' to your name for all the examples (except the first 5).
 
 If there are any questions, feel free to reach out to epsteine@stanford.edu for clarifications.
 

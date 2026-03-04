@@ -1,9 +1,12 @@
-\section{MoA Temporal Reconciliation Evaluation}
+\section{Multi-Agent Temporal Reconciliation Evaluation}
 \label{sec:three-agent-note}
 
 We evaluate a 4-stage Mixture-of-Agents (MoA) temporal grounding pipeline on a controlled synthetic benchmark with known ground-truth year labels.
 The benchmark has 120 samples: 60 explicit, 20 explicit-multi, 20 implicit, and 20 multi-implicit.
 \footnote{Explicit: single timestamp target. Explicit-multi: one sentence mentions two entities, and the target is the later entity year. Implicit: one non-event claim with plausible-year uncertainty. Multi-implicit: one sentence combines two implicit claims; target is earliest year where both can hold jointly.}
+
+\paragraph{Introduction.}
+This note documents the current three-proposer plus one-aggregator MoA setup for temporal reconciliation, the exact prompt protocol used at each stage, and the resulting stage-wise performance on explicit and implicit synthetic samples. The goal is to make the evaluation easy to audit end-to-end: inputs, prompt scaffolding, intermediate outputs, and final metrics.
 
 \paragraph{Pipeline.}
 We run three proposer agents (\texttt{gemini-3-flash}, \texttt{claude-4.5-haiku}, \texttt{gpt-5-mini}) and one aggregator (\texttt{gemini-3-flash}) in four stages:
@@ -13,6 +16,29 @@ We run three proposer agents (\texttt{gemini-3-flash}, \texttt{claude-4.5-haiku}
   \item \textbf{Proposal round 2:} three proposers re-propose using the round-1 aggregate as auxiliary context.
   \item \textbf{Aggregation round 2:} aggregator synthesizes round-2 outputs.
 \end{itemize}
+
+\subsection*{Main aggregation prompt}
+The aggregator prompt template used in stages 2 and 4 is:
+\begin{verbatim}
+You have been provided with a set of responses from various open-source
+models to the latest user query. Your task is to synthesize these
+responses into a single, high-quality response. It is crucial to
+critically evaluate the information provided in these responses,
+recognizing that some of it may be biased or incorrect. Your response
+should not simply replicate the given answers but should offer a
+refined, accurate, and comprehensive reply to the instruction. Ensure
+your response is well-structured, coherent, and adheres to the highest
+standards of accuracy and reliability.
+
+Responses from models:
+1. [Model Response from A_i,1] year=...; distribution=...; rationale=...
+2. [Model Response from A_i,2] year=...; distribution=...; rationale=...
+3. [Model Response from A_i,3] year=...; distribution=...; rationale=...
+
+Latest user query:
+Sentence: <input sentence>
+<task-specific block for explicit / explicit_multi / implicit / multi_implicit>
+\end{verbatim}
 
 \paragraph{Scoring.}
 For each proposal round, exact-match accuracy is averaged over the three proposer predictions per sample (values in $\{0, \frac13, \frac23, 1\}$), then averaged across samples.
@@ -254,6 +280,7 @@ The refinement stage is also related to critique/refine and debate-style interac
 \begin{enumerate}
   \item Improve implicit calibration (especially implicit stage-4 regression) via stronger distribution constraints and calibration-aware aggregation.
   \item Compare this fixed MoA schedule against debate-style proposer interactions while keeping the same final aggregation model \cite{du2023multiagentdebate}.
+  \item Improve uncertainty detection so the pipeline can more reliably identify samples where the model is unsure and route them for targeted review or fallback handling.
 \end{enumerate}
 
 \bibliographystyle{plain}
